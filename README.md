@@ -1,2 +1,2 @@
-# my-reddit
+# doom-scroll
 A simple Reddit client.
