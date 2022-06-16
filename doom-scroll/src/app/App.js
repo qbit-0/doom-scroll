@@ -4,32 +4,29 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import { Content } from "../components/Content/Content";
+import { CommentsPage } from "../components/CommentsPage/CommentsPage";
 import { Hero } from "../components/Hero/Hero";
 import { Login } from "../components/Login/Login";
 import { NavBar } from "../components/NavBar/NavBar";
-import { Comments } from "../features/comments/Comments";
+import { PostsPage } from "../components/PostsPage/PostsPage";
 
 function App() {
   return (
     <Router>
       <header>
-        <Routes>
-          <Route path="/" element={<Hero />} />
-          <Route path="r/all" element={<Hero />} />
-          <Route path="*" element={<></>} />
-        </Routes>
+        <Hero />
       </header>
       <main>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Content />} />
-          <Route path="r/:subreddit" element={<Content />} />
-          <Route path="login" element={<Login />} />
+          <Route path="/" element={<PostsPage />} />
+          <Route path="r/:subreddit" element={<PostsPage />} />
+          <Route path="search" element={<PostsPage />} />
           <Route
-            path="r/:subreddit/comments/:subreddit_id/:title"
-            element={<Comments />}
+            path="r/:subreddit/comments/:article/:title"
+            element={<CommentsPage />}
           />
+          <Route path="login" element={<Login />} />
           <Route path="*" element={<></>} />
         </Routes>
       </main>

@@ -1,7 +1,12 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Post } from "../../components/Post/Post";
-import { selectAppAccessToken, selectUserAccessToken } from "../auth/authSlice";
+import { PostPlaceholder } from "../../components/PostPlaceholder/PostPlaceholder";
+import {
+  retrieveAppAccessToken,
+  selectAppAccessToken,
+  selectUserAccessToken,
+} from "../auth/authSlice";
 import {
   loadMorePosts,
   loadPosts,
@@ -10,7 +15,7 @@ import {
   selectPosts,
 } from "./postsSlice";
 
-export const Posts = ({ subreddit }) => {
+export const Posts = ({ pathname, params }) => {
   const dispatch = useDispatch();
 
   const appAccessToken = useSelector(selectAppAccessToken);
@@ -20,17 +25,17 @@ export const Posts = ({ subreddit }) => {
   const hasError = useSelector(selectHasError);
 
   useEffect(() => {
-    let accessToken = null;
-    if (userAccessToken !== null) {
-      accessToken = userAccessToken;
-    } else if (appAccessToken !== null) {
-      accessToken = appAccessToken;
+    if (userAccessToken || appAccessToken) {
+      dispatch(
+        loadPosts({
+          pathname: pathname,
+          params: params,
+        })
+      );
+    } else {
+      dispatch(retrieveAppAccessToken());
     }
-
-    if (accessToken !== null) {
-      dispatch(loadPosts({ accessToken: accessToken, subreddit: subreddit }));
-    }
-  }, [appAccessToken, userAccessToken, subreddit]);
+  }, [appAccessToken, userAccessToken, pathname, params]);
 
   const containerRef = useRef(null);
 
@@ -41,25 +46,22 @@ export const Posts = ({ subreddit }) => {
   };
 
   useEffect(() => {
-    let accessToken = null;
-    if (userAccessToken !== null) {
-      accessToken = userAccessToken;
-    } else if (appAccessToken !== null) {
-      accessToken = appAccessToken;
-    }
-
-    if (accessToken !== null) {
+    if (userAccessToken || appAccessToken) {
       const observer = new IntersectionObserver((entries, observer) => {
         const [entry] = entries;
 
         if (entry.isIntersecting) {
           dispatch(
-            loadMorePosts({ accessToken: accessToken, subreddit: subreddit })
+            loadMorePosts({
+              pathname: pathname,
+              params: params,
+            })
           );
+          entry.unobserve(entry.target);
         }
       }, options);
 
-      if (containerRef.current) {
+      if (containerRef.current && !isLoading) {
         observer.observe(containerRef.current);
       }
 
@@ -69,13 +71,14 @@ export const Posts = ({ subreddit }) => {
         }
       };
     }
-  }, [appAccessToken, userAccessToken]);
+  }, [appAccessToken, userAccessToken, isLoading]);
 
   return (
     <div>
       {posts.map((post, index) => (
         <Post key={index} post={post} />
       ))}
+      {isLoading && <PostPlaceholder />}
       <div ref={containerRef}></div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { selectAppAccessToken, selectUserAccessToken } from "../auth/authSlice";
 
 const BASE_URL = "https://oauth.reddit.com";
 
@@ -6,14 +7,25 @@ const BASE_URL = "https://oauth.reddit.com";
 
 export const loadPosts = createAsyncThunk(
   "posts/loadPosts",
-  async ({ accessToken, subreddit }) => {
-    const url = new URL(`${BASE_URL}/r/${subreddit}/`);
+  async ({pathname, params }, thunkAPI) => {
+    const userAccessToken = selectUserAccessToken(thunkAPI.getState());
+    const appAccessToken = selectAppAccessToken(thunkAPI.getState());
+    
+    let accessToken = null;
+    if (userAccessToken !== null) {
+      accessToken = userAccessToken;
+    } else if (appAccessToken !== null) {
+      accessToken = appAccessToken;
+    }
+
+    const url = new URL(`${BASE_URL}${pathname}`);
+    const stringUrl = `${url.href}?${params.toString()}`;
 
     const headers = {
       Authorization: `bearer ${accessToken}`,
     };
 
-    const response = await fetch(url.href, {
+    const response = await fetch(stringUrl, {
       method: "GET",
       headers: headers,
     });
@@ -25,19 +37,29 @@ export const loadPosts = createAsyncThunk(
 
 export const loadMorePosts = createAsyncThunk(
   "posts/loadMorePosts",
-  async ({ accessToken, subreddit }, thunkAPI) => {
-    const url = new URL(`${BASE_URL}/r/${subreddit}/`);
-    const params = new URLSearchParams();
+  async ({pathname, params }, thunkAPI) => {
+    const userAccessToken = selectUserAccessToken(thunkAPI.getState());
+    const appAccessToken = selectAppAccessToken(thunkAPI.getState());
+    
+    let accessToken = null;
+    if (userAccessToken !== null) {
+      accessToken = userAccessToken;
+    } else if (appAccessToken !== null) {
+      accessToken = appAccessToken;
+    }
+
+    const url = new URL(`${BASE_URL}${pathname}`);
     const after = selectAfter(thunkAPI.getState());
     if (after !== null) {
       params.append("after", after);
     }
+    const stringUrl = `${url.href}?${params.toString()}`;
 
     const headers = {
       Authorization: `bearer ${accessToken}`,
     };
 
-    const response = await fetch(`${url.href}?${params.toString()}`, {
+    const response = await fetch(stringUrl, {
       method: "GET",
       headers: headers,
     });
@@ -82,6 +104,10 @@ export const postsSlice = createSlice({
         state.hasError = false;
       })
       .addCase(loadMorePosts.fulfilled, (state, action) => {
+        if (action.payload === null) {
+          return;
+        }
+
         state.posts.push(...action.payload.data.children);
         state.before = action.payload.data.before;
         state.after = action.payload.data.after;
