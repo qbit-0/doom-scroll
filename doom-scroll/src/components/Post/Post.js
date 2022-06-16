@@ -16,17 +16,16 @@ export const Post = ({ post }) => {
   }
 
   return (
-    <div
-      className="post"
-      style={{ margin: "2rem", border: "0.25rem solid blue" }}
-    >
-      <h3>{post.data.title}</h3>
+    <div className="p-4 m-4 border-4 border-solid border-blue-600">
       <Link to={`/${post.data.subreddit_name_prefixed}`}>
         <h4>{post.data.subreddit_name_prefixed}</h4>
       </Link>
-      <p>Votes: {post.data.ups}</p>
-      {thumbail}
-      {selftext}
+      <Link to={`${post.data.permalink}`}>
+        <h3>{post.data.title}</h3>
+        <p>Votes: {post.data.ups}</p>
+        {thumbail}
+        {selftext}
+      </Link>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 
 export const NavBar = () => {
   return (
-    <nav>
+    <nav className="sticky top-0 bg-red-400">
       <NavLink to="r/all">ALL</NavLink>
       <NavLink to="r/popular">POPULAR</NavLink>
       <NavLink to="r/news">NEWS</NavLink>
