@@ -16,7 +16,7 @@ export const Post = ({ post }) => {
   }
 
   return (
-    <div className="p-4 m-4 border-4 border-solid border-blue-600">
+    <div className="p-4 m-4 border-4 border-solid border-blue-600 rounded-md">
       <Link to={`/${post.data.subreddit_name_prefixed}`}>
         <h4>{post.data.subreddit_name_prefixed}</h4>
       </Link>

@@ -6,8 +6,8 @@ const BASE_URL = "https://oauth.reddit.com";
 
 export const loadPosts = createAsyncThunk(
   "posts/loadPosts",
-  async ({ accessToken, query }, thunkAPI) => {
-    const url = new URL(`${BASE_URL}/r/${query}/hot`);
+  async ({ accessToken, subreddit }) => {
+    const url = new URL(`${BASE_URL}/r/${subreddit}/`);
 
     const headers = {
       Authorization: `bearer ${accessToken}`,
@@ -25,10 +25,9 @@ export const loadPosts = createAsyncThunk(
 
 export const loadMorePosts = createAsyncThunk(
   "posts/loadMorePosts",
-  async ({ accessToken, query }, thunkAPI) => {
-    const url = new URL(`${BASE_URL}/r/${query}/hot`);
+  async ({ accessToken, subreddit }, thunkAPI) => {
+    const url = new URL(`${BASE_URL}/r/${subreddit}/`);
     const params = new URLSearchParams();
-
     const after = selectAfter(thunkAPI.getState());
     if (after !== null) {
       params.append("after", after);

@@ -5,8 +5,7 @@ export const NavBar = () => {
     <nav className="sticky top-0 bg-red-400">
       <NavLink to="r/all">ALL</NavLink>
       <NavLink to="r/popular">POPULAR</NavLink>
-      <NavLink to="r/news">NEWS</NavLink>
-      <NavLink to="r/worldnews">WORLD NEWS</NavLink>
+      <NavLink to="r/best">BEST</NavLink>
       <form>
         <input type="text" placeholder="Search" />
         <input type="submit" />
@@ -15,7 +14,8 @@ export const NavBar = () => {
         <input type="number" placeholder="Sentiment" />
         <input type="submit" />
       </form>
-      <button>Doom Scroll</button>
+      <NavLink to="login">Log In</NavLink>
+      <button className="">Doom Scroll</button>
       <button>Bloom Scroll</button>
     </nav>
   );
