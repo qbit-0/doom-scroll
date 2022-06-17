@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { PostPlaceholder } from "./PostPlaceholder";
 
 export const Post = ({ post }) => {
+  if (post === null) {
+    return <PostPlaceholder />
+  }
+
   let thumbail;
   if (
     post.data.thumbnail !== undefined &&
@@ -16,7 +21,7 @@ export const Post = ({ post }) => {
   }
 
   return (
-    <div className="p-4 m-4 border-4 border-solid border-blue-600 rounded-lg">
+    <div className="p-4 m-4 border-2 border-solid border-blue-600 rounded-lg">
       <Link to={`/${post.data.subreddit_name_prefixed}`}>
         <h4>{post.data.subreddit_name_prefixed}</h4>
       </Link>
