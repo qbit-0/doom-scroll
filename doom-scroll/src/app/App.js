@@ -1,11 +1,9 @@
-import {
-  BrowserRouter as Router, Route,
-  Routes
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { CommentsPage } from "../components/CommentsPage";
 import { Hero } from "../components/Hero";
-import { ListingsPage } from "../components/ListingsPage";
 import { Login } from "../components/Login";
 import { NavBar } from "../components/NavBar";
+import { PostsPage } from "../components/PostsPage";
 
 function App() {
   return (
@@ -16,19 +14,13 @@ function App() {
       <main>
         <NavBar />
         <Routes>
-          {/* <Route path="/" element={<PostsPage />} />
+          <Route path="/" element={<PostsPage />} />
           <Route path="r/:subreddit" element={<PostsPage />} />
           <Route path="search" element={<PostsPage />} />
           <Route
             path="r/:subreddit/comments/:article/:title"
             element={<CommentsPage />}
-          /> */}
-          
-          <Route path="/" element={<ListingsPage />} />
-          <Route path="r/:subreddit" element={<ListingsPage />} />
-          <Route path="search" element={<ListingsPage />} />
-          <Route path="r/:subreddit/comments/:article/:title" element={<ListingsPage />} />
-
+          />
           <Route path="login" element={<Login />} />
           <Route path="*" element={<></>} />
         </Routes>

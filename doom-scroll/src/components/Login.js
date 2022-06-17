@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Navigate, useLocation, useParams } from "react-router-dom";
 import { v4 as uuid } from "uuid";
-import { setUserAccessToken } from "../features/auth/authSlice";
+import { setUserToken } from "../features/auth/authSlice";
 
 const REDDIT_AUTH_URL = "https://www.reddit.com/api/v1/authorize";
 
@@ -18,7 +18,7 @@ export const Login = () => {
   const accessToken = params.get("#access_token");
 
   if (accessToken !== null) {
-    dispatch(setUserAccessToken(accessToken));
+    dispatch(setUserToken(accessToken));
     return <Navigate to="/" />;
   } else {
     const randomString = uuid();

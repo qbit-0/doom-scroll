@@ -5,9 +5,7 @@ export const NavBar = () => {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("relevance");
   const [time, setTime] = useState("all");
-
   const [sentiment, setSentiment] = useState(0);
-
   const navigate = useNavigate();
 
   const handleSearchChange = (e) => {
