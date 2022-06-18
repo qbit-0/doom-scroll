@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { CommentsPage } from "../components/CommentsPage";
+import { Content } from "../components/Content";
 import { Hero } from "../components/Hero";
 import { Login } from "../components/Login";
 import { NavBar } from "../components/NavBar";
@@ -21,6 +22,7 @@ function App() {
             path="r/:subreddit/comments/:article/:title"
             element={<CommentsPage />}
           />
+
           <Route path="login" element={<Login />} />
           <Route path="*" element={<></>} />
         </Routes>

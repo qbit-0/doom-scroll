@@ -1,10 +1,11 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { PostPlaceholder } from "./PostPlaceholder";
+import { selectListings } from "../features/listings/listingsSlice";
+import { navListings } from "../utility/navListings";
 
-export const Post = ({ post }) => {
-  if (post === null) {
-    return <PostPlaceholder />
-  }
+export const Post = ({ path }) => {
+  const listings = useSelector(selectListings);
+  const post = navListings(listings, path);
 
   let thumbail;
   if (

@@ -1,23 +1,11 @@
-import { Link } from "react-router-dom";
-import { Comments } from "./Comments";
+import { useSelector } from "react-redux";
+import { selectListings } from "../features/listings/listingsSlice";
+import { navListings } from "../utility/navListings";
+import { Listing } from "./Listing";
 
-export const Comment = ({ comment }) => {
-  const renderMore = () => {
-    const count = comment.data.count;
-
-    if (count === 0) {
-      return <button to="#">Continue this thread</button>;
-    } else
-      return (
-        <button to="#">{`${count} more ${
-          comment.data.count > 1 ? "replies" : "reply"
-        }`}</button>
-      );
-  };
-
-  if (comment.kind === "more") {
-    return renderMore(comment);
-  }
+export const Comment = ({ path }) => {
+  const listings = useSelector(selectListings);
+  const comment = navListings(listings, path);
 
   const renderReplies = (comment) => {
     if (comment.data.replies === undefined) return;
@@ -25,7 +13,7 @@ export const Comment = ({ comment }) => {
     const replies = comment.data.replies;
     if (replies === "") return;
 
-    return <Comments comments={replies.data.children} />;
+    return <Listing path={[...path, 0]} />
   };
 
   return (
