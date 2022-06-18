@@ -1,17 +1,32 @@
 import { useSelector } from "react-redux";
-import { selectListings } from "../features/listings/listingsSlice";
-import { navListings } from "../utility/navListings";
+import { useLocation } from "react-router-dom";
+import { selectAccessToken } from "../features/auth/authSlice";
+import { fetchReddit } from "../utility/redditAPI";
 
-export const More = ({ path }) => {
-  const listings = useSelector(selectListings);
-  const more = navListings(listings, path);
+export const More = ({ more, link, setSelf }) => {
+  const location = useLocation();
+  const accessToken = useSelector(selectAccessToken);
 
-  const count = more.data.count;
-  if (count === 0) {
-    return <button to="#">Continue this thread</button>;
+  const handleClick = () => {
+    const params = new URLSearchParams();
+    params.append("api_type", "json");
+    params.append("children", [...more.data.children].join(","));
+    params.append("link_id", link);
+
+    fetchReddit({
+      accessToken: accessToken,
+      pathname: "/api/morechildren",
+      search: params.toString(),
+    }).then((response) => {
+      setSelf(response.json.data.things);
+    });
+  };
+
+  if (more.data.count <= 0) {
+    return <button onClick={handleClick}>Continue this thread</button>;
   } else
     return (
-      <button to="#">{`${count} more ${
+      <button onClick={handleClick}>{`${more.data.count} more ${
         more.data.count > 1 ? "replies" : "reply"
       }`}</button>
     );

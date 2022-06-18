@@ -1,13 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAccessToken } from "../features/auth/authSlice";
-import {
-  appendAfter,
-  selectListings,
-  selectPathname,
-  selectSearch,
-  updateTreePath,
-} from "../features/listings/listingsSlice";
 import { navListings } from "../utility/navListings";
 import { Comment } from "./Comment";
 import { More } from "./More";

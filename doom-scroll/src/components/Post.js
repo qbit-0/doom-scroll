@@ -1,12 +1,8 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { selectListings } from "../features/listings/listingsSlice";
 import { navListings } from "../utility/navListings";
 
-export const Post = ({ path }) => {
-  const listings = useSelector(selectListings);
-  const post = navListings(listings, path);
-
+export const Post = ({ post }) => {
   let thumbail;
   if (
     post.data.thumbnail !== undefined &&

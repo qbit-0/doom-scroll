@@ -1,11 +1,27 @@
-import { useSelector } from "react-redux";
-import { selectListings } from "../features/listings/listingsSlice";
-import { navListings } from "../utility/navListings";
-import { Listing } from "./Listing";
+import { More } from "./More";
 
-export const Comment = ({ path }) => {
-  const listings = useSelector(selectListings);
-  const comment = navListings(listings, path);
+export const Comment = ({ comment, link, setSelf }) => {
+  const replaceChild = (targetIndex, newChilden) => {
+    const children = comment.data.replies.data.children;
+    const newComment = {
+      ...comment,
+      data: {
+        ...comment.data,
+        replies: {
+          ...comment.data.replies,
+          data: {
+            ...comment.data.replies.data,
+            children: [
+              ...children.slice(0, targetIndex),
+              ...newChilden,
+              ...children.slice(targetIndex + 1, children.length),
+            ],
+          },
+        },
+      },
+    };
+    setSelf([newComment]);
+  };
 
   const renderReplies = (comment) => {
     if (comment.data.replies === undefined) return;
@@ -13,7 +29,32 @@ export const Comment = ({ path }) => {
     const replies = comment.data.replies;
     if (replies === "") return;
 
-    return <Listing path={[...path, 0]} />
+    return replies.data.children.map((child, index) => {
+      switch (child.kind) {
+        case "more":
+          return (
+            <More
+              more={child}
+              link={link}
+              setSelf={(newChildren) => {
+                replaceChild(index, newChildren);
+              }}
+              key={index}
+            />
+          );
+        case "t1":
+          return (
+            <Comment
+              comment={child}
+              link={link}
+              setSelf={(newChildren) => {
+                replaceChild(index, newChildren);
+              }}
+              key={index}
+            />
+          );
+      }
+    });
   };
 
   return (

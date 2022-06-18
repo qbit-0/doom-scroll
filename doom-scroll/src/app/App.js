@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { CommentsPage } from "../components/CommentsPage";
-import { Content } from "../components/Content";
 import { Hero } from "../components/Hero";
 import { Login } from "../components/Login";
 import { NavBar } from "../components/NavBar";
@@ -19,7 +18,7 @@ function App() {
           <Route path="r/:subreddit" element={<PostsPage />} />
           <Route path="search" element={<PostsPage />} />
           <Route
-            path="r/:subreddit/comments/:article/:title"
+            path="r/:subreddit/comments/:name/:title"
             element={<CommentsPage />}
           />
 
