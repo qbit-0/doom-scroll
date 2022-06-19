@@ -34,7 +34,7 @@ export const PostsPage = () => {
 
   useEffect(() => {
     const options = {
-      rootMargin: "0px",
+      rootMargin: "5000px",
     };
 
     const observer = new IntersectionObserver((entities, observer) => {
@@ -53,7 +53,7 @@ export const PostsPage = () => {
 
   return (
     <div>
-      <div className="p-16">
+      <div className="pt-8 px-16">
         {posts.map((post, index) => (
           <Post post={post} key={index} />
         ))}

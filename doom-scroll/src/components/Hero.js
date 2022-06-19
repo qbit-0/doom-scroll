@@ -2,33 +2,40 @@ import { Link } from "react-router-dom";
 
 export const Hero = () => {
   return (
-    <div className="h-screen bg-stone-900">
-      <header>
+    <div className="h-screen bg-gray-900">
+      <header className="text-amber-100">
         <blockquote
           cite="www.merriam-webster.com"
           className="w-3/5 max-w-md pt-16 mx-auto"
         >
-          <p className="p-4 border-8 border-double text-justify text-lg font-thin text-amber-100">
+          <p className="p-4 text-justify text-lg font-serif font-light">
             Doomscrolling and doomsurfing are new terms referring to the
             tendency to continue to surf or scroll through bad news, even though
             that news is saddening, disheartening, or depressing.
           </p>
         </blockquote>
-        <h1 className="mt-16 text-9xl text-center font-black font-sans text-amber-100">
-          <span className="underline decoration-rose-600">Doom</span>Scroll
+        <h1 className="mt-16 text-8xl text-center font-extrabold">
+          <span className="text-transparent bg-clip-text bg-gradient-to-tl from-amber-100 to-rose-600 before:relative before:-left-4 before:border-8 before:border-rose-600 before:rounded-t-2xl">
+            Doom
+          </span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-br from-amber-100 to-sky-600 after:relative after:left-4 after:border-8 after:border-sky-600 after:rounded-t-2xl">
+            Scroll
+          </span>
         </h1>
-        <h2 className="mt-8 text-4xl font-thin text-amber-100 text-center">
+        <h2 className="mt-16 text-2xl font-light text-center">
           The{" "}
-          <button className="p-2 border-4 font-black text-sky-600">Best</button>{" "}
+          <button className="p-2 border-2 border-amber-100 rounded-tl-2xl text-4xl font-extrabold transition-all text-sky-300 hover:bg-sky-600 hover:text-gray-900">
+            Best
+          </button>{" "}
           and{" "}
-          <button className="p-2 border-4 font-black text-rose-600">
+          <button className="p-2 border-2 border-amber-100 rounded-tl-2xl text-4xl font-extrabold transition-all text-rose-300 hover:bg-rose-600 hover:text-gray-900">
             Worst
           </button>{" "}
           of Reddit.
         </h2>
       </header>
-      <footer className="absolute bottom-0 w-full p-4 bg-amber-100">
-        <p className="relative bottom-0 text-center font-medium text-stone-900">
+      <footer className="absolute bottom-0 w-full p-4 rounded-tl-2xl bg-gray-800 text-amber-100">
+        <p className="relative bottom-0 text-center font-medium">
           Designed and Built by Duy Pham
         </p>
       </footer>

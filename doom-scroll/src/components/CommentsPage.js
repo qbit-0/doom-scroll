@@ -35,9 +35,9 @@ export const CommentsPage = () => {
   }, [accessToken]);
 
   return (
-    <div>
-      <div className="px-16">
-        {post && <Post post={post} />}
+    <div className="px-28 mt-8">
+      <div>{post && <Post post={post} />}</div>
+      <div className="mt-16">
         <CommentTree comments={comments} baseDepth={0} treeStartIndex={0} />
       </div>
     </div>

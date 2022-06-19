@@ -35,11 +35,11 @@ export const NavBar = () => {
   const handleSentimentSubmit = (e) => {};
 
   return (
-    <nav className="sticky top-0 bg-red-400">
-      <NavLink to="r/all">ALL</NavLink>
-      <NavLink to="r/popular">POPULAR</NavLink>
-      <NavLink to="r/best">BEST</NavLink>
-      <NavLink to="login">Log In</NavLink>
+    <nav className="sticky top-0 p-4 ml-4 border-l-2 border-b-2 border-amber-100 rounded-bl-2xl bg-gradient-to-r from-gray-800 to-gray-900">
+      <NavLink to="r/all"><p className="inline">ALL</p></NavLink>
+      <NavLink to="r/popular"><p className="inline">POPULAR</p></NavLink>
+      <NavLink to="r/best"><p className="inline">BEST</p></NavLink>
+      <NavLink to="login"><p className="inline">LOG IN</p></NavLink>
       <form onSubmit={handleSearchSubmit}>
         <input
           type="text"

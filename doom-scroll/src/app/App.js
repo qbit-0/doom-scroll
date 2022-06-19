@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <Hero />
-      <main>
+      <main className="bg-gray-900 text-amber-100">
         <NavBar />
         <Routes>
           <Route path="/" element={<PostsPage />} />

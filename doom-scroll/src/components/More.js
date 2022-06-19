@@ -27,7 +27,7 @@ export const More = ({ more, startIndex }) => {
   };
 
   return (
-    <div>
+    <div className="text-amber-100 p-4 bg-gradient-to-r from-gray-800 to-gray-900">
       {renderButton(more.data.count)}
     </div>
   );

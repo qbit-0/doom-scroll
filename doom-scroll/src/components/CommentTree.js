@@ -15,7 +15,10 @@ export const CommentTree = ({ comments, baseDepth, treeStartIndex }) => {
     const comment = comments[i];
     if (comment.data.depth === baseDepth) {
       branches.push(branch);
-      branch = { branchStartIndex: treeStartIndex + i, branchComments: [comments[i]] };
+      branch = {
+        branchStartIndex: treeStartIndex + i,
+        branchComments: [comments[i]],
+      };
     } else {
       branch.branchComments.push(comments[i]);
     }
@@ -45,16 +48,18 @@ export const CommentTree = ({ comments, baseDepth, treeStartIndex }) => {
     return (
       <div
         key={key}
-        className="pt-2 pl-4 mt-2 border-t-4 border-l-4 border-solid border-blue-600 rounded-tl-lg"
+        className="overflow-hidden mt-4 border-t-2 border-l-2 border-solid border-amber-100 rounded-tl-2xl"
       >
         {renderComment(branchBaseComment, branchStartIndex)}
-        {branchReplies.length > 0 && (
-          <CommentTree
-            comments={branchReplies}
-            baseDepth={baseDepth + 1}
-            treeStartIndex={branchStartIndex + 1}
-          />
-        )}
+        <div className="pl-4">
+          {branchReplies.length > 0 && (
+            <CommentTree
+              comments={branchReplies}
+              baseDepth={baseDepth + 1}
+              treeStartIndex={branchStartIndex + 1}
+            />
+          )}
+        </div>
       </div>
     );
   };
