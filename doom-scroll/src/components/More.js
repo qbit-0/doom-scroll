@@ -1,33 +1,34 @@
-import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import { selectAccessToken } from "../features/auth/authSlice";
-import { fetchReddit } from "../utility/redditAPI";
+import { useDispatch } from "react-redux";
+import { replaceComment } from "../features/comments/commentsSlice";
 
-export const More = ({ more, link, setSelf }) => {
-  const location = useLocation();
-  const accessToken = useSelector(selectAccessToken);
+export const More = ({ more, startIndex }) => {
+  const dispatch = useDispatch();
 
-  const handleClick = () => {
-    const params = new URLSearchParams();
-    params.append("api_type", "json");
-    params.append("children", [...more.data.children].join(","));
-    params.append("link_id", link);
+  const handleClick = (e) => {
+    e.preventDefault();
 
-    fetchReddit({
-      accessToken: accessToken,
-      pathname: "/api/morechildren",
-      search: params.toString(),
-    }).then((response) => {
-      setSelf(response.json.data.things);
-    });
+    dispatch(
+      replaceComment({
+        index: startIndex,
+        childrenIds: more.data.children,
+      })
+    );
   };
 
-  if (more.data.count <= 0) {
-    return <button onClick={handleClick}>Continue this thread</button>;
-  } else
-    return (
-      <button onClick={handleClick}>{`${more.data.count} more ${
-        more.data.count > 1 ? "replies" : "reply"
-      }`}</button>
-    );
+  const renderButton = (count) => {
+    if (count <= 0) {
+      return <button onClick={handleClick}>Continue this thread</button>;
+    } else
+      return (
+        <button onClick={handleClick}>{`${count} more ${
+          count > 1 ? "replies" : "reply"
+        }`}</button>
+      );
+  };
+
+  return (
+    <div>
+      {renderButton(more.data.count)}
+    </div>
+  );
 };

@@ -1,32 +1,33 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { selectAccessToken, updateAppToken } from "../features/auth/authSlice";
-import { fetchReddit } from "../utility/redditAPI";
+import {
+  loadPosts,
+  loadPostsAfter,
+  selectPosts,
+  setPostsPathname,
+  setPostsSearch,
+} from "../features/posts/postsSlice";
 import { Post } from "./Post";
 
 export const PostsPage = () => {
   const location = useLocation();
   const accessToken = useSelector(selectAccessToken);
+  const posts = useSelector(selectPosts);
   const dispatch = useDispatch();
-  const [posts, setPosts] = useState([]);
-  const [after, setAfter] = useState(null);
 
   useEffect(() => {
     dispatch(updateAppToken());
   }, []);
 
   useEffect(() => {
-    if (accessToken) {
-      fetchReddit({
-        accessToken: accessToken,
-        pathname: location.pathname,
-        search: location.search,
-      }).then((response) => {
-        setPosts([...response.data.children]);
-        setAfter(response.data.after);
-      });
-    }
+    dispatch(setPostsPathname(location.pathname));
+    dispatch(setPostsSearch(location.search));
+  }, [location]);
+
+  useEffect(() => {
+    dispatch(loadPosts());
   }, [location, accessToken]);
 
   const ref = useRef();
@@ -38,18 +39,8 @@ export const PostsPage = () => {
 
     const observer = new IntersectionObserver((entities, observer) => {
       const entity = entities[0];
-      if (entity.isIntersecting && accessToken && after) {
-        const params = new URLSearchParams(location.search);
-        params.append("after", after);
-
-        fetchReddit({
-          accessToken: accessToken,
-          pathname: location.pathname,
-          search: params.toString(),
-        }).then((response) => {
-          setPosts([...posts, ...response.data.children]);
-          setAfter(response.data.after);
-        });
+      if (entity.isIntersecting) {
+        dispatch(loadPostsAfter());
       }
     }, options);
 
@@ -58,13 +49,15 @@ export const PostsPage = () => {
     return () => {
       if (ref.current) observer.unobserve(ref.current);
     };
-  }, [location, accessToken, after]);
+  }, [location, accessToken]);
 
   return (
     <div>
-      {posts.map((post, index) => (
-        <Post post={post} key={index} />
-      ))}
+      <div className="p-16">
+        {posts.map((post, index) => (
+          <Post post={post} key={index} />
+        ))}
+      </div>
       <div ref={ref} />
     </div>
   );

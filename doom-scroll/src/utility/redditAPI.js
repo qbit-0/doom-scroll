@@ -31,7 +31,11 @@ export const getAppToken = async () => {
 
 export const fetchReddit = async ({ accessToken, pathname, search }) => {
   const url = new URL(`${REDDIT_FETCH_BASE_URL}${pathname}`);
-  const stringUrl = `${url.href}?${search}`;
+
+  const params = new URLSearchParams(search);
+  params.append("raw_json", "1");
+
+  const stringUrl = `${url.href}?${params.toString()}`;
 
   const headers = {
     Authorization: `bearer ${accessToken}`,

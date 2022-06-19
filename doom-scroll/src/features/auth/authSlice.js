@@ -20,12 +20,9 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(updateAppToken.pending, (state, action) => {})
-      .addCase(updateAppToken.fulfilled, (state, action) => {
-        state.appToken = action.payload.access_token;
-      })
-      .addCase(updateAppToken.rejected, (state, action) => {});
+    builder.addCase(updateAppToken.fulfilled, (state, action) => {
+      state.appToken = action.payload.access_token;
+    });
   },
 });
 

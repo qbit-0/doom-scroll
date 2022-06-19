@@ -8,9 +8,7 @@ import { PostsPage } from "../components/PostsPage";
 function App() {
   return (
     <Router>
-      <header>
-        <Hero />
-      </header>
+      <Hero />
       <main>
         <NavBar />
         <Routes>
