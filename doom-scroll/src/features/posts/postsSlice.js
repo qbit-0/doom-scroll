@@ -1,13 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { analyzePost } from "../../utility/nlpHelpers";
 import { fetchReddit } from "../../utility/redditAPI";
 import { selectAccessToken } from "../auth/authSlice";
 
 export const loadPosts = createAsyncThunk(
   "posts/loadPosts",
-  async (args, thunkAPI) => {
+  async (nlp, thunkAPI) => {
     const accessToken = selectAccessToken(thunkAPI.getState());
-    const pathname = selectPostsPathname(thunkAPI.getState());
-    const search = selectPostsSearch(thunkAPI.getState());
+    const location = selectPostsLocation(thunkAPI.getState());
+    const pathname = location.pathname;
+    const search = location.search;
 
     if (!accessToken) {
       return {
@@ -17,14 +19,21 @@ export const loadPosts = createAsyncThunk(
       };
     }
 
+    const params = new URLSearchParams(search);
+
     const responseJson = await fetchReddit({
       accessToken: accessToken,
       pathname: pathname,
-      search: search,
+      search: params.toString(),
+    });
+
+    const posts = responseJson.data.children;
+    posts.forEach((post) => {
+      post.score = analyzePost(nlp, post);
     });
 
     return {
-      posts: responseJson.data.children,
+      posts: posts,
       after: responseJson.data.after,
     };
   }
@@ -32,10 +41,11 @@ export const loadPosts = createAsyncThunk(
 
 export const loadPostsAfter = createAsyncThunk(
   "posts/loadPostsAfter",
-  async (args, thunkAPI) => {
+  async (nlp, thunkAPI) => {
     const accessToken = selectAccessToken(thunkAPI.getState());
-    const pathname = selectPostsPathname(thunkAPI.getState());
-    const search = selectPostsSearch(thunkAPI.getState());
+    const location = selectPostsLocation(thunkAPI.getState());
+    const pathname = location.pathname;
+    const search = location.search;
     const after = selectPostsAfter(thunkAPI.getState());
 
     if (!accessToken || !after) {
@@ -55,8 +65,13 @@ export const loadPostsAfter = createAsyncThunk(
       search: params.toString(),
     });
 
+    const posts = responseJson.data.children;
+    posts.forEach((post) => {
+      post.score = analyzePost(nlp, post);
+    });
+
     return {
-      posts: responseJson.data.children,
+      posts: posts,
       before: responseJson.data.before,
       after: responseJson.data.after,
     };
@@ -66,39 +81,47 @@ export const loadPostsAfter = createAsyncThunk(
 export const postSlice = createSlice({
   name: "posts",
   initialState: {
-    pathname: "",
-    search: "",
+    location: {
+      pathname: "",
+      search: "",
+    },
     posts: [],
     before: null,
     after: null,
+    isLoading: false,
   },
   reducers: {
-    setPostsPathname: (state, action) => {
-      state.pathname = action.payload;
-    },
-    setPostsSearch: (state, action) => {
-      state.search = action.payload;
+    setPostsLocation: (state, action) => {
+      state.location = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
+      .addCase(loadPosts.pending, (state, action) => {
+        state.isLoading = true;
+      })
       .addCase(loadPosts.fulfilled, (state, action) => {
         state.posts = action.payload.posts;
         state.before = action.payload.before;
         state.after = action.payload.after;
+        state.isLoading = false;
+      })
+      .addCase(loadPostsAfter.pending, (state, action) => {
+        state.isLoading = true;
       })
       .addCase(loadPostsAfter.fulfilled, (state, action) => {
         state.posts.push(...action.payload.posts);
         state.after = action.payload.after;
+        state.isLoading = false;
       });
   },
 });
 
-export const selectPostsPathname = (state) => state.posts.pathname;
-export const selectPostsSearch = (state) => state.posts.search;
+export const selectPostsLocation = (state) => state.posts.location;
 export const selectPosts = (state) => state.posts.posts;
 export const selectPostsBefore = (state) => state.posts.before;
 export const selectPostsAfter = (state) => state.posts.after;
+export const selectIsLoadingPosts = (state) => state.posts.isLoading;
 
-export const { setPostsPathname, setPostsSearch } = postSlice.actions;
+export const { setPostsLocation } = postSlice.actions;
 export default postSlice.reducer;

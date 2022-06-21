@@ -28,7 +28,6 @@ export const getAppToken = async () => {
   return json;
 };
 
-
 export const fetchReddit = async ({ accessToken, pathname, search }) => {
   const url = new URL(`${REDDIT_FETCH_BASE_URL}${pathname}`);
 

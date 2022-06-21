@@ -1,30 +1,37 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import its from "wink-nlp/src/its";
 import { selectAccessToken } from "../features/auth/authSlice";
 import { fetchReddit } from "../utility/redditAPI";
+import { SentimentBanner } from "./SentimentBanner";
 
-export const Comment = ({ comment }) => {
+export const Comment = ({ comment, nlp }) => {
   const accessToken = useSelector(selectAccessToken);
   const [profileImg, setProfileImg] = useState(null);
 
   const author = comment.data.author;
-  useEffect(() => {
-    fetchReddit({
-      accessToken: accessToken,
-      pathname: `/user/${author}/about`,
-      search: "",
-    }).then((jsonResponse) => {
-      setProfileImg(jsonResponse.data.icon_img);
-    });
-  }, [accessToken]);
-
   const created = comment.data.created_utc;
   const body = comment.data.body;
   const upvotes = comment.data.ups;
 
+  useEffect(() => {
+    if (author !== "[deleted]") {
+      fetchReddit({
+        accessToken: accessToken,
+        pathname: `/user/${author}/about`,
+        search: "",
+      }).then((jsonResponse) => {
+        setProfileImg(jsonResponse.data.icon_img);
+      });
+    }
+  }, [accessToken]);
+
+  const score = comment.score;
+
   return (
-    <div className="flex overflow-hidden bg-gradient-to-r from-gray-800 to-gray-900">
-      <div className="inline-block w-24 flex-shrink-0 border-b-2 border-amber-100 bg-gradient-to-b from-sky-600 to-gray-800"></div>
+    <div className="flex overflow-hidden border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900">
+      <SentimentBanner score={score} />
+
       <div className="inline-block p-8">
         <div>
           <div className="flex items-center">
@@ -33,8 +40,7 @@ export const Comment = ({ comment }) => {
             </figure>
             <div>
               <p className="inline-block ml-4">
-                <span className="font-bold italic">{author}</span> - Posed {created}{" "}
-                ago
+                <span className="font-bold italic">{author}</span> - {created}
               </p>
             </div>
           </div>

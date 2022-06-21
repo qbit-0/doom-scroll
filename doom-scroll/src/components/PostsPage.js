@@ -5,16 +5,18 @@ import { selectAccessToken, updateAppToken } from "../features/auth/authSlice";
 import {
   loadPosts,
   loadPostsAfter,
+  selectIsLoadingPosts,
   selectPosts,
-  setPostsPathname,
-  setPostsSearch,
+  setPostsLocation,
 } from "../features/posts/postsSlice";
 import { Post } from "./Post";
+import { PostPlaceholder } from "./PostPlaceholder";
 
-export const PostsPage = () => {
+export const PostsPage = ({ nlp }) => {
   const location = useLocation();
   const accessToken = useSelector(selectAccessToken);
   const posts = useSelector(selectPosts);
+  const isLoading = useSelector(selectIsLoadingPosts);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,42 +24,44 @@ export const PostsPage = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(setPostsPathname(location.pathname));
-    dispatch(setPostsSearch(location.search));
+    dispatch(setPostsLocation(location));
   }, [location]);
 
   useEffect(() => {
-    dispatch(loadPosts());
+    if (!isLoading) {
+      dispatch(loadPosts(nlp));
+    }
   }, [location, accessToken]);
 
   const ref = useRef();
 
   useEffect(() => {
-    const options = {
-      rootMargin: "5000px",
-    };
+    if (!isLoading) {
+      const options = {
+        rootMargin: "2000px",
+      };
 
-    const observer = new IntersectionObserver((entities, observer) => {
-      const entity = entities[0];
-      if (entity.isIntersecting) {
-        dispatch(loadPostsAfter());
-      }
-    }, options);
+      const observer = new IntersectionObserver((entities, observer) => {
+        const entity = entities[0];
+        if (entity.isIntersecting) {
+          dispatch(loadPostsAfter(nlp));
+        }
+      }, options);
 
-    if (ref.current) observer.observe(ref.current);
+      if (ref.current) observer.observe(ref.current);
 
-    return () => {
-      if (ref.current) observer.unobserve(ref.current);
-    };
-  }, [location, accessToken]);
+      return () => {
+        if (ref.current) observer.unobserve(ref.current);
+      };
+    }
+  }, [location, accessToken, isLoading]);
 
   return (
-    <div>
-      <div className="pt-8 px-16">
-        {posts.map((post, index) => (
-          <Post post={post} key={index} />
-        ))}
-      </div>
+    <div className="px-16 py-8">
+      {posts.map((post, index) => (
+        <Post post={post} nlp={nlp} key={index} />
+      ))}
+      {<PostPlaceholder />}
       <div ref={ref} />
     </div>
   );

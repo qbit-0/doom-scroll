@@ -1,7 +1,7 @@
 import { Comment } from "./Comment";
 import { More } from "./More";
 
-export const CommentTree = ({ comments, baseDepth, treeStartIndex }) => {
+export const CommentTree = ({ comments, baseDepth, treeStartIndex, nlp }) => {
   if (comments.length === 0) {
     return;
   }
@@ -28,10 +28,10 @@ export const CommentTree = ({ comments, baseDepth, treeStartIndex }) => {
   const renderComment = (comment, commentStartIndex) => {
     switch (comment.kind) {
       case "more": {
-        return <More more={comment} startIndex={commentStartIndex} />;
+        return <More more={comment} startIndex={commentStartIndex} nlp={nlp} />;
       }
       case "t1": {
-        return <Comment comment={comment} />;
+        return <Comment comment={comment} nlp={nlp} />;
       }
       default: {
         throw Error("Illegal kind");
@@ -46,17 +46,15 @@ export const CommentTree = ({ comments, baseDepth, treeStartIndex }) => {
     const branchReplies = branchComments.slice(1, branchComments.length);
 
     return (
-      <div
-        key={key}
-        className="overflow-hidden mt-4 border-t-2 border-l-2 border-solid border-amber-100 rounded-tl-2xl"
-      >
+      <div key={key}>
         {renderComment(branchBaseComment, branchStartIndex)}
-        <div className="pl-4">
+        <div className="pl-4 mt-4 border-l-2 border-gray-600">
           {branchReplies.length > 0 && (
             <CommentTree
               comments={branchReplies}
               baseDepth={baseDepth + 1}
               treeStartIndex={branchStartIndex + 1}
+              nlp={nlp}
             />
           )}
         </div>

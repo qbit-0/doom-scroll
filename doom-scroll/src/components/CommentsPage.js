@@ -5,18 +5,20 @@ import { selectAccessToken, updateAppToken } from "../features/auth/authSlice";
 import {
   loadComments,
   selectComments,
+  selectCommentsIsLoading,
   selectCommentsPost,
-  setCommentsPathname,
-  setCommentsSearch,
+  setCommentsLocation,
 } from "../features/comments/commentsSlice";
 import { CommentTree } from "./CommentTree";
 import { Post } from "./Post";
+import { PostPlaceholder } from "./PostPlaceholder";
 
-export const CommentsPage = () => {
+export const CommentsPage = ({ nlp }) => {
   const location = useLocation();
   const accessToken = useSelector(selectAccessToken);
   const post = useSelector(selectCommentsPost);
   const comments = useSelector(selectComments);
+  const isLoading = useSelector(selectCommentsIsLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,21 +26,28 @@ export const CommentsPage = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(setCommentsPathname(location.pathname));
-    dispatch(setCommentsSearch(location.search));
+    dispatch(setCommentsLocation(location));
   }, [location]);
 
   useEffect(() => {
     if (accessToken) {
-      dispatch(loadComments());
+      dispatch(loadComments(nlp));
     }
   }, [accessToken]);
 
   return (
-    <div className="px-28 mt-8">
-      <div>{post && <Post post={post} />}</div>
-      <div className="mt-16">
-        <CommentTree comments={comments} baseDepth={0} treeStartIndex={0} />
+    <div className="px-28 py-8">
+      <div>
+        {post && <Post post={post} nlp={nlp} />}
+        {isLoading && <PostPlaceholder />}
+      </div>
+      <div className="pt-16">
+        <CommentTree
+          comments={comments}
+          baseDepth={0}
+          treeStartIndex={0}
+          nlp={nlp}
+        />
       </div>
     </div>
   );

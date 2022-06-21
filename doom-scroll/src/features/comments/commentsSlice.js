@@ -1,14 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { analyzePost, analyzeComment } from "../../utility/nlpHelpers";
 import { fetchReddit } from "../../utility/redditAPI";
 import { flattenCommentTree } from "../../utility/redditDataStructure";
 import { selectAccessToken } from "../auth/authSlice";
 
 export const loadComments = createAsyncThunk(
   "comments/loadComments",
-  async (args, thunkAPI) => {
+  async (nlp, thunkAPI) => {
     const accessToken = selectAccessToken(thunkAPI.getState());
-    const pathname = selectCommentsPathname(thunkAPI.getState());
-    const search = selectCommentsSearch(thunkAPI.getState());
+    const location = selectCommentsLocation(thunkAPI.getState());
+    const pathname = location.pathname;
+    const search = location.search;
 
     if (!accessToken) {
       return {
@@ -24,7 +26,12 @@ export const loadComments = createAsyncThunk(
     });
 
     const post = responseJson[0].data.children[0];
+    post.score = analyzePost(nlp, post);
+
     const comments = flattenCommentTree(responseJson[1]);
+    comments.forEach((comment) => {
+      comment.score = analyzeComment(nlp, comment);
+    });
 
     return {
       post: post,
@@ -35,7 +42,7 @@ export const loadComments = createAsyncThunk(
 
 export const replaceComment = createAsyncThunk(
   "comments/replaceComment",
-  async ({ index, childrenIds }, thunkAPI) => {
+  async ({ index, childrenIds, nlp }, thunkAPI) => {
     const accessToken = selectAccessToken(thunkAPI.getState());
     const post = selectCommentsPost(thunkAPI.getState());
     const link = post.data.name;
@@ -58,9 +65,14 @@ export const replaceComment = createAsyncThunk(
       search: params.toString(),
     });
 
+    const comments = responseJson.json.data.things;
+    comments.forEach((comment) => {
+      comment.score = analyzeComment(nlp, comment);
+    });
+
     return {
       index: index,
-      newComments: responseJson.json.data.things,
+      newComments: comments,
     };
   }
 );
@@ -68,24 +80,28 @@ export const replaceComment = createAsyncThunk(
 export const commentsSlice = createSlice({
   name: "comments",
   initialState: {
-    pathname: "",
-    search: "",
+    location: {
+      pathname: "",
+      search: "",
+    },
     post: null,
     comments: [],
+    isLoading: false,
   },
   reducers: {
-    setCommentsPathname: (state, action) => {
-      state.pathname = action.payload;
-    },
-    setCommentsSearch: (state, action) => {
-      state.search = action.payload;
+    setCommentsLocation: (state, action) => {
+      state.location = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
+      .addCase(loadComments.pending, (state, action) => {
+        state.isLoading = true;
+      })
       .addCase(loadComments.fulfilled, (state, action) => {
         state.post = action.payload.post;
         state.comments = action.payload.comments;
+        state.isLoading = false;
       })
       .addCase(replaceComment.fulfilled, (state, action) => {
         const { index, newComments } = action.payload;
@@ -99,10 +115,10 @@ export const commentsSlice = createSlice({
   },
 });
 
-export const selectCommentsPathname = (state) => state.comments.pathname;
-export const selectCommentsSearch = (state) => state.comments.search;
+export const selectCommentsLocation = (state) => state.comments.location;
 export const selectCommentsPost = (state) => state.comments.post;
 export const selectComments = (state) => state.comments.comments;
+export const selectCommentsIsLoading = (state) => state.comments.isLoading;
 
-export const { setCommentsPathname, setCommentsSearch } = commentsSlice.actions;
+export const { setCommentsLocation } = commentsSlice.actions;
 export default commentsSlice.reducer;
