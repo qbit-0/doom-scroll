@@ -60,7 +60,7 @@ export const Post = ({ post, nlp }) => {
 
         <div className="flex items-center mt-4">
           <figure className="inline-block flex-grow-0 flex-shrink-0 overflow-clip w-12 h-12 rounded-full">
-            <img src={profileImg} className="block w-full h-auto" />
+            <img src={profileImg} className="block w-full h-full" />
           </figure>
           <div>
             <p className="inline-block ml-4">
@@ -77,8 +77,8 @@ export const Post = ({ post, nlp }) => {
         </div>
 
         {preview !== null && (
-          <figure className="inline-block w-full max-h-96 rounded-xl mt-4 overflow-hidden">
-            <img src={preview} className="block min-w-full h-auto" />
+          <figure className="max-w-2xl max-h-96 mt-4 mx-auto rounded-2xl overflow-clip">
+            <img src={preview} className="block w-full h-full" />
           </figure>
         )}
 
