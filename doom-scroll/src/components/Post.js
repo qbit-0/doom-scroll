@@ -50,10 +50,10 @@ export const Post = ({ post, nlp }) => {
   }
 
   return (
-    <section className="flex overflow-hidden max-w-7xl mx-auto mb-8 border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900">
+    <section className="flex overflow-clip max-w-7xl mx-auto mb-8 border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900">
       <SentimentBanner score={score} />
 
-      <div className="flex-grow-0 inline-block w-full p-8">
+      <div className="flex-grow-0 w-full p-8">
         <Link to={`/${post.data.subreddit_name_prefixed}`}>
           <p className="underline">{post.data.subreddit_name_prefixed}</p>
         </Link>
@@ -77,13 +77,22 @@ export const Post = ({ post, nlp }) => {
         </div>
 
         {preview !== null && (
-          <figure className="max-w-2xl max-h-96 mt-4 mx-auto rounded-2xl overflow-clip">
-            <img src={preview} className="block w-full h-full" />
-          </figure>
+          <a href={preview} target="_blank">
+            <figure className="max-w-2xl max-h-96 mt-4 mx-auto rounded-2xl overflow-clip">
+              <img src={preview} className="block w-full h-full" />
+            </figure>
+          </a>
         )}
 
-        {selftext !== null && <p>{selftext}</p>}
-        <p className="mt-4">Votes: {upvotes}</p>
+        {selftext !== null && (
+          <div>
+            <p>{selftext}</p>
+          </div>
+        )}
+
+        <div>
+          <p className="mt-4">Votes: {upvotes}</p>
+        </div>
       </div>
     </section>
   );
