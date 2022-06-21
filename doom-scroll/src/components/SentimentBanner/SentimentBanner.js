@@ -10,9 +10,9 @@ export const SentimentBanner = ({ score }) => {
   const roundedScore = Math.round(score * 100) / 100;
 
   let fromColor = "from-gray-600";
-  if (roundedScore < -0.15) {
+  if (roundedScore < 0) {
     fromColor = "from-rose-600";
-  } else if (roundedScore > 0.15) {
+  } else if (roundedScore > 0) {
     fromColor = "from-sky-600";
   }
 

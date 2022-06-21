@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { selectAccessToken, updateAppToken } from "../features/auth/authSlice";
+import { selectAccessToken, updateAppToken } from "../../features/auth/authSlice";
 import {
   loadComments,
   selectComments,
   selectCommentsIsLoading,
   selectCommentsPost,
   setCommentsLocation,
-} from "../features/comments/commentsSlice";
-import { CommentTree } from "./CommentTree";
-import { Post } from "./Post";
-import { PostPlaceholder } from "./PostPlaceholder";
+} from "../../features/comments/commentsSlice";
+import { CommentTree } from "../CommentTree/CommentTree";
+import { Post } from "../Post/Post";
+import { PostPlaceholder } from "../PostPlaceholder/PostPlaceholder";
 
 export const CommentsPage = ({ nlp }) => {
   const location = useLocation();

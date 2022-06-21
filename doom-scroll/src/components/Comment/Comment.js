@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import its from "wink-nlp/src/its";
-import { selectAccessToken } from "../features/auth/authSlice";
-import { fetchReddit } from "../utility/redditAPI";
-import { SentimentBanner } from "./SentimentBanner";
+import { selectAccessToken } from "../../features/auth/authSlice";
+import { fetchReddit } from "../../utility/redditAPI";
+import { SentimentBanner } from "../SentimentBanner/SentimentBanner";
 
 export const Comment = ({ comment, nlp }) => {
   const accessToken = useSelector(selectAccessToken);

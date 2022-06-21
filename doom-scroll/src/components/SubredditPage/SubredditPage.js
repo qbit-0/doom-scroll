@@ -1,18 +1,22 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { selectAccessToken, updateAppToken } from "../features/auth/authSlice";
+import {
+  selectAccessToken,
+  updateAppToken,
+} from "../../features/auth/authSlice";
 import {
   loadPosts,
   loadPostsAfter,
   selectIsLoadingPosts,
   selectPosts,
   setPostsLocation,
-} from "../features/posts/postsSlice";
-import { Post } from "./Post";
-import { PostPlaceholder } from "./PostPlaceholder";
+} from "../../features/posts/postsSlice";
+import { Post } from "../Post/Post";
+import { PostPlaceholder } from "../PostPlaceholder/PostPlaceholder";
+import { SubredditSort } from "../SubredditSort/SubredditSort";
 
-export const PostsPage = ({ nlp }) => {
+export const SubredditPage = ({ nlp }) => {
   const location = useLocation();
   const accessToken = useSelector(selectAccessToken);
   const posts = useSelector(selectPosts);
@@ -57,10 +61,15 @@ export const PostsPage = ({ nlp }) => {
   }, [location, accessToken, isLoading]);
 
   return (
-    <div className="px-16 py-8">
-      {posts.map((post, index) => (
-        <Post post={post} nlp={nlp} key={index} />
-      ))}
+    <div className="px-16 py-8 max-w-7xl mx-auto">
+      <div className="mb-8">
+        <SubredditSort />
+      </div>
+      <div>
+        {posts.map((post, index) => (
+          <Post post={post} nlp={nlp} key={index} />
+        ))}
+      </div>
       {<PostPlaceholder />}
       <div ref={ref} />
     </div>

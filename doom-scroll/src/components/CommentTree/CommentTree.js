@@ -1,5 +1,5 @@
-import { Comment } from "./Comment";
-import { More } from "./More";
+import { Comment } from "../Comment/Comment";
+import { More } from "../More/More";
 
 export const CommentTree = ({ comments, baseDepth, treeStartIndex, nlp }) => {
   if (comments.length === 0) {

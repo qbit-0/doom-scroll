@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { replaceComment } from "../features/comments/commentsSlice";
+import { replaceComment } from "../../features/comments/commentsSlice";
 
 export const More = ({ more, startIndex, nlp }) => {
   const dispatch = useDispatch();
