@@ -27,6 +27,8 @@ export const Post = ({ post, nlp }) => {
     preview = post.data.preview.images[0].source.url;
   }
 
+  const url = post.data.url_overridden_by_dest;
+
   let selftext = null;
   if (post.data.selftext !== undefined) {
     selftext = post.data.selftext;
@@ -77,7 +79,7 @@ export const Post = ({ post, nlp }) => {
         </div>
 
         {preview !== null && (
-          <a href={preview} target="_blank">
+          <a href={url} target="_blank">
             <figure className="max-w-2xl max-h-96 mt-4 mx-auto rounded-2xl overflow-clip">
               <img src={preview} className="block w-full h-full" />
             </figure>
