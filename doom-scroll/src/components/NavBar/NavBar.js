@@ -67,7 +67,7 @@ export const NavBar = () => {
                 handleNavClick("popular");
               }}
             >
-              <p className="inline font-bold">POPULAR</p>
+              <p className="inline font-bold">r/popular</p>
             </Button>
           </div>
 
@@ -78,7 +78,7 @@ export const NavBar = () => {
                 handleNavClick("all");
               }}
             >
-              <p className="inline font-bold">ALL</p>
+              <p className="inline font-bold">r/all</p>
             </Button>
           </div>
         </div>

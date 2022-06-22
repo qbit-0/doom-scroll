@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../Button/Button";
+import { FilterSentiment } from "../FilterSentiment/FilterSentiment";
 import { Option } from "../Option/Option";
 import { Select } from "../Select/Select";
 
@@ -42,25 +43,25 @@ export const SubredditSort = () => {
     <div>
       <div className="inline-block mr-2">
         <Button highlight={sort === "hot"} onClick={handleClickHot}>
-          <p className="inline font-bold">HOT</p>
+          <p className="inline font-bold">Hot</p>
         </Button>
       </div>
 
       <div className="inline-block mr-2">
         <Button highlight={sort === "new"} onClick={handleClickNew}>
-          <p className="inline font-bold">NEW</p>
+          <p className="inline font-bold">New</p>
         </Button>
       </div>
 
       <div className="inline-block mr-2">
         <Button highlight={sort === "top"} onClick={handleClickTop}>
-          <p className="inline font-bold">TOP</p>
+          <p className="inline font-bold">Top</p>
         </Button>
       </div>
 
       <div className="inline-block">
         <Button highlight={sort === "rising"} onClick={handleClickRising}>
-          <p className="inline font-bold">RISING</p>
+          <p className="inline font-bold">Rising</p>
         </Button>
       </div>
 
@@ -76,6 +77,12 @@ export const SubredditSort = () => {
           </Select>{" "}
         </div>
       )}
+
+      <div className="mt-2 border-t-2 border-gray-800">
+        <div className="mt-2">
+          <FilterSentiment />
+        </div>
+      </div>
     </div>
   );
 };

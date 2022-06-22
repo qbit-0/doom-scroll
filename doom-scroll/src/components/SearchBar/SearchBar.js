@@ -11,11 +11,11 @@ export const SearchBar = ({ value, onChange, onSubmit }) => {
             onSubmit();
           }
         }}
-        className="text-amber-100 p-2 border-y-2 border-l-2 border-amber-100 rounded-l-2xl bg-gray-900"
+        className="text-amber-100 p-2 border-y-2 border-l-2 border-amber-100 rounded-l-2xl bg-gray-900 font-bold placeholder:font-thin"
       />
       <button
         onClick={onSubmit}
-        className="p-2 border-2 border-amber-100 rounded-r-2xl decoration-gray-600 decoration-4 transition-all"
+        className="p-2 border-2 border-amber-100 rounded-r-2xl decoration-gray-600 decoration-4 transition-all font-bold"
       >
         Search
       </button>
