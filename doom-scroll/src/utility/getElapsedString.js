@@ -33,5 +33,5 @@ export const getElapsedString = (start) => {
       return `${months}w`;
     }
 
-    return Math.floor(dateElapsed / 3.154e+10);
+    return `${Math.floor(dateElapsed / 3.154e+10)}y`;
   };

@@ -57,7 +57,7 @@ export const FilterSentiment = () => {
           <Button onClick={handleBloom}>Bloom</Button>
         </div>
       </div>
-      <div className="inline-block float-right">
+      <div className="inline-block">
         <div className="inline-block mr-2">
           <label for="minScore">Min: </label>
           <input
