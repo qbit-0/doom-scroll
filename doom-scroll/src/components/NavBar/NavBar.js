@@ -53,7 +53,7 @@ export const NavBar = () => {
   };
 
   return (
-    <nav className="sticky top-0 p-4 border-b-2 border-gray-800 bg-gray-900">
+    <nav className="sticky top-0 p-4 border-b-2 border-gray-800 bg-gray-900 shadow-md">
       <div className="w-fit mx-auto">
         <div className="inline-block">
           <div className="inline-block mr-2">

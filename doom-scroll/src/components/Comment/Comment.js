@@ -16,7 +16,7 @@ export const Comment = ({ comment, nlp }) => {
   const sentiment = comment.score;
 
   return (
-    <div className="flex overflow-hidden border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900">
+    <div className="flex overflow-hidden border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900 shadow-md">
       <SentimentBanner sentiment={sentiment} />
 
       <div className="inline-block p-8">

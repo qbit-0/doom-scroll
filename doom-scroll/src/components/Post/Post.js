@@ -48,7 +48,7 @@ export const Post = ({ post, nlp }) => {
   }
 
   return (
-    <section className="flex overflow-clip mx-auto mb-8 border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900">
+    <section className="flex overflow-clip mx-auto mb-8 border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900 shadow-md">
       <SentimentBanner sentiment={sentiment} ratio={ratio} />
 
       <div className="flex-grow-0 w-full p-8">

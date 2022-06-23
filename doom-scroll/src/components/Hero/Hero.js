@@ -1,4 +1,3 @@
-
 export const Hero = () => {
   return (
     <div className="h-screen bg-gray-900">
@@ -14,22 +13,22 @@ export const Hero = () => {
           </p>
         </blockquote>
         <h1 className="mt-16 text-8xl text-center font-extrabold">
-          <span className="text-transparent bg-clip-text bg-gradient-to-tl from-amber-100 to-rose-600">
+          <span className="text-transparent bg-clip-text bg-gradient-to-tl from-amber-100 to-rose-600 drop-shadow-2xl">
             Doom
           </span>
-          <span className="text-transparent bg-clip-text bg-gradient-to-br from-amber-100 to-sky-600">
+          <span className="text-transparent bg-clip-text bg-gradient-to-br from-amber-100 to-sky-600 drop-shadow-2xl">
             Scroll
           </span>
         </h1>
         <h2 className="mt-16 text-2xl font-light text-center">
           The{" "}
-          <button className="p-2 border-2 border-amber-100 rounded-2xl text-4xl font-extrabold transition-all text-sky-300 hover:bg-sky-600 hover:text-gray-900">
+          <span className="p-2 text-4xl font-extrabold text-sky-600 drop-shadow-2xl">
             Best
-          </button>{" "}
+          </span>{" "}
           and{" "}
-          <button className="p-2 border-2 border-amber-100 rounded-2xl text-4xl font-extrabold transition-all text-rose-300 hover:bg-rose-600 hover:text-gray-900">
+          <span className="p-2 text-4xl font-extrabold text-rose-600 drop-shadow-2xl">
             Worst
-          </button>{" "}
+          </span>{" "}
           of Reddit.
         </h2>
       </header>
