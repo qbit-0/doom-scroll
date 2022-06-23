@@ -1,4 +1,4 @@
-export const Select = ({ onChange, value, children }) => {
+const Select = ({ onChange, value, children }) => {
   return (
     <select
       value={value}
@@ -9,3 +9,5 @@ export const Select = ({ onChange, value, children }) => {
     </select>
   );
 };
+
+export default Select;

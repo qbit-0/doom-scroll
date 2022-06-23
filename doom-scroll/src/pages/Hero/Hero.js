@@ -1,4 +1,4 @@
-export const Hero = () => {
+const Hero = () => {
   return (
     <div className="h-screen bg-gray-900">
       <header className="text-amber-100">
@@ -40,3 +40,5 @@ export const Hero = () => {
     </div>
   );
 };
+
+export default Hero;

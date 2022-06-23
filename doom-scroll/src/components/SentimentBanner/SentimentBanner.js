@@ -1,4 +1,4 @@
-export const SentimentBanner = ({ sentiment, ratio }) => {
+const SentimentBanner = ({ sentiment, ratio }) => {
   if (
     sentiment === null ||
     sentiment === undefined ||
@@ -38,3 +38,5 @@ export const SentimentBanner = ({ sentiment, ratio }) => {
     </div>
   );
 };
+
+export default SentimentBanner;

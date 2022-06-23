@@ -1,4 +1,4 @@
-export const Button = ({ highlight, onClick, children }) => {
+const Button = ({ highlight, onClick, children }) => {
   if (highlight) {
     return (
       <button
@@ -21,3 +21,5 @@ export const Button = ({ highlight, onClick, children }) => {
     </button>
   );
 };
+
+export default Button;

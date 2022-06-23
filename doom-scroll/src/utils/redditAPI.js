@@ -48,3 +48,13 @@ export const fetchReddit = async ({ accessToken, pathname, search }) => {
   const json = await response.json();
   return json;
 };
+
+export const fetchProfileImg = async (accessToken, author) => {
+  const json = await fetchReddit({
+    accessToken: accessToken,
+    pathname: `/user/${author}/about`,
+    search: "",
+  });
+
+  return json.data.icon_img;
+};

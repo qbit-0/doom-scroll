@@ -1,23 +1,24 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { Post } from "../../components/Post/Post";
-import { PostPlaceholder } from "../../components/PostPlaceholder/PostPlaceholder";
-import { SubredditSort } from "../../components/SubredditSort/SubredditSort";
+import Post from "../../components/Post/Post";
+import PostPlaceholder from "../../components/PostPlaceholder/PostPlaceholder";
+import SubredditSort from "../../components/SubredditSort/SubredditSort";
 import {
   selectAccessToken,
-  updateAppToken
+  updateAppToken,
 } from "../../features/auth/authSlice";
 import {
   loadPosts,
   loadPostsAfter,
-  selectIsLoadingPosts, selectIsLoadingPostsNew,
+  selectIsLoadingPosts,
+  selectIsLoadingPostsNew,
   selectPosts,
   selectPostsAfter,
-  setPostsLocation
+  setPostsLocation,
 } from "../../features/posts/postsSlice";
 
-export const SubredditPage = ({ nlp }) => {
+const SubredditPage = ({ nlp }) => {
   const location = useLocation();
   const accessToken = useSelector(selectAccessToken);
   const posts = useSelector(selectPosts);
@@ -25,10 +26,6 @@ export const SubredditPage = ({ nlp }) => {
   const isLoadingNew = useSelector(selectIsLoadingPostsNew);
   const after = useSelector(selectPostsAfter);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(updateAppToken());
-  }, []);
 
   useEffect(() => {
     dispatch(setPostsLocation(location));
@@ -79,3 +76,5 @@ export const SubredditPage = ({ nlp }) => {
     </div>
   );
 };
+
+export default SubredditPage;

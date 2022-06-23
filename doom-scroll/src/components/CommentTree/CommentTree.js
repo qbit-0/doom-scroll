@@ -1,7 +1,7 @@
-import { Comment } from "../Comment/Comment";
-import { More } from "../More/More";
+import Comment from "../Comment/Comment";
+import More from "../More/More";
 
-export const CommentTree = ({ comments, baseDepth, treeStartIndex, nlp }) => {
+const CommentTree = ({ comments, baseDepth, treeStartIndex, nlp }) => {
   if (comments.length === 0) {
     return;
   }
@@ -68,3 +68,5 @@ export const CommentTree = ({ comments, baseDepth, treeStartIndex, nlp }) => {
 
   return <div>{renderBranches(branches, treeStartIndex)}</div>;
 };
+
+export default CommentTree;

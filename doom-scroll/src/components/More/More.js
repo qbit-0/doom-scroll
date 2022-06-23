@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { replaceComment } from "../../features/comments/commentsSlice";
 
-export const More = ({ more, startIndex, nlp }) => {
+const More = ({ more, startIndex, nlp }) => {
   const dispatch = useDispatch();
 
   const handleClick = (e) => {
@@ -11,7 +11,7 @@ export const More = ({ more, startIndex, nlp }) => {
       replaceComment({
         index: startIndex,
         childrenIds: more.data.children,
-        nlp: nlp
+        nlp: nlp,
       })
     );
   };
@@ -33,3 +33,5 @@ export const More = ({ more, startIndex, nlp }) => {
     </div>
   );
 };
+
+export default More;

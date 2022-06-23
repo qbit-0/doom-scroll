@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import CommentTree from "../../components/CommentTree/CommentTree";
+import Post from "../../components/Post/Post";
+import PostPlaceholder from "../../components/PostPlaceholder/PostPlaceholder";
 import {
   selectAccessToken,
   updateAppToken,
@@ -12,22 +15,15 @@ import {
   selectCommentsPost,
   setCommentsLocation,
 } from "../../features/comments/commentsSlice";
-import { CommentTree } from "../../components/CommentTree/CommentTree";
-import { Post } from "../../components/Post/Post";
-import { PostPlaceholder } from "../../components/PostPlaceholder/PostPlaceholder";
 
-export const CommentsPage = ({ nlp }) => {
+const CommentsPage = ({ nlp }) => {
   const location = useLocation();
   const accessToken = useSelector(selectAccessToken);
   const post = useSelector(selectCommentsPost);
   const comments = useSelector(selectComments);
   const isLoadingNew = useSelector(selectCommentsIsLoadingNew);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(updateAppToken());
-  }, []);
-
+  
   useEffect(() => {
     dispatch(setCommentsLocation(location));
   }, [location]);
@@ -57,3 +53,5 @@ export const CommentsPage = ({ nlp }) => {
     </div>
   );
 };
+
+export default CommentsPage;

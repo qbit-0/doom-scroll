@@ -9,10 +9,10 @@ import {
   setMaxScore,
   setMinScore,
 } from "../../features/nlp/nlpSlice";
-import { Button } from "../Button/Button";
-import { SearchBar } from "../SearchBar/SearchBar";
+import Button from "../Button/Button";
+import SearchBar from "../SearchBar/SearchBar";
 
-export const NavBar = () => {
+const NavBar = () => {
   const location = useLocation();
   const minSentiment = useSelector(selectMinSentiment);
   const maxSentiment = useSelector(selectMaxSentiment);
@@ -90,3 +90,5 @@ export const NavBar = () => {
     </nav>
   );
 };
+
+export default NavBar;

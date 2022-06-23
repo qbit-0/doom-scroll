@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button } from "../Button/Button";
-import { FilterSentiment } from "../FilterSentiment/FilterSentiment";
-import { Option } from "../Option/Option";
-import { Select } from "../Select/Select";
+import Button from "../Button/Button";
+import FilterSentiment from "../FilterSentiment/FilterSentiment";
+import Option from "../Option/Option";
+import Select from "../Select/Select";
 
-export const SearchSort = () => {
+const SearchSort = () => {
   const location = useLocation();
   const [sort, setSort] = useState("relevance");
   const [time, setTime] = useState("all");
@@ -97,3 +97,5 @@ export const SearchSort = () => {
     </div>
   );
 };
+
+export default SearchSort;

@@ -1,7 +1,7 @@
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const Vote = ({ score }) => {
+const Vote = ({ score }) => {
   return (
     <div className="inline-block py-8 px-4 flex-shrink-0 flex-grow-0">
       <div className="w-fit mx-auto">
@@ -14,3 +14,5 @@ export const Vote = ({ score }) => {
     </div>
   );
 };
+
+export default Vote;

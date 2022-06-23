@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { analyzePost, analyzeComment } from "../../utility/nlpHelpers";
-import { fetchReddit } from "../../utility/redditAPI";
-import { flattenCommentTree } from "../../utility/redditDataStructure";
+import { analyzeComment, analyzePost } from "../../utils/nlpHelpers";
+import { fetchReddit } from "../../utils/redditAPI";
+import { flattenCommentTree } from "../../utils/redditDataStructure";
 import { selectAccessToken } from "../auth/authSlice";
 
 export const loadComments = createAsyncThunk(

@@ -1,7 +1,7 @@
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const SearchBar = ({ value, onChange, onSubmit }) => {
+const SearchBar = ({ value, onChange, onSubmit }) => {
   return (
     <div className="inline-block border-2 border-amber-100 rounded-2xl">
       <input
@@ -20,8 +20,10 @@ export const SearchBar = ({ value, onChange, onSubmit }) => {
         onClick={onSubmit}
         className="p-2 rounded-r-2xl decoration-gray-600 decoration-4 transition-all font-bold"
       >
-        <FontAwesomeIcon icon={solid("magnifying-glass")}/>
+        <FontAwesomeIcon icon={solid("magnifying-glass")} />
       </button>
     </div>
   );
 };
+
+export default SearchBar;

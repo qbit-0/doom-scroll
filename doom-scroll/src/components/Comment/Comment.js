@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Author } from "../Author/Author";
-import { SentimentBanner } from "../SentimentBanner/SentimentBanner";
-import { Vote } from "../Vote/Vote";
+import Author from "../Author/Author";
+import SentimentBanner from "../SentimentBanner/SentimentBanner";
+import Vote from "../Vote/Vote";
 
-export const Comment = ({ comment, nlp }) => {
+const Comment = ({ comment, nlp }) => {
   const author = comment.data.author;
   const created = comment.data.created_utc;
   const body = comment.data.body;
@@ -26,3 +26,5 @@ export const Comment = ({ comment, nlp }) => {
     </div>
   );
 };
+
+export default Comment;

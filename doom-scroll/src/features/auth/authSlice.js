@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAppToken } from "../../utility/redditAPI";
+import { getAppToken } from "../../utils/redditAPI";
 
 export const updateAppToken = createAsyncThunk(
-  "auth/updateAppAccessToken",
+  "auth/updateAppToken",
   async () => {
     return await getAppToken();
   }

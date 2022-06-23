@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "../Button/Button";
-import { FilterSentiment } from "../FilterSentiment/FilterSentiment";
-import { Option } from "../Option/Option";
-import { Select } from "../Select/Select";
+import Button from "../Button/Button";
+import FilterSentiment from "../FilterSentiment/FilterSentiment";
+import Option from "../Option/Option";
+import Select from "../Select/Select";
 
-export const SubredditSort = () => {
+const SubredditSort = () => {
   const { subreddit } = useParams();
   const [sort, setSort] = useState("hot");
   const [time, setTime] = useState("all");
@@ -86,3 +86,5 @@ export const SubredditSort = () => {
     </div>
   );
 };
+
+export default SubredditSort;

@@ -10,7 +10,7 @@ const TOKEN_RESPONSE_TYPE = "token";
 const REDIRECT_URI = "http://localhost:3000/login";
 const SCOPE = "read";
 
-export const Login = () => {
+const Login = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -32,3 +32,5 @@ export const Login = () => {
     window.location = url;
   }
 };
+
+export default Login;

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { analyzePost } from "../../utility/nlpHelpers";
-import { fetchReddit } from "../../utility/redditAPI";
+import { analyzePost } from "../../utils/nlpHelpers";
+import { fetchReddit } from "../../utils/redditAPI";
 import { selectAccessToken } from "../auth/authSlice";
 
 export const loadPosts = createAsyncThunk(

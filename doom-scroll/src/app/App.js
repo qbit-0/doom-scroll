@@ -2,19 +2,27 @@ import {
   BrowserRouter as Router,
   Navigate,
   Route,
-  Routes
+  Routes,
 } from "react-router-dom";
 import model from "wink-eng-lite-web-model";
 import winkNLP from "wink-nlp";
-import { Hero } from "../components/Hero/Hero";
-import { Login } from "../components/Login/Login";
-import { NavBar } from "../components/NavBar/NavBar";
-import { CommentsPage } from "../pages/CommentsPage/CommentsPage";
-import { SearchPage } from "../pages/SearchPage/SearchPage";
-import { SubredditPage } from "../pages/SubredditPage/SubredditPage";
+import Hero from "../pages/Hero/Hero";
+import Login from "../components/Login/Login";
+import NavBar from "../components/NavBar/NavBar";
+import CommentsPage from "../pages/CommentsPage/CommentsPage";
+import SearchPage from "../pages/SearchPage/SearchPage";
+import SubredditPage from "../pages/SubredditPage/SubredditPage";
+import { useEffect } from "react";
+import { updateAppToken } from "../features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
   const nlp = winkNLP(model, ["sbd", "negation", "sentiment"]);
+
+  useEffect(() => {
+    dispatch(updateAppToken());
+  }, []);
 
   return (
     <Router>
@@ -40,6 +48,6 @@ function App() {
       </main>
     </Router>
   );
-}
+};
 
 export default App;

@@ -1,6 +1,9 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import Post from "../../components/Post/Post";
+import PostPlaceholder from "../../components/PostPlaceholder/PostPlaceholder";
+import SearchSort from "../../components/SearchSort/SearchSort";
 import {
   selectAccessToken,
   updateAppToken,
@@ -14,11 +17,8 @@ import {
   selectPostsAfter,
   setPostsLocation,
 } from "../../features/posts/postsSlice";
-import { Post } from "../../components/Post/Post";
-import { PostPlaceholder } from "../../components/PostPlaceholder/PostPlaceholder";
-import { SearchSort } from "../../components/SearchSort/SearchSort";
 
-export const SearchPage = ({ nlp }) => {
+const SearchPage = ({ nlp }) => {
   const location = useLocation();
   const accessToken = useSelector(selectAccessToken);
   const posts = useSelector(selectPosts);
@@ -26,10 +26,6 @@ export const SearchPage = ({ nlp }) => {
   const isLoadingNew = useSelector(selectIsLoadingPostsNew);
   const after = useSelector(selectPostsAfter);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(updateAppToken());
-  }, []);
 
   useEffect(() => {
     dispatch(setPostsLocation(location));
@@ -80,3 +76,5 @@ export const SearchPage = ({ nlp }) => {
     </div>
   );
 };
+
+export default SearchPage;

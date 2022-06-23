@@ -10,9 +10,9 @@ import {
   setMinRatio,
   setMinScore as setMinSentiment,
 } from "../../features/nlp/nlpSlice";
-import { Button } from "../Button/Button";
+import Button from "../Button/Button";
 
-export const FilterSentiment = () => {
+const FilterSentiment = () => {
   const minSentiment = useSelector(selectMinSentiment);
   const maxSentiment = useSelector(selectMaxSentiment);
   const minRatio = useSelector(selectMinRatio);
@@ -161,3 +161,5 @@ export const FilterSentiment = () => {
     </div>
   );
 };
+
+export default FilterSentiment;
