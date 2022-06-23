@@ -30,6 +30,6 @@ export const selectMaxSentiment = (state) => state.nlp.maxSentiment;
 export const selectMinRatio = (state) => state.nlp.minRatio;
 export const selectMaxRatio = (state) => state.nlp.maxRatio;
 
-export const { setMinScore, setMaxScore, setMinRatio, setMaxRatio } =
+export const {setMinScore, setMaxScore, setMinRatio, setMaxRatio } =
   nlpSlice.actions;
 export default nlpSlice.reducer;

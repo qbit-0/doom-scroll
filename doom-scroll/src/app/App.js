@@ -2,14 +2,14 @@ import {
   BrowserRouter as Router,
   Navigate,
   Route,
-  Routes,
+  Routes
 } from "react-router-dom";
 import model from "wink-eng-lite-web-model";
 import winkNLP from "wink-nlp";
-import { CommentsPage } from "../pages/CommentsPage/CommentsPage";
 import { Hero } from "../components/Hero/Hero";
 import { Login } from "../components/Login/Login";
 import { NavBar } from "../components/NavBar/NavBar";
+import { CommentsPage } from "../pages/CommentsPage/CommentsPage";
 import { SearchPage } from "../pages/SearchPage/SearchPage";
 import { SubredditPage } from "../pages/SubredditPage/SubredditPage";
 
