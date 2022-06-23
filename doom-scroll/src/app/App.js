@@ -6,12 +6,12 @@ import {
 } from "react-router-dom";
 import model from "wink-eng-lite-web-model";
 import winkNLP from "wink-nlp";
-import { CommentsPage } from "../components/CommentsPage/CommentsPage";
+import { CommentsPage } from "../pages/CommentsPage/CommentsPage";
 import { Hero } from "../components/Hero/Hero";
 import { Login } from "../components/Login/Login";
 import { NavBar } from "../components/NavBar/NavBar";
-import { SearchPage } from "../components/SearchPage/SearchPage";
-import { SubredditPage } from "../components/SubredditPage/SubredditPage";
+import { SearchPage } from "../pages/SearchPage/SearchPage";
+import { SubredditPage } from "../pages/SubredditPage/SubredditPage";
 
 function App() {
   const nlp = winkNLP(model, ["sbd", "negation", "sentiment"]);

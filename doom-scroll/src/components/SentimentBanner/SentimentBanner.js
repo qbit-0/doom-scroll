@@ -1,5 +1,9 @@
 export const SentimentBanner = ({ sentiment, ratio }) => {
-  if (sentiment === null) {
+  if (
+    sentiment === null ||
+    sentiment === undefined ||
+    Number.isNaN(sentiment)
+  ) {
     return (
       <div
         className={`inline-block w-20 flex-shrink-0 p-4 bg-gradient-to-b from-gray-600 to-gray-800`}

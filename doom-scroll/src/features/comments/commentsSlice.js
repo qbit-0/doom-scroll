@@ -13,10 +13,7 @@ export const loadComments = createAsyncThunk(
     const search = location.search;
 
     if (!accessToken) {
-      return {
-        post: null,
-        comments: [],
-      };
+      return thunkAPI.rejectWithValue("No access token found.");
     }
 
     const responseJson = await fetchReddit({
@@ -48,10 +45,7 @@ export const replaceComment = createAsyncThunk(
     const link = post.data.name;
 
     if (!accessToken) {
-      return {
-        index: index,
-        newComments: [],
-      };
+      return thunkAPI.rejectWithValue("No access token found.");
     }
 
     const params = new URLSearchParams();
@@ -86,6 +80,8 @@ export const commentsSlice = createSlice({
     },
     post: null,
     comments: [],
+    isLoadingNew: false,
+    isLoadingReplacement: false,
     isLoading: false,
   },
   reducers: {
@@ -96,12 +92,21 @@ export const commentsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loadComments.pending, (state, action) => {
+        state.isLoadingNew = true;
         state.isLoading = true;
       })
       .addCase(loadComments.fulfilled, (state, action) => {
         state.post = action.payload.post;
         state.comments = action.payload.comments;
-        state.isLoading = false;
+        state.isLoadingNew = false;
+      })
+      .addCase(loadComments.rejected, (state, action) => {
+        state.isLoadingNew = false;
+        state.isLoading = state.isLoadingReplacement;
+      })
+      .addCase(replaceComment.pending, (state, action) => {
+        state.isLoadingReplacement = true;
+        state.isLoading = true;
       })
       .addCase(replaceComment.fulfilled, (state, action) => {
         const { index, newComments } = action.payload;
@@ -111,6 +116,13 @@ export const commentsSlice = createSlice({
           ...newComments,
           ...state.comments.slice(index + 1, state.comments.length),
         ];
+
+        state.isLoadingReplacement = false;
+        state.isLoading = state.isLoadingNew;
+      })
+      .addCase(replaceComment.rejected, (state, action) => {
+        state.isLoadingReplacement = false;
+        state.isLoading = state.isLoadingNew;
       });
   },
 });
@@ -118,7 +130,11 @@ export const commentsSlice = createSlice({
 export const selectCommentsLocation = (state) => state.comments.location;
 export const selectCommentsPost = (state) => state.comments.post;
 export const selectComments = (state) => state.comments.comments;
-export const selectCommentsIsLoading = (state) => state.comments.isLoading;
+export const selectCommentsIsLoadingNew = (state) =>
+  state.comments.isLoadingNew;
+export const selectCommentsIsLoadingReplacement = (state) =>
+  state.comments.isLoadingReplacement;
+export const selectIsLoadingComments = (state) => state.comments.isLoading;
 
 export const { setCommentsLocation } = commentsSlice.actions;
 export default commentsSlice.reducer;

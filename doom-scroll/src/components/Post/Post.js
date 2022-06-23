@@ -1,28 +1,23 @@
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { selectAccessToken } from "../../features/auth/authSlice";
 import {
-  selectMaxRatio, selectMaxSentiment,
-  selectMinRatio, selectMinSentiment
+  selectMaxRatio,
+  selectMaxSentiment,
+  selectMinRatio,
+  selectMinSentiment
 } from "../../features/nlp/nlpSlice";
-import { getElapsedString } from "../../utility/getElapsedString";
-import { fetchReddit } from "../../utility/redditAPI";
+import { Author } from "../Author/Author";
 import { SentimentBanner } from "../SentimentBanner/SentimentBanner";
 
 export const Post = ({ post, nlp }) => {
-  const accessToken = useSelector(selectAccessToken);
   const minScore = useSelector(selectMinSentiment);
   const maxScore = useSelector(selectMaxSentiment);
   const minRatio = useSelector(selectMinRatio);
   const maxRatio = useSelector(selectMaxRatio);
 
-  const [profileImg, setProfileImg] = useState(null);
-
   const author = post.data.author;
 
   const created = post.data.created_utc;
-  const elapsedString = getElapsedString(created);
 
   const title = post.data.title;
   const permalink = post.data.permalink;
@@ -40,18 +35,6 @@ export const Post = ({ post, nlp }) => {
   }
 
   const upvotes = post.data.ups;
-
-  useEffect(() => {
-    if (author !== "[deleted]") {
-      fetchReddit({
-        accessToken: accessToken,
-        pathname: `/user/${author}/about`,
-        search: "",
-      }).then((jsonResponse) => {
-        setProfileImg(jsonResponse.data.icon_img);
-      });
-    }
-  }, [accessToken]);
 
   const sentiment = post.score;
   const ratio = post.data.upvote_ratio;
@@ -73,16 +56,8 @@ export const Post = ({ post, nlp }) => {
           <p className="underline">{post.data.subreddit_name_prefixed}</p>
         </Link>
 
-        <div className="flex items-center mt-4">
-          <figure className="inline-block flex-grow-0 flex-shrink-0 overflow-clip w-12 h-12 rounded-full">
-            <img src={profileImg} className="block w-full h-full" />
-          </figure>
-          <div>
-            <p className="inline-block ml-4">
-              <span className="font-bold italic">{author}</span>{" "}
-              <span className="font-thin">- {elapsedString}</span>
-            </p>
-          </div>
+        <div className="mt-4">
+          <Author author={author} created={created} />
         </div>
 
         <div className="mt-4">
@@ -106,7 +81,7 @@ export const Post = ({ post, nlp }) => {
         )}
 
         <div>
-          <p className="mt-4">Votes: {upvotes}</p>
+          <p className="mt-4">Score: {upvotes}</p>
         </div>
       </div>
     </section>

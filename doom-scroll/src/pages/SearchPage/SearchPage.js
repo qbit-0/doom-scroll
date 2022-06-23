@@ -9,20 +9,22 @@ import {
   loadPosts,
   loadPostsAfter,
   selectIsLoadingPosts,
-  selectIsLoadingPostsAfter,
+  selectIsLoadingPostsNew,
   selectPosts,
+  selectPostsAfter,
   setPostsLocation,
 } from "../../features/posts/postsSlice";
-import { Post } from "../Post/Post";
-import { PostPlaceholder } from "../PostPlaceholder/PostPlaceholder";
-import { SubredditSort } from "../SubredditSort/SubredditSort";
+import { Post } from "../../components/Post/Post";
+import { PostPlaceholder } from "../../components/PostPlaceholder/PostPlaceholder";
+import { SearchSort } from "../../components/SearchSort/SearchSort";
 
-export const SubredditPage = ({ nlp }) => {
+export const SearchPage = ({ nlp }) => {
   const location = useLocation();
   const accessToken = useSelector(selectAccessToken);
   const posts = useSelector(selectPosts);
   const isLoading = useSelector(selectIsLoadingPosts);
-  const isLoadingAfter = useSelector(selectIsLoadingPostsAfter);
+  const isLoadingNew = useSelector(selectIsLoadingPostsNew);
+  const after = useSelector(selectPostsAfter);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export const SubredditPage = ({ nlp }) => {
   }, [location]);
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoadingNew) {
       dispatch(loadPosts(nlp));
     }
   }, [location, accessToken]);
@@ -42,9 +44,9 @@ export const SubredditPage = ({ nlp }) => {
   const ref = useRef();
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoading && after !== null) {
       const options = {
-        rootMargin: "0px",
+        rootMargin: "5000px",
       };
 
       const observer = new IntersectionObserver((entities, observer) => {
@@ -60,19 +62,20 @@ export const SubredditPage = ({ nlp }) => {
         if (ref.current) observer.unobserve(ref.current);
       };
     }
-  }, [location, accessToken, isLoading]);
+  }, [location, accessToken, isLoading, after]);
 
   return (
     <div className="px-16 py-8 max-w-7xl mx-auto">
       <div className="mb-8">
-        <SubredditSort />
+        <SearchSort />
       </div>
       <div>
-        {!isLoading && posts.map((post, index) => (
-          <Post post={post} nlp={nlp} key={index} />
-        ))}
+        {!isLoadingNew &&
+          posts.map((post, index) => (
+            <Post post={post} nlp={nlp} key={index} />
+          ))}
       </div>
-      {(isLoading || isLoadingAfter) && <PostPlaceholder />}
+      {after !== null && <PostPlaceholder />}
       <div ref={ref} />
     </div>
   );

@@ -12,11 +12,7 @@ export const loadPosts = createAsyncThunk(
     const search = location.search;
 
     if (!accessToken) {
-      return {
-        posts: [],
-        before: null,
-        after: null,
-      };
+      return thunkAPI.rejectWithValue("No access token found.");
     }
 
     const params = new URLSearchParams(search);
@@ -48,12 +44,12 @@ export const loadPostsAfter = createAsyncThunk(
     const search = location.search;
     const after = selectPostsAfter(thunkAPI.getState());
 
-    if (!accessToken || !after) {
-      return {
-        posts: [],
-        before: null,
-        after: null,
-      };
+    if (!accessToken) {
+      return thunkAPI.rejectWithValue("No access token found.");
+    }
+
+    if (!after) {
+      return thunkAPI.rejectWithValue("No listings after current.");
     }
 
     const params = new URLSearchParams(search);
@@ -88,8 +84,9 @@ export const postSlice = createSlice({
     posts: [],
     before: null,
     after: null,
-    isLoading: false,
+    isLoadingNew: false,
     isLoadingAfter: false,
+    isLoading: false,
   },
   reducers: {
     setPostsLocation: (state, action) => {
@@ -99,21 +96,33 @@ export const postSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loadPosts.pending, (state, action) => {
+        state.isLoadingNew = true;
         state.isLoading = true;
       })
       .addCase(loadPosts.fulfilled, (state, action) => {
         state.posts = action.payload.posts;
         state.before = action.payload.before;
         state.after = action.payload.after;
-        state.isLoading = false;
+        state.isLoadingNew = false;
+        state.isLoading = state.isLoadingAfter;
+      })
+      .addCase(loadPosts.rejected, (state, action) => {
+        state.isLoadingNew = false;
+        state.isLoading = state.isLoadingAfter;
       })
       .addCase(loadPostsAfter.pending, (state, action) => {
         state.isLoadingAfter = true;
+        state.isLoading = true;
       })
       .addCase(loadPostsAfter.fulfilled, (state, action) => {
         state.posts.push(...action.payload.posts);
         state.after = action.payload.after;
         state.isLoadingAfter = false;
+        state.isLoading = state.isLoadingNew;
+      })
+      .addCase(loadPostsAfter.rejected, (state, action) => {
+        state.isLoadingAfter = false;
+        state.isLoading = state.isLoadingNew;
       });
   },
 });
@@ -122,8 +131,9 @@ export const selectPostsLocation = (state) => state.posts.location;
 export const selectPosts = (state) => state.posts.posts;
 export const selectPostsBefore = (state) => state.posts.before;
 export const selectPostsAfter = (state) => state.posts.after;
-export const selectIsLoadingPosts = (state) => state.posts.isLoading;
+export const selectIsLoadingPostsNew = (state) => state.posts.isLoadingNew;
 export const selectIsLoadingPostsAfter = (state) => state.posts.isLoadingAfter;
+export const selectIsLoadingPosts = (state) => state.posts.isLoading;
 
 export const { setPostsLocation } = postSlice.actions;
 export default postSlice.reducer;

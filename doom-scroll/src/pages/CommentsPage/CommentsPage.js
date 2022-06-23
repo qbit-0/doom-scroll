@@ -8,20 +8,20 @@ import {
 import {
   loadComments,
   selectComments,
-  selectCommentsIsLoading,
+  selectCommentsIsLoadingNew,
   selectCommentsPost,
   setCommentsLocation,
 } from "../../features/comments/commentsSlice";
-import { CommentTree } from "../CommentTree/CommentTree";
-import { Post } from "../Post/Post";
-import { PostPlaceholder } from "../PostPlaceholder/PostPlaceholder";
+import { CommentTree } from "../../components/CommentTree/CommentTree";
+import { Post } from "../../components/Post/Post";
+import { PostPlaceholder } from "../../components/PostPlaceholder/PostPlaceholder";
 
 export const CommentsPage = ({ nlp }) => {
   const location = useLocation();
   const accessToken = useSelector(selectAccessToken);
   const post = useSelector(selectCommentsPost);
   const comments = useSelector(selectComments);
-  const isLoading = useSelector(selectCommentsIsLoading);
+  const isLoadingNew = useSelector(selectCommentsIsLoadingNew);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,10 +41,10 @@ export const CommentsPage = ({ nlp }) => {
   return (
     <div className="px-28 py-8">
       <div>
-        {!isLoading && post && <Post post={post} nlp={nlp} />}
-        {isLoading && <PostPlaceholder />}
+        {!isLoadingNew && post && <Post post={post} nlp={nlp} />}
+        {isLoadingNew && <PostPlaceholder />}
       </div>
-      {!isLoading && (
+      {!isLoadingNew && (
         <div className="pt-16">
           <CommentTree
             comments={comments}

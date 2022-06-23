@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectMaxRatio,
   selectMaxSentiment,
-  selectMinRatio, selectMinSentiment,
+  selectMinRatio,
+  selectMinSentiment,
   setMaxRatio,
   setMaxScore as setMaxSentiment,
   setMinRatio,
-  setMinScore as setMinSentiment
+  setMinScore as setMinSentiment,
 } from "../../features/nlp/nlpSlice";
 import { Button } from "../Button/Button";
 
@@ -76,7 +77,14 @@ export const FilterSentiment = () => {
   const handleBloom = () => {
     setCurrMinSentiment(0.1);
     setCurrMaxSentiment(5);
-    setCurrMinRatio(0.5);
+    setCurrMinRatio(0.95);
+    setCurrMaxRatio(1);
+  };
+
+  const handleReset = () => {
+    setCurrMinSentiment(-5);
+    setCurrMaxSentiment(5);
+    setCurrMinRatio(0);
     setCurrMaxRatio(1);
   };
 
@@ -88,6 +96,9 @@ export const FilterSentiment = () => {
         </div>
         <div className="inline-block mr-2">
           <Button onClick={handleBloom}>Bloom</Button>
+        </div>
+        <div className="inline-block mr-2">
+          <Button onClick={handleReset}>Reset</Button>
         </div>
       </div>
       <div className="inline-block">
