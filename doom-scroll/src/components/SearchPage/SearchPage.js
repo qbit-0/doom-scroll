@@ -1,16 +1,20 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { selectAccessToken, updateAppToken } from "../../features/auth/authSlice";
+import {
+  selectAccessToken,
+  updateAppToken
+} from "../../features/auth/authSlice";
 import {
   loadPosts,
   loadPostsAfter,
   selectIsLoadingPosts,
   selectPosts,
-  setPostsLocation,
+  setPostsLocation
 } from "../../features/posts/postsSlice";
 import { Post } from "../Post/Post";
 import { PostPlaceholder } from "../PostPlaceholder/PostPlaceholder";
+import { SearchSort } from "../SearchSort/SearchSort";
 
 export const SearchPage = ({ nlp }) => {
   const location = useLocation();
@@ -57,10 +61,15 @@ export const SearchPage = ({ nlp }) => {
   }, [location, accessToken, isLoading]);
 
   return (
-    <div className="px-16 py-8">
-      {posts.map((post, index) => (
-        <Post post={post} nlp={nlp} key={index} />
-      ))}
+    <div className="px-16 py-8 max-w-7xl mx-auto">
+      <div className="mb-8">
+        <SearchSort />
+      </div>
+      <div>
+        {posts.map((post, index) => (
+          <Post post={post} nlp={nlp} key={index} />
+        ))}
+      </div>
       {<PostPlaceholder />}
       <div ref={ref} />
     </div>

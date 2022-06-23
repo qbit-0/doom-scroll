@@ -23,18 +23,18 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Navigate to="r/popular" />} />
-          <Route path="r/:subreddit/" element={<SubredditPage nlp={nlp} />} />
+          <Route path="/r/:subreddit/" element={<SubredditPage nlp={nlp} />} />
           <Route
-            path="r/:subreddit/:sort"
+            path="/r/:subreddit/:sort"
             element={<SubredditPage nlp={nlp} />}
           />
-          <Route path="search" element={<SearchPage nlp={nlp} />} />
+          <Route path="/search" element={<SearchPage nlp={nlp} />} />
           <Route
-            path="r/:subreddit/comments/:name/:title"
+            path="/r/:subreddit/comments/:name/:title"
             element={<CommentsPage nlp={nlp} />}
           />
 
-          <Route path="login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<></>} />
         </Routes>
       </main>

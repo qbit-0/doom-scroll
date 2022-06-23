@@ -39,7 +39,7 @@ export const NavBar = () => {
   const handleSearchSubmit = () => {
     const params = new URLSearchParams();
     params.append("q", search);
-    navigate(`search?${params.toString()}`);
+    navigate(`/search?${params.toString()}`);
   };
 
   const handleCurrMinScoreChange = (e) => {

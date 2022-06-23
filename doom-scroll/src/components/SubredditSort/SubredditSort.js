@@ -59,14 +59,8 @@ export const SubredditSort = () => {
         </Button>
       </div>
 
-      <div className="inline-block">
-        <Button highlight={sort === "rising"} onClick={handleClickRising}>
-          <p className="inline font-bold">Rising</p>
-        </Button>
-      </div>
-
       {sort === "top" && (
-        <div className="float-right">
+        <div className="inline-block mr-2">
           <Select value={time} onChange={handleTimeChange}>
             <Option value="hour">Now</Option>
             <Option value="day">Today</Option>
@@ -77,6 +71,12 @@ export const SubredditSort = () => {
           </Select>{" "}
         </div>
       )}
+
+      <div className="inline-block">
+        <Button highlight={sort === "rising"} onClick={handleClickRising}>
+          <p className="inline font-bold">Rising</p>
+        </Button>
+      </div>
 
       <div className="mt-2 border-t-2 border-gray-800">
         <div className="mt-2">
