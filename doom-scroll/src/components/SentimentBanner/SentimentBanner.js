@@ -6,7 +6,7 @@ export const SentimentBanner = ({ sentiment, ratio }) => {
   ) {
     return (
       <div
-        className={`inline-block w-20 flex-shrink-0 p-4 bg-gradient-to-b from-gray-600 to-gray-800`}
+        className={`inline-block w-28 flex-shrink-0 p-4 bg-gradient-to-b from-gray-600 to-gray-800`}
       ></div>
     );
   }

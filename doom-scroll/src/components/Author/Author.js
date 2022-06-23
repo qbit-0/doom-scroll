@@ -25,7 +25,8 @@ export const Author = ({ author, created }) => {
   return (
     <div className="flex items-center">
       <figure className="inline-block flex-grow-0 flex-shrink-0 overflow-clip w-12 h-12 rounded-full">
-        <img src={profileImg} className="block w-full h-full" />
+        {profileImg && <img src={profileImg} className="block w-full h-full" />}
+        {!profileImg && <div className="block w-full h-full bg-gray-800"></div>}
       </figure>
       <div>
         <p className="inline-block ml-4">

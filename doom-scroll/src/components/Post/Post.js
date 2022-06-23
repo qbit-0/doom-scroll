@@ -8,6 +8,7 @@ import {
 } from "../../features/nlp/nlpSlice";
 import { Author } from "../Author/Author";
 import { SentimentBanner } from "../SentimentBanner/SentimentBanner";
+import { Vote } from "../Vote/Vote";
 
 export const Post = ({ post, nlp }) => {
   const minScore = useSelector(selectMinSentiment);
@@ -51,7 +52,9 @@ export const Post = ({ post, nlp }) => {
     <section className="flex overflow-clip mx-auto mb-8 border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900 shadow-md">
       <SentimentBanner sentiment={sentiment} ratio={ratio} />
 
-      <div className="flex-grow-0 w-full p-8">
+      <Vote score={upvotes}/>
+
+      <div className="flex-grow-0 w-full py-8">
         <Link to={`/${post.data.subreddit_name_prefixed}`}>
           <p className="underline">{post.data.subreddit_name_prefixed}</p>
         </Link>
@@ -79,10 +82,6 @@ export const Post = ({ post, nlp }) => {
             <p>{selftext}</p>
           </div>
         )}
-
-        <div>
-          <p className="mt-4">Score: {upvotes}</p>
-        </div>
       </div>
     </section>
   );

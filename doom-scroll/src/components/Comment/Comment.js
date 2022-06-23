@@ -1,13 +1,9 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectAccessToken } from "../../features/auth/authSlice";
-import { fetchReddit } from "../../utility/redditAPI";
+import { useState } from "react";
 import { Author } from "../Author/Author";
 import { SentimentBanner } from "../SentimentBanner/SentimentBanner";
+import { Vote } from "../Vote/Vote";
 
 export const Comment = ({ comment, nlp }) => {
-  const [profileImg, setProfileImg] = useState(null);
-
   const author = comment.data.author;
   const created = comment.data.created_utc;
   const body = comment.data.body;
@@ -19,11 +15,12 @@ export const Comment = ({ comment, nlp }) => {
     <div className="flex overflow-hidden border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900 shadow-md">
       <SentimentBanner sentiment={sentiment} />
 
-      <div className="inline-block p-8">
-        <div>
+      <Vote score={upvotes} />
+
+      <div className="inline-block py-8">
+        <div className="inline-block">
           <Author author={author} created={created} />
-          <p className="mt-4">{body}</p>
-          <p>Score: {upvotes}</p>
+          <p className="mt-2">{body}</p>
         </div>
       </div>
     </div>

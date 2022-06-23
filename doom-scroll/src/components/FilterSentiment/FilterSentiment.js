@@ -90,7 +90,7 @@ export const FilterSentiment = () => {
 
   return (
     <div>
-      <div className="inline-block">
+      <div className="block mb-2">
         <div className="inline-block mr-2">
           <Button onClick={handleDoom}>Doom</Button>
         </div>
@@ -101,7 +101,7 @@ export const FilterSentiment = () => {
           <Button onClick={handleReset}>Reset</Button>
         </div>
       </div>
-      <div className="inline-block">
+      <div className="block">
         <div className="inline-block mr-2">
           <label htmlFor="minScore">Sentiment Min: </label>
           <input
