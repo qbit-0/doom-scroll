@@ -2,20 +2,18 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "../../app/store";
 import {
-  selectAccessToken,
-  updateAppToken,
+  updateAppToken
 } from "../../features/auth/authSlice";
-import { fetchReddit } from "../../utils/redditAPI";
-import Author from "./Author";
 import * as redditAPI from "../../utils/redditAPI";
+import Author from "./Author";
 
 describe("Author component", () => {
+  const author = "AuthorUsername";
+  const created = 0;
+
   beforeAll(() => {});
 
   test("it renders author name", () => {
-    const author = "KeyboardCreature";
-    const created = 0;
-
     render(
       <Provider store={store}>
         <Author author={author} created={created} />
@@ -26,16 +24,13 @@ describe("Author component", () => {
   });
 
   test("it renders time elapsed", () => {
-    const author = "KeyboardCreature";
-    const created = 0;
-
     render(
       <Provider store={store}>
         <Author author={author} created={created} />
       </Provider>
     );
 
-    expect(screen.getByText(/- (\d)+y/)).toBeInTheDocument();
+    expect(screen.getByText(/(\d)+y/)).toBeInTheDocument();
   });
 
   test("it renders author profile picture", async () => {
@@ -46,9 +41,6 @@ describe("Author component", () => {
 
     const fetchProfileImgSpy = jest.spyOn(redditAPI, "fetchProfileImg");
     fetchProfileImgSpy.mockResolvedValue("https://picsum.photos/200");
-
-    const author = "KeyboardCreature";
-    const created = 0;
 
     store.dispatch(updateAppToken());
 
@@ -61,7 +53,7 @@ describe("Author component", () => {
     await waitFor(() => expect(getAppTokenSpy).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(fetchProfileImgSpy).toHaveBeenCalledTimes(1));
 
-    const altText = "KeyboardCreature's profile picture.";
+    const altText = `${author}'s profile picture.`;
     expect(await screen.findByAltText(altText)).toBeInTheDocument();
   });
 });

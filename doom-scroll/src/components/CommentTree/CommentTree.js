@@ -31,7 +31,7 @@ const CommentTree = ({ comments, baseDepth, treeStartIndex, nlp }) => {
         return <More more={comment} startIndex={commentStartIndex} nlp={nlp} />;
       }
       case "t1": {
-        return <Comment comment={comment} nlp={nlp} />;
+        return <Comment comment={comment} />;
       }
       default: {
         throw Error("Illegal kind");

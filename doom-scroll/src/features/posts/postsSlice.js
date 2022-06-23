@@ -25,7 +25,7 @@ export const loadPosts = createAsyncThunk(
 
     const posts = responseJson.data.children;
     posts.forEach((post) => {
-      post.score = analyzePost(nlp, post);
+      post.sentiment = analyzePost(nlp, post);
     });
 
     return {
@@ -63,7 +63,7 @@ export const loadPostsAfter = createAsyncThunk(
 
     const posts = responseJson.data.children;
     posts.forEach((post) => {
-      post.score = analyzePost(nlp, post);
+      post.sentiment = analyzePost(nlp, post);
     });
 
     return {

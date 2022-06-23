@@ -68,7 +68,7 @@ const SearchPage = ({ nlp }) => {
       <div>
         {!isLoadingNew &&
           posts.map((post, index) => (
-            <Post post={post} nlp={nlp} key={index} />
+            <Post post={post} key={index} />
           ))}
       </div>
       {after !== null && <PostPlaceholder />}

@@ -10,7 +10,7 @@ import Author from "../Author/Author";
 import SentimentBanner from "../SentimentBanner/SentimentBanner";
 import Vote from "../Vote/Vote";
 
-const Post = ({ post, nlp }) => {
+const Post = ({ post }) => {
   const minScore = useSelector(selectMinSentiment);
   const maxScore = useSelector(selectMaxSentiment);
   const minRatio = useSelector(selectMinRatio);
@@ -37,7 +37,7 @@ const Post = ({ post, nlp }) => {
 
   const upvotes = post.data.ups;
 
-  const sentiment = post.score;
+  const sentiment = post.sentiment;
   const ratio = post.data.upvote_ratio;
   if (
     sentiment < minScore ||

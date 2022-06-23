@@ -27,7 +27,7 @@ export const loadComments = createAsyncThunk(
 
     const comments = flattenCommentTree(responseJson[1]);
     comments.forEach((comment) => {
-      comment.score = analyzeComment(nlp, comment);
+      comment.sentiment = analyzeComment(nlp, comment);
     });
 
     return {
@@ -61,7 +61,7 @@ export const replaceComment = createAsyncThunk(
 
     const comments = responseJson.json.data.things;
     comments.forEach((comment) => {
-      comment.score = analyzeComment(nlp, comment);
+      comment.sentiment = analyzeComment(nlp, comment);
     });
 
     return {
