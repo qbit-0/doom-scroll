@@ -11,7 +11,7 @@ export const Comment = ({ comment, nlp }) => {
   const author = comment.data.author;
   const created = comment.data.created_utc;
   const body = comment.data.body;
-  const upvotes = comment.data.ups;
+  const upvotes = comment.data.score;
 
   useEffect(() => {
     if (author !== "[deleted]") {
@@ -25,11 +25,11 @@ export const Comment = ({ comment, nlp }) => {
     }
   }, [accessToken]);
 
-  const score = comment.score;
+  const sentiment = comment.score;
 
   return (
     <div className="flex overflow-hidden border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900">
-      <SentimentBanner score={score} />
+      <SentimentBanner sentiment={sentiment} />
 
       <div className="inline-block p-8">
         <div>

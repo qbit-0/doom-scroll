@@ -2,15 +2,20 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectAccessToken } from "../../features/auth/authSlice";
-import { selectMaxScore, selectMinScore } from "../../features/nlp/nlpSlice";
+import {
+  selectMaxRatio, selectMaxSentiment,
+  selectMinRatio, selectMinSentiment
+} from "../../features/nlp/nlpSlice";
 import { getElapsedString } from "../../utility/getElapsedString";
 import { fetchReddit } from "../../utility/redditAPI";
 import { SentimentBanner } from "../SentimentBanner/SentimentBanner";
 
 export const Post = ({ post, nlp }) => {
   const accessToken = useSelector(selectAccessToken);
-  const minScore = useSelector(selectMinScore);
-  const maxScore = useSelector(selectMaxScore);
+  const minScore = useSelector(selectMinSentiment);
+  const maxScore = useSelector(selectMaxSentiment);
+  const minRatio = useSelector(selectMinRatio);
+  const maxRatio = useSelector(selectMaxRatio);
 
   const [profileImg, setProfileImg] = useState(null);
 
@@ -37,23 +42,31 @@ export const Post = ({ post, nlp }) => {
   const upvotes = post.data.ups;
 
   useEffect(() => {
-    fetchReddit({
-      accessToken: accessToken,
-      pathname: `/user/${author}/about`,
-      search: "",
-    }).then((jsonResponse) => {
-      setProfileImg(jsonResponse.data.icon_img);
-    });
+    if (author !== "[deleted]") {
+      fetchReddit({
+        accessToken: accessToken,
+        pathname: `/user/${author}/about`,
+        search: "",
+      }).then((jsonResponse) => {
+        setProfileImg(jsonResponse.data.icon_img);
+      });
+    }
   }, [accessToken]);
 
-  const score = post.score;
-  if (score < minScore || score > maxScore) {
+  const sentiment = post.score;
+  const ratio = post.data.upvote_ratio;
+  if (
+    sentiment < minScore ||
+    sentiment > maxScore ||
+    ratio < minRatio ||
+    ratio > maxRatio
+  ) {
     return;
   }
 
   return (
     <section className="flex overflow-clip mx-auto mb-8 border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900">
-      <SentimentBanner score={score} />
+      <SentimentBanner sentiment={sentiment} ratio={ratio} />
 
       <div className="flex-grow-0 w-full p-8">
         <Link to={`/${post.data.subreddit_name_prefixed}`}>

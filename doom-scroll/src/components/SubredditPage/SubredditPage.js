@@ -9,6 +9,7 @@ import {
   loadPosts,
   loadPostsAfter,
   selectIsLoadingPosts,
+  selectIsLoadingPostsAfter,
   selectPosts,
   setPostsLocation,
 } from "../../features/posts/postsSlice";
@@ -21,6 +22,7 @@ export const SubredditPage = ({ nlp }) => {
   const accessToken = useSelector(selectAccessToken);
   const posts = useSelector(selectPosts);
   const isLoading = useSelector(selectIsLoadingPosts);
+  const isLoadingAfter = useSelector(selectIsLoadingPostsAfter);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,7 +44,7 @@ export const SubredditPage = ({ nlp }) => {
   useEffect(() => {
     if (!isLoading) {
       const options = {
-        rootMargin: "2000px",
+        rootMargin: "0px",
       };
 
       const observer = new IntersectionObserver((entities, observer) => {
@@ -66,11 +68,11 @@ export const SubredditPage = ({ nlp }) => {
         <SubredditSort />
       </div>
       <div>
-        {posts.map((post, index) => (
+        {!isLoading && posts.map((post, index) => (
           <Post post={post} nlp={nlp} key={index} />
         ))}
       </div>
-      {<PostPlaceholder />}
+      {(isLoading || isLoadingAfter) && <PostPlaceholder />}
       <div ref={ref} />
     </div>
   );

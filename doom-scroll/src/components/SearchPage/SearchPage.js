@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import {
   selectAccessToken,
-  updateAppToken
+  updateAppToken,
 } from "../../features/auth/authSlice";
 import {
   loadPosts,
   loadPostsAfter,
   selectIsLoadingPosts,
+  selectIsLoadingPostsAfter,
   selectPosts,
-  setPostsLocation
+  setPostsLocation,
 } from "../../features/posts/postsSlice";
 import { Post } from "../Post/Post";
 import { PostPlaceholder } from "../PostPlaceholder/PostPlaceholder";
@@ -21,6 +22,7 @@ export const SearchPage = ({ nlp }) => {
   const accessToken = useSelector(selectAccessToken);
   const posts = useSelector(selectPosts);
   const isLoading = useSelector(selectIsLoadingPosts);
+  const isLoadingAfter = useSelector(selectIsLoadingPostsAfter);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -66,11 +68,11 @@ export const SearchPage = ({ nlp }) => {
         <SearchSort />
       </div>
       <div>
-        {posts.map((post, index) => (
+        {!isLoading && posts.map((post, index) => (
           <Post post={post} nlp={nlp} key={index} />
         ))}
       </div>
-      {<PostPlaceholder />}
+      {(isLoading || isLoadingAfter) && <PostPlaceholder />}
       <div ref={ref} />
     </div>
   );

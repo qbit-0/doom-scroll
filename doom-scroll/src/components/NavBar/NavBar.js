@@ -1,15 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Link,
-  matchPath,
-  NavLink,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { matchPath, useLocation, useNavigate } from "react-router-dom";
 import {
   selectMaxScore,
+  selectMaxSentiment,
   selectMinScore,
+  selectMinSentiment,
   setMaxScore,
   setMinScore,
 } from "../../features/nlp/nlpSlice";
@@ -18,12 +14,12 @@ import { SearchBar } from "../SearchBar/SearchBar";
 
 export const NavBar = () => {
   const location = useLocation();
-  const minScore = useSelector(selectMinScore);
-  const maxScore = useSelector(selectMaxScore);
+  const minSentiment = useSelector(selectMinSentiment);
+  const maxSentiment = useSelector(selectMaxSentiment);
 
   const [search, setSearch] = useState("");
-  const [currMinScore, setCurrMinScore] = useState(minScore);
-  const [currMaxScore, setCurrMaxScore] = useState(maxScore);
+  const [currMinSentiment, setCurrMinSentiment] = useState(minSentiment);
+  const [currMaxSentiment, setCurrMaxSentiment] = useState(maxSentiment);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -43,17 +39,17 @@ export const NavBar = () => {
   };
 
   const handleCurrMinScoreChange = (e) => {
-    setCurrMinScore(Number(e.target.value));
+    setCurrMinSentiment(Number(e.target.value));
   };
 
   const handleCurrMaxScoreChange = (e) => {
-    setCurrMaxScore(Number(e.target.value));
+    setCurrMaxSentiment(Number(e.target.value));
   };
 
   const handleScoreSubmit = (e) => {
     e.preventDefault();
-    dispatch(setMinScore(currMinScore));
-    dispatch(setMaxScore(currMaxScore));
+    dispatch(setMinScore(currMinSentiment));
+    dispatch(setMaxScore(currMaxSentiment));
   };
 
   return (

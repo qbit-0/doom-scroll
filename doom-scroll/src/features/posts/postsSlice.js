@@ -89,6 +89,7 @@ export const postSlice = createSlice({
     before: null,
     after: null,
     isLoading: false,
+    isLoadingAfter: false,
   },
   reducers: {
     setPostsLocation: (state, action) => {
@@ -107,12 +108,12 @@ export const postSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(loadPostsAfter.pending, (state, action) => {
-        state.isLoading = true;
+        state.isLoadingAfter = true;
       })
       .addCase(loadPostsAfter.fulfilled, (state, action) => {
         state.posts.push(...action.payload.posts);
         state.after = action.payload.after;
-        state.isLoading = false;
+        state.isLoadingAfter = false;
       });
   },
 });
@@ -122,6 +123,7 @@ export const selectPosts = (state) => state.posts.posts;
 export const selectPostsBefore = (state) => state.posts.before;
 export const selectPostsAfter = (state) => state.posts.after;
 export const selectIsLoadingPosts = (state) => state.posts.isLoading;
+export const selectIsLoadingPostsAfter = (state) => state.posts.isLoadingAfter;
 
 export const { setPostsLocation } = postSlice.actions;
 export default postSlice.reducer;

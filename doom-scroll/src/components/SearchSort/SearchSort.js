@@ -81,11 +81,11 @@ export const SearchSort = () => {
       <div className="float-right">
         <Select value={time} onChange={handleTimeChange}>
           <Option value="all">All Time</Option>
-          <Option value="year">This Year</Option>
-          <Option value="month">This Month</Option>
-          <Option value="week">This Week</Option>
-          <Option value="day">Today</Option>
-          <Option value="hour">Now</Option>
+          <Option value="year">Past Year</Option>
+          <Option value="month">Past Month</Option>
+          <Option value="week">Past Week</Option>
+          <Option value="day">Past 24 Hours</Option>
+          <Option value="hour">Past Hour</Option>
         </Select>
       </div>
 

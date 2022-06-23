@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { selectAccessToken, updateAppToken } from "../../features/auth/authSlice";
+import {
+  selectAccessToken,
+  updateAppToken,
+} from "../../features/auth/authSlice";
 import {
   loadComments,
   selectComments,
@@ -38,17 +41,19 @@ export const CommentsPage = ({ nlp }) => {
   return (
     <div className="px-28 py-8">
       <div>
-        {post && <Post post={post} nlp={nlp} />}
+        {!isLoading && post && <Post post={post} nlp={nlp} />}
         {isLoading && <PostPlaceholder />}
       </div>
-      <div className="pt-16">
-        <CommentTree
-          comments={comments}
-          baseDepth={0}
-          treeStartIndex={0}
-          nlp={nlp}
-        />
-      </div>
+      {!isLoading && (
+        <div className="pt-16">
+          <CommentTree
+            comments={comments}
+            baseDepth={0}
+            treeStartIndex={0}
+            nlp={nlp}
+          />
+        </div>
+      )}
     </div>
   );
 };
