@@ -71,7 +71,7 @@ export const Post = ({ post, nlp }) => {
 
         {preview !== null && (
           <a href={url} target="_blank">
-            <figure className="max-w-2xl max-h-96 mt-4 mx-auto rounded-2xl overflow-clip">
+            <figure className="max-w-2xl max-h-96 mt-4 mx-auto rounded-2xl overflow-clip shadow-md">
               <img src={preview} className="block w-full h-full" />
             </figure>
           </a>

@@ -13,20 +13,20 @@ export const Hero = () => {
           </p>
         </blockquote>
         <h1 className="mt-16 text-8xl text-center font-extrabold">
-          <span className="text-transparent bg-clip-text bg-gradient-to-tl from-amber-100 to-rose-600 drop-shadow-2xl">
+          <span className="text-transparent bg-clip-text bg-gradient-to-tl from-amber-100 to-rose-600 drop-shadow-md">
             Doom
           </span>
-          <span className="text-transparent bg-clip-text bg-gradient-to-br from-amber-100 to-sky-600 drop-shadow-2xl">
+          <span className="text-transparent bg-clip-text bg-gradient-to-br from-amber-100 to-sky-600 drop-shadow-md">
             Scroll
           </span>
         </h1>
         <h2 className="mt-16 text-2xl font-light text-center">
           The{" "}
-          <span className="p-2 text-4xl font-extrabold text-sky-600 drop-shadow-2xl">
+          <span className="p-2 text-4xl font-extrabold text-sky-600 drop-shadow-md">
             Best
           </span>{" "}
           and{" "}
-          <span className="p-2 text-4xl font-extrabold text-rose-600 drop-shadow-2xl">
+          <span className="p-2 text-4xl font-extrabold text-rose-600 drop-shadow-md">
             Worst
           </span>{" "}
           of Reddit.
