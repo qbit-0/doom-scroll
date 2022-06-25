@@ -61,6 +61,8 @@ const SearchPage: React.FC<Props> = ({ nlp }) => {
         if (ref.current) observer.unobserve(ref.current);
       };
     }
+    
+    return;
   }, [location, accessToken, isLoading, after]);
 
   return (

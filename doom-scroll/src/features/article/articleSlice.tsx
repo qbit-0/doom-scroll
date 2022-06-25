@@ -128,7 +128,9 @@ export const articleSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(loadMore.fulfilled, (state, action) => {
+        // @ts-ignore
         const replies = action.payload;
+        // @ts-ignore
         const replyPath = action.meta.arg.replacePath;
         // TODO
 

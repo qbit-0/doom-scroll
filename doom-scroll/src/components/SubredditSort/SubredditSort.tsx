@@ -1,6 +1,4 @@
-import React, { ChangeEvent, ChangeEventHandler, MouseEvent } from "react";
-import { MouseEventHandler } from "react";
-import { useEffect, useState } from "react";
+import React, { ChangeEventHandler, MouseEventHandler, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../Button/Button";
 import FilterSentiment from "../FilterSentiment/FilterSentiment";

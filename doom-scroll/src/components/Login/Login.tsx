@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Navigate, useLocation, useParams } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { setUserToken } from "../../features/auth/authSlice";
 

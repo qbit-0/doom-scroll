@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom";
-import { act, render, screen, waitFor } from "@testing-library/react";
-import { Provider } from "react-redux";
-import store from "./store";
-import App from "./App";
+import { render, screen } from "@testing-library/react";
 import React from "react";
+import { Provider } from "react-redux";
+import App from "./App";
+import store from "./store";
 
 describe("App component", () => {
   test("it renders the hero page", async () => {

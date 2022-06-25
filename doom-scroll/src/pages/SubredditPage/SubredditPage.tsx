@@ -57,7 +57,6 @@ const SubredditPage: React.FC<Props> = ({ nlp }) => {
       };
 
       const observer = new IntersectionObserver((entities, observer) => {
-
         const entity = entities[0];
         if (entity.isIntersecting) {
           dispatch(loadSubredditPostsAfter(nlp));
@@ -70,6 +69,8 @@ const SubredditPage: React.FC<Props> = ({ nlp }) => {
         if (ref.current) observer.unobserve(ref.current);
       };
     }
+
+    return;
   }, [isLoading, after]);
 
   return (

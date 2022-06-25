@@ -1,6 +1,4 @@
-import React, { MouseEvent } from "react";
-import { MouseEventHandler } from "react";
-import { useDispatch } from "react-redux";
+import React, { MouseEvent, MouseEventHandler } from "react";
 import { WinkMethods } from "wink-nlp";
 import { useAppDispatch } from "../../app/store";
 import { loadMore } from "../../features/article/articleSlice";

@@ -1,24 +1,20 @@
-import React from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
-import ReplyTree from "../../components/ReplyTree/ReplyTree";
+import { WinkMethods } from "wink-nlp";
+import { useAppDispatch } from "../../app/store";
 import PostComponent from "../../components/PostComponent/PostComponent";
 import PostPlaceholder from "../../components/PostPlaceholder/PostPlaceholder";
-import {
-  selectAccessToken,
-  updateAppToken,
-} from "../../features/auth/authSlice";
+import ReplyTree from "../../components/ReplyTree/ReplyTree";
 import {
   loadArticle,
-  selectIsLoadingNew,
   selectArticle,
-  setSubreddit,
+  selectIsLoadingNew,
   setArticleId,
   setSearch,
+  setSubreddit,
 } from "../../features/article/articleSlice";
-import { useAppDispatch } from "../../app/store";
-import { WinkMethods } from "wink-nlp";
+import { selectAccessToken } from "../../features/auth/authSlice";
 
 type Props = {
   nlp: WinkMethods;
@@ -52,8 +48,6 @@ const ArticlePage: React.FC<Props> = ({ nlp }) => {
     return <></>;
   }
   const post = article.data.post;
-  const replyRoot = article.data.replyRoot;
-
   return (
     <div className="px-28 py-8">
       <div>

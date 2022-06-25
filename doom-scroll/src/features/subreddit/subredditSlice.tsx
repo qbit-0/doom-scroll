@@ -1,8 +1,7 @@
 import {
-  AsyncThunkAction,
   createAsyncThunk,
   createSlice,
-  PayloadAction,
+  PayloadAction
 } from "@reduxjs/toolkit";
 import { WinkMethods } from "wink-nlp";
 import { AppDispatch, RootState } from "../../app/store";

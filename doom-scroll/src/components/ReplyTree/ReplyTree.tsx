@@ -1,9 +1,8 @@
 import React from "react";
 import { WinkMethods } from "wink-nlp";
-import { Comment, Reply, ReplyRoot } from "../../reddit/redditDataStructures";
+import { Reply, ReplyRoot } from "../../reddit/redditDataStructures";
 import CommentComponent from "../CommentComponent/CommentComponent";
 import MoreComponent from "../MoreComponent/MoreComponent";
-import SentimentBanner from "../SentimentBanner/SentimentBanner";
 type Props = {
   replyRoot: ReplyRoot;
   nlp: WinkMethods;

@@ -1,9 +1,7 @@
 import React, {
-  ChangeEventHandler,
-  MouseEvent,
-  MouseEventHandler,
+  ChangeEventHandler, MouseEventHandler,
   useEffect,
-  useState,
+  useState
 } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../Button/Button";

@@ -1,12 +1,9 @@
-import { WinkMethods } from "wink-nlp";
-import { analyzeSentiment } from "../utils/nlpUtils";
 import {
   Article,
   Comment,
   More,
   Post,
-  Reply,
-  ReplyRoot,
+  Reply
 } from "./redditDataStructures";
 
 /**
