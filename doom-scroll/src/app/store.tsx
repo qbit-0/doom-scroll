@@ -1,18 +1,22 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "../features/auth/authSlice";
-import postsReducer from "../features/posts/postsSlice";
-import commentsReducer from "../features/comments/commentsSlice";
+import subredditReducer from "../features/subreddit/subredditSlice";
+import searchReducer from "../features/search/searchSlice";
+import articleReducer from "../features/article/articleSlice";
 import nlpReducer from "../features/nlp/nlpSlice";
+import { useDispatch } from "react-redux";
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    posts: postsReducer,
-    comments: commentsReducer,
+    subreddit: subredditReducer,
+    search: searchReducer,
+    article: articleReducer,
     nlp: nlpReducer,
   },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch;
 export default store;

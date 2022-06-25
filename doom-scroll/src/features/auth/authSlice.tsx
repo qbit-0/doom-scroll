@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { getAppToken } from "../../utils/redditAPI";
+import { getAppToken } from "../../reddit/redditApi";
 
 export const updateAppToken = createAsyncThunk(
   "auth/updateAppToken",
@@ -9,14 +9,19 @@ export const updateAppToken = createAsyncThunk(
   }
 );
 
+const initialState: {
+  appToken: string | null;
+  userToken: string | null;
+} = {
+  appToken: null,
+  userToken: null,
+};
+
 export const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    appToken: null,
-    userToken: null,
-  },
+  initialState: initialState,
   reducers: {
-    setUserToken: (state, action) => {
+    setUserToken: (state, action: PayloadAction<string>) => {
       state.userToken = action.payload;
     },
   },

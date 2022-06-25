@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import {
   BrowserRouter as Router,
   Navigate,
@@ -11,13 +10,14 @@ import winkNLP from "wink-nlp";
 import Login from "../components/Login/Login";
 import NavBar from "../components/NavBar/NavBar";
 import { updateAppToken } from "../features/auth/authSlice";
-import CommentsPage from "../pages/CommentsPage/CommentsPage";
+import ArticlePage from "../pages/ArticlePage/ArticlePage";
 import Hero from "../pages/Hero/Hero";
 import SearchPage from "../pages/SearchPage/SearchPage";
 import SubredditPage from "../pages/SubredditPage/SubredditPage";
+import { useAppDispatch } from "./store";
 
 const App = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const nlp = winkNLP(model, ["sbd", "negation", "sentiment"]);
 
   useEffect(() => {
@@ -38,8 +38,12 @@ const App = () => {
           />
           <Route path="/search" element={<SearchPage nlp={nlp} />} />
           <Route
-            path="/r/:subreddit/comments/:name/:title"
-            element={<CommentsPage nlp={nlp} />}
+            path="/r/:subreddit/comments/:articleId/"
+            element={<ArticlePage nlp={nlp} />}
+          />
+          <Route
+            path="/r/:subreddit/comments/:articleId/:articleTitle"
+            element={<ArticlePage nlp={nlp} />}
           />
 
           <Route path="/login" element={<Login />} />

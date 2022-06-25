@@ -19,10 +19,14 @@ const FilterSentiment = () => {
   const maxSentiment = useSelector(selectMaxSentiment);
   const minRatio = useSelector(selectMinRatio);
   const maxRatio = useSelector(selectMaxRatio);
-  const [currMinSentiment, setCurrMinSentiment] = useState(minSentiment);
-  const [currMaxSentiment, setCurrMaxSentiment] = useState(maxSentiment);
-  const [currMinRatio, setCurrMinRatio] = useState(minRatio);
-  const [currMaxRatio, setCurrMaxRatio] = useState(maxRatio);
+  const [currMinSentiment, setCurrMinSentiment] = useState<number | string>(
+    minSentiment
+  );
+  const [currMaxSentiment, setCurrMaxSentiment] = useState<number | string>(
+    maxSentiment
+  );
+  const [currMinRatio, setCurrMinRatio] = useState<number | string>(minRatio);
+  const [currMaxRatio, setCurrMaxRatio] = useState<number | string>(maxRatio);
   const dispatch = useDispatch();
 
   useEffect(() => {

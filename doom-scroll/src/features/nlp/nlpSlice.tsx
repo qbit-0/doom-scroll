@@ -1,35 +1,43 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
+
+const initialState: {
+  minSentiment: number;
+  maxSentiment: number;
+  minRatio: number;
+  maxRatio: number;
+} = {
+  minSentiment: -5,
+  maxSentiment: 5,
+  minRatio: 0,
+  maxRatio: 1,
+};
 
 export const nlpSlice = createSlice({
   name: "nlp",
-  initialState: {
-    minSentiment: -5,
-    maxSentiment: 5,
-    minRatio: 0,
-    maxRatio: 1,
-  },
+  initialState: initialState,
   reducers: {
-    setMinScore: (state, action) => {
+    setMinScore: (state, action: PayloadAction<number>) => {
       state.minSentiment = action.payload;
     },
-    setMaxScore: (state, action) => {
+    setMaxScore: (state, action: PayloadAction<number>) => {
       state.maxSentiment = action.payload;
     },
-    setMinRatio: (state, action) => {
+    setMinRatio: (state, action: PayloadAction<number>) => {
       state.minRatio = action.payload;
     },
-    setMaxRatio: (state, action) => {
+    setMaxRatio: (state, action: PayloadAction<number>) => {
       state.maxRatio = action.payload;
     },
   },
   extraReducers: (builder) => {},
 });
 
-export const selectMinSentiment = (state) => state.nlp.minSentiment;
-export const selectMaxSentiment = (state) => state.nlp.maxSentiment;
-export const selectMinRatio = (state) => state.nlp.minRatio;
-export const selectMaxRatio = (state) => state.nlp.maxRatio;
+export const selectMinSentiment = (state: RootState) => state.nlp.minSentiment;
+export const selectMaxSentiment = (state: RootState) => state.nlp.maxSentiment;
+export const selectMinRatio = (state: RootState) => state.nlp.minRatio;
+export const selectMaxRatio = (state: RootState) => state.nlp.maxRatio;
 
-export const {setMinScore, setMaxScore, setMinRatio, setMaxRatio } =
+export const { setMinScore, setMaxScore, setMinRatio, setMaxRatio } =
   nlpSlice.actions;
 export default nlpSlice.reducer;

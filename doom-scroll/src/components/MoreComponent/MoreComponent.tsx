@@ -1,30 +1,31 @@
 import React, { MouseEvent } from "react";
 import { MouseEventHandler } from "react";
 import { useDispatch } from "react-redux";
-import { replaceComment } from "../../features/comments/commentsSlice";
+import { WinkMethods } from "wink-nlp";
+import { useAppDispatch } from "../../app/store";
+import { loadMore } from "../../features/article/articleSlice";
+import { More } from "../../reddit/redditDataStructures";
 
 type Props = {
-  more: any; //TODO
-  startIndex: number;
-  nlp: any; //TODO
-}
+  more: More;
+  nlp: WinkMethods;
+};
 
-const More: React.FC<Props> = ({ more, startIndex, nlp }) => {
-  const dispatch = useDispatch();
+const MoreComponent: React.FC<Props> = ({ more, nlp }) => {
+  const dispatch = useAppDispatch();
 
   const handleClick: MouseEventHandler = (event: MouseEvent) => {
     event.preventDefault();
 
     dispatch(
-      replaceComment({
-        index: startIndex,
-        childrenIds: more.data.children,
+      loadMore({
+        replacePath: more.meta.replyPath,
         nlp: nlp,
       })
     );
   };
 
-  const renderButton = (count) => {
+  const renderButton = (count: number) => {
     if (count <= 0) {
       return <button onClick={handleClick}>Continue this thread</button>;
     } else
@@ -42,4 +43,4 @@ const More: React.FC<Props> = ({ more, startIndex, nlp }) => {
   );
 };
 
-export default More;
+export default MoreComponent;

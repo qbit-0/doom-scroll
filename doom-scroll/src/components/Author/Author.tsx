@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectAccessToken } from "../../features/auth/authSlice";
 import { getElapsedString } from "../../utils/getElapsedString";
-import { fetchProfileImg } from "../../utils/redditAPI";
+import { fetchProfileImg } from "../../reddit/redditApi";
 
 const Author = ({ author, created }: { author: string; created: number }) => {
   const accessToken = useSelector(selectAccessToken);

@@ -1,21 +1,24 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { WinkMethods } from "wink-nlp";
 import {
   selectMaxRatio,
   selectMaxSentiment,
   selectMinRatio,
   selectMinSentiment,
 } from "../../features/nlp/nlpSlice";
+import { Post } from "../../reddit/redditDataStructures";
 import Author from "../Author/Author";
 import SentimentBanner from "../SentimentBanner/SentimentBanner";
 import Vote from "../Vote/Vote";
 
 type Props = {
-  post: any; //TODO
+  post: Post;
+  nlp: WinkMethods;
 };
 
-const Post: React.FC<Props> = ({ post }) => {
+const PostComponent: React.FC<Props> = ({ post, nlp }) => {
   const minScore = useSelector(selectMinSentiment);
   const maxScore = useSelector(selectMaxSentiment);
   const minRatio = useSelector(selectMinRatio);
@@ -23,45 +26,46 @@ const Post: React.FC<Props> = ({ post }) => {
 
   const author = post.data.author;
 
-  const created = post.data.created_utc;
+  const created = post.data.created;
 
   const title = post.data.title;
   const permalink = post.data.permalink;
 
   let preview = null;
   if (post.data.preview !== undefined) {
-    preview = post.data.preview.images[0].source.url;
+    preview = post.data.preview;
   }
 
-  const url = post.data.url_overridden_by_dest;
+  const url = post.data.url;
 
   let selftext = null;
   if (post.data.selftext !== undefined) {
     selftext = post.data.selftext;
   }
 
-  const upvotes = post.data.ups;
+  const score = post.data.score;
+  const ratio = post.data.ratio;
 
-  const sentiment = post.sentiment;
-  const ratio = post.data.upvote_ratio;
+  const sentiment = post.meta.sentiment !== undefined ? post.meta.sentiment : 0;
+
   if (
     sentiment < minScore ||
     sentiment > maxScore ||
     ratio < minRatio ||
     ratio > maxRatio
   ) {
-    return;
+    return <></>;
   }
 
   return (
-    <section className="flex overflow-clip mx-auto mb-8 border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900 shadow-md">
+    <article className="flex overflow-clip mx-auto mb-8 border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900 shadow-md">
       <SentimentBanner sentiment={sentiment} ratio={ratio} />
 
-      <Vote score={upvotes} />
+      <Vote score={score} />
 
       <div className="flex-grow-0 w-full py-8">
-        <Link to={`/${post.data.subreddit_name_prefixed}`}>
-          <p className="underline">{post.data.subreddit_name_prefixed}</p>
+        <Link to={`/r/${post.data.subreddit}`}>
+          <p className="underline">{`/r/${post.data.subreddit}`}</p>
         </Link>
 
         <div className="mt-4">
@@ -88,8 +92,8 @@ const Post: React.FC<Props> = ({ post }) => {
           </div>
         )}
       </div>
-    </section>
+    </article>
   );
 };
 
-export default Post;
+export default PostComponent;

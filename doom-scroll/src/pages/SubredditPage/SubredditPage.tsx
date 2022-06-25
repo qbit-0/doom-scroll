@@ -1,44 +1,54 @@
-import React from "react";
-import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import Post from "../../components/Post/Post";
+import React, { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import { useLocation, useParams } from "react-router-dom";
+import { WinkMethods } from "wink-nlp";
+import { useAppDispatch } from "../../app/store";
+import PostComponent from "../../components/PostComponent/PostComponent";
 import PostPlaceholder from "../../components/PostPlaceholder/PostPlaceholder";
 import SubredditSort from "../../components/SubredditSort/SubredditSort";
+import { selectAccessToken } from "../../features/auth/authSlice";
 import {
-  selectAccessToken,
-  updateAppToken,
-} from "../../features/auth/authSlice";
-import {
-  loadPosts,
-  loadPostsAfter,
-  selectIsLoadingPosts,
-  selectIsLoadingPostsNew,
+  loadSubredditPosts,
+  loadSubredditPostsAfter,
+  selectAfter,
+  selectIsLoading,
+  selectIsLoadingNew,
   selectPosts,
-  selectPostsAfter,
-  setPostsLocation,
-} from "../../features/posts/postsSlice";
+  setSearch,
+  setSubreddit,
+} from "../../features/subreddit/subredditSlice";
 
-const SubredditPage = ({ nlp }) => {
+type Props = {
+  nlp: WinkMethods;
+};
+
+const SubredditPage: React.FC<Props> = ({ nlp }) => {
   const location = useLocation();
+  const { subreddit } = useParams();
   const accessToken = useSelector(selectAccessToken);
   const posts = useSelector(selectPosts);
-  const isLoading = useSelector(selectIsLoadingPosts);
-  const isLoadingNew = useSelector(selectIsLoadingPostsNew);
-  const after = useSelector(selectPostsAfter);
-  const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+  const isLoadingNew = useSelector(selectIsLoadingNew);
+  const after = useSelector(selectAfter);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(setPostsLocation(location));
+    if (subreddit !== undefined) {
+      dispatch(setSubreddit(subreddit));
+    }
+  }, [subreddit]);
+
+  useEffect(() => {
+    dispatch(setSearch(location.search));
   }, [location]);
 
   useEffect(() => {
     if (!isLoadingNew) {
-      dispatch(loadPosts(nlp));
+      dispatch(loadSubredditPosts(nlp));
     }
   }, [location, accessToken]);
 
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isLoading && after !== null) {
@@ -49,7 +59,7 @@ const SubredditPage = ({ nlp }) => {
       const observer = new IntersectionObserver((entities, observer) => {
         const entity = entities[0];
         if (entity.isIntersecting) {
-          dispatch(loadPostsAfter(nlp));
+          dispatch(loadSubredditPostsAfter(nlp));
         }
       }, options);
 
@@ -68,7 +78,9 @@ const SubredditPage = ({ nlp }) => {
       </div>
       <div>
         {!isLoadingNew &&
-          posts.map((post, index) => <Post post={post} key={index} />)}
+          posts.map((post, index) => (
+            <PostComponent post={post} nlp={nlp} key={index} />
+          ))}
       </div>
       {after !== null && <PostPlaceholder />}
       <div ref={ref} />

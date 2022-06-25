@@ -5,7 +5,7 @@ import store from "../../app/store";
 import {
   updateAppToken
 } from "../../features/auth/authSlice";
-import * as redditAPI from "../../utils/redditAPI";
+import * as redditAPI from "../../reddit/redditApi";
 import Author from "./Author";
 
 describe("Author component", () => {
