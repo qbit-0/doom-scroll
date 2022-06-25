@@ -12,16 +12,14 @@ const NavBar = () => {
     navigate(`/r/${subreddit}`);
   };
 
-  const handleSearchChange: ChangeEventHandler<HTMLInputElement> = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleSearchChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setSearch(event.target.value);
   };
 
-  const handleSearchKeyDown: React.KeyboardEventHandler = () => {
-    const params = new URLSearchParams();
-    params.append("q", search);
-    navigate(`/search?${params.toString()}`);
+  const handleSearchKeyDown: React.KeyboardEventHandler = (event) => {
+    if (event.code === "Enter") {
+      handleSearchSubmit();
+    }
   };
 
   const handleSearchSubmit = () => {

@@ -89,6 +89,7 @@ export const searchSlice = createSlice({
       })
       .addCase(loadSearchPosts.fulfilled, (state, action) => {
         state.posts = action.payload;
+        state.after = action.payload[action.payload.length - 1].data.name;
         state.isLoadingNew = false;
         state.isLoading = state.isLoadingAfter;
       })
@@ -102,6 +103,7 @@ export const searchSlice = createSlice({
       })
       .addCase(loadSearchPostsAfter.fulfilled, (state, action) => {
         state.posts.push(...action.payload);
+        state.after = action.payload[action.payload.length - 1].data.name;
         state.isLoadingAfter = false;
         state.isLoading = state.isLoadingNew;
       })

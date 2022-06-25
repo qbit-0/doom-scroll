@@ -3,7 +3,7 @@ import React, {
   MouseEvent,
   MouseEventHandler,
   useEffect,
-  useState
+  useState,
 } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
@@ -24,38 +24,30 @@ const SearchSort = () => {
   }, [sort, time]);
 
   const handleClickRelevance: MouseEventHandler<HTMLButtonElement> = (
-    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+    event
   ) => {
     event.preventDefault();
     setSort("relevance");
   };
 
-  const handleClickHot: MouseEventHandler<HTMLButtonElement> = (
-    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
+  const handleClickHot: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
     setSort("hot");
   };
 
-  const handleClickTop: MouseEventHandler<HTMLButtonElement> = (
-    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
+  const handleClickTop: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
 
     setSort("top");
   };
 
-  const handleClickNew: MouseEventHandler<HTMLButtonElement> = (
-    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
+  const handleClickNew: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
 
     setSort("new");
   };
 
-  const handleClickComments: MouseEventHandler<HTMLButtonElement> = (
-    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
+  const handleClickComments: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
 
     setSort("comments");

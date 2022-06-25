@@ -115,7 +115,9 @@ const FilterSentiment = () => {
       </div>
       <div className="block">
         <div className="inline-block mr-2">
-          <label htmlFor="minScore">Sentiment Min: </label>
+          <label htmlFor="minScore" className="font-bold mr-2">
+            Sentiment Min:
+          </label>
           <input
             type="number"
             id="minScore"
@@ -129,7 +131,9 @@ const FilterSentiment = () => {
         </div>
 
         <div className="inline-block mr-2">
-          <label htmlFor="maxScore">Sentiment Max: </label>
+          <label htmlFor="maxScore" className="font-bold mr-2">
+            Sentiment Max:
+          </label>
           <input
             type="number"
             id="maxScore"
@@ -143,7 +147,9 @@ const FilterSentiment = () => {
         </div>
 
         <div className="inline-block mr-2">
-          <label htmlFor="maxScore">Ratio Min: </label>
+          <label htmlFor="maxScore" className="font-bold mr-2">
+            Ratio Min:
+          </label>
           <input
             type="number"
             id="maxScore"
@@ -157,7 +163,9 @@ const FilterSentiment = () => {
         </div>
 
         <div className="inline-block">
-          <label htmlFor="maxScore">Ratio Max: </label>
+          <label htmlFor="maxScore" className="font-bold mr-2">
+            Ratio Max:
+          </label>
           <input
             type="number"
             id="maxScore"

@@ -66,7 +66,7 @@ export const fetchSubredditPosts = async (
 };
 
 export const fetchSearchPosts = async (accessToken: string, search: string) => {
-  const json = await fetchReddit(accessToken, "search", search);
+  const json = await fetchReddit(accessToken, "/search", search);
   return parsePostsListing(json);
 };
 

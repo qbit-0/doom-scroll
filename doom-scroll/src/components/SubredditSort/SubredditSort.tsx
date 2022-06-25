@@ -17,37 +17,27 @@ const SubredditSort = () => {
     navigate(`/r/${subreddit}/${sort}?t=${time}`);
   }, [sort, time]);
 
-  const handleClickHot: MouseEventHandler<HTMLButtonElement> = (
-    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
+  const handleClickHot: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
     setSort("hot");
   };
 
-  const handleClickNew: MouseEventHandler<HTMLButtonElement> = (
-    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
+  const handleClickNew: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
     setSort("new");
   };
 
-  const handleClickTop: MouseEventHandler<HTMLButtonElement> = (
-    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
+  const handleClickTop: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
     setSort("top");
   };
 
-  const handleClickRising: MouseEventHandler<HTMLButtonElement> = (
-    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
+  const handleClickRising: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
     setSort("rising");
   };
 
-  const handleTimeChange: ChangeEventHandler<HTMLSelectElement> = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleTimeChange: ChangeEventHandler<HTMLSelectElement> = (event) => {
     setTime(event.target.value);
   };
 

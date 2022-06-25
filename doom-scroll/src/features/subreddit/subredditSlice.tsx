@@ -1,4 +1,9 @@
-import { AsyncThunkAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  AsyncThunkAction,
+  createAsyncThunk,
+  createSlice,
+  PayloadAction,
+} from "@reduxjs/toolkit";
 import { WinkMethods } from "wink-nlp";
 import { AppDispatch, RootState } from "../../app/store";
 import { fetchSubredditPosts } from "../../reddit/redditApi";
@@ -117,6 +122,7 @@ export const subredditSlice = createSlice({
       })
       .addCase(loadSubredditPosts.fulfilled, (state, action) => {
         state.posts = action.payload;
+        state.after = action.payload[action.payload.length - 1].data.name;
         state.isLoadingNew = false;
         state.isLoading = state.isLoadingAfter;
       })
@@ -130,6 +136,7 @@ export const subredditSlice = createSlice({
       })
       .addCase(loadSubredditPostsAfter.fulfilled, (state, action) => {
         state.posts.push(...action.payload);
+        state.after = action.payload[action.payload.length - 1].data.name;
         state.isLoadingAfter = false;
         state.isLoading = state.isLoadingNew;
       })
