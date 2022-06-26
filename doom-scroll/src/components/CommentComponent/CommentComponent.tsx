@@ -4,7 +4,6 @@ import { WinkMethods } from "wink-nlp";
 import { selectCommentsReplyTree } from "../../features/comments/commentsSlice";
 import { replyTreeFind } from "../../reddit/redditDataUtils";
 import Author from "../Author/Author";
-import MoreComponent from "../MoreComponent/MoreComponent";
 import ReplyComponent from "../ReplyComponent/ReplyComponent";
 import SanitizeHTML from "../SanitizeHTML/SanitizeHTML";
 import SentimentBanner from "../SentimentBanner/SentimentBanner";
@@ -36,7 +35,7 @@ const CommentComponent: React.FC<Props> = ({ id, nlp }) => {
         comment.meta.sentiment !== undefined ? comment.meta.sentiment : 0;
 
     const baseComment = (
-        <div className="flex overflow-hidden my-4 border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900 shadow-md">
+        <div className="flex overflow-hidden my-4 border-t-2 border-l-2 border-gray-800 rounded-tl-3xl bg-gray-900 shadow-md">
             <SentimentBanner sentiment={sentiment} />
             <Vote score={upvotes} />
             <div className="inline-block py-8">

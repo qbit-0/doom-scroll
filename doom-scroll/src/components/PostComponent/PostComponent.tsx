@@ -28,7 +28,8 @@ const PostComponent: React.FC<Props> = (props) => {
     const maxRatio = useSelector(selectMaxRatio);
 
     const post = props.post || postDequeFind(postDeque, props.id);
-    const { nlp } = props;
+    // TODO
+    // const { nlp } = props;
 
     const author = post.data.author;
     const created = post.data.created;
@@ -63,7 +64,7 @@ const PostComponent: React.FC<Props> = (props) => {
     }
 
     return (
-        <article className="flex overflow-clip mx-auto my-8 border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900 shadow-md">
+        <article className="flex overflow-clip mx-auto border-t-2 border-l-2 border-gray-800 rounded-tl-3xl bg-gray-900 shadow-md">
             <SentimentBanner sentiment={sentiment} ratio={ratio} />
 
             <Vote score={score} />
@@ -84,25 +85,27 @@ const PostComponent: React.FC<Props> = (props) => {
                 </div>
 
                 {preview !== null && (
-                    <a
-                        title="post preview"
-                        href={url}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <figure className="max-w-2xl max-h-96 mt-4 mx-auto rounded-2xl overflow-clip shadow-md">
-                            <img
-                                alt="post preview"
-                                src={preview}
-                                className="block w-full h-full"
-                            />
-                        </figure>
-                    </a>
+                    <div className="my-4">
+                        <a
+                            title="post preview"
+                            href={url}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <figure className="max-w-2xl max-h-96 mt-4 mx-auto rounded-3xl overflow-clip shadow-md">
+                                <img
+                                    alt="post preview"
+                                    src={preview}
+                                    className="block w-full h-full"
+                                />
+                            </figure>
+                        </a>
+                    </div>
                 )}
 
                 {selftextHTML !== null && (
                     <div>
-                        <SanitizeHTML dirty={selftextHTML}/>
+                        <SanitizeHTML dirty={selftextHTML} />
                     </div>
                 )}
             </div>

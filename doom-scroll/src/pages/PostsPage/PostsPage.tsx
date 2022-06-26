@@ -79,7 +79,9 @@ const PostsPage: React.FC<Props> = ({ nlp }) => {
                     Object.keys(postDeque.data)
                         .map(Number)
                         .map((id, index) => (
-                            <PostComponent id={id} nlp={nlp} key={index} />
+                            <div className="my-4" key={index}>
+                                <PostComponent id={id} nlp={nlp} />
+                            </div>
                         ))}
             </div>
             {(isLoading || after !== null) && <PostPlaceholder />}
