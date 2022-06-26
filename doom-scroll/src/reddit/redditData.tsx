@@ -20,7 +20,7 @@ export type Post = {
         score: number;
         ratio: number;
 
-        selftext?: string;
+        selftextHTML?: string;
         preview?: string;
     };
     meta: {
@@ -41,7 +41,7 @@ export type Comment = {
         name: string;
         author: string;
         created: number;
-        body: string;
+        bodyHTML: string;
         score: number;
     };
     meta: {

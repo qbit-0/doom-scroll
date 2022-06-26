@@ -12,6 +12,7 @@ import { selectPostDeque } from "../../features/posts/postSlice";
 import { Post } from "../../reddit/redditData";
 import { postDequeFind } from "../../reddit/redditDataUtils";
 import Author from "../Author/Author";
+import SanitizeHTML from "../SanitizeHTML/SanitizeHTML";
 import SentimentBanner from "../SentimentBanner/SentimentBanner";
 import Vote from "../Vote/Vote";
 
@@ -41,9 +42,9 @@ const PostComponent: React.FC<Props> = (props) => {
 
     const url = post.data.url;
 
-    let selftext = null;
-    if (post.data.selftext !== undefined) {
-        selftext = post.data.selftext;
+    let selftextHTML = null;
+    if (post.data.selftextHTML !== undefined) {
+        selftextHTML = post.data.selftextHTML;
     }
 
     const score = post.data.score;
@@ -62,7 +63,7 @@ const PostComponent: React.FC<Props> = (props) => {
     }
 
     return (
-        <article className="flex overflow-clip mx-auto mb-8 border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900 shadow-md">
+        <article className="flex overflow-clip mx-auto my-8 border-t-2 border-l-2 border-gray-800 rounded-tl-2xl bg-gradient-to-r from-gray-800 to-gray-900 shadow-md">
             <SentimentBanner sentiment={sentiment} ratio={ratio} />
 
             <Vote score={score} />
@@ -99,9 +100,9 @@ const PostComponent: React.FC<Props> = (props) => {
                     </a>
                 )}
 
-                {selftext !== null && (
+                {selftextHTML !== null && (
                     <div>
-                        <p>{selftext}</p>
+                        <SanitizeHTML dirty={selftextHTML}/>
                     </div>
                 )}
             </div>

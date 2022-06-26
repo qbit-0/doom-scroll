@@ -6,6 +6,7 @@ import { replyTreeFind } from "../../reddit/redditDataUtils";
 import Author from "../Author/Author";
 import MoreComponent from "../MoreComponent/MoreComponent";
 import ReplyComponent from "../ReplyComponent/ReplyComponent";
+import SanitizeHTML from "../SanitizeHTML/SanitizeHTML";
 import SentimentBanner from "../SentimentBanner/SentimentBanner";
 import Vote from "../Vote/Vote";
 
@@ -28,7 +29,7 @@ const CommentComponent: React.FC<Props> = ({ id, nlp }) => {
 
     const author = comment.data.author;
     const created = comment.data.created;
-    const body = comment.data.body;
+    const bodyHTML = comment.data.bodyHTML;
     const upvotes = comment.data.score;
 
     const sentiment =
@@ -41,7 +42,9 @@ const CommentComponent: React.FC<Props> = ({ id, nlp }) => {
             <div className="inline-block py-8">
                 <div className="inline-block">
                     <Author author={author} created={created} />
-                    <p className="mt-2">{body}</p>
+                    <div className="mt-2">
+                        <SanitizeHTML dirty={bodyHTML} />
+                    </div>
                 </div>
             </div>
         </div>

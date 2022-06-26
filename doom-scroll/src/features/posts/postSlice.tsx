@@ -29,6 +29,8 @@ export const loadPosts = createAsyncThunk<
     if (search === null) return thunkApi.rejectWithValue("search is null");
 
     const json = await fetchReddit(accessToken, pathname, search);
+    console.log(json);
+    
     const postDeque = parsePostDeque(json);
     return postDeque;
 });

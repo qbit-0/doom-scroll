@@ -58,8 +58,8 @@ export const parsePost = (redditPost: any): Post => {
         meta: {},
     };
 
-    if ("selftext" in redditPost.data)
-        post.data.selftext = redditPost.data.selftext;
+    if ("selftext_html" in redditPost.data)
+        post.data.selftextHTML = redditPost.data.selftext_html;
 
     if ("preview" in redditPost.data)
         post.data.preview = redditPost.data.preview.images[0].source.url;
@@ -111,7 +111,7 @@ export const pushComment = (
             name: redditComment.data.name,
             author: redditComment.data.author,
             created: redditComment.data.created_utc,
-            body: redditComment.data.body,
+            bodyHTML: redditComment.data.body_html,
             score: redditComment.data.score,
         },
         meta: {},
