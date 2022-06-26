@@ -14,10 +14,15 @@ type Props = {
 const ReplyComponent: React.FC<Props> = ({ id, nlp }) => {
     const replyTree = useSelector(selectCommentsReplyTree);
     const reply = replyTreeFind(replyTree, id);
-    if ("children" in reply) {
-        return <CommentComponent id={id} nlp={nlp} />;
-    }
-    return <MoreComponent id={id} nlp={nlp} />;
+
+    const getInnerComponent = () => {
+        if ("children" in reply) {
+            return <CommentComponent id={id} nlp={nlp} />;
+        }
+        return <MoreComponent id={id} nlp={nlp} />;
+    };
+
+    return <div className="mb-2">{getInnerComponent()}</div>;
 };
 
 export default ReplyComponent;

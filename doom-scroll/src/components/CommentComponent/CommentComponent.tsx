@@ -60,13 +60,7 @@ const CommentComponent: React.FC<Props> = ({ id, nlp }) => {
             <div className="pt-2">
                 {comment.children.map((childId: number, index: number) => {
                     return (
-                        <div className="mb-2">
-                            <ReplyComponent
-                                id={childId}
-                                nlp={nlp}
-                                key={index}
-                            />
-                        </div>
+                        <ReplyComponent id={childId} nlp={nlp} key={index} />
                     );
                 })}
             </div>
