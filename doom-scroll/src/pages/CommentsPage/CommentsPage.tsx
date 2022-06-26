@@ -40,7 +40,7 @@ const CommentsPage: React.FC<Props> = ({ nlp }) => {
         <div className="px-28 py-8">
             <div>
                 {!isRefreshing && post && (
-                    <PostComponent id={0} nlp={nlp} />
+                    <PostComponent post={post} nlp={nlp} />
                 )}
                 {isRefreshing && <PostPlaceholder />}
             </div>
