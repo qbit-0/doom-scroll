@@ -1,19 +1,16 @@
 import React, { MouseEvent, MouseEventHandler } from "react";
 import { useSelector } from "react-redux";
-import { WinkMethods } from "wink-nlp";
 import { useAppDispatch } from "../../app/store";
 import {
     loadMore,
-    selectCommentsReplyTree,
+    selectCommentsReplyTree
 } from "../../features/comments/commentsSlice";
-import { replyBorderColors } from "../../utils/commentBorderColors";
 
 type Props = {
     id: number;
-    nlp: WinkMethods;
 };
 
-const MoreComponent: React.FC<Props> = ({ id, nlp }) => {
+const MoreComponent: React.FC<Props> = ({ id }) => {
     const replyTree = useSelector(selectCommentsReplyTree);
     const dispatch = useAppDispatch();
 
@@ -33,18 +30,15 @@ const MoreComponent: React.FC<Props> = ({ id, nlp }) => {
         } else
             return (
                 <button onClick={handleClick}>
-                    {`${count} more ${count > 1 ? "replies" : "reply"}`}{" "}
+                    <p className="underline">{`${count} more ${
+                        count > 1 ? "replies" : "reply"
+                    }`}</p>
                 </button>
             );
     };
 
-    const borderColor =
-        replyBorderColors[more.data.depth % replyBorderColors.length];
-
     return (
-        <div
-            className={`text-amber-100 p-4 mb-2 border-t-2 border-l-2 ${borderColor} rounded-tl-3xl bg-gray-900 shadow-md`}
-        >
+        <div className={`text-amber-100`}>
             {renderButton(more.data.count)}
         </div>
     );

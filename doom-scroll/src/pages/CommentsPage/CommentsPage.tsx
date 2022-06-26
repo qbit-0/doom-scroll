@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { WinkMethods } from "wink-nlp";
 import { useAppDispatch } from "../../app/store";
 import PostComponent from "../../components/PostComponent/PostComponent";
 import PostPlaceholder from "../../components/PostPlaceholder/PostPlaceholder";
@@ -12,14 +11,13 @@ import {
     selectCommentsIsRefreshing,
     selectCommentsPost,
     setComentsPathname as setCommentsPathname,
-    setCommentsSearch,
+    setCommentsSearch
 } from "../../features/comments/commentsSlice";
 
 type Props = {
-    nlp: WinkMethods;
 };
 
-const CommentsPage: React.FC<Props> = ({ nlp }) => {
+const CommentsPage: React.FC<Props> = ({}) => {
     const location = useLocation();
     const accessToken = useSelector(selectAccessToken);
     const post = useSelector(selectCommentsPost);
@@ -41,13 +39,13 @@ const CommentsPage: React.FC<Props> = ({ nlp }) => {
         <div className="px-28 py-8">
             <div>
                 {!isRefreshing && post && (
-                    <PostComponent post={post} nlp={nlp} />
+                    <PostComponent post={post} />
                 )}
                 {isRefreshing && <PostPlaceholder />}
             </div>
             {!isRefreshing && (
                 <div className="pt-16">
-                    <ReplyTree nlp={nlp} />
+                    <ReplyTree />
                 </div>
             )}
         </div>

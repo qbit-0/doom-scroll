@@ -5,8 +5,7 @@ import {
     Route,
     Routes,
 } from "react-router-dom";
-import model from "wink-eng-lite-web-model";
-import winkNLP from "wink-nlp";
+
 import Login from "../components/Login/Login";
 import NavBar from "../components/NavBar/NavBar";
 import { updateAppToken } from "../features/auth/authSlice";
@@ -17,7 +16,6 @@ import { useAppDispatch } from "./store";
 
 const App = () => {
     const dispatch = useAppDispatch();
-    const nlp = winkNLP(model, ["sbd", "negation", "sentiment"]);
 
     useEffect(() => {
         dispatch(updateAppToken());
@@ -26,26 +24,26 @@ const App = () => {
     return (
         <Router>
             <Hero />
-            <main className="bg-gray-900 text-amber-100">
+            <main className="bg-zinc-900 text-amber-100">
                 <NavBar />
                 <Routes>
                     <Route path="/" element={<Navigate to="r/popular" />} />
                     <Route
                         path="/r/:subreddit/"
-                        element={<PostsPage nlp={nlp} />}
+                        element={<PostsPage />}
                     />
                     <Route
                         path="/r/:subreddit/:sort"
-                        element={<PostsPage nlp={nlp} />}
+                        element={<PostsPage />}
                     />
-                    <Route path="/search" element={<PostsPage nlp={nlp} />} />
+                    <Route path="/search" element={<PostsPage />} />
                     <Route
                         path="/r/:subreddit/comments/:articleId/"
-                        element={<CommentsPage nlp={nlp} />}
+                        element={<CommentsPage />}
                     />
                     <Route
                         path="/r/:subreddit/comments/:articleId/:articleTitle"
-                        element={<CommentsPage nlp={nlp} />}
+                        element={<CommentsPage />}
                     />
 
                     <Route path="/login" element={<Login />} />

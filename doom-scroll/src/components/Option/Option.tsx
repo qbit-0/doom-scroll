@@ -7,7 +7,7 @@ type Props = {
 
 const Option: React.FC<Props> = ({ value, children }) => {
   return (
-    <option value={value} className="bg-gray-900">
+    <option value={value} className="bg-zinc-900">
       {children}
     </option>
   );

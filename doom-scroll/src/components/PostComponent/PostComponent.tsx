@@ -1,12 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { WinkMethods } from "wink-nlp";
 import {
     selectMaxRatio,
     selectMaxSentiment,
     selectMinRatio,
-    selectMinSentiment,
+    selectMinSentiment
 } from "../../features/nlp/nlpSlice";
 import { selectPostDeque } from "../../features/posts/postSlice";
 import { Post } from "../../reddit/redditData";
@@ -16,9 +15,7 @@ import SanitizeHTML from "../SanitizeHTML/SanitizeHTML";
 import SentimentBanner from "../SentimentBanner/SentimentBanner";
 import Vote from "../Vote/Vote";
 
-type Props =
-    | { id: number; post?: never; nlp: WinkMethods }
-    | { id?: never; post: Post; nlp: WinkMethods };
+type Props = { id: number; post?: never } | { id?: never; post: Post };
 
 const PostComponent: React.FC<Props> = (props) => {
     const postDeque = useSelector(selectPostDeque);
@@ -28,8 +25,6 @@ const PostComponent: React.FC<Props> = (props) => {
     const maxRatio = useSelector(selectMaxRatio);
 
     const post = props.post || postDequeFind(postDeque, props.id);
-    // TODO
-    // const { nlp } = props;
 
     const author = post.data.author;
     const created = post.data.created;
@@ -64,7 +59,7 @@ const PostComponent: React.FC<Props> = (props) => {
     }
 
     return (
-        <article className="flex overflow-clip mx-auto border-t-2 border-l-2 border-gray-700 rounded-tl-3xl bg-gray-900 shadow-md">
+        <article className="flex overflow-clip mx-auto border-t-2 border-l-2 border-zinc-700 rounded-tl-3xl bg-gradient-to-r from-zinc-800 shadow-md">
             <SentimentBanner sentiment={sentiment} ratio={ratio} />
 
             <Vote score={score} />

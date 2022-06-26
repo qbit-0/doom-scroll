@@ -98,7 +98,7 @@ const SearchSort = () => {
         </Select>
       </div>
 
-      <div className="mt-2 border-t-2 border-gray-800">
+      <div className="mt-2 border-t-2 border-zinc-800">
         <div className="mt-2">
           <FilterSentiment />
         </div>

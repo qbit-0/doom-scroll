@@ -24,11 +24,11 @@ const SearchBar: React.FC<Props> = ({
         value={value}
         onChange={onChange}
         onKeyDown={onKeyDown}
-        className="text-amber-100 p-2 rounded-l-3xl bg-gray-900 font-bold placeholder:font-thin"
+        className="text-amber-100 p-2 rounded-l-3xl bg-zinc-900 font-bold placeholder:font-thin"
       />
       <button
         onClick={onSubmit}
-        className="p-2 rounded-r-3xl decoration-gray-600 decoration-4 transition-all font-bold"
+        className="p-2 rounded-r-3xl decoration-zinc-600 decoration-4 transition-all font-bold"
       >
         <FontAwesomeIcon icon={solid("magnifying-glass")} />
       </button>

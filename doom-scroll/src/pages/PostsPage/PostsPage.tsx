@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { WinkMethods } from "wink-nlp";
 import { useAppDispatch } from "../../app/store";
 import PostComponent from "../../components/PostComponent/PostComponent";
 import PostPlaceholder from "../../components/PostPlaceholder/PostPlaceholder";
@@ -15,14 +14,13 @@ import {
     selectPostsIsLoading,
     selectPostsIsRefreshing,
     setPathname as setPostsPathname,
-    setSearch as setPostsSearch,
+    setSearch as setPostsSearch
 } from "../../features/posts/postSlice";
 
 type Props = {
-    nlp: WinkMethods;
 };
 
-const PostsPage: React.FC<Props> = ({ nlp }) => {
+const PostsPage: React.FC<Props> = () => {
     const location = useLocation();
     const accessToken = useSelector(selectAccessToken);
     const postDeque = useSelector(selectPostDeque);
@@ -80,7 +78,7 @@ const PostsPage: React.FC<Props> = ({ nlp }) => {
                         .map(Number)
                         .map((id, index) => (
                             <div className="my-4" key={index}>
-                                <PostComponent id={id} nlp={nlp} />
+                                <PostComponent id={id} />
                             </div>
                         ))}
             </div>

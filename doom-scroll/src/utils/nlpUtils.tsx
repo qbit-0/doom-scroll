@@ -1,5 +1,8 @@
-import { WinkMethods } from "wink-nlp";
+import model from "wink-eng-lite-web-model";
+import winkNLP from "wink-nlp";
 
-export const analyzeSentiment = (nlp: WinkMethods, text: string) => {
-  return Number(nlp.readDoc(text).out(nlp.its.sentiment));
-}
+const nlp = winkNLP(model, ["sbd", "negation", "sentiment"]);
+
+export const analyzeSentiment = (text: string) => {
+    return Number(nlp.readDoc(text).out(nlp.its.sentiment));
+};

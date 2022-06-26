@@ -126,7 +126,7 @@ const FilterSentiment = () => {
             step={0.01}
             value={currMinSentiment}
             onChange={handleMinScoreChange}
-            className="p-2 border-2 border-amber-100 rounded-3xl bg-gray-900 text-amber-100"
+            className="p-2 border-2 border-amber-100 rounded-3xl bg-zinc-900 text-amber-100"
           />
         </div>
 
@@ -142,7 +142,7 @@ const FilterSentiment = () => {
             step={0.01}
             value={currMaxSentiment}
             onChange={handleMaxScoreChange}
-            className="p-2 border-2 border-amber-100 rounded-3xl bg-gray-900 text-amber-100"
+            className="p-2 border-2 border-amber-100 rounded-3xl bg-zinc-900 text-amber-100"
           />
         </div>
 
@@ -158,7 +158,7 @@ const FilterSentiment = () => {
             step={0.01}
             value={currMinRatio}
             onChange={handleMinRatioChange}
-            className="p-2 border-2 border-amber-100 rounded-3xl bg-gray-900 text-amber-100"
+            className="p-2 border-2 border-amber-100 rounded-3xl bg-zinc-900 text-amber-100"
           />
         </div>
 
@@ -174,7 +174,7 @@ const FilterSentiment = () => {
             step={0.01}
             value={currMaxRatio}
             onChange={handleMaxRatioChange}
-            className="p-2 border-2 border-amber-100 rounded-3xl bg-gray-900 text-amber-100"
+            className="p-2 border-2 border-amber-100 rounded-3xl bg-zinc-900 text-amber-100"
           />
         </div>
       </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { WinkMethods } from "wink-nlp";
 import { selectCommentsReplyTree } from "../../features/comments/commentsSlice";
 import { replyTreeFind } from "../../reddit/redditDataUtils";
 import { replyBorderColors } from "../../utils/commentBorderColors";
@@ -12,10 +11,9 @@ import Vote from "../Vote/Vote";
 
 type Props = {
     id: number;
-    nlp: WinkMethods;
 };
 
-const CommentComponent: React.FC<Props> = ({ id, nlp }) => {
+const CommentComponent: React.FC<Props> = ({ id }) => {
     const replyTree = useSelector(selectCommentsReplyTree);
 
     if (replyTree === null) {
@@ -40,35 +38,35 @@ const CommentComponent: React.FC<Props> = ({ id, nlp }) => {
 
     const baseComment = (
         <div
-            className={`flex overflow-hidden border-t-2 border-l-2 ${borderColor} rounded-tl-3xl bg-gray-900 shadow-md`}
+            className={`flex overflow-hidden bg-gradient-to-r from-zinc-800 shadow-md`}
         >
             <SentimentBanner sentiment={sentiment} />
             <Vote score={upvotes} />
             <div className="inline-block py-4">
-                <div className="inline-block">
+                <div className="mb-2">
                     <Author author={author} created={created} />
-                    <div className="mt-2">
-                        <SanitizeHTML dirty={bodyHTML} />
-                    </div>
                 </div>
+                <SanitizeHTML dirty={bodyHTML} />
             </div>
         </div>
     );
 
     const childReplies = (
-        <div className={`pl-8 border-l-2 ${borderColor}`}>
-            <div className="pt-2">
-                {comment.children.map((childId: number, index: number) => {
-                    return (
-                        <ReplyComponent id={childId} nlp={nlp} key={index} />
-                    );
-                })}
-            </div>
+        <div className={"pl-8"}>
+            {comment.children.map((childId: number, index: number) => {
+                return (
+                    <div className="my-2">
+                        <ReplyComponent id={childId} key={index} />
+                    </div>
+                );
+            })}
         </div>
     );
 
     return (
-        <div>
+        <div
+            className={`overflow-clip border-t-2 border-l-2 ${borderColor} rounded-tl-3xl`}
+        >
             {baseComment}
             {comment.children.length > 0 && childReplies}
         </div>
