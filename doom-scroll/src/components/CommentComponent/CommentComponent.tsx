@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { WinkMethods } from "wink-nlp";
 import { selectCommentsReplyTree } from "../../features/comments/commentsSlice";
 import { replyTreeFind } from "../../reddit/redditDataUtils";
+import { replyBorderColors } from "../../utils/commentBorderColors";
 import Author from "../Author/Author";
 import ReplyComponent from "../ReplyComponent/ReplyComponent";
 import SanitizeHTML from "../SanitizeHTML/SanitizeHTML";
@@ -34,11 +35,16 @@ const CommentComponent: React.FC<Props> = ({ id, nlp }) => {
     const sentiment =
         comment.meta.sentiment !== undefined ? comment.meta.sentiment : 0;
 
+    const borderColor =
+        replyBorderColors[comment.data.depth % replyBorderColors.length];
+
     const baseComment = (
-        <div className="flex overflow-hidden my-4 border-t-2 border-l-2 border-gray-800 rounded-tl-3xl bg-gray-900 shadow-md">
+        <div
+            className={`flex overflow-hidden border-t-2 border-l-2 ${borderColor} rounded-tl-3xl bg-gray-900 shadow-md`}
+        >
             <SentimentBanner sentiment={sentiment} />
             <Vote score={upvotes} />
-            <div className="inline-block py-8">
+            <div className="inline-block py-4">
                 <div className="inline-block">
                     <Author author={author} created={created} />
                     <div className="mt-2">
@@ -50,10 +56,20 @@ const CommentComponent: React.FC<Props> = ({ id, nlp }) => {
     );
 
     const childReplies = (
-        <div className="pl-4 my-4 border-l-2 border-amber-100">
-            {comment.children.map((childId: number, index: number) => {
-                return <ReplyComponent id={childId} nlp={nlp} key={index} />;
-            })}
+        <div className={`pl-8 border-l-2 ${borderColor}`}>
+            <div className="pt-2">
+                {comment.children.map((childId: number, index: number) => {
+                    return (
+                        <div className="mb-2">
+                            <ReplyComponent
+                                id={childId}
+                                nlp={nlp}
+                                key={index}
+                            />
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 

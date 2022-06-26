@@ -8,7 +8,7 @@ type Props = {
 
 const Vote: React.FC<Props> = ({ score }) => {
   return (
-    <div className="inline-block py-8 px-4 flex-shrink-0 flex-grow-0">
+    <div className="inline-block py-4 px-4 flex-shrink-0 flex-grow-0 shadow-md">
       <div className="w-fit mx-auto">
         <FontAwesomeIcon icon={solid("chevron-up")} size="lg" />
       </div>

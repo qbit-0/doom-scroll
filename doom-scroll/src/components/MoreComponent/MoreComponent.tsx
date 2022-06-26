@@ -6,6 +6,7 @@ import {
     loadMore,
     selectCommentsReplyTree,
 } from "../../features/comments/commentsSlice";
+import { replyBorderColors } from "../../utils/commentBorderColors";
 
 type Props = {
     id: number;
@@ -37,8 +38,13 @@ const MoreComponent: React.FC<Props> = ({ id, nlp }) => {
             );
     };
 
+    const borderColor =
+        replyBorderColors[more.data.depth % replyBorderColors.length];
+
     return (
-        <div className="text-amber-100 p-4 my-4 border-t-2 border-l-2 border-gray-800 rounded-tl-3xl bg-gray-900">
+        <div
+            className={`text-amber-100 p-4 mb-2 border-t-2 border-l-2 ${borderColor} rounded-tl-3xl bg-gray-900 shadow-md`}
+        >
             {renderButton(more.data.count)}
         </div>
     );

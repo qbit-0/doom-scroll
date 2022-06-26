@@ -21,7 +21,7 @@ const Author = ({ author, created }: { author: string; created: number }) => {
 
     return (
         <div className="flex items-center">
-            <figure className="inline-block flex-grow-0 flex-shrink-0 overflow-clip w-12 h-12 rounded-full">
+            <figure className="inline-block flex-grow-0 flex-shrink-0 overflow-clip w-6 h-6 rounded-full">
                 {profileImg && (
                     <img
                         src={profileImg}

@@ -64,7 +64,7 @@ const PostComponent: React.FC<Props> = (props) => {
     }
 
     return (
-        <article className="flex overflow-clip mx-auto border-t-2 border-l-2 border-gray-800 rounded-tl-3xl bg-gray-900 shadow-md">
+        <article className="flex overflow-clip mx-auto border-t-2 border-l-2 border-gray-700 rounded-tl-3xl bg-gray-900 shadow-md">
             <SentimentBanner sentiment={sentiment} ratio={ratio} />
 
             <Vote score={score} />
