@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectCommentsReplyTree } from "../../features/comments/commentsSlice";
+import { selectCommentsReplyTree } from "../../../features/comments/commentsSlice";
 import ReplyComponent from "../ReplyComponent/ReplyComponent";
 
 type Props = {};

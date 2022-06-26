@@ -6,14 +6,14 @@ import {
     selectMaxSentiment,
     selectMinRatio,
     selectMinSentiment
-} from "../../features/nlp/nlpSlice";
-import { selectPostDeque } from "../../features/posts/postSlice";
-import { Post } from "../../reddit/redditData";
-import { postDequeFind } from "../../reddit/redditDataUtils";
-import Author from "../Author/Author";
-import SanitizeHTML from "../SanitizeHTML/SanitizeHTML";
-import SentimentBanner from "../SentimentBanner/SentimentBanner";
-import Vote from "../Vote/Vote";
+} from "../../../features/nlp/nlpSlice";
+import { selectPostDeque } from "../../../features/posts/postSlice";
+import { Post } from "../../../reddit/redditData";
+import { postDequeFind } from "../../../reddit/redditDataUtils";
+import Author from "../../SharedComponents/Author/Author";
+import SanitizeHTML from "../../SharedComponents/SanitizeHTML/SanitizeHTML";
+import SentimentBanner from "../../SharedComponents/SentimentBanner/SentimentBanner";
+import Vote from "../../SharedComponents/Vote/Vote";
 
 type Props = { id: number; post?: never } | { id?: never; post: Post };
 

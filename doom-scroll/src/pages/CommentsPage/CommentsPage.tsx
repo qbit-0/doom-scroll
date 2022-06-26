@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useAppDispatch } from "../../app/store";
-import PostComponent from "../../components/PostComponent/PostComponent";
-import PostPlaceholder from "../../components/PostPlaceholder/PostPlaceholder";
-import ReplyTree from "../../components/ReplyTreeComponent/ReplyTreeComponent";
+import PostComponent from "../../components/PostsPageComponents/PostComponent/PostComponent";
+import PostPlaceholder from "../../components/PostsPageComponents/PostPlaceholder/PostPlaceholder";
+import ReplyTree from "../../components/CommentsPageComponent/ReplyTreeComponent/ReplyTreeComponent";
 import { selectAccessToken } from "../../features/auth/authSlice";
 import {
     loadArticle,

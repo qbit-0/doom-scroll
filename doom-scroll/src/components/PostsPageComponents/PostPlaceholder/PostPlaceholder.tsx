@@ -2,7 +2,7 @@ import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
-import SentimentBanner from "../SentimentBanner/SentimentBanner";
+import SentimentBanner from "../../SharedComponents/SentimentBanner/SentimentBanner";
 
 const PostPlaceholder = () => {
   return (

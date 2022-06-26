@@ -1,6 +1,6 @@
 import React, { ChangeEventHandler, useState } from "react";
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
-import Button from "../Button/Button";
+import Button from "../../BasicStyledComponents/Button/Button";
 import SearchBar from "../SearchBar/SearchBar";
 
 const NavBar = () => {

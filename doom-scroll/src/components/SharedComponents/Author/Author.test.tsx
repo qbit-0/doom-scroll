@@ -1,11 +1,11 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 import { Provider } from "react-redux";
-import store from "../../app/store";
+import store from "../../../app/store";
 import {
   updateAppToken
-} from "../../features/auth/authSlice";
-import * as redditAPI from "../../reddit/redditApi";
+} from "../../../features/auth/authSlice";
+import * as redditAPI from "../../../reddit/redditApi";
 import Author from "./Author";
 
 describe("Author component", () => {

@@ -1,10 +1,10 @@
 import React, { MouseEvent, MouseEventHandler } from "react";
 import { useSelector } from "react-redux";
-import { useAppDispatch } from "../../app/store";
+import { useAppDispatch } from "../../../app/store";
 import {
     loadMore,
     selectCommentsReplyTree
-} from "../../features/comments/commentsSlice";
+} from "../../../features/comments/commentsSlice";
 
 type Props = {
     id: number;

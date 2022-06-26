@@ -1,9 +1,9 @@
 import React, { ChangeEventHandler, MouseEventHandler, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Button from "../Button/Button";
-import FilterSentiment from "../FilterSentiment/FilterSentiment";
-import Option from "../Option/Option";
-import Select from "../Select/Select";
+import Button from "../../BasicStyledComponents/Button/Button";
+import FilterSentiment from "../../SharedComponents/FilterSentiment/FilterSentiment";
+import Option from "../../BasicStyledComponents/Option/Option";
+import Select from "../../BasicStyledComponents/Select/Select";
 
 const SubredditSort = () => {
   const { subreddit } = useParams();

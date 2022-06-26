@@ -6,8 +6,8 @@ import {
     Routes,
 } from "react-router-dom";
 
-import Login from "../components/Login/Login";
-import NavBar from "../components/NavBar/NavBar";
+import Login from "../pages/LoginPage/Login";
+import NavBar from "../components/SharedComponents/NavBar/NavBar";
 import { updateAppToken } from "../features/auth/authSlice";
 import CommentsPage from "../pages/CommentsPage/CommentsPage";
 import Hero from "../pages/Hero/Hero";
