@@ -6,27 +6,28 @@ import {
     selectMaxRatio,
     selectMaxSentiment,
     selectMinRatio,
-    selectMinSentiment
+    selectMinSentiment,
 } from "../../features/nlp/nlpSlice";
 import { selectPostDeque } from "../../features/posts/postSlice";
+import { Post } from "../../reddit/redditData";
 import { postDequeFind } from "../../reddit/redditDataUtils";
 import Author from "../Author/Author";
 import SentimentBanner from "../SentimentBanner/SentimentBanner";
 import Vote from "../Vote/Vote";
 
-type Props = {
-    id: number;
-    nlp: WinkMethods;
-};
+type Props =
+    | { id: number; post?: never; nlp: WinkMethods }
+    | { id?: never; post: Post; nlp: WinkMethods };
 
-const PostComponent: React.FC<Props> = ({ id, nlp }) => {
+const PostComponent: React.FC<Props> = (props) => {
     const postDeque = useSelector(selectPostDeque);
     const minScore = useSelector(selectMinSentiment);
     const maxScore = useSelector(selectMaxSentiment);
     const minRatio = useSelector(selectMinRatio);
     const maxRatio = useSelector(selectMaxRatio);
 
-    const post = postDequeFind(postDeque, id);
+    const post = props.post || postDequeFind(postDeque, props.id);
+    const { nlp } = props;
 
     const author = post.data.author;
     const created = post.data.created;

@@ -35,7 +35,9 @@ export type ReplyTree = {
 };
 
 export type Comment = {
+    kind: string;
     data: {
+        depth: number;
         name: string;
         author: string;
         created: number;
@@ -51,7 +53,9 @@ export type Comment = {
 };
 
 export type More = {
+    kind: string;
     data: {
+        depth: number;
         count: number;
         childrenIds: string[];
     };

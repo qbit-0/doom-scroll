@@ -10,8 +10,9 @@ import { selectAccessToken } from "../../features/auth/authSlice";
 import {
     loadArticle,
     selectCommentsIsRefreshing,
-    selectCommentsPost, setComentsPathname as setCommentsPathname,
-    setCommentsSearch
+    selectCommentsPost,
+    setComentsPathname as setCommentsPathname,
+    setCommentsSearch,
 } from "../../features/comments/commentsSlice";
 
 type Props = {

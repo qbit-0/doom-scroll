@@ -36,7 +36,7 @@ export const postDequePopTop = (postDeque: PostDeque) => {
 export const replyTreeFind = (replyTree: ReplyTree, id: number): Reply => {
     const reply = replyTree.data[id];
     if (reply === undefined) {
-        throw new Error("reply not found");
+        throw new Error(`reply with id ${id} not found`);
     }
     return reply;
 };
@@ -47,8 +47,8 @@ export const replyTreePush = (replyTree: ReplyTree, reply: Reply) => {
 };
 
 export const replyTreeRemove = (replyTree: ReplyTree, id: number) => {
-    if (replyTree.data[id] === undefined) throw new Error("reply not found");
+    if (replyTree.data[id] === undefined)
+        throw new Error(`reply with id ${id} not found`);
 
     delete replyTree.data[id];
 };
-

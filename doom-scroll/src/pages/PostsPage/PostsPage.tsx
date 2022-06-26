@@ -77,7 +77,7 @@ const PostsPage: React.FC<Props> = ({ nlp }) => {
             <div>
                 {!isRefreshing &&
                     Object.keys(postDeque.data)
-                        .map((idString) => Number(idString))
+                        .map(Number)
                         .map((id, index) => (
                             <PostComponent id={id} nlp={nlp} key={index} />
                         ))}

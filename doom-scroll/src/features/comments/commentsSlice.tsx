@@ -20,7 +20,7 @@ import { selectAccessToken } from "../auth/authSlice";
 
 export const loadArticle = createAsyncThunk<
     { post: Post; replyTree: ReplyTree },
-    undefined,
+    void,
     { state: RootState; dispatch: AppDispatch }
 >("comments/loadArticle", async (args, thunkApi) => {
     const accessToken = selectAccessToken(thunkApi.getState());
@@ -86,14 +86,17 @@ const initialState: {
     pathname: string | null;
     search: string | null;
     post: Post | null;
-    replyTree: ReplyTree | null;
+    replyTree: ReplyTree;
     isRefreshing: boolean;
     isLoadingMore: boolean;
 } = {
     pathname: null,
     search: null,
     post: null,
-    replyTree: null,
+    replyTree: {
+        data: {},
+        currId: 0,
+    },
     isRefreshing: false,
     isLoadingMore: false,
 };
@@ -116,6 +119,8 @@ const commentsSlice = createSlice({
             })
             .addCase(loadArticle.fulfilled, (state, action) => {
                 state.isRefreshing = false;
+                state.post = action.payload.post;
+                state.replyTree = action.payload.replyTree;
             })
             .addCase(loadArticle.rejected, (state, action) => {
                 state.isRefreshing = false;
