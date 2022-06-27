@@ -2,16 +2,16 @@ import {
     createAsyncThunk,
     createSelector,
     createSlice,
-    PayloadAction
+    PayloadAction,
 } from "@reduxjs/toolkit";
+import { AppDispatch, RootState } from "app/store";
+import { selectAccessToken } from "features/auth/authSlice";
+import RedditApi from "lib/reddit/redditApi";
+import { Comment, More, Post, ReplyTree } from "lib/reddit/redditData";
+import { parseArticle, pushMoreListing } from "lib/reddit/redditParseUtils";
+import ReplyTreeUtils from "lib/reddit/replyTreeUtils";
+import { NlpUtils } from "lib/utils/nlpUtils";
 import { matchPath } from "react-router-dom";
-import { AppDispatch, RootState } from "../../app/store";
-import RedditApi from "../../reddit/redditApi";
-import { Comment, More, Post, ReplyTree } from "../../reddit/redditData";
-import { parseArticle, pushMoreListing } from "../../reddit/redditParseUtils";
-import ReplyTreeUtils from "../../reddit/replyTreeUtils";
-import { NlpUtils } from "../../utils/nlpUtils";
-import { selectAccessToken } from "../auth/authSlice";
 
 export const loadArticle = createAsyncThunk<
     { post: Post; replyTree: ReplyTree },
@@ -70,7 +70,6 @@ export const loadMore = createAsyncThunk<
     ReplyTreeUtils.remove(treeCopy, more.id);
     pushMoreListing(treeCopy, json, more);
     return treeCopy;
-    //TODO: Ensure that only 100 children of more are requested.
 });
 
 export const analyzeComment = createAsyncThunk(

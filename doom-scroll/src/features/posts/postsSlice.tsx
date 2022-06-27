@@ -4,20 +4,17 @@ import {
     createSlice,
     PayloadAction,
 } from "@reduxjs/toolkit";
-import { AppDispatch, RootState } from "../../app/store";
+import { AppDispatch, RootState } from "app/store";
+import { selectAccessToken } from "features/auth/authSlice";
+import { loadArticle } from "features/comments/commentsSlice";
 import {
-    default as postDequeUtils,
     default as PostDequeUtils,
-} from "../../reddit/postDequeUtils";
-import RedditApi from "../../reddit/redditApi";
-import { Post, PostDeque } from "../../reddit/redditData";
-import {
-    parsePostDeque,
-    parsePostListing,
-} from "../../reddit/redditParseUtils";
-import { NlpUtils } from "../../utils/nlpUtils";
-import { selectAccessToken } from "../auth/authSlice";
-import { loadArticle } from "../comments/commentsSlice";
+    default as postDequeUtils,
+} from "lib/reddit/postDequeUtils";
+import RedditApi from "lib/reddit/redditApi";
+import { Post, PostDeque } from "lib/reddit/redditData";
+import { parsePostDeque, parsePostListing } from "lib/reddit/redditParseUtils";
+import { NlpUtils } from "lib/utils/nlpUtils";
 
 export const loadPosts = createAsyncThunk<
     PostDeque,
@@ -146,7 +143,7 @@ const postsSlice = createSlice({
 
                 const post = postDequeUtils.find(state.postDeque, id);
                 if (post === undefined) throw new Error("post is undefined");
-                
+
                 post.meta.sentiment = sentiment;
             })
             .addCase(analyzePost.rejected, (state, action) => {})

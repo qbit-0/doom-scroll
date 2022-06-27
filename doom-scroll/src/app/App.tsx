@@ -3,16 +3,16 @@ import {
     BrowserRouter as Router,
     Navigate,
     Route,
-    Routes,
+    Routes
 } from "react-router-dom";
 
-import Login from "../pages/LoginPage/Login";
-import NavBar from "../components/SharedComponents/NavBar/NavBar";
-import { updateAppToken } from "../features/auth/authSlice";
-import CommentsPage from "../pages/CommentsPage/CommentsPage";
-import Hero from "../pages/Hero/Hero";
-import PostsPage from "../pages/PostsPage/PostsPage";
-import { useAppDispatch } from "./store";
+import { useAppDispatch } from "app/store";
+import NavBar from "components/shared/NavBar/NavBar";
+import { updateAppToken } from "features/auth/authSlice";
+import Article from "pages/Article/Article";
+import Browse from "pages/Browse/Browse";
+import Hero from "pages/Hero/Hero";
+import Login from "pages/Login/Login";
 
 const App = () => {
     const dispatch = useAppDispatch();
@@ -30,18 +30,18 @@ const App = () => {
                     <Route path="/" element={<Navigate to="r/popular" />} />
 
                     <Route path="/r/:subreddit/">
-                        <Route path="" element={<PostsPage />} />
-                        <Route path=":sort" element={<PostsPage />} />
+                        <Route path="" element={<Browse />} />
+                        <Route path=":sort" element={<Browse />} />
                     </Route>
 
-                    <Route path="/search" element={<PostsPage />} />
+                    <Route path="/search" element={<Browse />} />
 
                     <Route path="/r/:subreddit/comments/:articleId/">
                         <Route
                             path=":articleTitle"
-                            element={<CommentsPage />}
+                            element={<Article />}
                         />
-                        <Route path="" element={<CommentsPage />} />
+                        <Route path="" element={<Article />} />
                     </Route>
 
                     <Route path="/login" element={<Login />} />
