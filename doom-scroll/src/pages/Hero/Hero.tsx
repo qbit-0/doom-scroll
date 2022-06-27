@@ -9,25 +9,24 @@ const Hero = () => {
                     className="w-3/5 max-w-md pt-16 mx-auto"
                 >
                     <p className="p-4 text-justify text-lg font-serif font-light">
-                        Doomscrolling and doomsurfing are new terms referring to
-                        the tendency to continue to surf or scroll through bad
-                        news, even though that news is saddening, disheartening,
-                        or depressing.
+                        Doomscrolling refers to the tendency to continue to surf
+                        or scroll through bad news, even though that news is
+                        saddening, disheartening, or depressing.
                     </p>
                 </blockquote>
                 <h1 className="mt-16 text-8xl text-center font-extrabold">
-                    <div className="inline-block text-transparent bg-clip-text bg-rose-600 drop-shadow-md">
+                    <p className="inline-block text-transparent bg-clip-text bg-rose-600 drop-shadow-xl">
                         Doom
-                    </div>
-                    <div className="inline-block text-transparent bg-clip-text bg-sky-600 drop-shadow-md">
+                    </p>
+                    <p className="inline-block text-transparent bg-clip-text bg-sky-600 drop-shadow-xl animate-fadeintop">
                         Scroll
-                    </div>
+                    </p>
                 </h1>
                 <h2 className="mt-16 text-2xl font-light text-center">
                     The Best and Worst of Reddit.
                 </h2>
             </header>
-            <footer className="absolute bottom-0 w-full p-4 bg-zinc-800 shadow-md text-amber-100">
+            <footer className="absolute bottom-0 w-full p-4 bg-zinc-800 shadow-xl text-amber-100">
                 <p className="relative bottom-0 text-center font-medium">
                     Designed and Built by Duy Pham
                 </p>

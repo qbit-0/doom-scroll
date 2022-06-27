@@ -22,7 +22,7 @@ type Props = {};
 
 const PostsPage: React.FC<Props> = () => {
     const location = useLocation();
-    const searchMatch = useMatch("/search*");
+    const searchMatch = useMatch("/search/*");
     const accessToken = useSelector(selectAccessToken);
     const postDeque = useSelector(selectPostDeque);
     const isRefreshing = useSelector(selectPostsIsRefreshing);
@@ -82,7 +82,7 @@ const PostsPage: React.FC<Props> = () => {
                             </div>
                         ))}
                 </div>
-                {(isLoading || after !== null) && <PostPlaceholder />}
+                {isLoading && <PostPlaceholder />}
                 <div ref={ref} />
             </div>
         </div>

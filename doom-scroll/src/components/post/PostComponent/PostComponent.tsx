@@ -2,12 +2,16 @@ import VoteVertical from "components/post/VoteVertical/VoteVertical";
 import Author from "components/shared/Author/Author";
 import SanitizeHTML from "components/shared/SanitizeHTML/SanitizeHTML";
 import SentimentBanner from "components/shared/SentimentBanner/SentimentBanner";
-import { selectMaxRatio, selectMaxSentiment, selectMinRatio, selectMinSentiment } from "features/nlp/nlpSlice";
+import {
+    selectMaxRatio,
+    selectMaxSentiment,
+    selectMinRatio,
+    selectMinSentiment,
+} from "features/nlp/nlpSlice";
 import { Post } from "lib/reddit/redditData";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
 
 type Props = { post: Post };
 
@@ -27,7 +31,7 @@ const PostComponent: React.FC<Props> = ({ post }) => {
     }
 
     return (
-        <article className="flex overflow-clip mx-auto border-t-2 border-l-2 border-zinc-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-zinc-800 shadow-md">
+        <article className="flex overflow-clip mx-auto border-t-2 border-l-2 border-zinc-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-zinc-800 shadow-xl">
             <VoteVertical score={post.data.score} />
 
             <div className="w-full px-4 py-8">
@@ -60,7 +64,7 @@ const PostComponent: React.FC<Props> = ({ post }) => {
                             target="_blank"
                             rel="noreferrer"
                         >
-                            <figure className="max-w-2xl max-h-96 mt-4 mx-auto rounded-3xl overflow-clip shadow-md">
+                            <figure className="max-w-2xl max-h-96 mt-4 mx-auto rounded-3xl overflow-clip shadow-xl">
                                 <img
                                     alt="post preview"
                                     src={post.data.preview}
