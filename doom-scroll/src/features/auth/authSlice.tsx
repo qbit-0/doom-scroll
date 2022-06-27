@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { getAppToken } from "../../reddit/redditApi";
+import RedditApi from "../../reddit/redditApi";
 
 export const updateAppToken = createAsyncThunk(
   "auth/updateAppToken",
   async () => {
-    return await getAppToken();
+    return await RedditApi.getAppToken();
   }
 );
 

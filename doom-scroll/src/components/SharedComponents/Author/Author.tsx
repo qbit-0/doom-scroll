@@ -1,9 +1,8 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectAccessToken } from "../../../features/auth/authSlice";
+import RedditApi from "../../../reddit/redditApi";
 import { getElapsedString } from "../../../utils/getElapsedString";
-import { fetchProfileImg } from "../../../reddit/redditApi";
 
 const Author = ({ author, created }: { author: string; created: number }) => {
     const accessToken = useSelector(selectAccessToken);
@@ -11,7 +10,7 @@ const Author = ({ author, created }: { author: string; created: number }) => {
 
     useEffect(() => {
         if (accessToken !== null && author !== "[deleted]") {
-            fetchProfileImg(accessToken, author).then((fetchedProfileImg) => {
+            RedditApi.fetchProfileImg(accessToken, author).then((fetchedProfileImg) => {
                 setProfileImg(fetchedProfileImg);
             });
         }

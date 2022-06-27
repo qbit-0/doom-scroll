@@ -7,24 +7,19 @@ import {
     selectMinRatio,
     selectMinSentiment
 } from "../../../features/nlp/nlpSlice";
-import { selectPostDeque } from "../../../features/posts/postSlice";
 import { Post } from "../../../reddit/redditData";
-import { postDequeFind } from "../../../reddit/redditDataUtils";
 import Author from "../../SharedComponents/Author/Author";
 import SanitizeHTML from "../../SharedComponents/SanitizeHTML/SanitizeHTML";
 import SentimentBanner from "../../SharedComponents/SentimentBanner/SentimentBanner";
 import Vote from "../../SharedComponents/Vote/Vote";
 
-type Props = { id: number; post?: never } | { id?: never; post: Post };
+type Props = { post: Post };
 
-const PostComponent: React.FC<Props> = (props) => {
-    const postDeque = useSelector(selectPostDeque);
+const PostComponent: React.FC<Props> = ({ post }) => {
     const minScore = useSelector(selectMinSentiment);
     const maxScore = useSelector(selectMaxSentiment);
     const minRatio = useSelector(selectMinRatio);
     const maxRatio = useSelector(selectMaxRatio);
-
-    const post = props.post || postDequeFind(postDeque, props.id);
 
     const author = post.data.author;
     const created = post.data.created;
@@ -37,17 +32,10 @@ const PostComponent: React.FC<Props> = (props) => {
     }
 
     const url = post.data.url;
-
-    let selftextHTML = null;
-    if (post.data.selftextHTML !== undefined) {
-        selftextHTML = post.data.selftextHTML;
-    }
-
+    const selftextHTML = post.data.selftextHTML;
     const score = post.data.score;
     const ratio = post.data.ratio;
-
-    const sentiment =
-        post.meta.sentiment !== undefined ? post.meta.sentiment : 0;
+    const sentiment = post.meta.sentiment;
 
     if (
         sentiment < minScore ||
@@ -98,7 +86,7 @@ const PostComponent: React.FC<Props> = (props) => {
                     </div>
                 )}
 
-                {selftextHTML !== null && (
+                {selftextHTML !== undefined && (
                     <div>
                         <SanitizeHTML dirty={selftextHTML} />
                     </div>

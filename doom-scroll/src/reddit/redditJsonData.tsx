@@ -5,7 +5,7 @@ export type RedditListing = {
     before: string;
     after: string;
     data: {
-        [key: string]: any;
+        [key: string]: unknown;
         children: (RedditT3 | RedditT1)[];
     };
 };
@@ -13,20 +13,20 @@ export type RedditListing = {
 export type RedditT3 = {
     kind: string;
     data: {
-        [key: string]: any;
+        [key: string]: unknown;
     };
 };
 
 export type RedditT1 = {
     kind: string;
     data: {
-        [key: string]: any;
+        [key: string]: unknown;
     };
 };
 
 export type RedditMore = {
     kind: string;
     data: {
-        [key: string]: any;
+        [key: string]: unknown;
     };
 };

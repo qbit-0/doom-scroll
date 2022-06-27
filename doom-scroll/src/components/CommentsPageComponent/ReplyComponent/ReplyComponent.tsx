@@ -1,22 +1,20 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { selectCommentsReplyTree } from "../../../features/comments/commentsSlice";
-import { replyTreeFind } from "../../../reddit/redditDataUtils";
+import { Comment, More, Reply } from "../../../reddit/redditData";
 import CommentAndReplies from "../CommentAndReplies/CommentAndReplies";
 import MoreComponent from "../MoreComponent/MoreComponent";
 
 type Props = {
-    id: number;
+    reply: Reply;
 };
 
-const ReplyComponent: React.FC<Props> = ({ id }) => {
-    const replyTree = useSelector(selectCommentsReplyTree);
-    const reply = replyTreeFind(replyTree, id);
-
-    if ("children" in reply) {
-        return <CommentAndReplies id={id} />;
+const ReplyComponent: React.FC<Props> = ({ reply }) => {
+    if (reply.kind === "comment") {
+        const comment: Comment = reply as Comment;
+        return <CommentAndReplies comment={comment} />;
+    } else {
+        const more: More = reply as More;
+        return <MoreComponent more={more} />;
     }
-    return <MoreComponent id={id} />;
 };
 
 export default ReplyComponent;

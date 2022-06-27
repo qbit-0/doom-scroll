@@ -5,7 +5,7 @@ import store from "../../../app/store";
 import {
   updateAppToken
 } from "../../../features/auth/authSlice";
-import * as redditAPI from "../../../reddit/redditApi";
+import RedditApi from "../../../reddit/redditApi";
 import Author from "./Author";
 
 describe("Author component", () => {
@@ -35,12 +35,12 @@ describe("Author component", () => {
   });
 
   test("it renders author profile picture", async () => {
-    const getAppTokenSpy = jest.spyOn(redditAPI, "getAppToken");
+    const getAppTokenSpy = jest.spyOn(RedditApi, "getAppToken");
     getAppTokenSpy.mockResolvedValue({
       access_token: "mock_access_token",
     });
 
-    const fetchProfileImgSpy = jest.spyOn(redditAPI, "fetchProfileImg");
+    const fetchProfileImgSpy = jest.spyOn(RedditApi, "fetchProfileImg");
     fetchProfileImgSpy.mockResolvedValue("https://picsum.photos/200");
 
     store.dispatch(updateAppToken());

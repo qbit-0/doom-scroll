@@ -24,30 +24,27 @@ const App = () => {
     return (
         <Router>
             <Hero />
-            <main className="bg-zinc-900 text-amber-100">
+            <main>
                 <NavBar />
                 <Routes>
                     <Route path="/" element={<Navigate to="r/popular" />} />
-                    <Route
-                        path="/r/:subreddit/"
-                        element={<PostsPage />}
-                    />
-                    <Route
-                        path="/r/:subreddit/:sort"
-                        element={<PostsPage />}
-                    />
+
+                    <Route path="/r/:subreddit/">
+                        <Route path="" element={<PostsPage />} />
+                        <Route path=":sort" element={<PostsPage />} />
+                    </Route>
+
                     <Route path="/search" element={<PostsPage />} />
-                    <Route
-                        path="/r/:subreddit/comments/:articleId/"
-                        element={<CommentsPage />}
-                    />
-                    <Route
-                        path="/r/:subreddit/comments/:articleId/:articleTitle"
-                        element={<CommentsPage />}
-                    />
+
+                    <Route path="/r/:subreddit/comments/:articleId/">
+                        <Route
+                            path=":articleTitle"
+                            element={<CommentsPage />}
+                        />
+                        <Route path="" element={<CommentsPage />} />
+                    </Route>
 
                     <Route path="/login" element={<Login />} />
-                    <Route path="*" element={<></>} />
                 </Routes>
             </main>
         </Router>

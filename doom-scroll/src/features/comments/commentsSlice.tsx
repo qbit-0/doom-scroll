@@ -2,20 +2,15 @@ import {
     createAsyncThunk,
     createSelector,
     createSlice,
-    PayloadAction,
+    PayloadAction
 } from "@reduxjs/toolkit";
 import { matchPath } from "react-router-dom";
 import { AppDispatch, RootState } from "../../app/store";
-import {
-    fetchMoreJson as fetchMore,
-    fetchReddit,
-} from "../../reddit/redditApi";
-import { Post, ReplyTree } from "../../reddit/redditData";
-import { replyTreeFind } from "../../reddit/redditDataUtils";
-import {
-    parseArticle,
-    parseMoreListing as pushMoreListing,
-} from "../../reddit/redditParseUtils";
+import RedditApi from "../../reddit/redditApi";
+import { Comment, More, Post, ReplyTree } from "../../reddit/redditData";
+import { parseArticle, pushMoreListing } from "../../reddit/redditParseUtils";
+import ReplyTreeUtils from "../../reddit/replyTreeUtils";
+import { NlpUtils } from "../../utils/nlpUtils";
 import { selectAccessToken } from "../auth/authSlice";
 
 export const loadArticle = createAsyncThunk<
@@ -32,15 +27,15 @@ export const loadArticle = createAsyncThunk<
     if (pathname === null) return thunkApi.rejectWithValue("pathname is null");
     if (search === null) return thunkApi.rejectWithValue("search is null");
 
-    const json = await fetchReddit(accessToken, pathname, search);
+    const json = await RedditApi.fetchReddit(accessToken, pathname, search);
     return parseArticle(json);
 });
 
 export const loadMore = createAsyncThunk<
     ReplyTree,
-    number,
+    More,
     { state: RootState; dispatch: AppDispatch }
->("comments/loadMore", async (id, thunkApi) => {
+>("comments/loadMore", async (more, thunkApi) => {
     const accessToken = selectAccessToken(thunkApi.getState());
     const pathname = selectCommentsPathname(thunkApi.getState());
     const search = selectCommentsSearch(thunkApi.getState());
@@ -54,45 +49,46 @@ export const loadMore = createAsyncThunk<
         return thunkApi.rejectWithValue("replyTree is null");
 
     const treeCopy = structuredClone(replyTree);
-
-    const more = replyTreeFind(replyTree, id);
-    if ("children" in more)
-        return thunkApi.rejectWithValue("more is a Comment");
-
-    const match = matchPath(
-        pathname,
-        "/r/:subreddit/comments/:articleId/:articleTitle"
-    );
+    const match = matchPath("/r/:subreddit/comments/:articleId/*", pathname);
 
     if (match === null) return thunkApi.rejectWithValue("match is null");
 
-    const articleId = match.params["articleId"];
-
+    const articleId = "t3_" + match.params["articleId"];
     if (articleId === undefined)
         return thunkApi.rejectWithValue("articleId is undefined");
 
-    const json = await fetchMore(
+    const json = await RedditApi.fetchMoreJson(
         accessToken,
-        more.data.childrenIds,
+        more,
         articleId,
         search
     );
-    pushMoreListing(treeCopy, json, more.parent);
 
+    if (more.id === undefined)
+        return thunkApi.rejectWithValue("more is undefined");
+
+    ReplyTreeUtils.remove(treeCopy, more.id);
+    pushMoreListing(treeCopy, json, more);
     return treeCopy;
+    //TODO: Ensure that only 100 children of more are requested.
 });
+
+export const analyzeComment = createAsyncThunk(
+    "comments/analyzeComment",
+    async (comment: Comment, thunkApi) => {
+        return NlpUtils.analyzeComment(comment);
+    }
+);
 
 const initialState: {
     pathname: string | null;
     search: string | null;
-    post: Post | null;
     replyTree: ReplyTree;
     isRefreshing: boolean;
     isLoadingMore: boolean;
 } = {
     pathname: null,
     search: null,
-    post: null,
     replyTree: {
         data: {},
         currId: 0,
@@ -116,10 +112,10 @@ const commentsSlice = createSlice({
         builder
             .addCase(loadArticle.pending, (state, action) => {
                 state.isRefreshing = true;
+                // TODO HANDLE ERRORS
             })
             .addCase(loadArticle.fulfilled, (state, action) => {
                 state.isRefreshing = false;
-                state.post = action.payload.post;
                 state.replyTree = action.payload.replyTree;
             })
             .addCase(loadArticle.rejected, (state, action) => {
@@ -128,20 +124,39 @@ const commentsSlice = createSlice({
 
             .addCase(loadMore.pending, (state, action) => {
                 state.isLoadingMore = true;
+                // TODO HANDLE ERRORS
             })
             .addCase(loadMore.fulfilled, (state, action) => {
+                state.replyTree = action.payload;
                 state.isLoadingMore = false;
             })
             .addCase(loadMore.rejected, (state, action) => {
                 state.isLoadingMore = false;
-            });
+            })
+
+            .addCase(analyzeComment.pending, (state, action) => {
+                // TODO HANDLE PENDING
+                // TODO HANDLE ERRORS
+            })
+            .addCase(analyzeComment.fulfilled, (state, action) => {
+                const id = action.meta.arg.id;
+                const sentiment = action.payload;
+
+                if (id === undefined) throw new Error("id is undefined");
+
+                const comment: Comment = ReplyTreeUtils.find(
+                    state.replyTree,
+                    id
+                ) as Comment;
+                comment.meta.sentiment = sentiment;
+            })
+            .addCase(analyzeComment.rejected, (state, action) => {});
     },
 });
 
 export const selectCommentsPathname = (state: RootState) =>
     state.comments.pathname;
 export const selectCommentsSearch = (state: RootState) => state.comments.search;
-export const selectCommentsPost = (state: RootState) => state.comments.post;
 export const selectCommentsReplyTree = (state: RootState) =>
     state.comments.replyTree;
 export const selectCommentsIsRefreshing = (state: RootState) =>

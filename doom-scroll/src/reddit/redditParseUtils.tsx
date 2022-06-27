@@ -1,7 +1,9 @@
+import { NlpUtils } from "../utils/nlpUtils";
+import PostDequeUtils from "./postDequeUtils";
 import { Comment, More, Post, PostDeque, ReplyTree } from "./redditData";
-import { postDequePushBot, replyTreePush } from "./redditDataUtils";
+import ReplyTreeUtils from "./replyTreeUtils";
 
-export const parsePostDeque = (redditListing: any): PostDeque => {
+export const parsePostDeque = (redditListing: unknown): PostDeque => {
     const postDeque: PostDeque = {
         data: {},
         topId: 0,
@@ -10,7 +12,7 @@ export const parsePostDeque = (redditListing: any): PostDeque => {
         after: null,
     };
     parsePostListing(redditListing).forEach((post: Post) => {
-        postDequePushBot(postDeque, post);
+        PostDequeUtils.pushBot(postDeque, post);
     });
     return postDeque;
 };
@@ -55,8 +57,13 @@ export const parsePost = (redditPost: any): Post => {
             score: redditPost.data.ups,
             ratio: redditPost.data.upvote_ratio,
         },
-        meta: {},
+        meta: {
+            sentiment: 0,
+        },
     };
+
+    if ("selftext" in redditPost.data)
+        post.data.selftext = redditPost.data.selftext;
 
     if ("selftext_html" in redditPost.data)
         post.data.selftextHTML = redditPost.data.selftext_html;
@@ -64,17 +71,19 @@ export const parsePost = (redditPost: any): Post => {
     if ("preview" in redditPost.data)
         post.data.preview = redditPost.data.preview.images[0].source.url;
 
+    post.meta.sentiment = NlpUtils.analyzePost(post);
+
     return post;
 };
 
 export const pushRepliesListing = (
     replyTree: ReplyTree,
     redditRepliesListing: any,
-    parent: number
+    parentId: number
 ): number[] => {
     const listingChildren = redditRepliesListing.data.children;
     return listingChildren
-        .map((redditReply: any) => pushReply(replyTree, redditReply, parent))
+        .map((redditReply: any) => pushReply(replyTree, redditReply, parentId))
         .reduce((previousValue: number[], currentValue: number[]) => {
             return [...previousValue, currentValue];
         }, []);
@@ -83,14 +92,14 @@ export const pushRepliesListing = (
 export const pushReply = (
     replyTree: ReplyTree,
     redditReply: any,
-    parent: number
+    parentId: number
 ): number => {
     switch (redditReply.kind) {
         case "t1": {
-            return pushComment(replyTree, redditReply, parent);
+            return pushComment(replyTree, redditReply, parentId);
         }
         case "more": {
-            return pushMore(replyTree, redditReply, parent);
+            return pushMore(replyTree, redditReply, parentId);
         }
         default: {
             throw new Error("invalid kind");
@@ -101,24 +110,31 @@ export const pushReply = (
 export const pushComment = (
     replyTree: ReplyTree,
     redditComment: any,
-    parent: number
+    parentId: number
 ): number => {
     const commentId = replyTree.currId;
     const comment: Comment = {
+        id: -1,
         kind: "comment",
         data: {
             depth: redditComment.data.depth,
             name: redditComment.data.name,
             author: redditComment.data.author,
             created: redditComment.data.created_utc,
+            body: redditComment.data.body,
             bodyHTML: redditComment.data.body_html,
             score: redditComment.data.score,
         },
-        meta: {},
-        parent: parent,
-        children: [],
+        meta: {
+            sentiment: 0,
+        },
+        parentId: parentId,
+        childrenIds: [],
     };
-    replyTreePush(replyTree, comment);
+
+    comment.meta.sentiment = NlpUtils.analyzeComment(comment);
+
+    ReplyTreeUtils.push(replyTree, comment, parentId);
 
     let children: number[] = [];
     if (redditComment.data.replies !== "") {
@@ -128,37 +144,47 @@ export const pushComment = (
             commentId
         );
     }
-    comment.children = children;
-
+    comment.childrenIds = children;
     return commentId;
 };
 
 export const pushMore = (
     replyTree: ReplyTree,
     redditMore: any,
-    parent: number
+    parentId: number
 ): number => {
     const moreId = replyTree.currId;
     const more: More = {
+        id: -1,
         kind: "more",
         data: {
             depth: redditMore.data.depth,
             count: redditMore.data.count,
-            childrenIds: redditMore.data.childrenIds,
+            children: redditMore.data.children,
         },
         meta: {},
-        parent: parent,
+        parentId: parentId,
     };
-    replyTreePush(replyTree, more);
+    ReplyTreeUtils.push(replyTree, more, parentId);
     return moreId;
 };
 
-export const parseMoreListing = (
+export const pushMoreListing = (
     replyTree: ReplyTree,
     redditMoreListing: any,
-    parent: number
+    more: More
 ) => {
-    redditMoreListing.data.children.things.forEach((reply: any) => {
-        pushReply(replyTree, reply, parent);
+    const moreReplies = redditMoreListing.json.data.things;
+
+    const parentIds: {
+        [depth: number]: number;
+    } = {
+        [more.data.depth]: more.parentId,
+    };
+
+    moreReplies.forEach((reply: any) => {
+        const depth = reply.data.depth;
+        const replyId = pushReply(replyTree, reply, parentIds[depth]);
+        parentIds[depth + 1] = replyId;
     });
 };

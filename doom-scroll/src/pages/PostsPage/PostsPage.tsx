@@ -14,11 +14,10 @@ import {
     selectPostsIsLoading,
     selectPostsIsRefreshing,
     setPathname as setPostsPathname,
-    setSearch as setPostsSearch
-} from "../../features/posts/postSlice";
+    setSearch as setPostsSearch,
+} from "../../features/posts/postsSlice";
 
-type Props = {
-};
+type Props = {};
 
 const PostsPage: React.FC<Props> = () => {
     const location = useLocation();
@@ -68,19 +67,17 @@ const PostsPage: React.FC<Props> = () => {
     }, [dispatch, isLoading, after]);
 
     return (
-        <div className="px-16 py-8 max-w-7xl mx-auto">
+        <div className="px-16 py-8 max-w-7xl mx-auto bg-zinc-900 text-amber-100">
             <div className="mb-8">
                 <SubredditSort />
             </div>
             <div>
                 {!isRefreshing &&
-                    Object.keys(postDeque.data)
-                        .map(Number)
-                        .map((id, index) => (
-                            <div className="my-4" key={index}>
-                                <PostComponent id={id} />
-                            </div>
-                        ))}
+                    Object.values(postDeque.data).map((post, index) => (
+                        <div className="my-4" key={index}>
+                            <PostComponent post={post} />
+                        </div>
+                    ))}
             </div>
             {(isLoading || after !== null) && <PostPlaceholder />}
             <div ref={ref} />

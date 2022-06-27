@@ -29,7 +29,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="sticky top-0 p-4 bg-zinc-900 shadow-md">
+    <nav className="sticky top-0 p-4 bg-zinc-900 text-amber-100 shadow-md">
       <div className="w-fit mx-auto">
         <div className="inline-block">
           <div className="inline-block mr-2">

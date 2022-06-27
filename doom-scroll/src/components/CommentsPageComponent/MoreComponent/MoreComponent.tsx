@@ -1,27 +1,20 @@
 import React, { MouseEvent, MouseEventHandler } from "react";
-import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../app/store";
 import {
-    loadMore,
-    selectCommentsReplyTree
+    loadMore
 } from "../../../features/comments/commentsSlice";
+import { More } from "../../../reddit/redditData";
 
 type Props = {
-    id: number;
+    more: More;
 };
 
-const MoreComponent: React.FC<Props> = ({ id }) => {
-    const replyTree = useSelector(selectCommentsReplyTree);
+const MoreComponent: React.FC<Props> = ({ more }) => {
     const dispatch = useAppDispatch();
-
-    if (replyTree === null) throw new Error("replyTree is null");
-
-    const more = replyTree.data[id];
-    if ("children" in more) throw new Error("more is a Commet");
 
     const handleClick: MouseEventHandler = (event: MouseEvent) => {
         event.preventDefault();
-        dispatch(loadMore(id));
+        dispatch(loadMore(more));
     };
 
     const renderButton = (count: number) => {

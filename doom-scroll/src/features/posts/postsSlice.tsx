@@ -2,17 +2,22 @@ import {
     createAsyncThunk,
     createSelector,
     createSlice,
-    PayloadAction
+    PayloadAction,
 } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "../../app/store";
-import { fetchReddit } from "../../reddit/redditApi";
+import {
+    default as postDequeUtils,
+    default as PostDequeUtils,
+} from "../../reddit/postDequeUtils";
+import RedditApi from "../../reddit/redditApi";
 import { Post, PostDeque } from "../../reddit/redditData";
-import { postDequePushBot } from "../../reddit/redditDataUtils";
 import {
     parsePostDeque,
-    parsePostListing
+    parsePostListing,
 } from "../../reddit/redditParseUtils";
+import { NlpUtils } from "../../utils/nlpUtils";
 import { selectAccessToken } from "../auth/authSlice";
+import { loadArticle } from "../comments/commentsSlice";
 
 export const loadPosts = createAsyncThunk<
     PostDeque,
@@ -28,9 +33,8 @@ export const loadPosts = createAsyncThunk<
     if (pathname === null) return thunkApi.rejectWithValue("pathname is null");
     if (search === null) return thunkApi.rejectWithValue("search is null");
 
-    const json = await fetchReddit(accessToken, pathname, search);
-    console.log(json);
-    
+    const json = await RedditApi.fetchReddit(accessToken, pathname, search);
+
     const postDeque = parsePostDeque(json);
     return postDeque;
 });
@@ -54,10 +58,21 @@ export const loadPostsAfter = createAsyncThunk<
     const params = new URLSearchParams(search);
     params.append("after", after);
 
-    const json = await fetchReddit(accessToken, pathname, params.toString());
+    const json = await RedditApi.fetchReddit(
+        accessToken,
+        pathname,
+        params.toString()
+    );
     const posts = parsePostListing(json);
     return posts;
 });
+
+export const analyzePost = createAsyncThunk(
+    "posts/analyzePost",
+    async (post: Post, thunkApi) => {
+        return NlpUtils.analyzePost(post);
+    }
+);
 
 const initialState: {
     pathname: string | null;
@@ -96,6 +111,7 @@ const postsSlice = createSlice({
         builder
             .addCase(loadPosts.pending, (state, action) => {
                 state.isRefreshing = true;
+                // TODO HANDLE ERRORS
             })
             .addCase(loadPosts.fulfilled, (state, action) => {
                 state.postDeque = action.payload;
@@ -107,15 +123,45 @@ const postsSlice = createSlice({
 
             .addCase(loadPostsAfter.pending, (state, action) => {
                 state.isLoadingAfter = true;
+                // TODO HANDLE ERRORS
             })
             .addCase(loadPostsAfter.fulfilled, (state, action) => {
                 action.payload.forEach((post) => {
-                    postDequePushBot(state.postDeque, post);
+                    PostDequeUtils.pushBot(state.postDeque, post);
                 });
                 state.isLoadingAfter = false;
             })
             .addCase(loadPostsAfter.rejected, (state, action) => {
                 state.isLoadingAfter = false;
+            })
+
+            .addCase(analyzePost.pending, (state, action) => {
+                // TODO HANDLE PENDING AND ERRORS
+            })
+            .addCase(analyzePost.fulfilled, (state, action) => {
+                const id = action.meta.arg.id;
+                const sentiment = action.payload;
+
+                if (id === undefined) throw new Error("id is undefined");
+
+                const post = postDequeUtils.find(state.postDeque, id);
+                if (post === undefined) throw new Error("post is undefined");
+                
+                post.meta.sentiment = sentiment;
+            })
+            .addCase(analyzePost.rejected, (state, action) => {})
+
+            .addCase(loadArticle.pending, (state, action) => {
+                state.isRefreshing = true;
+            })
+            .addCase(loadArticle.fulfilled, (state, action) => {
+                const post = action.payload.post;
+                PostDequeUtils.clear(state.postDeque);
+                PostDequeUtils.pushBot(state.postDeque, post);
+                state.isRefreshing = false;
+            })
+            .addCase(loadArticle.rejected, (state, action) => {
+                state.isRefreshing = false;
             });
     },
 });

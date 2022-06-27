@@ -5,20 +5,24 @@ import ReplyComponent from "../ReplyComponent/ReplyComponent";
 
 type Props = {};
 
-const ReplyTree: React.FC<Props> = () => {
+const ReplyTreeComponent: React.FC<Props> = () => {
     const replyTree = useSelector(selectCommentsReplyTree);
 
-    const replyComponents: JSX.Element[] = [];
-    Object.entries(replyTree.data).forEach((entry, index) => {
-        const [id, reply] = entry;
-        if (reply.parent === -1) {
-            replyComponents.push(<div className="my-2">
-                <ReplyComponent id={Number(id)} />
-            </div>);
-        }
-    });
-
-    return <section>{replyComponents}</section>;
+    return (
+        <section>
+            {Object.values(replyTree.data)
+                .filter((reply) => {
+                    return reply.parentId === -1;
+                })
+                .map((reply, index) => {
+                    return (
+                        <div className="my-2" key={index}>
+                            <ReplyComponent reply={reply} />
+                        </div>
+                    );
+                })}
+        </section>
+    );
 };
 
-export default ReplyTree;
+export default ReplyTreeComponent;

@@ -9,6 +9,7 @@ export type PostDeque = {
 };
 
 export type Post = {
+    id?: number;
     data: {
         name: string;
         author: string;
@@ -20,11 +21,12 @@ export type Post = {
         score: number;
         ratio: number;
 
+        selftext?: string;
         selftextHTML?: string;
         preview?: string;
     };
     meta: {
-        sentiment?: number;
+        sentiment: number;
         fullSentiment?: number;
     };
 };
@@ -35,32 +37,35 @@ export type ReplyTree = {
 };
 
 export type Comment = {
+    id: number;
     kind: string;
     data: {
         depth: number;
         name: string;
         author: string;
         created: number;
+        body: string;
         bodyHTML: string;
         score: number;
     };
     meta: {
-        sentiment?: number;
+        sentiment: number;
         fullSentiment?: number;
     };
-    parent: number;
-    children: number[];
+    parentId: number;
+    childrenIds: number[];
 };
 
 export type More = {
+    id: number;
     kind: string;
     data: {
         depth: number;
         count: number;
-        childrenIds: string[];
+        children: string[];
     };
     meta: {};
-    parent: number;
+    parentId: number;
 };
 
 export type Reply = Comment | More;
