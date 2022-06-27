@@ -3,23 +3,27 @@ import {
     BrowserRouter as Router,
     Navigate,
     Route,
-    Routes
+    Routes,
 } from "react-router-dom";
 
 import { useAppDispatch } from "app/store";
-import NavBar from "components/shared/NavBar/NavBar";
-import { updateAppToken } from "features/auth/authSlice";
+import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import Article from "pages/Article/Article";
 import Browse from "pages/Browse/Browse";
 import Hero from "pages/Hero/Hero";
 import Login from "pages/Login/Login";
+import NavBar from "components/NavBar/NavBar";
+import { useSelector } from "react-redux";
 
 const App = () => {
     const dispatch = useAppDispatch();
+    const accessToken = useSelector(selectAccessToken);
 
     useEffect(() => {
-        dispatch(updateAppToken());
-    }, [dispatch]);
+        if (accessToken === null) {
+            dispatch(updateAppToken());
+        }
+    }, [dispatch, accessToken]);
 
     return (
         <Router>
@@ -37,10 +41,7 @@ const App = () => {
                     <Route path="/search" element={<Browse />} />
 
                     <Route path="/r/:subreddit/comments/:articleId/">
-                        <Route
-                            path=":articleTitle"
-                            element={<Article />}
-                        />
+                        <Route path=":articleTitle" element={<Article />} />
                         <Route path="" element={<Article />} />
                     </Route>
 

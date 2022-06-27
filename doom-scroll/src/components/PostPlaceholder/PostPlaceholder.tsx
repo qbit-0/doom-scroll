@@ -1,12 +1,12 @@
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import VoteVertical from "components/post/VoteVertical/VoteVertical";
-import SentimentBanner from "components/shared/SentimentBanner/SentimentBanner";
+import SentimentBanner from "components/SentimentBanner/SentimentBanner";
+import VoteVertical from "components/VoteVertical/VoteVertical";
 import React from "react";
 
 const PostPlaceholder = () => {
     return (
-        <article className="flex overflow-clip h-96 mx-auto border-t-2 border-l-2 border-zinc-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-zinc-800 shadow-xl">
+        <article className="flex overflow-clip h-[50rem] mx-auto border-t-2 border-l-2 border-zinc-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-zinc-800 shadow-xl">
             <VoteVertical />
 
             <div className="flex-grow-0 w-full">

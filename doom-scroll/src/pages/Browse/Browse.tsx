@@ -1,12 +1,10 @@
-import React, { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
-import { useLocation, useMatch } from "react-router-dom";
-import { useAppDispatch } from "../../app/store";
-import PostComponent from "../../components/post/PostComponent/PostComponent";
-import PostPlaceholder from "../../components/post/PostPlaceholder/PostPlaceholder";
-import SearchSort from "../../components/post/SearchSort/SearchSort";
-import SubredditSort from "../../components/post/SubredditSort/SubredditSort";
-import { selectAccessToken } from "../../features/auth/authSlice";
+import { useAppDispatch } from "app/store";
+import FilterSentiment from "components/FilterSentiment/FilterSentiment";
+import PostComponent from "components/PostComponent/PostComponent";
+import PostPlaceholder from "components/PostPlaceholder/PostPlaceholder";
+import SearchSort from "components/SearchSort/SearchSort";
+import SubredditSort from "components/SubredditSort/SubredditSort";
+import { selectAccessToken } from "features/auth/authSlice";
 import {
     loadPosts,
     loadPostsAfter,
@@ -14,9 +12,12 @@ import {
     selectPostsAfter,
     selectPostsIsLoading,
     selectPostsIsRefreshing,
-    setPathname as setPostsPathname,
-    setSearch as setPostsSearch,
-} from "../../features/posts/postsSlice";
+    setPostsPathname,
+    setPostsSearchStr,
+} from "features/posts/postsSlice";
+import React, { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import { useLocation, useMatch } from "react-router-dom";
 
 type Props = {};
 
@@ -30,19 +31,34 @@ const Browse: React.FC<Props> = () => {
     const after = useSelector(selectPostsAfter);
     const dispatch = useAppDispatch();
 
+    const refTop = useRef<HTMLDivElement>(null);
+
+    const scrollToTop = () => {
+        if (refTop.current === null) return;
+
+        window.scroll({
+            top: refTop.current.offsetTop,
+            behavior: "auto",
+        });
+    };
+
     useEffect(() => {
+        if (isRefreshing) return;
+        scrollToTop();
         dispatch(setPostsPathname(location.pathname));
-        dispatch(setPostsSearch(location.search));
+        dispatch(setPostsSearchStr(location.search));
+        dispatch(loadPosts());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, location]);
 
     useEffect(() => {
-        if (!isRefreshing) {
-            dispatch(loadPosts());
-        }
+        if (isRefreshing) return;
+        scrollToTop();
+        dispatch(loadPosts());
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch, location, accessToken]);
+    }, [dispatch, accessToken]);
 
-    const ref = useRef<HTMLDivElement>(null);
+    const refBot = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (!isLoading && after !== null) {
@@ -57,11 +73,11 @@ const Browse: React.FC<Props> = () => {
                 }
             }, options);
 
-            if (ref.current) observer.observe(ref.current);
+            if (refBot.current) observer.observe(refBot.current);
 
-            const refCopy = ref;
+            const refBotCopy = refBot;
             return () => {
-                if (refCopy.current) observer.unobserve(refCopy.current);
+                if (refBotCopy.current) observer.unobserve(refBotCopy.current);
             };
         }
 
@@ -70,21 +86,32 @@ const Browse: React.FC<Props> = () => {
 
     return (
         <div className="bg-zinc-900 text-amber-100">
-            <div className="px-16 py-8 max-w-7xl mx-auto">
-                <div className="mb-8">
-                    {searchMatch ? <SearchSort /> : <SubredditSort />}
+            <div ref={refTop} />
+            <div className="px-16 pb-8 max-w-7xl mx-auto">
+                <div className="pt-28 pb-8">
+                    <div>
+                        {searchMatch ? <SearchSort /> : <SubredditSort />}
+                    </div>
+                    <div className="border-t-2 border-zinc-700">
+                        <FilterSentiment />
+                    </div>
                 </div>
+
                 <div>
                     {!isRefreshing &&
                         Object.values(postDeque.data).map((post, index) => (
-                            <div className="my-4" key={index}>
+                            <div className="my-8" key={index}>
                                 <PostComponent post={post} />
                             </div>
                         ))}
+                    {(isLoading || after) && (
+                        <div className="my-8">
+                            <PostPlaceholder />
+                        </div>
+                    )}
                 </div>
-                {(isLoading || after !== null) && <PostPlaceholder />}
-                <div ref={ref} />
             </div>
+            <div ref={refBot} />
         </div>
     );
 };

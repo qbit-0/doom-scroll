@@ -23,22 +23,21 @@ const Author = ({ author, created }: { author: string; created: number }) => {
     return (
         <div className="flex items-center">
             <figure className="inline-block flex-grow-0 flex-shrink-0 overflow-clip w-6 h-6 rounded-full">
-                {profileImg && (
+                {profileImg !== null ? (
                     <img
                         src={profileImg}
                         alt={`${author}'s profile`}
                         className="block w-full h-full"
                     />
-                )}
-                {!profileImg && (
+                ) : (
                     <div className="block w-full h-full bg-zinc-800 "></div>
                 )}
             </figure>
             <div>
-                <p className="inline-block ml-4">
+                <div className="inline-block ml-4">
                     <p className="inline font-bold italic">{author}</p>{" "}
                     <p className="inline font-thin">- {elapsedString}</p>
-                </p>
+                </div>
             </div>
         </div>
     );

@@ -23,14 +23,14 @@ export const loadPosts = createAsyncThunk<
 >("posts/loadPosts", async (args, thunkApi) => {
     const accessToken = selectAccessToken(thunkApi.getState());
     const pathname = selectPostsPathname(thunkApi.getState());
-    const search = selectPostsSearch(thunkApi.getState());
+    const searchStr = selectPostsSearchStr(thunkApi.getState());
 
     if (accessToken === null)
         return thunkApi.rejectWithValue("accessToken is null");
     if (pathname === null) return thunkApi.rejectWithValue("pathname is null");
-    if (search === null) return thunkApi.rejectWithValue("search is null");
+    if (searchStr === null) return thunkApi.rejectWithValue("search is null");
 
-    const json = await RedditApi.fetchReddit(accessToken, pathname, search);
+    const json = await RedditApi.fetchReddit(accessToken, pathname, searchStr);
 
     const postDeque = parsePostDeque(json);
     return postDeque;
@@ -43,7 +43,7 @@ export const loadPostsAfter = createAsyncThunk<
 >("posts/loadPostsAfter", async (args, thunkApi) => {
     const accessToken = selectAccessToken(thunkApi.getState());
     const pathname = selectPostsPathname(thunkApi.getState());
-    const search = selectPostsSearch(thunkApi.getState());
+    const search = selectPostsSearchStr(thunkApi.getState());
     const after = selectPostsAfter(thunkApi.getState());
 
     if (accessToken === null)
@@ -52,13 +52,13 @@ export const loadPostsAfter = createAsyncThunk<
     if (search === null) return thunkApi.rejectWithValue("search is null");
     if (after === null) return thunkApi.rejectWithValue("after is null");
 
-    const params = new URLSearchParams(search);
-    params.append("after", after);
+    const searchParams = new URLSearchParams(search);
+    searchParams.append("after", after);
 
     const json = await RedditApi.fetchReddit(
         accessToken,
         pathname,
-        params.toString()
+        searchParams.toString()
     );
     const posts = parsePostListing(json);
     return posts;
@@ -73,14 +73,14 @@ export const analyzePost = createAsyncThunk(
 
 const initialState: {
     pathname: string | null;
-    search: string | null;
+    searchStr: string | null;
     postDeque: PostDeque;
     isRefreshing: boolean;
     isLoadingBefore: boolean;
     isLoadingAfter: boolean;
 } = {
     pathname: null,
-    search: null,
+    searchStr: null,
     postDeque: {
         data: {},
         topId: 0,
@@ -97,11 +97,11 @@ const postsSlice = createSlice({
     name: "posts",
     initialState: initialState,
     reducers: {
-        setPathname: (state, action: PayloadAction<string>) => {
+        setPostsPathname: (state, action: PayloadAction<string>) => {
             state.pathname = action.payload;
         },
-        setSearch: (state, action: PayloadAction<string>) => {
-            state.search = action.payload;
+        setPostsSearchParams: (state, action: PayloadAction<string>) => {
+            state.searchStr = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -164,7 +164,7 @@ const postsSlice = createSlice({
 });
 
 export const selectPostsPathname = (state: RootState) => state.posts.pathname;
-export const selectPostsSearch = (state: RootState) => state.posts.search;
+export const selectPostsSearchStr = (state: RootState) => state.posts.searchStr;
 export const selectPostDeque = (state: RootState) => state.posts.postDeque;
 export const selectPostsBefore = (state: RootState) =>
     state.posts.postDeque.before;
@@ -184,5 +184,6 @@ export const selectPostsIsLoading = createSelector(
         isRefreshing || isLoadingBefore || isLoadingAfter
 );
 
-export const { setPathname, setSearch } = postsSlice.actions;
+export const { setPostsPathname, setPostsSearchParams: setPostsSearchStr } =
+    postsSlice.actions;
 export default postsSlice.reducer;

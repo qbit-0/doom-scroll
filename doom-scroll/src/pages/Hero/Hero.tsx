@@ -15,7 +15,7 @@ const Hero = () => {
                     </p>
                 </blockquote>
                 <h1 className="mt-16 text-8xl text-center font-extrabold">
-                    <p className="inline-block text-transparent bg-clip-text bg-rose-600 drop-shadow-xl">
+                    <p className="inline-block text-transparent bg-clip-text bg-gradient-to-t from-rose-600 to-black drop-shadow-xl animate-shake">
                         Doom
                     </p>
                     <p className="inline-block text-transparent bg-clip-text bg-sky-600 drop-shadow-xl animate-fadeintop">

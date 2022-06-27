@@ -1,5 +1,5 @@
-import CommentComponent from "components/comments/CommentComponent/CommentComponent";
-import ReplyComponent from "components/comments/ReplyComponent/ReplyComponent";
+import CommentComponent from "components/CommentComponent/CommentComponent";
+import ReplyComponent from "components/ReplyComponent/ReplyComponent";
 import { selectCommentsReplyTree } from "features/comments/commentsSlice";
 import { Comment } from "lib/reddit/redditData";
 import ReplyTreeUtils from "lib/reddit/replyTreeUtils";

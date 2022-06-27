@@ -26,22 +26,20 @@ export default class RedditApi {
             body: body,
         });
 
-        const json = await response.json();
-
-        return json;
+        return await response.json();
     };
 
     static fetchReddit = async (
         accessToken: string,
         pathname: string,
-        search: string
+        searchStr: string
     ) => {
         const url = new URL(`${REDDIT_FETCH_HOSTNAME}${pathname}`);
 
-        const params = new URLSearchParams(search);
-        params.append("raw_json", "1");
+        const newSearchParams = new URLSearchParams(searchStr);
+        newSearchParams.append("raw_json", "1");
 
-        const stringUrl = `${url.href}?${params.toString()}`;
+        const stringUrl = `${url.href}?${newSearchParams.toString()}`;
 
         const headers = {
             Authorization: `bearer ${accessToken}`,
@@ -52,29 +50,26 @@ export default class RedditApi {
             headers: headers,
         });
 
-        const json = await response.json();
-        return json;
+        return await response.json();
     };
 
     static fetchMoreJson = async (
         accessToken: string,
         more: More,
         articleId: string,
-        search: string
+        searchStr: string
     ) => {
-        const params = new URLSearchParams(search);
-        params.append("api_type", "json");
-        params.append("children", more.data.children.join(","));
-        params.append("id", more.data.name);
-        params.append("link_id", articleId);
+        const searchParams = new URLSearchParams(searchStr);
+        searchParams.append("api_type", "json");
+        searchParams.append("children", more.data.children.join(","));
+        searchParams.append("id", more.data.name);
+        searchParams.append("link_id", articleId);
 
-        const json = await this.fetchReddit(
+        return await this.fetchReddit(
             accessToken,
             "/api/morechildren",
-            params.toString()
+            searchParams.toString()
         );
-
-        return json;
     };
 
     static fetchProfileImg = async (accessToken: string, author: string) => {

@@ -1,7 +1,7 @@
-import VoteHorizontal from "components/comments/VoteHorizontal/VoteHorizontal";
-import Author from "components/shared/Author/Author";
-import SanitizeHTML from "components/shared/SanitizeHTML/SanitizeHTML";
-import SentimentBanner from "components/shared/SentimentBanner/SentimentBanner";
+import Author from "components/Author/Author";
+import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
+import SentimentBanner from "components/SentimentBanner/SentimentBanner";
+import VoteHorizontal from "components/VoteHorizontal/VoteHorizontal";
 import { Comment } from "lib/reddit/redditData";
 import React from "react";
 

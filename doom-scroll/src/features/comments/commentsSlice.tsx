@@ -20,14 +20,14 @@ export const loadArticle = createAsyncThunk<
 >("comments/loadArticle", async (args, thunkApi) => {
     const accessToken = selectAccessToken(thunkApi.getState());
     const pathname = selectCommentsPathname(thunkApi.getState());
-    const search = selectCommentsSearch(thunkApi.getState());
+    const searchStr = selectCommentsSearchStr(thunkApi.getState());
 
     if (accessToken === null)
         return thunkApi.rejectWithValue("accessToken is null");
     if (pathname === null) return thunkApi.rejectWithValue("pathname is null");
-    if (search === null) return thunkApi.rejectWithValue("search is null");
+    if (searchStr === null) return thunkApi.rejectWithValue("search is null");
 
-    const json = await RedditApi.fetchReddit(accessToken, pathname, search);
+    const json = await RedditApi.fetchReddit(accessToken, pathname, searchStr);
     return parseArticle(json);
 });
 
@@ -38,13 +38,13 @@ export const loadMore = createAsyncThunk<
 >("comments/loadMore", async (more, thunkApi) => {
     const accessToken = selectAccessToken(thunkApi.getState());
     const pathname = selectCommentsPathname(thunkApi.getState());
-    const search = selectCommentsSearch(thunkApi.getState());
+    const searchStr = selectCommentsSearchStr(thunkApi.getState());
     const replyTree = selectCommentsReplyTree(thunkApi.getState());
 
     if (accessToken === null)
         return thunkApi.rejectWithValue("accessToken is null");
     if (pathname === null) return thunkApi.rejectWithValue("pathname is null");
-    if (search === null) return thunkApi.rejectWithValue("search is null");
+    if (searchStr === null) return thunkApi.rejectWithValue("search is null");
     if (replyTree === null)
         return thunkApi.rejectWithValue("replyTree is null");
 
@@ -61,7 +61,7 @@ export const loadMore = createAsyncThunk<
         accessToken,
         more,
         articleId,
-        search
+        searchStr
     );
 
     if (more.id === undefined)
@@ -81,13 +81,13 @@ export const analyzeComment = createAsyncThunk(
 
 const initialState: {
     pathname: string | null;
-    search: string | null;
+    searchStr: string | null;
     replyTree: ReplyTree;
     isRefreshing: boolean;
     isLoadingMore: boolean;
 } = {
     pathname: null,
-    search: null,
+    searchStr: null,
     replyTree: {
         data: {},
         currId: 0,
@@ -100,11 +100,11 @@ const commentsSlice = createSlice({
     name: "comments",
     initialState: initialState,
     reducers: {
-        setComentsPathname: (state, action: PayloadAction<string>) => {
+        setCommentsPathname: (state, action: PayloadAction<string>) => {
             state.pathname = action.payload;
         },
-        setCommentsSearch: (state, action: PayloadAction<string>) => {
-            state.search = action.payload;
+        setCommentsSearchStr: (state, action: PayloadAction<string>) => {
+            state.searchStr = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -155,7 +155,8 @@ const commentsSlice = createSlice({
 
 export const selectCommentsPathname = (state: RootState) =>
     state.comments.pathname;
-export const selectCommentsSearch = (state: RootState) => state.comments.search;
+export const selectCommentsSearchStr = (state: RootState) =>
+    state.comments.searchStr;
 export const selectCommentsReplyTree = (state: RootState) =>
     state.comments.replyTree;
 export const selectCommentsIsRefreshing = (state: RootState) =>
@@ -167,5 +168,6 @@ export const selectCommentsIsLoading = createSelector(
     selectCommentsIsLoadingMore,
     (isRefreshing, isLoadingMore) => isRefreshing || isLoadingMore
 );
-export const { setComentsPathname, setCommentsSearch } = commentsSlice.actions;
+export const { setCommentsPathname, setCommentsSearchStr } =
+    commentsSlice.actions;
 export default commentsSlice.reducer;

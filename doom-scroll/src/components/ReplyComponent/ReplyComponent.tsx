@@ -1,5 +1,5 @@
-import CommentAndReplies from "components/comments/CommentAndReplies/CommentAndReplies";
-import MoreComponent from "components/comments/MoreComponent/MoreComponent";
+import CommentAndReplies from "components/CommentAndReplies/CommentAndReplies";
+import MoreComponent from "components/MoreComponent/MoreComponent";
 import { Comment, More, Reply } from "lib/reddit/redditData";
 import React from "react";
 

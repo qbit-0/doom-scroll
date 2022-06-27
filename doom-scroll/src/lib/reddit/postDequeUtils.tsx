@@ -1,11 +1,11 @@
 import { Post, PostDeque } from "./redditData";
 
 export default class PostDequeUtils {
-    static peekBot = (postDeque: PostDeque) => {
+    static peekBot = (postDeque: PostDeque): Post | undefined => {
         return postDeque.data[postDeque.botId - 1];
     };
 
-    static peekTop = (postDeque: PostDeque) => {
+    static peekTop = (postDeque: PostDeque): Post | undefined => {
         return postDeque.data[postDeque.topId + 1];
     };
 

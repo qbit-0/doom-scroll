@@ -1,7 +1,7 @@
-import VoteVertical from "components/post/VoteVertical/VoteVertical";
-import Author from "components/shared/Author/Author";
-import SanitizeHTML from "components/shared/SanitizeHTML/SanitizeHTML";
-import SentimentBanner from "components/shared/SentimentBanner/SentimentBanner";
+import Author from "components/Author/Author";
+import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
+import SentimentBanner from "components/SentimentBanner/SentimentBanner";
+import VoteVertical from "components/VoteVertical/VoteVertical";
 import {
     selectMaxRatio,
     selectMaxSentiment,
@@ -27,7 +27,7 @@ const PostComponent: React.FC<Props> = ({ post }) => {
         post.data.ratio < minRatio ||
         post.data.ratio > maxRatio
     ) {
-        return <></>;
+        return null;
     }
 
     return (
