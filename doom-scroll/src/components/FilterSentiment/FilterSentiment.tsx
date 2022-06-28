@@ -59,15 +59,15 @@ const FilterSentiment = () => {
         setCurr(event.target.value);
     };
 
-    const handleDoom = () => {
+    const handleWorst = () => {
         setCurrMinSentiment(-5);
-        setCurrMaxSentiment(-0.1);
+        setCurrMaxSentiment(-0.01);
         setCurrMinRatio(0);
-        setCurrMaxRatio(0.95);
+        setCurrMaxRatio(0.97);
     };
 
-    const handleBloom = () => {
-        setCurrMinSentiment(0.1);
+    const handleBest = () => {
+        setCurrMinSentiment(0.05);
         setCurrMaxSentiment(5);
         setCurrMinRatio(0.95);
         setCurrMaxRatio(1);
@@ -85,24 +85,26 @@ const FilterSentiment = () => {
             <div className="block">
                 <div className="inline-block mx-1 my-2">
                     <button
-                        onClick={handleDoom}
-                        className="p-2 border-2 border-amber-100 rounded-3xl decoration-zinc-600 decoration-4 transition-all font-bold"
+                        onClick={handleBest}
+                        className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                     >
-                        Doom
+                        Best
                     </button>
                 </div>
+
                 <div className="inline-block mx-1 my-2">
                     <button
-                        onClick={handleBloom}
-                        className="p-2 border-2 border-amber-100 rounded-3xl decoration-zinc-600 decoration-4 transition-all font-bold"
+                        onClick={handleWorst}
+                        className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                     >
-                        Bloom
+                        Worst
                     </button>
                 </div>
+
                 <div className="inline-block mx-1 my-2">
                     <button
                         onClick={handleReset}
-                        className="p-2 border-2 border-amber-100 rounded-3xl decoration-zinc-600 decoration-4 transition-all font-bold"
+                        className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                     >
                         Reset
                     </button>
@@ -123,7 +125,7 @@ const FilterSentiment = () => {
                         onChange={(event) =>
                             handleChange(event, setCurrMinSentiment)
                         }
-                        className="p-2 border-2 border-amber-100 rounded-3xl bg-zinc-900 text-amber-100"
+                        className="p-2 border-2 border-amber-100 rounded-3xl bg-neutral-900 text-amber-100"
                     />
                 </div>
 
@@ -141,7 +143,7 @@ const FilterSentiment = () => {
                         onChange={(event) =>
                             handleChange(event, setCurrMaxSentiment)
                         }
-                        className="p-2 border-2 border-amber-100 rounded-3xl bg-zinc-900 text-amber-100"
+                        className="p-2 border-2 border-amber-100 rounded-3xl bg-neutral-900 text-amber-100"
                     />
                 </div>
 
@@ -159,7 +161,7 @@ const FilterSentiment = () => {
                         onChange={(event) =>
                             handleChange(event, setCurrMinRatio)
                         }
-                        className="p-2 border-2 border-amber-100 rounded-3xl bg-zinc-900 text-amber-100"
+                        className="p-2 border-2 border-amber-100 rounded-3xl bg-neutral-900 text-amber-100"
                     />
                 </div>
 
@@ -177,7 +179,7 @@ const FilterSentiment = () => {
                         onChange={(event) =>
                             handleChange(event, setCurrMaxRatio)
                         }
-                        className="p-2 border-2 border-amber-100 rounded-3xl bg-zinc-900 text-amber-100"
+                        className="p-2 border-2 border-amber-100 rounded-3xl bg-neutral-900 text-amber-100"
                     />
                 </div>
             </div>

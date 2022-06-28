@@ -53,7 +53,7 @@ const SubredditSort = () => {
                     onClick={(event) =>
                         handleSortClick(event, SubredditSortOption.HOT)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-zinc-600 decoration-4 transition-all font-bold"
+                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
                     <p className="inline font-bold">
                         {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.HOT]}
@@ -66,7 +66,7 @@ const SubredditSort = () => {
                     onClick={(event) =>
                         handleSortClick(event, SubredditSortOption.NEW)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-zinc-600 decoration-4 transition-all font-bold"
+                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
                     <p className="inline font-bold">
                         {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.NEW]}
@@ -79,7 +79,7 @@ const SubredditSort = () => {
                     onClick={(event) =>
                         handleSortClick(event, SubredditSortOption.TOP)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-zinc-600 decoration-4 transition-all font-bold"
+                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
                     <p className="inline font-bold">
                         {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.TOP]}
@@ -99,7 +99,7 @@ const SubredditSort = () => {
                             (timeOption, index) => (
                                 <option
                                     value={timeOption[0]}
-                                    className="bg-zinc-900"
+                                    className="bg-neutral-900"
                                     key={index}
                                 >
                                     {timeOption[1]}
@@ -115,7 +115,7 @@ const SubredditSort = () => {
                     onClick={(event) =>
                         handleSortClick(event, SubredditSortOption.RISING)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-zinc-600 decoration-4 transition-all font-bold"
+                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
                     <p className="inline font-bold">
                         {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.RISING]}

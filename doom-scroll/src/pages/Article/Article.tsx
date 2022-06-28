@@ -53,7 +53,7 @@ const Article: React.FC<Props> = () => {
     const post = PostDequeUtils.peekTop(postDeque);
 
     return (
-        <div className="bg-zinc-900 text-amber-100">
+        <div className="bg-neutral-900 text-amber-100">
             <div ref={refTop} />
             <div className="px-16 pt-28 pb-8 ">
                 <div>

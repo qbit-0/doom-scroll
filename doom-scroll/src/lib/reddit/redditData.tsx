@@ -27,7 +27,7 @@ export type Post = {
     };
     meta: {
         sentiment: number;
-        fullSentiment?: number;
+        commentsSentiment?: number;
     };
 };
 

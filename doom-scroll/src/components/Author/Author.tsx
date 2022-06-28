@@ -30,7 +30,7 @@ const Author = ({ author, created }: { author: string; created: number }) => {
                         className="block w-full h-full"
                     />
                 ) : (
-                    <div className="block w-full h-full bg-zinc-800 "></div>
+                    <div className={`block w-full h-full bg-neutral-800`}></div>
                 )}
             </figure>
             <div>

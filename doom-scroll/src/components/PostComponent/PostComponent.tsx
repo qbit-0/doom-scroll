@@ -1,3 +1,4 @@
+import { useAppDispatch } from "app/store";
 import Author from "components/Author/Author";
 import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
 import SentimentBanner from "components/SentimentBanner/SentimentBanner";
@@ -8,8 +9,9 @@ import {
     selectMinRatio,
     selectMinSentiment,
 } from "features/nlp/nlpSlice";
+import { analyzePostComments } from "features/posts/postsSlice";
 import { Post } from "lib/reddit/redditData";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -20,6 +22,29 @@ const PostComponent: React.FC<Props> = ({ post }) => {
     const maxScore = useSelector(selectMaxSentiment);
     const minRatio = useSelector(selectMinRatio);
     const maxRatio = useSelector(selectMaxRatio);
+    const dispatch = useAppDispatch();
+
+    const refPost = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const options = {
+            rootMargin: "1000px",
+        };
+
+        const observer = new IntersectionObserver((entities) => {
+            const entity = entities[0];
+            if (entity.isIntersecting) {
+                dispatch(analyzePostComments(post));
+            }
+        }, options);
+
+        if (refPost.current) observer.observe(refPost.current);
+
+        const refPostCopy = refPost;
+        return () => {
+            if (refPostCopy.current) observer.unobserve(refPostCopy.current);
+        };
+    }, [dispatch, post]);
 
     if (
         post.meta.sentiment < minScore ||
@@ -31,7 +56,10 @@ const PostComponent: React.FC<Props> = ({ post }) => {
     }
 
     return (
-        <article className="flex overflow-clip mx-auto border-t-2 border-l-2 border-zinc-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-zinc-800 shadow-xl">
+        <article
+            ref={refPost}
+            className="flex overflow-clip mx-auto border-t-2 border-l-2 border-neutral-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-neutral-800 shadow-xl"
+        >
             <VoteVertical score={post.data.score} />
 
             <div className="w-full px-4 py-8">
@@ -84,6 +112,7 @@ const PostComponent: React.FC<Props> = ({ post }) => {
 
             <SentimentBanner
                 sentiment={post.meta.sentiment}
+                commentSentiment={post.meta.commentsSentiment}
                 ratio={post.data.ratio}
             />
         </article>

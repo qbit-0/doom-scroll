@@ -51,7 +51,7 @@ const SearchSort = () => {
                     onClick={(event) =>
                         handleSortClick(event, SearchSortOption.RELEVANCE)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-zinc-600 decoration-4 transition-all font-bold"
+                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
                     <p className="inline font-bold">
                         {SEARCH_SORT_OPTIONS[SearchSortOption.RELEVANCE]}
@@ -64,7 +64,7 @@ const SearchSort = () => {
                     onClick={(event) =>
                         handleSortClick(event, SearchSortOption.HOT)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-zinc-600 decoration-4 transition-all font-bold"
+                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
                     <p className="inline font-bold">
                         {SEARCH_SORT_OPTIONS[SearchSortOption.HOT]}
@@ -77,7 +77,7 @@ const SearchSort = () => {
                     onClick={(event) =>
                         handleSortClick(event, SearchSortOption.TOP)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-zinc-600 decoration-4 transition-all font-bold"
+                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
                     <p className="inline font-bold">
                         {SEARCH_SORT_OPTIONS[SearchSortOption.TOP]}
@@ -90,7 +90,7 @@ const SearchSort = () => {
                     onClick={(event) =>
                         handleSortClick(event, SearchSortOption.NEW)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-zinc-600 decoration-4 transition-all font-bold"
+                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
                     <p className="inline font-bold">
                         {SEARCH_SORT_OPTIONS[SearchSortOption.NEW]}
@@ -103,7 +103,7 @@ const SearchSort = () => {
                     onClick={(event) =>
                         handleSortClick(event, SearchSortOption.COMMENTS)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-zinc-600 decoration-4 transition-all font-bold"
+                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
                     <p className="inline font-bold">
                         {SEARCH_SORT_OPTIONS[SearchSortOption.COMMENTS]}
@@ -122,7 +122,7 @@ const SearchSort = () => {
                         (timeOption, index) => (
                             <option
                                 value={timeOption[0]}
-                                className="bg-zinc-900"
+                                className="bg-neutral-900"
                                 key={index}
                             >
                                 {timeOption[1]}

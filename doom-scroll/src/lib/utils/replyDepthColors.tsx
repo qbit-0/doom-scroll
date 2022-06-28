@@ -14,7 +14,7 @@ export const borderDepthColors = [
 // export const borderDepthColors = [
 //     "border-slate-500",
 //     "border-gray-500",
-//     "border-zinc-500",
 //     "border-neutral-500",
-//     "border-stone-500",
+//     "border-neutral-500",
+//     "border-neutral-500",
 // ];

@@ -6,11 +6,11 @@ import React from "react";
 
 const PostPlaceholder = () => {
     return (
-        <article className="flex overflow-clip h-[50rem] mx-auto border-t-2 border-l-2 border-zinc-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-zinc-800 shadow-xl">
+        <article className="flex overflow-clip h-[50rem] mx-auto border-t-2 border-l-2 border-neutral-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-neutral-800 shadow-xl">
             <VoteVertical />
 
             <div className="flex-grow-0 w-full">
-                <div className="flex w-full h-full flex-col justify-center items-center text-zinc-700">
+                <div className="flex w-full h-full flex-col justify-center items-center text-neutral-700">
                     <FontAwesomeIcon icon={solid("frog")} size="10x" bounce />
                 </div>
             </div>

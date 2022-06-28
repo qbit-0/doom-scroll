@@ -10,7 +10,7 @@ const NavBar = () => {
     };
 
     return (
-        <nav className="sticky z-10 top-0 p-4 bg-zinc-900 text-amber-100 shadow-xl">
+        <nav className="sticky z-10 top-0 p-4 bg-neutral-900 text-amber-100 shadow-xl">
             <div className="w-fit mx-auto">
                 <div className="inline-block">
                     <div className="inline-block mx-1">
@@ -18,7 +18,7 @@ const NavBar = () => {
                             onClick={(e) => {
                                 handleNavClick("popular");
                             }}
-                            className="p-2 border-2 border-amber-100 rounded-3xl decoration-zinc-600 decoration-4 transition-all font-bold"
+                            className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                         >
                             <p className="inline font-bold">r/popular</p>
                         </button>
@@ -29,7 +29,7 @@ const NavBar = () => {
                             onClick={(e) => {
                                 handleNavClick("all");
                             }}
-                            className="p-2 border-2 border-amber-100 rounded-3xl decoration-zinc-600 decoration-4 transition-all font-bold"
+                            className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                         >
                             <p className="inline font-bold">r/all</p>
                         </button>

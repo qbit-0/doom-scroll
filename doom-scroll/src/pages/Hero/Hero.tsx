@@ -2,7 +2,7 @@ import React from "react";
 
 const Hero = () => {
     return (
-        <div className="h-screen bg-zinc-900">
+        <div className="h-screen bg-neutral-900">
             <header className="text-amber-100">
                 <blockquote
                     cite="www.merriam-webster.com"
@@ -23,10 +23,18 @@ const Hero = () => {
                     </p>
                 </h1>
                 <h2 className="mt-16 text-2xl font-light text-center">
-                    The Best and Worst of Reddit.
+                    The{" "}
+                    <div className="inline-block p-2 border-2 border-amber-100 rounded-3xl font-bold">
+                        Best
+                    </div>{" "}
+                    and{" "}
+                    <div className="inline-block p-2 border-2 border-amber-100 rounded-3xl font-bold">
+                        Worst
+                    </div>{" "}
+                    of Reddit.
                 </h2>
             </header>
-            <footer className="absolute bottom-0 w-full p-4 bg-zinc-800 shadow-xl text-amber-100">
+            <footer className="absolute bottom-0 w-full p-4 bg-neutral-800 shadow-xl text-amber-100">
                 <p className="relative bottom-0 text-center font-medium">
                     Designed and Built by Duy Pham
                 </p>

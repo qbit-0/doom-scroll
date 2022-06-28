@@ -18,7 +18,7 @@ const CommentComponent: React.FC<Props> = ({ comment }) => {
 
     return (
         <div
-            className={`flex overflow-clip rounded-br-3xl bg-gradient-to-r from-zinc-800 shadow-xl`}
+            className={`flex overflow-clip rounded-br-3xl bg-gradient-to-r from-neutral-800 shadow-xl`}
         >
             <div className="w-full px-8">
                 <div className="mt-4 mb-2">

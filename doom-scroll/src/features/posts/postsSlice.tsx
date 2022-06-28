@@ -13,7 +13,11 @@ import {
 } from "lib/reddit/postDequeUtils";
 import RedditApi from "lib/reddit/redditApi";
 import { Post, PostDeque } from "lib/reddit/redditData";
-import { parsePostDeque, parsePostListing } from "lib/reddit/redditParseUtils";
+import {
+    parseArticle,
+    parsePostDeque,
+    parsePostListing,
+} from "lib/reddit/redditParseUtils";
 import { NlpUtils } from "lib/utils/nlpUtils";
 
 export const loadPosts = createAsyncThunk<
@@ -32,8 +36,7 @@ export const loadPosts = createAsyncThunk<
 
     const json = await RedditApi.fetchReddit(accessToken, pathname, searchStr);
 
-    const postDeque = parsePostDeque(json);
-    return postDeque;
+    return parsePostDeque(json);
 });
 
 export const loadPostsAfter = createAsyncThunk<
@@ -60,16 +63,28 @@ export const loadPostsAfter = createAsyncThunk<
         pathname,
         searchParams.toString()
     );
-    const posts = parsePostListing(json);
-    return posts;
+    return parsePostListing(json);
 });
 
-export const analyzePost = createAsyncThunk(
-    "posts/analyzePost",
-    async (post: Post, thunkApi) => {
-        return NlpUtils.analyzePost(post);
-    }
-);
+export const analyzePostComments = createAsyncThunk<
+    number,
+    Post,
+    { state: RootState; dispatch: AppDispatch }
+>("posts/analyzePostAndReplies", async (post: Post, thunkApi) => {
+    const accessToken = selectAccessToken(thunkApi.getState());
+
+    if (accessToken === null)
+        return thunkApi.rejectWithValue("accessToken is null");
+
+    const json = await RedditApi.fetchReddit(
+        accessToken,
+        post.data.permalink,
+        ""
+    );
+    const { replyTree } = parseArticle(json);
+
+    return NlpUtils.analyzePostComments(replyTree);
+});
 
 const initialState: {
     pathname: string | null;
@@ -132,21 +147,21 @@ const postsSlice = createSlice({
                 state.isLoadingAfter = false;
             })
 
-            .addCase(analyzePost.pending, (state, action) => {
+            .addCase(analyzePostComments.pending, (state, action) => {
                 // TODO HANDLE PENDING AND ERRORS
             })
-            .addCase(analyzePost.fulfilled, (state, action) => {
+            .addCase(analyzePostComments.fulfilled, (state, action) => {
                 const id = action.meta.arg.id;
-                const sentiment = action.payload;
+                const fullSentiment = action.payload;
 
                 if (id === undefined) throw new Error("id is undefined");
 
                 const post = postDequeUtils.find(state.postDeque, id);
                 if (post === undefined) throw new Error("post is undefined");
 
-                post.meta.sentiment = sentiment;
+                post.meta.commentsSentiment = fullSentiment;
             })
-            .addCase(analyzePost.rejected, (state, action) => {})
+            .addCase(analyzePostComments.rejected, (state, action) => {})
 
             .addCase(loadArticle.pending, (state, action) => {
                 state.isRefreshing = true;

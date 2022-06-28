@@ -85,14 +85,14 @@ const Browse: React.FC<Props> = () => {
     }, [dispatch, isLoading, after]);
 
     return (
-        <div className="bg-zinc-900 text-amber-100">
+        <div className="bg-neutral-900 text-amber-100">
             <div ref={refTop} />
             <div className="px-16 pb-8 max-w-7xl mx-auto">
                 <div className="pt-28 pb-8">
                     <div>
                         {searchMatch ? <SearchSort /> : <SubredditSort />}
                     </div>
-                    <div className="border-t-2 border-zinc-700">
+                    <div className="border-t-2 border-neutral-700">
                         <FilterSentiment />
                     </div>
                 </div>
