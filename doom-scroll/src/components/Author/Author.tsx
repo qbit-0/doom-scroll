@@ -10,11 +10,15 @@ const Author = ({ author, created }: { author: string; created: number }) => {
 
     useEffect(() => {
         if (accessToken !== null && author !== "[deleted]") {
-            RedditApi.fetchProfileImg(accessToken, author).then(
-                (fetchedProfileImg) => {
-                    setProfileImg(fetchedProfileImg);
-                }
-            );
+            try {
+                RedditApi.fetchProfileImg(accessToken, author).then(
+                    (fetchedProfileImg) => {
+                        setProfileImg(fetchedProfileImg);
+                    }
+                );
+            } catch (err) {
+                console.log(err);
+            }
         }
     }, [accessToken, author]);
 

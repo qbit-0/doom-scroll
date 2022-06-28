@@ -14,7 +14,7 @@ const SentimentBanner: React.FC<Props> = ({
     if (sentiment === null || Number.isNaN(sentiment)) {
         return (
             <div
-                className={`inline-block w-28 flex-shrink-0 py-4 rounded-br-3xl bg-neutral-600 shadow-xl`}
+                className={`inline-block w-28 flex-shrink-0 py-4 rounded-br-3xl bg-neutral-600 shadow-lg`}
             ></div>
         );
     }
@@ -35,7 +35,7 @@ const SentimentBanner: React.FC<Props> = ({
 
     return (
         <div
-            className={`inline-block w-28 flex-shrink-0 py-4 ${fromColor} shadow-xl`}
+            className={`inline-block w-28 flex-shrink-0 py-4 ${fromColor} shadow-lg`}
         >
             <div className="mb-4">
                 <h4 className="text-center font-bold"> Sentiment</h4>

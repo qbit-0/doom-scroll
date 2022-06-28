@@ -40,6 +40,7 @@ const Article: React.FC<Props> = () => {
         scrollToTop();
         dispatch(setCommentsPathname(location.pathname));
         dispatch(setCommentsSearchStr(location.search));
+        dispatch(loadArticle());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, location]);
 

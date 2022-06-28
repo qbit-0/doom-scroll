@@ -1,4 +1,3 @@
-import { useAppDispatch } from "app/store";
 import Author from "components/Author/Author";
 import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
 import SentimentBanner from "components/SentimentBanner/SentimentBanner";
@@ -9,9 +8,8 @@ import {
     selectMinRatio,
     selectMinSentiment,
 } from "features/nlp/nlpSlice";
-import { analyzePostComments } from "features/posts/postsSlice";
 import { Post } from "lib/reddit/redditData";
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -22,90 +20,96 @@ const PostComponent: React.FC<Props> = ({ post }) => {
     const maxScore = useSelector(selectMaxSentiment);
     const minRatio = useSelector(selectMinRatio);
     const maxRatio = useSelector(selectMaxRatio);
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
 
-    const refPost = useRef<HTMLElement>(null);
+    // const refPost = useRef<HTMLElement>(null);
 
-    useEffect(() => {
-        const options = {
-            rootMargin: "1000px",
-        };
+    // useEffect(() => {
+    //     const options = {
+    //         rootMargin: "1000px",
+    //     };
 
-        const observer = new IntersectionObserver((entities) => {
-            const entity = entities[0];
-            if (entity.isIntersecting) {
-                dispatch(analyzePostComments(post));
-            }
-        }, options);
+    //     const observer = new IntersectionObserver((entities) => {
+    //         const entity = entities[0];
+    //         if (entity.isIntersecting) {
+    //             dispatch(analyzePostComments(post));
+    //         }
+    //     }, options);
 
-        if (refPost.current) observer.observe(refPost.current);
+    //     if (refPost.current) observer.observe(refPost.current);
 
-        const refPostCopy = refPost;
-        return () => {
-            if (refPostCopy.current) observer.unobserve(refPostCopy.current);
-        };
-    }, [dispatch, post]);
+    //     const refPostCopy = refPost;
+    //     return () => {
+    //         if (refPostCopy.current) observer.unobserve(refPostCopy.current);
+    //     };
+    // }, [dispatch, post]);
 
     if (
         post.meta.sentiment < minScore ||
         post.meta.sentiment > maxScore ||
-        post.data.ratio < minRatio ||
-        post.data.ratio > maxRatio
+        post.data["ratio"] < minRatio ||
+        post.data["ratio"] > maxRatio
     ) {
         return null;
     }
 
     return (
         <article
-            ref={refPost}
-            className="flex overflow-clip mx-auto border-t-2 border-l-2 border-neutral-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-neutral-800 shadow-xl"
+            // ref={refPost}
+            className="flex overflow-clip mx-auto border-t-2 border-l-2 border-neutral-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-neutral-800 shadow-lg"
         >
-            <VoteVertical score={post.data.score} />
+            <VoteVertical score={post.data["score"]} />
 
             <div className="w-full px-4 py-8">
                 <div className="my-2">
-                    <Link to={`/r/${post.data.subreddit}`}>
-                        <p className="underline">{`/r/${post.data.subreddit}`}</p>
+                    <Link to={`/r/${post.data["subreddit"]}`}>
+                        <p className="underline">{`/r/${post.data["subreddit"]}`}</p>
                     </Link>
                 </div>
 
                 <div className="mt-4">
                     <Author
-                        author={post.data.author}
-                        created={post.data.created}
+                        author={post.data["author"]}
+                        created={post.data["created"]}
                     />
                 </div>
 
                 <div className="mt-4">
-                    <Link to={`${post.data.permalink}`}>
-                        <h3 className="text-3xl font-bold">
-                            {post.data.title}
+                    <Link to={`${post.data["permalink"]}`}>
+                        <h3 className="text-2xl font-bold">
+                            {post.data["title"]}
                         </h3>
                     </Link>
                 </div>
 
-                {post.data.preview !== undefined && (
+                {post.data?.["preview"]?.["images"]?.[0]?.["source"]?.[
+                    "url"
+                ] !== undefined && (
                     <div className="my-4">
                         <a
                             title="post preview"
-                            href={post.data.url}
+                            href={post.data["url_overridden_by_dest"]}
                             target="_blank"
                             rel="noreferrer"
                         >
-                            <figure className="max-w-2xl max-h-96 mt-4 mx-auto rounded-3xl overflow-clip shadow-xl">
+                            <figure className="overflow-clip max-w-2xl max-h-[40rem] mt-4 mx-auto rounded-xl shadow-lg bg-neutral-800">
                                 <img
                                     alt="post preview"
-                                    src={post.data.preview}
-                                    className="block w-full h-full"
+                                    src={
+                                        post.data?.["preview"]?.[
+                                            "images"
+                                        ]?.[0]?.["source"]?.["url"]
+                                    }
+                                    className="block object-contain mx-auto"
                                 />
                             </figure>
                         </a>
                     </div>
                 )}
 
-                {post.data.selftextHTML !== undefined && (
-                    <div>
-                        <SanitizeHTML dirty={post.data.selftextHTML} />
+                {post.data["selftextHTML"] !== undefined && (
+                    <div className="overflow-y-auto max-h-[20rem] my-4">
+                        <SanitizeHTML dirty={post.data["selftextHTML"]} />
                     </div>
                 )}
             </div>
@@ -113,7 +117,7 @@ const PostComponent: React.FC<Props> = ({ post }) => {
             <SentimentBanner
                 sentiment={post.meta.sentiment}
                 commentSentiment={post.meta.commentsSentiment}
-                ratio={post.data.ratio}
+                ratio={post.data["ratio"]}
             />
         </article>
     );

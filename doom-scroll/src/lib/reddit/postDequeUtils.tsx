@@ -25,7 +25,7 @@ export default class PostDequeUtils {
             postDeque.botId++;
         }
 
-        postDeque.after = post.data.name;
+        postDeque.after = post.data["name"];
     };
 
     static pushTop = (postDeque: PostDeque, post: Post) => {
@@ -39,7 +39,7 @@ export default class PostDequeUtils {
             postDeque.topId--;
         }
 
-        postDeque.before = post.data.name;
+        postDeque.before = post.data["name"];
     };
 
     static popBot = (postDeque: PostDeque) => {

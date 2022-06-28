@@ -15,7 +15,7 @@ const CommentAndReplies: React.FC<Props> = ({ comment }) => {
     const replyTree = useSelector(selectCommentsReplyTree);
 
     const borderDepthColor =
-        borderDepthColors[comment.data.depth % borderDepthColors.length];
+        borderDepthColors[comment.data["depth"] % borderDepthColors.length];
 
     const childReplies = (
         <div className={"pl-2"}>

@@ -10,26 +10,23 @@ type Props = {
 };
 
 const CommentComponent: React.FC<Props> = ({ comment }) => {
-    const author = comment.data.author;
-    const created = comment.data.created;
-    const bodyHTML = comment.data.bodyHTML;
-    const upvotes = comment.data.score;
-    const sentiment = comment.meta.sentiment;
-
     return (
         <div
-            className={`flex overflow-clip rounded-br-3xl bg-gradient-to-r from-neutral-800 shadow-xl`}
+            className={`flex overflow-clip rounded-br-3xl bg-gradient-to-r from-neutral-800 shadow-lg`}
         >
             <div className="w-full px-8">
                 <div className="mt-4 mb-2">
-                    <Author author={author} created={created} />
-                    <SanitizeHTML dirty={bodyHTML} />
+                    <Author
+                        author={comment.data["author"]}
+                        created={comment.data["created"]}
+                    />
+                    <SanitizeHTML dirty={comment.data["body_html"]} />
                 </div>
                 <div className="my-2">
-                    <VoteHorizontal score={upvotes} />
+                    <VoteHorizontal score={comment.data["score"]} />
                 </div>
             </div>
-            <SentimentBanner sentiment={sentiment} />
+            <SentimentBanner sentiment={comment.meta.sentiment} />
         </div>
     );
 };

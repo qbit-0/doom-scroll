@@ -46,30 +46,11 @@ export const parsePostListing = (redditListing: any): Post[] => {
 
 export const parsePost = (redditPost: any): Post => {
     const post: Post = {
-        data: {
-            name: redditPost.data.name,
-            author: redditPost.data.author,
-            created: redditPost.data.created_utc,
-            subreddit: redditPost.data.subreddit,
-            title: redditPost.data.title,
-            permalink: redditPost.data.permalink,
-            url: redditPost.data.url_overridden_by_dest,
-            score: redditPost.data.ups,
-            ratio: redditPost.data.upvote_ratio,
-        },
+        data: structuredClone(redditPost.data),
         meta: {
             sentiment: 0,
         },
     };
-
-    if ("selftext" in redditPost.data)
-        post.data.selftext = redditPost.data.selftext;
-
-    if ("selftext_html" in redditPost.data)
-        post.data.selftextHTML = redditPost.data.selftext_html;
-
-    if ("preview" in redditPost.data)
-        post.data.preview = redditPost.data.preview.images[0].source.url;
 
     post.meta.sentiment = NlpUtils.analyzePost(post);
 
@@ -113,24 +94,22 @@ export const pushComment = (
     parentId: number
 ): number => {
     const commentId = replyTree.currId;
+
+    const copiedEntries = Object.entries(redditComment.data)
+        .filter((entry: [string, any]) => entry[0] !== "replies")
+        .map((entry: [string, any]) => [entry[0], structuredClone(entry[1])]);
+
     const comment: Comment = {
         id: -1,
         kind: "comment",
-        data: {
-            name: redditComment.data.name,
-            depth: redditComment.data.depth,
-            author: redditComment.data.author,
-            created: redditComment.data.created_utc,
-            body: redditComment.data.body,
-            bodyHTML: redditComment.data.body_html,
-            score: redditComment.data.score,
-        },
+        data: Object.fromEntries(copiedEntries),
         meta: {
             sentiment: 0,
         },
         parentId: parentId,
         childrenIds: [],
     };
+    delete comment.data["replies"];
 
     comment.meta.sentiment = NlpUtils.analyzeComment(comment);
 
@@ -157,12 +136,7 @@ export const pushMore = (
     const more: More = {
         id: -1,
         kind: "more",
-        data: {
-            name: redditMore.data.name,
-            depth: redditMore.data.depth,
-            count: redditMore.data.count,
-            children: redditMore.data.children,
-        },
+        data: structuredClone(redditMore.data),
         meta: {},
         parentId: parentId,
     };
@@ -180,7 +154,7 @@ export const pushMoreListing = (
     const parentIds: {
         [depth: number]: number;
     } = {
-        [more.data.depth]: more.parentId,
+        [more.data["depth"]]: more.parentId,
     };
 
     moreReplies.forEach((reply: any) => {

@@ -6,7 +6,7 @@ import React from "react";
 
 const PostPlaceholder = () => {
     return (
-        <article className="flex overflow-clip h-[50rem] mx-auto border-t-2 border-l-2 border-neutral-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-neutral-800 shadow-xl">
+        <article className="flex overflow-clip h-[50rem] mx-auto border-t-2 border-l-2 border-neutral-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-neutral-800 shadow-lg">
             <VoteVertical />
 
             <div className="flex-grow-0 w-full">

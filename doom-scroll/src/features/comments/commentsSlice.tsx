@@ -27,7 +27,12 @@ export const loadArticle = createAsyncThunk<
     if (pathname === null) return thunkApi.rejectWithValue("pathname is null");
     if (searchStr === null) return thunkApi.rejectWithValue("search is null");
 
-    const json = await RedditApi.fetchReddit(accessToken, pathname, searchStr);
+    let json;
+    try {
+        json = await RedditApi.fetchReddit(accessToken, pathname, searchStr);
+    } catch (err) {
+        return thunkApi.rejectWithValue(err);
+    }
     return parseArticle(json);
 });
 

@@ -10,7 +10,7 @@ const NavBar = () => {
     };
 
     return (
-        <nav className="sticky z-10 top-0 p-4 bg-neutral-900 text-amber-100 shadow-xl">
+        <nav className="sticky z-10 top-0 p-4 bg-neutral-900 text-amber-100 shadow-lg">
             <div className="w-fit mx-auto">
                 <div className="inline-block">
                     <div className="inline-block mx-1">

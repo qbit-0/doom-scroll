@@ -34,8 +34,12 @@ export const loadPosts = createAsyncThunk<
     if (pathname === null) return thunkApi.rejectWithValue("pathname is null");
     if (searchStr === null) return thunkApi.rejectWithValue("search is null");
 
-    const json = await RedditApi.fetchReddit(accessToken, pathname, searchStr);
-
+    let json;
+    try {
+        json = await RedditApi.fetchReddit(accessToken, pathname, searchStr);
+    } catch (err) {
+        return thunkApi.rejectWithValue(err);
+    }
     return parsePostDeque(json);
 });
 
@@ -58,11 +62,16 @@ export const loadPostsAfter = createAsyncThunk<
     const searchParams = new URLSearchParams(search);
     searchParams.append("after", after);
 
-    const json = await RedditApi.fetchReddit(
-        accessToken,
-        pathname,
-        searchParams.toString()
-    );
+    let json;
+    try {
+        json = await RedditApi.fetchReddit(
+            accessToken,
+            pathname,
+            searchParams.toString()
+        );
+    } catch (err) {
+        thunkApi.rejectWithValue(err);
+    }
     return parsePostListing(json);
 });
 
@@ -78,7 +87,7 @@ export const analyzePostComments = createAsyncThunk<
 
     const json = await RedditApi.fetchReddit(
         accessToken,
-        post.data.permalink,
+        post.data["permalink"],
         ""
     );
     const { replyTree } = parseArticle(json);

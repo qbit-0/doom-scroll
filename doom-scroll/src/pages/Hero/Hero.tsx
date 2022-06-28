@@ -15,10 +15,10 @@ const Hero = () => {
                     </p>
                 </blockquote>
                 <h1 className="mt-16 text-8xl text-center font-extrabold">
-                    <p className="inline-block text-transparent bg-clip-text bg-gradient-to-t from-rose-600 to-black drop-shadow-xl animate-shake">
+                    <p className="inline-block text-transparent bg-clip-text bg-gradient-to-t from-rose-600 to-black drop-shadow-lg animate-shake">
                         Doom
                     </p>
-                    <p className="inline-block text-transparent bg-clip-text bg-sky-600 drop-shadow-xl animate-fadeintop">
+                    <p className="inline-block text-transparent bg-clip-text bg-sky-600 drop-shadow-lg animate-fadeintop">
                         Scroll
                     </p>
                 </h1>
@@ -34,7 +34,7 @@ const Hero = () => {
                     of Reddit.
                 </h2>
             </header>
-            <footer className="absolute bottom-0 w-full p-4 bg-neutral-800 shadow-xl text-amber-100">
+            <footer className="absolute bottom-0 w-full p-4 bg-neutral-800 shadow-lg text-amber-100">
                 <p className="relative bottom-0 text-center font-medium">
                     Designed and Built by Duy Pham
                 </p>

@@ -61,8 +61,8 @@ export default class RedditApi {
     ) => {
         const searchParams = new URLSearchParams(searchStr);
         searchParams.append("api_type", "json");
-        searchParams.append("children", more.data.children.join(","));
-        searchParams.append("id", more.data.name);
+        searchParams.append("children", more.data["children"].join(","));
+        searchParams.append("id", more.data["name"]);
         searchParams.append("link_id", articleId);
 
         return await this.fetchReddit(
@@ -73,11 +73,8 @@ export default class RedditApi {
     };
 
     static fetchProfileImg = async (accessToken: string, author: string) => {
-        const json = await this.fetchReddit(
-            accessToken,
-            `/user/${author}/about`,
-            ""
-        );
+        let json;
+        json = await this.fetchReddit(accessToken, `/user/${author}/about`, "");
 
         return json.data.icon_img;
     };

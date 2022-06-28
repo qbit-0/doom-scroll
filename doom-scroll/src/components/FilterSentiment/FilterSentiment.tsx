@@ -61,9 +61,9 @@ const FilterSentiment = () => {
 
     const handleWorst = () => {
         setCurrMinSentiment(-5);
-        setCurrMaxSentiment(-0.01);
+        setCurrMaxSentiment(-0.05);
         setCurrMinRatio(0);
-        setCurrMaxRatio(0.97);
+        setCurrMaxRatio(0.95);
     };
 
     const handleBest = () => {

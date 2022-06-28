@@ -11,19 +11,7 @@ export type PostDeque = {
 export type Post = {
     id?: number;
     data: {
-        name: string;
-        author: string;
-        created: number;
-        subreddit: string;
-        title: string;
-        permalink: string;
-        url: string;
-        score: number;
-        ratio: number;
-
-        selftext?: string;
-        selftextHTML?: string;
-        preview?: string;
+        [key: string]: any;
     };
     meta: {
         sentiment: number;
@@ -40,13 +28,7 @@ export type Comment = {
     id: number;
     kind: string;
     data: {
-        name: string;
-        depth: number;
-        author: string;
-        created: number;
-        body: string;
-        bodyHTML: string;
-        score: number;
+        [key: string]: any;
     };
     meta: {
         sentiment: number;
@@ -60,10 +42,7 @@ export type More = {
     id: number;
     kind: string;
     data: {
-        name: string;
-        depth: number;
-        count: number;
-        children: string[];
+        [key: string]: any;
     };
     meta: {};
     parentId: number;

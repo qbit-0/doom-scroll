@@ -9,14 +9,14 @@ export class NlpUtils {
     };
 
     static analyzePost = (post: Post) => {
-        let text = post.data.title;
-        if (post.data.selftext !== undefined)
-            text = text.concat(post.data.selftext, ", ");
+        let text = post.data["title"];
+        if (post.data["selftext"] !== undefined)
+            text = text.concat(post.data["selftext"], ", ");
         return this.analyzeSentiment(text);
     };
 
     static analyzeComment = (comment: Comment) => {
-        return this.analyzeSentiment(comment.data.body);
+        return this.analyzeSentiment(comment.data["body"]);
     };
 
     static analyzePostComments = (replyTree: ReplyTree) => {
@@ -25,7 +25,7 @@ export class NlpUtils {
         Object.values(replyTree.data).forEach((reply: Reply) => {
             if (reply.kind === "comment") {
                 const comment = reply as Comment;
-                text = text.concat(comment.data.body, ". ");
+                text = text.concat(comment.data["body"], ". ");
             }
         });
 
