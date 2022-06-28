@@ -1,28 +1,13 @@
-import { selectAccessToken } from "features/auth/authSlice";
-import RedditApi from "lib/reddit/redditApi";
 import { getElapsedString } from "lib/utils/getElapsedString";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { FC } from "react";
 
-const Author = ({ author, created }: { author: string; created: number }) => {
-    const accessToken = useSelector(selectAccessToken);
-    const [profileImg, setProfileImg] = useState(null);
-
-    useEffect(() => {
-        if (accessToken !== null && author !== "[deleted]") {
-            try {
-                RedditApi.fetchProfileImg(accessToken, author).then(
-                    (fetchedProfileImg) => {
-                        setProfileImg(fetchedProfileImg);
-                    }
-                );
-            } catch (err) {
-                console.log(err);
-            }
-        }
-    }, [accessToken, author]);
-
-    const elapsedString = getElapsedString(created);
+type Props = {
+    username: string;
+    profileImg: string | null;
+    createdUtc: number;
+};
+const Author: FC<Props> = ({ username: author, profileImg, createdUtc }) => {
+    const elapsedString = getElapsedString(createdUtc);
 
     return (
         <div className="flex items-center">

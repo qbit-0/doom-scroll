@@ -1,60 +1,31 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import store from "app/store";
+import { composeStories } from "@storybook/react";
+import { render, screen } from "@testing-library/react";
 import Author from "components/Author/Author";
-import { updateAppToken } from "features/auth/authSlice";
-import RedditApi from "lib/reddit/redditApi";
+import { getElapsedString } from "lib/utils/getElapsedString";
 import React from "react";
-import { Provider } from "react-redux";
+import * as stories from "components/Author/Author.stories";
 
-describe("Author component", () => {
-    const author = "AuthorUsername";
-    const created = 0;
+const { Default } = composeStories(stories);
 
-    beforeAll(() => {});
+describe("Author", () => {
+    test("it should render the author's username", () => {
+        render(<Default />);
 
-    test("it renders author name", () => {
-        render(
-            <Provider store={store}>
-                <Author author={author} created={created} />
-            </Provider>
-        );
-
-        expect(screen.getByText(author)).toBeInTheDocument();
+        expect(screen.getByText(Default.args.username)).toBeInTheDocument();
     });
+    test("it should render the author's profile picture", () => {
+        render(<Default />);
 
-    test("it renders time elapsed", () => {
-        render(
-            <Provider store={store}>
-                <Author author={author} created={created} />
-            </Provider>
-        );
-
-        expect(screen.getByText(/(\d)+y/)).toBeInTheDocument();
+        expect(
+            screen.getByAltText(`${Default.args.username}'s profile`)
+        ).toBeInTheDocument();
     });
+    test("it should render the relative age of posting", () => {
+        render(<Default />);
 
-    test("it renders author profile picture", async () => {
-        const getAppTokenSpy = jest.spyOn(RedditApi, "getAppToken");
-        getAppTokenSpy.mockResolvedValue({
-            access_token: "mock_access_token",
-        });
-
-        const fetchProfileImgSpy = jest.spyOn(RedditApi, "fetchProfileImg");
-        fetchProfileImgSpy.mockResolvedValue("https://picsum.photos/200");
-
-        store.dispatch(updateAppToken());
-
-        render(
-            <Provider store={store}>
-                <Author author={author} created={created} />
-            </Provider>
-        );
-
-        await waitFor(() => expect(getAppTokenSpy).toHaveBeenCalledTimes(1));
-        await waitFor(() =>
-            expect(fetchProfileImgSpy).toHaveBeenCalledTimes(1)
-        );
-
-        const altText = `${author}'s profile picture.`;
-        expect(await screen.findByAltText(altText)).toBeInTheDocument();
+        const elapsedString = getElapsedString(Default.args.createdUtc);
+        expect(
+            screen.getByText(new RegExp(`${elapsedString}`))
+        ).toBeInTheDocument();
     });
 });

@@ -1,4 +1,4 @@
-import ReplyComponent from "components/ReplyComponent/ReplyComponent";
+import ReplyComponent from "containers/ReplyComponent/ReplyComponent";
 import { selectCommentsReplyTree } from "features/comments/commentsSlice";
 import React from "react";
 import { useSelector } from "react-redux";

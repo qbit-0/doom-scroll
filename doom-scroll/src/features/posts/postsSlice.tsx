@@ -12,7 +12,7 @@ import {
     default as postDequeUtils,
 } from "lib/reddit/postDequeUtils";
 import RedditApi from "lib/reddit/redditApi";
-import { Post, PostDeque } from "lib/reddit/redditData";
+import { PostData, PostDeque } from "lib/reddit/redditData";
 import {
     parseArticle,
     parsePostDeque,
@@ -44,7 +44,7 @@ export const loadPosts = createAsyncThunk<
 });
 
 export const loadPostsAfter = createAsyncThunk<
-    Post[],
+    PostData[],
     void,
     { state: RootState; dispatch: AppDispatch }
 >("posts/loadPostsAfter", async (args, thunkApi) => {
@@ -77,9 +77,9 @@ export const loadPostsAfter = createAsyncThunk<
 
 export const analyzePostComments = createAsyncThunk<
     number,
-    Post,
+    PostData,
     { state: RootState; dispatch: AppDispatch }
->("posts/analyzePostAndReplies", async (post: Post, thunkApi) => {
+>("posts/analyzePostAndReplies", async (post: PostData, thunkApi) => {
     const accessToken = selectAccessToken(thunkApi.getState());
 
     if (accessToken === null)
@@ -124,7 +124,7 @@ const postsSlice = createSlice({
         setPostsPathname: (state, action: PayloadAction<string>) => {
             state.pathname = action.payload;
         },
-        setPostsSearchParams: (state, action: PayloadAction<string>) => {
+        setPostsSearchStr: (state, action: PayloadAction<string>) => {
             state.searchStr = action.payload;
         },
     },
@@ -208,6 +208,5 @@ export const selectPostsIsLoading = createSelector(
         isRefreshing || isLoadingBefore || isLoadingAfter
 );
 
-export const { setPostsPathname, setPostsSearchParams: setPostsSearchStr } =
-    postsSlice.actions;
+export const { setPostsPathname, setPostsSearchStr } = postsSlice.actions;
 export default postsSlice.reducer;

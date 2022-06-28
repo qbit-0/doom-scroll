@@ -1,11 +1,11 @@
-import { Post, PostDeque } from "./redditData";
+import { PostData, PostDeque } from "./redditData";
 
 export default class PostDequeUtils {
-    static peekBot = (postDeque: PostDeque): Post | undefined => {
+    static peekBot = (postDeque: PostDeque): PostData | undefined => {
         return postDeque.data[postDeque.botId - 1];
     };
 
-    static peekTop = (postDeque: PostDeque): Post | undefined => {
+    static peekTop = (postDeque: PostDeque): PostData | undefined => {
         return postDeque.data[postDeque.topId + 1];
     };
 
@@ -14,7 +14,7 @@ export default class PostDequeUtils {
         return post;
     };
 
-    static pushBot = (postDeque: PostDeque, post: Post) => {
+    static pushBot = (postDeque: PostDeque, post: PostData) => {
         post.id = postDeque.botId;
         postDeque.data[postDeque.botId] = post;
 
@@ -28,7 +28,7 @@ export default class PostDequeUtils {
         postDeque.after = post.data["name"];
     };
 
-    static pushTop = (postDeque: PostDeque, post: Post) => {
+    static pushTop = (postDeque: PostDeque, post: PostData) => {
         post.id = postDeque.topId;
         postDeque.data[postDeque.topId] = post;
 

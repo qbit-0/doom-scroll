@@ -1,9 +1,9 @@
 import { useAppDispatch } from "app/store";
-import FilterSentiment from "components/FilterSentiment/FilterSentiment";
-import PostComponent from "components/PostComponent/PostComponent";
-import PostPlaceholder from "components/PostPlaceholder/PostPlaceholder";
-import SearchSort from "components/SearchSort/SearchSort";
-import SubredditSort from "components/SubredditSort/SubredditSort";
+import FilterSentiment from "containers/FilterSentiment/FilterSentiment";
+import PostComponent from "containers/PostComponent/PostComponent";
+import PostPlaceholder from "containers/PostPlaceholder/PostPlaceholder";
+import SearchSort from "containers/SearchSort/SearchSort";
+import SubredditSort from "containers/SubredditSort/SubredditSort";
 import { selectAccessToken } from "features/auth/authSlice";
 import {
     loadPosts,

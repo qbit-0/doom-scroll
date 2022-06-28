@@ -7,14 +7,19 @@ import {
 import { AppDispatch, RootState } from "app/store";
 import { selectAccessToken } from "features/auth/authSlice";
 import RedditApi from "lib/reddit/redditApi";
-import { Comment, More, Post, ReplyTree } from "lib/reddit/redditData";
+import {
+    CommentData,
+    MoreData,
+    PostData,
+    ReplyTree,
+} from "lib/reddit/redditData";
 import { parseArticle, pushMoreListing } from "lib/reddit/redditParseUtils";
 import ReplyTreeUtils from "lib/reddit/replyTreeUtils";
 import { NlpUtils } from "lib/utils/nlpUtils";
 import { matchPath } from "react-router-dom";
 
 export const loadArticle = createAsyncThunk<
-    { post: Post; replyTree: ReplyTree },
+    { post: PostData; replyTree: ReplyTree },
     void,
     { state: RootState; dispatch: AppDispatch }
 >("comments/loadArticle", async (args, thunkApi) => {
@@ -38,7 +43,7 @@ export const loadArticle = createAsyncThunk<
 
 export const loadMore = createAsyncThunk<
     ReplyTree,
-    More,
+    MoreData,
     { state: RootState; dispatch: AppDispatch }
 >("comments/loadMore", async (more, thunkApi) => {
     const accessToken = selectAccessToken(thunkApi.getState());
@@ -79,7 +84,7 @@ export const loadMore = createAsyncThunk<
 
 export const analyzeComment = createAsyncThunk(
     "comments/analyzeComment",
-    async (comment: Comment, thunkApi) => {
+    async (comment: CommentData, thunkApi) => {
         return NlpUtils.analyzeComment(comment);
     }
 );
@@ -148,10 +153,10 @@ const commentsSlice = createSlice({
 
                 if (id === undefined) throw new Error("id is undefined");
 
-                const comment: Comment = ReplyTreeUtils.find(
+                const comment: CommentData = ReplyTreeUtils.find(
                     state.replyTree,
                     id
-                ) as Comment;
+                ) as CommentData;
                 comment.meta.sentiment = sentiment;
             })
             .addCase(analyzeComment.rejected, (state, action) => {});

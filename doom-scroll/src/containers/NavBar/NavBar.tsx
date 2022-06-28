@@ -1,4 +1,4 @@
-import SearchBar from "components/SearchBar/SearchBar";
+import SearchBar from "containers/SearchBar/SearchBar";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 

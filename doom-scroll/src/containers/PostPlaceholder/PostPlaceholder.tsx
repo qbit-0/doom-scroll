@@ -1,7 +1,7 @@
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SentimentBanner from "components/SentimentBanner/SentimentBanner";
-import VoteVertical from "components/VoteVertical/VoteVertical";
+import SentimentBanner from "containers/SentimentBanner/SentimentBanner";
+import VoteVertical from "containers/VoteVertical/VoteVertical";
 import React from "react";
 
 const PostPlaceholder = () => {

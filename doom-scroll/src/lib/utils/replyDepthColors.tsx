@@ -1,20 +1,9 @@
 export const borderDepthColors = [
-    "border-red-900",
-    "border-amber-900",
-    "border-blue-900",
-    "border-green-900",
-    "border-orange-900",
-    "border-rose-900",
-    "border-yellow-900",
-    "border-cyan-900",
-    "border-violet-900",
-    "border-sky-900",
+    "border-red-700",
+    "border-orange-700",
+    "border-yellow-700",
+    "border-green-700",
+    "border-cyan-700",
+    "border-blue-700",
+    "border-violet-700",
 ];
-
-// export const borderDepthColors = [
-//     "border-slate-500",
-//     "border-gray-500",
-//     "border-neutral-500",
-//     "border-neutral-500",
-//     "border-neutral-500",
-// ];

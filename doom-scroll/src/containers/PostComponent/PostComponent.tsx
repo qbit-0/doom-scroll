@@ -1,48 +1,26 @@
-import Author from "components/Author/Author";
-import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
-import SentimentBanner from "components/SentimentBanner/SentimentBanner";
-import VoteVertical from "components/VoteVertical/VoteVertical";
+import AuthorComponent from "containers/AuthorContainer/AuthorContainer";
+import Preview from "containers/Preview/Preview";
+import SanitizeHTML from "containers/SanitizeHTML/SanitizeHTML";
+import SentimentBanner from "containers/SentimentBanner/SentimentBanner";
+import VoteVertical from "containers/VoteVertical/VoteVertical";
 import {
     selectMaxRatio,
     selectMaxSentiment,
     selectMinRatio,
     selectMinSentiment,
 } from "features/nlp/nlpSlice";
-import { Post } from "lib/reddit/redditData";
+import { PostData } from "lib/reddit/redditData";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-type Props = { post: Post };
+type Props = { post: PostData };
 
 const PostComponent: React.FC<Props> = ({ post }) => {
     const minScore = useSelector(selectMinSentiment);
     const maxScore = useSelector(selectMaxSentiment);
     const minRatio = useSelector(selectMinRatio);
     const maxRatio = useSelector(selectMaxRatio);
-    // const dispatch = useAppDispatch();
-
-    // const refPost = useRef<HTMLElement>(null);
-
-    // useEffect(() => {
-    //     const options = {
-    //         rootMargin: "1000px",
-    //     };
-
-    //     const observer = new IntersectionObserver((entities) => {
-    //         const entity = entities[0];
-    //         if (entity.isIntersecting) {
-    //             dispatch(analyzePostComments(post));
-    //         }
-    //     }, options);
-
-    //     if (refPost.current) observer.observe(refPost.current);
-
-    //     const refPostCopy = refPost;
-    //     return () => {
-    //         if (refPostCopy.current) observer.unobserve(refPostCopy.current);
-    //     };
-    // }, [dispatch, post]);
 
     if (
         post.meta.sentiment < minScore ||
@@ -68,9 +46,9 @@ const PostComponent: React.FC<Props> = ({ post }) => {
                 </div>
 
                 <div className="mt-4">
-                    <Author
+                    <AuthorComponent
                         author={post.data["author"]}
-                        created={post.data["created"]}
+                        createdUtc={post.data["created_utc"]}
                     />
                 </div>
 
@@ -85,26 +63,14 @@ const PostComponent: React.FC<Props> = ({ post }) => {
                 {post.data?.["preview"]?.["images"]?.[0]?.["source"]?.[
                     "url"
                 ] !== undefined && (
-                    <div className="my-4">
-                        <a
-                            title="post preview"
-                            href={post.data["url_overridden_by_dest"]}
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            <figure className="overflow-clip max-w-2xl max-h-[40rem] mt-4 mx-auto rounded-xl shadow-lg bg-neutral-800">
-                                <img
-                                    alt="post preview"
-                                    src={
-                                        post.data?.["preview"]?.[
-                                            "images"
-                                        ]?.[0]?.["source"]?.["url"]
-                                    }
-                                    className="block object-contain mx-auto"
-                                />
-                            </figure>
-                        </a>
-                    </div>
+                    <Preview
+                        imgSrc={
+                            post.data?.["preview"]?.["images"]?.[0]?.[
+                                "source"
+                            ]?.["url"]
+                        }
+                        href={post.data["url_overridden_by_dest"]}
+                    />
                 )}
 
                 {post.data["selftextHTML"] !== undefined && (
@@ -117,7 +83,7 @@ const PostComponent: React.FC<Props> = ({ post }) => {
             <SentimentBanner
                 sentiment={post.meta.sentiment}
                 commentSentiment={post.meta.commentsSentiment}
-                ratio={post.data["ratio"]}
+                ratio={post.data["upvote_ratio"]}
             />
         </article>
     );

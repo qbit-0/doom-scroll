@@ -1,6 +1,6 @@
 export type PostDeque = {
     data: {
-        [id: number]: Post;
+        [id: number]: PostData;
     };
     topId: number;
     botId: number;
@@ -8,7 +8,7 @@ export type PostDeque = {
     after: string | null;
 };
 
-export type Post = {
+export type PostData = {
     id?: number;
     data: {
         [key: string]: any;
@@ -20,11 +20,11 @@ export type Post = {
 };
 
 export type ReplyTree = {
-    data: { [id: number]: Reply };
+    data: { [id: number]: ReplyData };
     currId: number;
 };
 
-export type Comment = {
+export type CommentData = {
     id: number;
     kind: string;
     data: {
@@ -38,7 +38,7 @@ export type Comment = {
     childrenIds: number[];
 };
 
-export type More = {
+export type MoreData = {
     id: number;
     kind: string;
     data: {
@@ -48,4 +48,4 @@ export type More = {
     parentId: number;
 };
 
-export type Reply = Comment | More;
+export type ReplyData = CommentData | MoreData;

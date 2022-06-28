@@ -1,4 +1,4 @@
-import { More } from "./redditData";
+import { MoreData } from "./redditData";
 
 const REDDIT_ACCESS_TOKEN_URL = "https://www.reddit.com/api/v1/access_token";
 const CLIENT_ID = "LAo7rLD7LwxNjuyP3V5-1w";
@@ -55,7 +55,7 @@ export default class RedditApi {
 
     static fetchMoreJson = async (
         accessToken: string,
-        more: More,
+        more: MoreData,
         articleId: string,
         searchStr: string
     ) => {

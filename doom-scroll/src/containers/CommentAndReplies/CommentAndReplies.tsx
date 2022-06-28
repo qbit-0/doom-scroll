@@ -1,14 +1,14 @@
-import CommentComponent from "components/CommentComponent/CommentComponent";
-import ReplyComponent from "components/ReplyComponent/ReplyComponent";
+import CommentComponent from "containers/CommentComponent/CommentComponent";
+import ReplyComponent from "containers/ReplyComponent/ReplyComponent";
 import { selectCommentsReplyTree } from "features/comments/commentsSlice";
-import { Comment } from "lib/reddit/redditData";
+import { CommentData } from "lib/reddit/redditData";
 import ReplyTreeUtils from "lib/reddit/replyTreeUtils";
 import { borderDepthColors } from "lib/utils/replyDepthColors";
 import React from "react";
 import { useSelector } from "react-redux";
 
 type Props = {
-    comment: Comment;
+    comment: CommentData;
 };
 
 const CommentAndReplies: React.FC<Props> = ({ comment }) => {

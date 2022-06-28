@@ -1,6 +1,12 @@
 import { NlpUtils } from "../utils/nlpUtils";
 import PostDequeUtils from "./postDequeUtils";
-import { Comment, More, Post, PostDeque, ReplyTree } from "./redditData";
+import {
+    CommentData,
+    MoreData,
+    PostData,
+    PostDeque,
+    ReplyTree,
+} from "./redditData";
 import ReplyTreeUtils from "./replyTreeUtils";
 
 export const parsePostDeque = (redditListing: unknown): PostDeque => {
@@ -11,7 +17,7 @@ export const parsePostDeque = (redditListing: unknown): PostDeque => {
         before: null,
         after: null,
     };
-    parsePostListing(redditListing).forEach((post: Post) => {
+    parsePostListing(redditListing).forEach((post: PostData) => {
         PostDequeUtils.pushBot(postDeque, post);
     });
     return postDeque;
@@ -20,7 +26,7 @@ export const parsePostDeque = (redditListing: unknown): PostDeque => {
 export const parseArticle = (
     redditArticle: any
 ): {
-    post: Post;
+    post: PostData;
     replyTree: ReplyTree;
 } => {
     const post = parsePost(redditArticle[0].data.children[0]);
@@ -36,7 +42,7 @@ export const parseArticle = (
     };
 };
 
-export const parsePostListing = (redditListing: any): Post[] => {
+export const parsePostListing = (redditListing: any): PostData[] => {
     if (redditListing.kind !== "Listing")
         throw new Error("not a Reddit Listing");
 
@@ -44,8 +50,8 @@ export const parsePostListing = (redditListing: any): Post[] => {
     return children.map(parsePost);
 };
 
-export const parsePost = (redditPost: any): Post => {
-    const post: Post = {
+export const parsePost = (redditPost: any): PostData => {
+    const post: PostData = {
         data: structuredClone(redditPost.data),
         meta: {
             sentiment: 0,
@@ -99,7 +105,7 @@ export const pushComment = (
         .filter((entry: [string, any]) => entry[0] !== "replies")
         .map((entry: [string, any]) => [entry[0], structuredClone(entry[1])]);
 
-    const comment: Comment = {
+    const comment: CommentData = {
         id: -1,
         kind: "comment",
         data: Object.fromEntries(copiedEntries),
@@ -133,7 +139,7 @@ export const pushMore = (
     parentId: number
 ): number => {
     const moreId = replyTree.currId;
-    const more: More = {
+    const more: MoreData = {
         id: -1,
         kind: "more",
         data: structuredClone(redditMore.data),
@@ -147,7 +153,7 @@ export const pushMore = (
 export const pushMoreListing = (
     replyTree: ReplyTree,
     redditMoreListing: any,
-    more: More
+    more: MoreData
 ) => {
     const moreReplies = redditMoreListing.json.data.things;
 

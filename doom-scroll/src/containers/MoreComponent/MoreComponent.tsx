@@ -1,11 +1,11 @@
 import { useAppDispatch } from "app/store";
 import { loadMore } from "features/comments/commentsSlice";
-import { More } from "lib/reddit/redditData";
+import { MoreData } from "lib/reddit/redditData";
 import { borderDepthColors } from "lib/utils/replyDepthColors";
 import React, { MouseEvent, MouseEventHandler, useState } from "react";
 
 type Props = {
-    more: More;
+    more: MoreData;
 };
 
 const MoreComponent: React.FC<Props> = ({ more }) => {

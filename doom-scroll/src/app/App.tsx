@@ -12,7 +12,7 @@ import Article from "pages/Article/Article";
 import Browse from "pages/Browse/Browse";
 import Hero from "pages/Hero/Hero";
 import Login from "pages/Login/Login";
-import NavBar from "components/NavBar/NavBar";
+import NavBar from "containers/NavBar/NavBar";
 import { useSelector } from "react-redux";
 
 const App = () => {

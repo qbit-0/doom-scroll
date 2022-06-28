@@ -1,18 +1,22 @@
-import { Comment, Reply, ReplyTree } from "./redditData";
+import { CommentData, ReplyData, ReplyTree } from "./redditData";
 
 export default class ReplyTreeUtils {
-    static find = (replyTree: ReplyTree, id: number): Reply => {
+    static find = (replyTree: ReplyTree, id: number): ReplyData => {
         return replyTree.data[id];
     };
 
-    static push = (replyTree: ReplyTree, reply: Reply, parentId: number) => {
+    static push = (
+        replyTree: ReplyTree,
+        reply: ReplyData,
+        parentId: number
+    ) => {
         const id = replyTree.currId;
 
         reply.id = id;
         replyTree.data[id] = reply;
 
         if (parentId !== -1) {
-            const parentComment = this.find(replyTree, parentId) as Comment;
+            const parentComment = this.find(replyTree, parentId) as CommentData;
             parentComment.childrenIds.push(id);
         }
 
@@ -21,14 +25,13 @@ export default class ReplyTreeUtils {
 
     static remove = (replyTree: ReplyTree, id: number) => {
         const reply = this.find(replyTree, id);
-
         delete replyTree.data[id];
 
         if (reply.parentId !== -1) {
-            const parentComment: Comment = this.find(
+            const parentComment: CommentData = this.find(
                 replyTree,
                 reply.parentId
-            ) as Comment;
+            ) as CommentData;
 
             parentComment.childrenIds = parentComment.childrenIds.filter(
                 (childId) => childId !== id

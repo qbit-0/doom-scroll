@@ -1,12 +1,12 @@
-import Author from "components/Author/Author";
-import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
-import SentimentBanner from "components/SentimentBanner/SentimentBanner";
-import VoteHorizontal from "components/VoteHorizontal/VoteHorizontal";
-import { Comment } from "lib/reddit/redditData";
+import AuthorComponent from "containers/AuthorContainer/AuthorContainer";
+import SanitizeHTML from "containers/SanitizeHTML/SanitizeHTML";
+import SentimentBanner from "containers/SentimentBanner/SentimentBanner";
+import VoteHorizontal from "containers/VoteHorizontal/VoteHorizontal";
+import { CommentData } from "lib/reddit/redditData";
 import React from "react";
 
 type Props = {
-    comment: Comment;
+    comment: CommentData;
 };
 
 const CommentComponent: React.FC<Props> = ({ comment }) => {
@@ -16,9 +16,9 @@ const CommentComponent: React.FC<Props> = ({ comment }) => {
         >
             <div className="w-full px-8">
                 <div className="mt-4 mb-2">
-                    <Author
+                    <AuthorComponent
                         author={comment.data["author"]}
-                        created={comment.data["created"]}
+                        createdUtc={comment.data["created_utc"]}
                     />
                     <SanitizeHTML dirty={comment.data["body_html"]} />
                 </div>
