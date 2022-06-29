@@ -9,6 +9,14 @@ addDecorator(
     })
 );
 
+// export const decorators = [
+//     (Story) => (
+//         <Provider store={store}>
+//             <Story />
+//         </Provider>
+//     ),
+// ];
+
 export const parameters = {
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
