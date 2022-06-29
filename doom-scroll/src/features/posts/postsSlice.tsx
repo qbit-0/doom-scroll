@@ -6,11 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "App/store";
 import { selectAccessToken } from "features/auth/authSlice";
-import { loadArticle } from "features/comments/commentsSlice";
-import {
-    default as PostDequeUtils,
-    default as postDequeUtils,
-} from "lib/reddit/postDequeUtils";
+import PostDequeUtils from "lib/reddit/postDequeUtils";
 import RedditApi from "lib/reddit/redditApi";
 import { PostData, PostDequeData } from "lib/reddit/redditData";
 import {
@@ -140,50 +136,37 @@ const postsSlice = createSlice({
             })
             .addCase(loadPosts.rejected, (state, action) => {
                 state.isRefreshing = false;
-            });
+            })
 
-        // .addCase(loadPostsAfter.pending, (state, action) => {
-        //     state.isLoadingAfter = true;
-        //     // TODO HANDLE ERRORS
-        // })
-        // .addCase(loadPostsAfter.fulfilled, (state, action) => {
-        //     action.payload.forEach((post) => {
-        //         PostDequeUtils.pushBot(state.postDeque, post);
-        //     });
-        //     state.isLoadingAfter = false;
-        // })
-        // .addCase(loadPostsAfter.rejected, (state, action) => {
-        //     state.isLoadingAfter = false;
-        // })
+            .addCase(loadPostsAfter.pending, (state, action) => {
+                state.isLoadingAfter = true;
+                // TODO HANDLE ERRORS
+            })
+            .addCase(loadPostsAfter.fulfilled, (state, action) => {
+                action.payload.forEach((post) => {
+                    PostDequeUtils.pushBot(state.postDeque, post);
+                });
+                state.isLoadingAfter = false;
+            })
+            .addCase(loadPostsAfter.rejected, (state, action) => {
+                state.isLoadingAfter = false;
+            })
 
-        // .addCase(analyzePostComments.pending, (state, action) => {
-        //     // TODO HANDLE PENDING AND ERRORS
-        // })
-        // .addCase(analyzePostComments.fulfilled, (state, action) => {
-        //     const id = action.meta.arg.id;
-        //     const fullSentiment = action.payload;
+            .addCase(analyzePostComments.pending, (state, action) => {
+                // TODO HANDLE PENDING AND ERRORS
+            })
+            .addCase(analyzePostComments.fulfilled, (state, action) => {
+                const id = action.meta.arg.id;
+                const fullSentiment = action.payload;
 
-        //     if (id === undefined) throw new Error("id is undefined");
+                if (id === undefined) throw new Error("id is undefined");
 
-        //     const post = postDequeUtils.find(state.postDeque, id);
-        //     if (post === undefined) throw new Error("post is undefined");
+                const post = PostDequeUtils.find(state.postDeque, id);
+                if (post === undefined) throw new Error("post is undefined");
 
-        //     post.meta.commentsSentiment = fullSentiment;
-        // })
-        // .addCase(analyzePostComments.rejected, (state, action) => {})
-
-        // .addCase(loadArticle.pending, (state, action) => {
-        //     state.isRefreshing = true;
-        // })
-        // .addCase(loadArticle.fulfilled, (state, action) => {
-        //     const post = action.payload.post;
-        //     PostDequeUtils.clear(state.postDeque);
-        //     PostDequeUtils.pushBot(state.postDeque, post);
-        //     state.isRefreshing = false;
-        // })
-        // .addCase(loadArticle.rejected, (state, action) => {
-        //     state.isRefreshing = false;
-        // });
+                post.meta.commentsSentiment = fullSentiment;
+            })
+            .addCase(analyzePostComments.rejected, (state, action) => {});
     },
 });
 

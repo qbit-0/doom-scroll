@@ -1,4 +1,6 @@
-import Button, { ButtonStyle } from "components/Button/Button";
+import Button from "components/Button";
+import { ButtonStyle } from "components/Button/Button";
+
 import {
     selectMaxRatio,
     selectMaxSentiment,
@@ -80,7 +82,7 @@ const FilterSentimentContainer = () => {
     };
 
     return (
-        <div>
+        <>
             <div className="block">
                 <div className="inline-block mx-1 my-2">
                     <Button
@@ -182,7 +184,7 @@ const FilterSentimentContainer = () => {
                     />
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

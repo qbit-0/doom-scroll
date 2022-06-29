@@ -1,12 +1,11 @@
-import CommentContainer from "containers/CommentContainer/CommentContainer";
-import Reply from "components/Reply/Reply";
+import Comment from "components/Comment";
+import Reply from "components/Reply";
 import { selectCommentsReplyTree } from "features/comments/commentsSlice";
 import { CommentData } from "lib/reddit/redditData";
 import ReplyTreeUtils from "lib/reddit/replyTreeUtils";
 import { borderDepthColors } from "lib/utils/replyDepthColors";
 import React from "react";
 import { useSelector } from "react-redux";
-import Comment from "components/Comment/Comment";
 
 type Props = {
     comment: CommentData;

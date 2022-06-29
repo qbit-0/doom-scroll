@@ -1,6 +1,6 @@
-import Button from "components/Button/Button";
-import Option from "components/Option/Option";
-import Select from "components/Select/Select";
+import Button from "components/Button";
+import Option from "components/Option";
+import Select from "components/Select";
 import {
     SubredditSortOption,
     SubredditTimeOption,
@@ -36,13 +36,14 @@ const SubredditSort = () => {
         navigate(url);
     }, [navigate, subreddit, sort, time]);
 
-    const handleSortClick = (
-        event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
-        value: SubredditSortOption
-    ) => {
-        event.preventDefault();
-        setSort(value);
-        setTime(SubredditTimeOption.DAY);
+    const handleSortClick = (value: SubredditSortOption) => {
+        return (
+            event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+        ) => {
+            event.preventDefault();
+            setSort(value);
+            setTime(SubredditTimeOption.DAY);
+        };
     };
 
     const handleTimeChange: ChangeEventHandler<HTMLSelectElement> = (event) => {
@@ -52,31 +53,19 @@ const SubredditSort = () => {
     return (
         <div className="py-2">
             <div className="inline-block mx-1">
-                <Button
-                    onClick={(event) =>
-                        handleSortClick(event, SubredditSortOption.HOT)
-                    }
-                >
+                <Button onClick={handleSortClick(SubredditSortOption.HOT)}>
                     {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.HOT]}
                 </Button>
             </div>
 
             <div className="inline-block mx-1">
-                <Button
-                    onClick={(event) =>
-                        handleSortClick(event, SubredditSortOption.NEW)
-                    }
-                >
+                <Button onClick={handleSortClick(SubredditSortOption.NEW)}>
                     {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.NEW]}
                 </Button>
             </div>
 
             <div className="inline-block mx-1">
-                <Button
-                    onClick={(event) =>
-                        handleSortClick(event, SubredditSortOption.TOP)
-                    }
-                >
+                <Button onClick={handleSortClick(SubredditSortOption.TOP)}>
                     {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.TOP]}
                 </Button>
             </div>
@@ -100,11 +89,7 @@ const SubredditSort = () => {
             )}
 
             <div className="inline-block mx-1">
-                <Button
-                    onClick={(event) =>
-                        handleSortClick(event, SubredditSortOption.RISING)
-                    }
-                >
+                <Button onClick={handleSortClick(SubredditSortOption.RISING)}>
                     {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.RISING]}
                 </Button>
             </div>

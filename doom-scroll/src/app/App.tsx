@@ -6,11 +6,11 @@ import {
     Routes,
 } from "react-router-dom";
 
-import NavBar from "components/NavBar/NavBar";
-import Article from "pages/Article/Article";
-import Browse from "pages/Browse/Browse";
-import Hero from "pages/Hero/Hero";
-import Login from "pages/Login/Login";
+import NavBar from "components/NavBar";
+import Article from "pages/Article";
+import Browse from "pages/Browse";
+import Hero from "pages/Hero";
+import Login from "pages/Login";
 
 const App = () => {
     return (

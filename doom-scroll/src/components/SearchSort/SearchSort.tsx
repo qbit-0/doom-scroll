@@ -1,6 +1,6 @@
-import Button from "components/Button/Button";
-import Option from "components/Option/Option";
-import Select from "components/Select/Select";
+import Button from "components/Button";
+import Option from "components/Option";
+import Select from "components/Select";
 import {
     SearchSortOption,
     SearchTimeOption,
@@ -34,13 +34,14 @@ const SearchSort = () => {
         navigate(url);
     }, [navigate, searchParams, sort, time]);
 
-    const handleSortClick = (
-        event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
-        sortOption: SearchSortOption
-    ) => {
-        event.preventDefault();
-        setSort(sortOption);
-        setTime(SearchTimeOption.ALL);
+    const handleSortClick = (sortOption: SearchSortOption) => {
+        return (
+            event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+        ) => {
+            event.preventDefault();
+            setSort(sortOption);
+            setTime(SearchTimeOption.ALL);
+        };
     };
 
     const handleTimeChange: ChangeEventHandler<HTMLSelectElement> = (event) => {
@@ -50,21 +51,13 @@ const SearchSort = () => {
     return (
         <div className="py-2">
             <div className="inline-block mx-1">
-                <Button
-                    onClick={(event) =>
-                        handleSortClick(event, SearchSortOption.RELEVANCE)
-                    }
-                >
+                <Button onClick={handleSortClick(SearchSortOption.RELEVANCE)}>
                     {SEARCH_SORT_OPTIONS[SearchSortOption.RELEVANCE]}
                 </Button>
             </div>
 
             <div className="inline-block mx-1">
-                <Button
-                    onClick={(event) =>
-                        handleSortClick(event, SearchSortOption.HOT)
-                    }
-                >
+                <Button onClick={handleSortClick(SearchSortOption.HOT)}>
                     <p className="inline font-bold">
                         {SEARCH_SORT_OPTIONS[SearchSortOption.HOT]}
                     </p>
@@ -72,31 +65,19 @@ const SearchSort = () => {
             </div>
 
             <div className="inline-block mx-1">
-                <Button
-                    onClick={(event) =>
-                        handleSortClick(event, SearchSortOption.TOP)
-                    }
-                >
+                <Button onClick={handleSortClick(SearchSortOption.TOP)}>
                     {SEARCH_SORT_OPTIONS[SearchSortOption.TOP]}
                 </Button>
             </div>
 
             <div className="inline-block mx-1">
-                <Button
-                    onClick={(event) =>
-                        handleSortClick(event, SearchSortOption.NEW)
-                    }
-                >
+                <Button onClick={handleSortClick(SearchSortOption.NEW)}>
                     {SEARCH_SORT_OPTIONS[SearchSortOption.NEW]}
                 </Button>
             </div>
 
             <div className="inline-block mx-1">
-                <Button
-                    onClick={(event) =>
-                        handleSortClick(event, SearchSortOption.COMMENTS)
-                    }
-                >
+                <Button onClick={handleSortClick(SearchSortOption.COMMENTS)}>
                     {SEARCH_SORT_OPTIONS[SearchSortOption.COMMENTS]}
                 </Button>
             </div>

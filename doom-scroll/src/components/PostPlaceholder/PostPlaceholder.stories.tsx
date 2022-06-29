@@ -1,5 +1,5 @@
 import { Meta, Story } from "@storybook/react";
-import PostPlaceholder from "components/PostPlaceholder/PostPlaceholder";
+import PostPlaceholder from "components/PostPlaceholder";
 import React, { ComponentProps } from "react";
 
 export default {

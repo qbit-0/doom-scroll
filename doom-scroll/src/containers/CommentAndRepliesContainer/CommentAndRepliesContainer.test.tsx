@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import CommentAndRepliesContainer from "containers/CommentAndRepliesContainer/CommentAndRepliesContainer";
+import CommentAndRepliesContainer from "containers/CommentAndRepliesContainer";
 import { CommentData, MoreData } from "lib/reddit/redditData";
 import { render } from "lib/utils/testUtils";
 import React from "react";

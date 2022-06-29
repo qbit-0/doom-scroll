@@ -1,9 +1,9 @@
 import { useAppDispatch } from "App/store";
-import FilterSentiment from "components/FilterSentiment/FilterSentiment";
-import Post from "components/Post/Post";
-import PostPlaceholder from "components/PostPlaceholder/PostPlaceholder";
-import SearchSort from "components/SearchSort/SearchSort";
-import SubredditSort from "components/SubredditSort/SubredditSort";
+import FilterSentiment from "components/FilterSentiment";
+import Post from "components/Post";
+import PostPlaceholder from "components/PostPlaceholder";
+import SearchSort from "components/SearchSort";
+import SubredditSort from "components/SubredditSort";
 import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import {
     loadPosts,
@@ -13,7 +13,7 @@ import {
     selectPostsIsLoading,
     selectPostsIsRefreshing,
     setPostsPathname,
-    setPostsSearchStr
+    setPostsSearchStr,
 } from "features/posts/postsSlice";
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
@@ -103,19 +103,17 @@ const Browse: React.FC<Props> = () => {
                     </div>
                 </div>
 
-                <div>
-                    {!isRefreshing &&
-                        Object.values(postDeque.data).map((post, index) => (
-                            <div className="my-8" key={index}>
-                                <Post post={post} />
-                            </div>
-                        ))}
-                    {(isLoading || after) && (
-                        <div className="my-8">
-                            <PostPlaceholder />
+                {!isRefreshing &&
+                    Object.values(postDeque.data).map((post, index) => (
+                        <div className="my-8" key={index}>
+                            <Post post={post} />
                         </div>
-                    )}
-                </div>
+                    ))}
+                {(isLoading || after) && (
+                    <div className="my-8">
+                        <PostPlaceholder />
+                    </div>
+                )}
             </div>
             <div ref={refBot} />
         </div>

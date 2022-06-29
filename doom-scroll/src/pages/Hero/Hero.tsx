@@ -1,4 +1,5 @@
-import Button, { ButtonStyle } from "components/Button/Button";
+import Button from "components/Button";
+import { ButtonStyle } from "components/Button/Button";
 import React from "react";
 
 const Hero = () => {

@@ -1,5 +1,5 @@
 import { Meta, Story } from "@storybook/react";
-import VoteVertical from "components/VoteVertical/VoteVertical";
+import VoteVertical from "components/VoteVertical";
 import React from "react";
 import { ComponentProps } from "react";
 

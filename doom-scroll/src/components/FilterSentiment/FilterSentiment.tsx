@@ -1,4 +1,6 @@
-import Button, { ButtonStyle as ButtonStyle } from "components/Button/Button";
+import Button from "components/Button";
+import { ButtonStyle } from "components/Button/Button";
+import InputNumber from "components/InputNumber";
 import {
     selectMaxRatio,
     selectMaxSentiment,
@@ -51,11 +53,12 @@ const FilterSentiment = () => {
         dispatch(setMaxRatio(num));
     }, [dispatch, currMaxRatio]);
 
-    const handleChange = (
-        event: ChangeEvent<HTMLInputElement>,
+    const handleFilterChange = (
         setCurr: Dispatch<SetStateAction<string | number>>
     ) => {
-        setCurr(event.target.value);
+        return (event: ChangeEvent<HTMLInputElement>) => {
+            setCurr(event.target.value);
+        };
     };
 
     const handleWorst = () => {
@@ -80,7 +83,7 @@ const FilterSentiment = () => {
     };
 
     return (
-        <div>
+        <>
             <div className="block">
                 <div className="inline-block mx-1 my-2">
                     <Button
@@ -114,17 +117,14 @@ const FilterSentiment = () => {
                     <label htmlFor="minSentiment" className="font-bold mr-2">
                         Sentiment Min:
                     </label>
-                    <input
-                        type="number"
+                    <InputNumber
                         id="minSentiment"
+                        title="Min Sentiment"
                         min={-5}
                         max={5}
                         step={0.01}
                         value={currMinSentiment}
-                        onChange={(event) =>
-                            handleChange(event, setCurrMinSentiment)
-                        }
-                        className="p-2 border-2 border-amber-100 rounded-3xl bg-neutral-900 text-amber-100"
+                        onChange={handleFilterChange(setCurrMinSentiment)}
                     />
                 </div>
 
@@ -132,17 +132,14 @@ const FilterSentiment = () => {
                     <label htmlFor="maxSentiment" className="font-bold mr-2">
                         Sentiment Max:
                     </label>
-                    <input
-                        type="number"
+                    <InputNumber
                         id="maxSentiment"
+                        title="Max Sentiment"
                         min={-5}
                         max={5}
                         step={0.01}
                         value={currMaxSentiment}
-                        onChange={(event) =>
-                            handleChange(event, setCurrMaxSentiment)
-                        }
-                        className="p-2 border-2 border-amber-100 rounded-3xl bg-neutral-900 text-amber-100"
+                        onChange={handleFilterChange(setCurrMaxSentiment)}
                     />
                 </div>
 
@@ -150,17 +147,14 @@ const FilterSentiment = () => {
                     <label htmlFor="minRatio" className="font-bold mr-2">
                         Ratio Min:
                     </label>
-                    <input
-                        type="number"
+                    <InputNumber
                         id="minRatio"
+                        title="Min Upvote Ratio"
                         min={0}
                         max={1}
                         step={0.01}
                         value={currMinRatio}
-                        onChange={(event) =>
-                            handleChange(event, setCurrMinRatio)
-                        }
-                        className="p-2 border-2 border-amber-100 rounded-3xl bg-neutral-900 text-amber-100"
+                        onChange={handleFilterChange(setCurrMinRatio)}
                     />
                 </div>
 
@@ -168,21 +162,18 @@ const FilterSentiment = () => {
                     <label htmlFor="maxRatio" className="font-bold mr-2">
                         Ratio Max:
                     </label>
-                    <input
-                        type="number"
+                    <InputNumber
                         id="maxRatio"
+                        title="Max Upvote Ratio"
                         min={0}
                         max={1}
                         step={0.01}
                         value={currMaxRatio}
-                        onChange={(event) =>
-                            handleChange(event, setCurrMaxRatio)
-                        }
-                        className="p-2 border-2 border-amber-100 rounded-3xl bg-neutral-900 text-amber-100"
+                        onChange={handleFilterChange(setCurrMaxRatio)}
                     />
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

@@ -1,5 +1,5 @@
 import { Meta, Story } from "@storybook/react";
-import Author from "components/Author/Author";
+import Author from "components/Author";
 import React, { ComponentProps } from "react";
 
 export default {

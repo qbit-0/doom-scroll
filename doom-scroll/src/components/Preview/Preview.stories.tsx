@@ -1,5 +1,5 @@
 import { Meta, Story } from "@storybook/react";
-import Preview from "components/Preview/Preview";
+import Preview from "components/Preview";
 import React, { ComponentProps } from "react";
 
 export default {

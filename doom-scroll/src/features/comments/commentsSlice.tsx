@@ -92,12 +92,14 @@ export const analyzeComment = createAsyncThunk(
 const initialState: {
     pathname: string | null;
     searchStr: string | null;
+    post: PostData | null;
     replyTree: ReplyTreeData;
     isRefreshing: boolean;
     isLoadingMore: boolean;
 } = {
     pathname: null,
     searchStr: null,
+    post: null,
     replyTree: {
         data: {},
         currId: 0,
@@ -124,8 +126,9 @@ const commentsSlice = createSlice({
                 // TODO HANDLE ERRORS
             })
             .addCase(loadArticle.fulfilled, (state, action) => {
-                state.isRefreshing = false;
+                state.post = action.payload.post;
                 state.replyTree = action.payload.replyTree;
+                state.isRefreshing = false;
             })
             .addCase(loadArticle.rejected, (state, action) => {
                 state.isRefreshing = false;
@@ -167,6 +170,7 @@ export const selectCommentsPathname = (state: RootState) =>
     state.comments.pathname;
 export const selectCommentsSearchStr = (state: RootState) =>
     state.comments.searchStr;
+export const selectCommentsPost = (state: RootState) => state.comments.post;
 export const selectCommentsReplyTree = (state: RootState) =>
     state.comments.replyTree;
 export const selectCommentsIsRefreshing = (state: RootState) =>

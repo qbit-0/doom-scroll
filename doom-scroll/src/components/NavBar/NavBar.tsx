@@ -1,6 +1,7 @@
-import Button, { ButtonStyle } from "components/Button/Button";
-import SearchBarContainer from "containers/SearchBarContainer/SearchBarContainer";
-import React, { FC } from "react";
+import Button from "components/Button";
+import { ButtonStyle } from "components/Button/Button";
+import SearchBarContainer from "containers/SearchBarContainer";
+import React, { FC, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
 type Props = {};
@@ -9,7 +10,9 @@ const NavBar: FC<Props> = (props) => {
     const navigate = useNavigate();
 
     const handleNavClick = (subreddit: string) => {
-        navigate(`/r/${subreddit}`);
+        return (event: MouseEvent<HTMLButtonElement>) => {
+            navigate(`/r/${subreddit}`);
+        };
     };
 
     return (
@@ -19,9 +22,7 @@ const NavBar: FC<Props> = (props) => {
                     <div className="inline-block mx-1">
                         <Button
                             buttonStyle={ButtonStyle.PRIMARY}
-                            onClick={(e) => {
-                                handleNavClick("popular");
-                            }}
+                            onClick={handleNavClick("popular")}
                         >
                             <p className="inline font-bold">r/popular</p>
                         </Button>
@@ -30,9 +31,7 @@ const NavBar: FC<Props> = (props) => {
                     <div className="inline-block mx-1">
                         <Button
                             buttonStyle={ButtonStyle.PRIMARY}
-                            onClick={(e) => {
-                                handleNavClick("all");
-                            }}
+                            onClick={handleNavClick("all")}
                         >
                             <p className="inline font-bold">r/all</p>
                         </Button>

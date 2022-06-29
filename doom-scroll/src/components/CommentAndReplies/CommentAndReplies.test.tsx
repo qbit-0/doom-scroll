@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import CommentAndReplies from "components/CommentAndReplies/CommentAndReplies";
+import CommentAndReplies from "components/CommentAndReplies";
 import { CommentData, MoreData } from "lib/reddit/redditData";
 import { render } from "lib/utils/testUtils";
 import React from "react";
@@ -50,6 +50,7 @@ describe("CommentAndReplies component", () => {
             comments: {
                 pathname: null,
                 searchStr: null,
+                post: null,
                 replyTree: {
                     data: {
                         0: parentComment,

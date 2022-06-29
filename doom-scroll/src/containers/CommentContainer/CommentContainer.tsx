@@ -1,7 +1,7 @@
-import AuthorComponent from "containers/AuthorContainer/AuthorContainer";
-import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
-import SentimentBanner from "components/SentimentBanner/SentimentBanner";
-import VoteHorizontal from "components/VoteHorizontal/VoteHorizontal";
+import AuthorComponent from "containers/AuthorContainer";
+import SanitizeHTML from "components/SanitizeHTML";
+import SentimentBanner from "components/SentimentBanner";
+import VoteHorizontal from "components/VoteHorizontal";
 import { CommentData } from "lib/reddit/redditData";
 import React from "react";
 

@@ -1,5 +1,6 @@
 import { Meta, Story } from "@storybook/react";
-import Button, { ButtonStyle } from "components/Button/Button";
+import Button from "components/Button";
+import { ButtonStyle } from "components/Button/Button";
 import React from "react";
 import { ComponentProps } from "react";
 
