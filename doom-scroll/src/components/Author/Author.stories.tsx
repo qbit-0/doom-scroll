@@ -6,6 +6,7 @@ export default {
     title: "Author",
     component: Author,
     parameters: {
+        layout: "centered",
         jest: ["Author.test.tsx"],
     },
 } as Meta;

@@ -6,6 +6,7 @@ export default {
     title: "Comment",
     component: Comment,
     parameters: {
+        layout: "centered",
         jest: ["Comment.test.tsx"],
     },
 } as Meta;

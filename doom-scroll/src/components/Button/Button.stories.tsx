@@ -7,6 +7,7 @@ export default {
     title: "Button",
     component: Button,
     parameters: {
+        layout: "centered",
         jest: ["Button.test.tsx"],
     },
 } as Meta;
