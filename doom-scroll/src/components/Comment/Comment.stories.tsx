@@ -15,10 +15,4 @@ const Template: Story<ComponentProps<typeof Comment>> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {
-    author: "",
-    createdUtc: 0,
-    bodyHtml: "Body Text",
-    score: 100,
-    sentiment: 1.5,
-};
+Default.args = {};
