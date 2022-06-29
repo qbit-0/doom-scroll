@@ -1,6 +1,5 @@
 import { CommentData, ReplyData, ReplyTree } from "./redditData";
-
-export default class ReplyTreeUtils {
+class ReplyTreeUtils {
     static find = (replyTree: ReplyTree, id: number): ReplyData => {
         return replyTree.data[id];
     };
@@ -39,3 +38,5 @@ export default class ReplyTreeUtils {
         }
     };
 }
+
+export default ReplyTreeUtils;

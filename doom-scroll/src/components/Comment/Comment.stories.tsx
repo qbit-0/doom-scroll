@@ -1,16 +1,6 @@
-import {
-    combineReducers,
-    configureStore,
-    PreloadedState,
-} from "@reduxjs/toolkit";
 import { Meta, Story } from "@storybook/react";
 import Comment from "components/Comment/Comment";
-import authReducer from "features/auth/authSlice";
-import commentsReducer from "features/comments/commentsSlice";
-import nlpReducer from "features/nlp/nlpSlice";
-import postsReducer from "features/posts/postsSlice";
 import React, { ComponentProps } from "react";
-import { BrowserRouter } from "react-router-dom";
 export default {
     title: "Comment",
     component: Comment,
@@ -30,7 +20,7 @@ Default.args = {
         id: 0,
         kind: "comment",
         data: {
-            author: "Author",
+            author: "Reddit",
             created_utc: 0,
             body_html: "<p>This is a comment.</p>",
             score: 100,
@@ -43,30 +33,21 @@ Default.args = {
     },
 };
 
-const rootReducer = combineReducers({
-    auth: authReducer,
-    // posts: postsReducer,
-    // comments: commentsReducer,
-    nlp: nlpReducer,
-});
-
-// type RootState = ReturnType<typeof rootReducer>;
-
-// const setupStore = (preloadedState?: PreloadedState<RootState>) => {
-//     const store = configureStore({
-//         reducer: rootReducer,
-//         preloadedState: preloadedState,
-//     });
-//     return store;
-// };
-
-Default.decorators = [
-    (Story) => {
-        // const newStore = setupStore();
-        return (
-            <BrowserRouter>
-                <Story />
-            </BrowserRouter>
-        );
+export const Deleted = Template.bind({});
+Deleted.args = {
+    comment: {
+        id: 0,
+        kind: "comment",
+        data: {
+            author: "[deleted]",
+            created_utc: 0,
+            body_html: "[deleted] by user",
+            score: 100,
+        },
+        meta: {
+            sentiment: 1.5,
+        },
+        parentId: -1,
+        childrenIds: [],
     },
-];
+};

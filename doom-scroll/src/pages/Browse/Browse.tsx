@@ -4,7 +4,7 @@ import PostComponent from "containers/PostComponent/PostComponent";
 import PostPlaceholder from "containers/PostPlaceholder/PostPlaceholder";
 import SearchSort from "containers/SearchSort/SearchSort";
 import SubredditSort from "containers/SubredditSort/SubredditSort";
-import { selectAccessToken } from "features/auth/authSlice";
+import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import {
     loadPosts,
     loadPostsAfter,
@@ -30,6 +30,12 @@ const Browse: React.FC<Props> = () => {
     const isLoading = useSelector(selectPostsIsLoading);
     const after = useSelector(selectPostsAfter);
     const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        if (accessToken === null) {
+            dispatch(updateAppToken());
+        }
+    }, [dispatch, accessToken]);
 
     const refTop = useRef<HTMLDivElement>(null);
 

@@ -20,3 +20,10 @@ Default.args = {
     profileImg: "https://picsum.photos/200",
     createdUtc: 0,
 };
+
+export const Deleted = Template.bind({});
+Deleted.args = {
+    username: "[deleted]",
+    profileImg: null,
+    createdUtc: 0,
+};

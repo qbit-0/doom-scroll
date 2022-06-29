@@ -2,7 +2,7 @@ import { useAppDispatch } from "App/store";
 import PostComponent from "containers/PostComponent/PostComponent";
 import PostPlaceholder from "containers/PostPlaceholder/PostPlaceholder";
 import ReplyTreeComponent from "containers/ReplyTreeComponent/ReplyTreeComponent";
-import { selectAccessToken } from "features/auth/authSlice";
+import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import {
     loadArticle,
     selectCommentsIsRefreshing,
@@ -23,6 +23,11 @@ const Article: React.FC<Props> = () => {
     const postDeque = useSelector(selectPostDeque);
     const isRefreshing = useSelector(selectCommentsIsRefreshing);
     const dispatch = useAppDispatch();
+    useEffect(() => {
+        if (accessToken === null) {
+            dispatch(updateAppToken());
+        }
+    }, [dispatch, accessToken]);
 
     const refTop = useRef<HTMLDivElement>(null);
 

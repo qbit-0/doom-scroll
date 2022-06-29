@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
     BrowserRouter as Router,
     Navigate,
@@ -6,25 +6,13 @@ import {
     Routes,
 } from "react-router-dom";
 
-import { useAppDispatch } from "App/store";
-import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
+import NavBar from "containers/NavBar/NavBar";
 import Article from "pages/Article/Article";
 import Browse from "pages/Browse/Browse";
 import Hero from "pages/Hero/Hero";
 import Login from "pages/Login/Login";
-import NavBar from "containers/NavBar/NavBar";
-import { useSelector } from "react-redux";
 
 const App = () => {
-    const dispatch = useAppDispatch();
-    const accessToken = useSelector(selectAccessToken);
-
-    useEffect(() => {
-        if (accessToken === null) {
-            dispatch(updateAppToken());
-        }
-    }, [dispatch, accessToken]);
-
     return (
         <Router>
             <Hero />

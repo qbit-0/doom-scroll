@@ -7,7 +7,7 @@ const DO_NOT_TRACK_THIS_DEVICE = "DO_NOT_TRACK_THIS_DEVICE";
 
 const REDDIT_FETCH_HOSTNAME = "https://oauth.reddit.com";
 
-export default class RedditApi {
+class RedditApi {
     static getAppToken = async () => {
         const url = new URL(REDDIT_ACCESS_TOKEN_URL);
 
@@ -79,3 +79,5 @@ export default class RedditApi {
         return json.data.icon_img;
     };
 }
+
+export default RedditApi;

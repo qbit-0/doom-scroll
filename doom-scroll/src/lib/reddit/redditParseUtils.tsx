@@ -9,7 +9,7 @@ import {
 } from "./redditData";
 import ReplyTreeUtils from "./replyTreeUtils";
 
-export const parsePostDeque = (redditListing: unknown): PostDeque => {
+export const parsePostDeque = (redditListing: any): PostDeque => {
     const postDeque: PostDeque = {
         data: {},
         topId: 0,

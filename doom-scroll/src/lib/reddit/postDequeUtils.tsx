@@ -1,6 +1,6 @@
 import { PostData, PostDeque } from "./redditData";
 
-export default class PostDequeUtils {
+class PostDequeUtils {
     static peekBot = (postDeque: PostDeque): PostData | undefined => {
         return postDeque.data[postDeque.botId - 1];
     };
@@ -17,14 +17,12 @@ export default class PostDequeUtils {
     static pushBot = (postDeque: PostDeque, post: PostData) => {
         post.id = postDeque.botId;
         postDeque.data[postDeque.botId] = post;
-
         if (postDeque.botId === postDeque.topId) {
             postDeque.botId++;
             postDeque.topId--;
         } else {
             postDeque.botId++;
         }
-
         postDeque.after = post.data["name"];
     };
 
@@ -58,3 +56,5 @@ export default class PostDequeUtils {
         postDeque.after = null;
     };
 }
+
+export default PostDequeUtils;

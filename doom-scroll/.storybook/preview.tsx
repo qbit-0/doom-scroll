@@ -11,6 +11,17 @@ addDecorator(
     })
 );
 
+export const decorators = [
+    (Story) => {
+        const newStore = setupStore();
+        return (
+            <Provider store={newStore}>
+                <Story />
+            </Provider>
+        );
+    },
+];
+
 export const parameters = {
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
