@@ -1,7 +1,7 @@
 import { useAppDispatch } from "App/store";
 import Post from "components/Post/Post";
 import PostPlaceholder from "components/PostPlaceholder/PostPlaceholder";
-import ReplyTreeComponent from "components/ReplyTreeComponent/ReplyTreeComponent";
+import ReplyTree from "containers/ReplyTree/ReplyTree";
 import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import {
     loadArticle,
@@ -75,7 +75,7 @@ const Article: React.FC<Props> = () => {
                 </div>
                 {!isRefreshing && (
                     <div className="pt-16">
-                        <ReplyTreeComponent />
+                        <ReplyTree />
                     </div>
                 )}
             </div>

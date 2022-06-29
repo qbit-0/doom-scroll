@@ -1,4 +1,4 @@
-export type PostDeque = {
+export type PostDequeData = {
     data: {
         [id: number]: PostData;
     };
@@ -19,7 +19,7 @@ export type PostData = {
     };
 };
 
-export type ReplyTree = {
+export type ReplyTreeData = {
     data: { [id: number]: ReplyData };
     currId: number;
 };

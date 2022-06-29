@@ -12,7 +12,7 @@ import {
     default as postDequeUtils,
 } from "lib/reddit/postDequeUtils";
 import RedditApi from "lib/reddit/redditApi";
-import { PostData, PostDeque } from "lib/reddit/redditData";
+import { PostData, PostDequeData } from "lib/reddit/redditData";
 import {
     parseArticle,
     parsePostDeque,
@@ -21,7 +21,7 @@ import {
 import { NlpUtils } from "lib/utils/nlpUtils";
 
 export const loadPosts = createAsyncThunk<
-    PostDeque,
+    PostDequeData,
     void,
     { state: RootState; dispatch: AppDispatch }
 >("posts/loadPosts", async (args, thunkApi) => {
@@ -98,7 +98,7 @@ export const analyzePostComments = createAsyncThunk<
 const initialState: {
     pathname: string | null;
     searchStr: string | null;
-    postDeque: PostDeque;
+    postDeque: PostDequeData;
     isRefreshing: boolean;
     isLoadingBefore: boolean;
     isLoadingAfter: boolean;

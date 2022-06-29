@@ -4,13 +4,13 @@ import {
     CommentData,
     MoreData,
     PostData,
-    PostDeque,
-    ReplyTree,
+    PostDequeData,
+    ReplyTreeData,
 } from "./redditData";
 import ReplyTreeUtils from "./replyTreeUtils";
 
-export const parsePostDeque = (redditListing: any): PostDeque => {
-    const postDeque: PostDeque = {
+export const parsePostDeque = (redditListing: any): PostDequeData => {
+    const postDeque: PostDequeData = {
         data: {},
         topId: 0,
         botId: 0,
@@ -27,10 +27,10 @@ export const parseArticle = (
     redditArticle: any
 ): {
     post: PostData;
-    replyTree: ReplyTree;
+    replyTree: ReplyTreeData;
 } => {
     const post = parsePost(redditArticle[0].data.children[0]);
-    const replyTree: ReplyTree = {
+    const replyTree: ReplyTreeData = {
         data: {},
         currId: 0,
     };
@@ -64,7 +64,7 @@ export const parsePost = (redditPost: any): PostData => {
 };
 
 export const pushRepliesListing = (
-    replyTree: ReplyTree,
+    replyTree: ReplyTreeData,
     redditRepliesListing: any,
     parentId: number
 ): number[] => {
@@ -77,7 +77,7 @@ export const pushRepliesListing = (
 };
 
 export const pushReply = (
-    replyTree: ReplyTree,
+    replyTree: ReplyTreeData,
     redditReply: any,
     parentId: number
 ): number => {
@@ -95,7 +95,7 @@ export const pushReply = (
 };
 
 export const pushComment = (
-    replyTree: ReplyTree,
+    replyTree: ReplyTreeData,
     redditComment: any,
     parentId: number
 ): number => {
@@ -134,7 +134,7 @@ export const pushComment = (
 };
 
 export const pushMore = (
-    replyTree: ReplyTree,
+    replyTree: ReplyTreeData,
     redditMore: any,
     parentId: number
 ): number => {
@@ -151,7 +151,7 @@ export const pushMore = (
 };
 
 export const pushMoreListing = (
-    replyTree: ReplyTree,
+    replyTree: ReplyTreeData,
     redditMoreListing: any,
     more: MoreData
 ) => {

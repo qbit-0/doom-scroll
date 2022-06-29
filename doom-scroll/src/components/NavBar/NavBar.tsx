@@ -1,8 +1,11 @@
+import Button, { ButtonStyle } from "components/Button/Button";
 import SearchBar from "components/SearchBar/SearchBar";
-import React from "react";
+import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
-const NavBar = () => {
+type Props = {};
+
+const NavBar: FC<Props> = (props) => {
     const navigate = useNavigate();
 
     const handleNavClick = (subreddit: string) => {
@@ -14,25 +17,25 @@ const NavBar = () => {
             <div className="w-fit mx-auto">
                 <div className="inline-block">
                     <div className="inline-block mx-1">
-                        <button
+                        <Button
+                            buttonStyle={ButtonStyle.PRIMARY}
                             onClick={(e) => {
                                 handleNavClick("popular");
                             }}
-                            className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                         >
                             <p className="inline font-bold">r/popular</p>
-                        </button>
+                        </Button>
                     </div>
 
                     <div className="inline-block mx-1">
-                        <button
+                        <Button
+                            buttonStyle={ButtonStyle.PRIMARY}
                             onClick={(e) => {
                                 handleNavClick("all");
                             }}
-                            className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                         >
                             <p className="inline font-bold">r/all</p>
-                        </button>
+                        </Button>
                     </div>
                 </div>
 

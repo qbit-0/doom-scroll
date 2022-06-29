@@ -1,20 +1,20 @@
-import { PostData, PostDeque } from "./redditData";
+import { PostData, PostDequeData } from "./redditData";
 
 class PostDequeUtils {
-    static peekBot = (postDeque: PostDeque): PostData | undefined => {
+    static peekBot = (postDeque: PostDequeData): PostData | undefined => {
         return postDeque.data[postDeque.botId - 1];
     };
 
-    static peekTop = (postDeque: PostDeque): PostData | undefined => {
+    static peekTop = (postDeque: PostDequeData): PostData | undefined => {
         return postDeque.data[postDeque.topId + 1];
     };
 
-    static find = (postDeque: PostDeque, id: number) => {
+    static find = (postDeque: PostDequeData, id: number) => {
         const post = postDeque.data[id];
         return post;
     };
 
-    static pushBot = (postDeque: PostDeque, post: PostData) => {
+    static pushBot = (postDeque: PostDequeData, post: PostData) => {
         post.id = postDeque.botId;
         postDeque.data[postDeque.botId] = post;
         if (postDeque.botId === postDeque.topId) {
@@ -26,7 +26,7 @@ class PostDequeUtils {
         postDeque.after = post.data["name"];
     };
 
-    static pushTop = (postDeque: PostDeque, post: PostData) => {
+    static pushTop = (postDeque: PostDequeData, post: PostData) => {
         post.id = postDeque.topId;
         postDeque.data[postDeque.topId] = post;
 
@@ -40,15 +40,15 @@ class PostDequeUtils {
         postDeque.before = post.data["name"];
     };
 
-    static popBot = (postDeque: PostDeque) => {
+    static popBot = (postDeque: PostDequeData) => {
         delete postDeque.data[postDeque.botId - 1];
     };
 
-    static popTop = (postDeque: PostDeque) => {
+    static popTop = (postDeque: PostDequeData) => {
         delete postDeque.data[postDeque.topId + 1];
     };
 
-    static clear = (postDeque: PostDeque) => {
+    static clear = (postDeque: PostDequeData) => {
         postDeque.data = {};
         postDeque.topId = 0;
         postDeque.botId = 0;

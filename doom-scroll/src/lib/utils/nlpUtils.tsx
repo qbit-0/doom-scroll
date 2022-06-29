@@ -4,7 +4,7 @@ import {
     CommentData,
     PostData,
     ReplyData,
-    ReplyTree,
+    ReplyTreeData,
 } from "../reddit/redditData";
 
 const nlp = winkNLP(model, ["sbd", "negation", "sentiment"]);
@@ -24,7 +24,7 @@ export class NlpUtils {
         return this.analyzeSentiment(comment.data["body"]);
     };
 
-    static analyzePostComments = (replyTree: ReplyTree) => {
+    static analyzePostComments = (replyTree: ReplyTreeData) => {
         let text = "";
 
         Object.values(replyTree.data).forEach((reply: ReplyData) => {

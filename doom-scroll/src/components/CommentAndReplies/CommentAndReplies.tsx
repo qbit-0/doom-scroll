@@ -6,6 +6,7 @@ import ReplyTreeUtils from "lib/reddit/replyTreeUtils";
 import { borderDepthColors } from "lib/utils/replyDepthColors";
 import React from "react";
 import { useSelector } from "react-redux";
+import Comment from "components/Comment/Comment";
 
 type Props = {
     comment: CommentData;
@@ -35,7 +36,7 @@ const CommentAndReplies: React.FC<Props> = ({ comment }) => {
         <div
             className={`overflow-clip border-t-2 border-l-2 ${borderDepthColor} rounded-tl-3xl`}
         >
-            <CommentContainer comment={comment} />
+            <Comment comment={comment} />
             {comment.childrenIds.length > 0 && childReplies}
         </div>
     );

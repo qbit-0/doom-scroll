@@ -1,3 +1,4 @@
+import Button from "components/Button/Button";
 import {
     SubredditSortOption,
     SubredditTimeOption,
@@ -49,42 +50,39 @@ const SubredditSort = () => {
     return (
         <div className="py-2">
             <div className="inline-block mx-1">
-                <button
+                <Button
                     onClick={(event) =>
                         handleSortClick(event, SubredditSortOption.HOT)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
                     <p className="inline font-bold">
                         {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.HOT]}
                     </p>
-                </button>
+                </Button>
             </div>
 
             <div className="inline-block mx-1">
-                <button
+                <Button
                     onClick={(event) =>
                         handleSortClick(event, SubredditSortOption.NEW)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
                     <p className="inline font-bold">
                         {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.NEW]}
                     </p>
-                </button>
+                </Button>
             </div>
 
             <div className="inline-block mx-1">
-                <button
+                <Button
                     onClick={(event) =>
                         handleSortClick(event, SubredditSortOption.TOP)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
                     <p className="inline font-bold">
                         {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.TOP]}
                     </p>
-                </button>
+                </Button>
             </div>
 
             {sort === "top" && (
@@ -111,16 +109,15 @@ const SubredditSort = () => {
             )}
 
             <div className="inline-block mx-1">
-                <button
+                <Button
                     onClick={(event) =>
                         handleSortClick(event, SubredditSortOption.RISING)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
                     <p className="inline font-bold">
                         {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.RISING]}
                     </p>
-                </button>
+                </Button>
             </div>
         </div>
     );

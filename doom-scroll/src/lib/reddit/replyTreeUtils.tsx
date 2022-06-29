@@ -1,11 +1,11 @@
-import { CommentData, ReplyData, ReplyTree } from "./redditData";
+import { CommentData, ReplyData, ReplyTreeData } from "./redditData";
 class ReplyTreeUtils {
-    static find = (replyTree: ReplyTree, id: number): ReplyData => {
+    static find = (replyTree: ReplyTreeData, id: number): ReplyData => {
         return replyTree.data[id];
     };
 
     static push = (
-        replyTree: ReplyTree,
+        replyTree: ReplyTreeData,
         reply: ReplyData,
         parentId: number
     ) => {
@@ -22,7 +22,7 @@ class ReplyTreeUtils {
         replyTree.currId++;
     };
 
-    static remove = (replyTree: ReplyTree, id: number) => {
+    static remove = (replyTree: ReplyTreeData, id: number) => {
         const reply = this.find(replyTree, id);
         delete replyTree.data[id];
 

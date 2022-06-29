@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 type Props = {};
 
-const ReplyTreeComponent: React.FC<Props> = () => {
+const ReplyTree: React.FC<Props> = () => {
     const replyTree = useSelector(selectCommentsReplyTree);
 
     return (
@@ -25,4 +25,4 @@ const ReplyTreeComponent: React.FC<Props> = () => {
     );
 };
 
-export default ReplyTreeComponent;
+export default ReplyTree;

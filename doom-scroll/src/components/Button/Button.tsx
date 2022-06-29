@@ -10,7 +10,7 @@ type Props = {
     buttonStyle?: ButtonStyle;
     borderColor?: string;
     bgColor?: string;
-    onClick?: MouseEventHandler;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
     children?: React.ReactNode;
 };
 

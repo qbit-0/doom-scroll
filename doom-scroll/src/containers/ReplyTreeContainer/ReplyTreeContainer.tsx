@@ -1,4 +1,5 @@
-import ReplyContainer from "containers/ReplyContainer/ReplyContainer";
+
+import Reply from "components/Reply/Reply";
 import { selectCommentsReplyTree } from "features/comments/commentsSlice";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -17,7 +18,7 @@ const ReplyTreeContainer: React.FC<Props> = () => {
                 .map((reply, index) => {
                     return (
                         <div className="my-2" key={index}>
-                            <ReplyContainer reply={reply} />
+                            <Reply reply={reply} />
                         </div>
                     );
                 })}

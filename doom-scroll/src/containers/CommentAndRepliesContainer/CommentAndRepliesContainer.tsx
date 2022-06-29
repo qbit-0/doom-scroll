@@ -1,11 +1,12 @@
 import Comment from "components/Comment/Comment";
-import ReplyContainer from "containers/ReplyContainer/ReplyContainer";
+import Reply from "components/Reply/Reply";
 import { selectCommentsReplyTree } from "features/comments/commentsSlice";
 import { CommentData } from "lib/reddit/redditData";
 import ReplyTreeUtils from "lib/reddit/replyTreeUtils";
 import { borderDepthColors } from "lib/utils/replyDepthColors";
 import React from "react";
 import { useSelector } from "react-redux";
+;
 
 type Props = {
     comment: CommentData;
@@ -24,7 +25,7 @@ const CommentAndRepliesContainer: React.FC<Props> = ({ comment }) => {
 
                 return (
                     <div className="my-2" key={index}>
-                        <ReplyContainer reply={reply} />
+                        <Reply reply={reply} />
                     </div>
                 );
             })}

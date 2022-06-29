@@ -1,4 +1,4 @@
-import CommentAndReplies from "containers/CommentAndReplies/CommentAndReplies";
+import CommentAndReplies from "components/CommentAndReplies/CommentAndReplies";
 import More from "components/More/More";
 import { CommentData, MoreData, ReplyData } from "lib/reddit/redditData";
 import React from "react";

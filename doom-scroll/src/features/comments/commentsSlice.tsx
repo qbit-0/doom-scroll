@@ -11,7 +11,7 @@ import {
     CommentData,
     MoreData,
     PostData,
-    ReplyTree,
+    ReplyTreeData,
 } from "lib/reddit/redditData";
 import { parseArticle, pushMoreListing } from "lib/reddit/redditParseUtils";
 import ReplyTreeUtils from "lib/reddit/replyTreeUtils";
@@ -19,7 +19,7 @@ import { NlpUtils } from "lib/utils/nlpUtils";
 import { matchPath } from "react-router-dom";
 
 export const loadArticle = createAsyncThunk<
-    { post: PostData; replyTree: ReplyTree },
+    { post: PostData; replyTree: ReplyTreeData },
     void,
     { state: RootState; dispatch: AppDispatch }
 >("comments/loadArticle", async (args, thunkApi) => {
@@ -42,7 +42,7 @@ export const loadArticle = createAsyncThunk<
 });
 
 export const loadMore = createAsyncThunk<
-    ReplyTree,
+    ReplyTreeData,
     MoreData,
     { state: RootState; dispatch: AppDispatch }
 >("comments/loadMore", async (more, thunkApi) => {
@@ -92,7 +92,7 @@ export const analyzeComment = createAsyncThunk(
 const initialState: {
     pathname: string | null;
     searchStr: string | null;
-    replyTree: ReplyTree;
+    replyTree: ReplyTreeData;
     isRefreshing: boolean;
     isLoadingMore: boolean;
 } = {

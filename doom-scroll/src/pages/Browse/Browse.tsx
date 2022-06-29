@@ -13,7 +13,7 @@ import {
     selectPostsIsLoading,
     selectPostsIsRefreshing,
     setPostsPathname,
-    setPostsSearchStr,
+    setPostsSearchStr
 } from "features/posts/postsSlice";
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
