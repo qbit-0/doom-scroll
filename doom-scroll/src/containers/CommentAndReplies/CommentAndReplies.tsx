@@ -1,5 +1,5 @@
 import CommentContainer from "containers/CommentContainer/CommentContainer";
-import ReplyComponent from "containers/ReplyComponent/ReplyComponent";
+import Reply from "components/Reply/Reply";
 import { selectCommentsReplyTree } from "features/comments/commentsSlice";
 import { CommentData } from "lib/reddit/redditData";
 import ReplyTreeUtils from "lib/reddit/replyTreeUtils";
@@ -24,7 +24,7 @@ const CommentAndReplies: React.FC<Props> = ({ comment }) => {
 
                 return (
                     <div className="my-2" key={index}>
-                        <ReplyComponent reply={reply} />
+                        <Reply reply={reply} />
                     </div>
                 );
             })}

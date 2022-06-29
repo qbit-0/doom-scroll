@@ -9,7 +9,7 @@ type Props = {
     more: MoreData;
 };
 
-const MoreComponent: React.FC<Props> = ({ more }) => {
+const More: React.FC<Props> = ({ more }) => {
     const [isClicked, setIsClicked] = useState(false);
     const dispatch = useAppDispatch();
 
@@ -45,4 +45,4 @@ const MoreComponent: React.FC<Props> = ({ more }) => {
     );
 };
 
-export default MoreComponent;
+export default More;

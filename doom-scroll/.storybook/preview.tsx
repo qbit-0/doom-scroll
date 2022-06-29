@@ -4,6 +4,7 @@ import "index.css";
 import results from "../.jest-test-results.json";
 import { setupStore } from "../src/App/store";
 import { Provider } from "react-redux";
+import { BrowserRouter as Router } from "react-router-dom";
 
 addDecorator(
     withTests({
@@ -16,7 +17,9 @@ export const decorators = [
         const newStore = setupStore();
         return (
             <Provider store={newStore}>
-                <Story />
+                <Router>
+                    <Story />
+                </Router>
             </Provider>
         );
     },

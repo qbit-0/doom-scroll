@@ -1,9 +1,9 @@
 import { useAppDispatch } from "App/store";
-import FilterSentiment from "containers/FilterSentiment/FilterSentiment";
-import PostComponent from "containers/PostComponent/PostComponent";
-import PostPlaceholder from "containers/PostPlaceholder/PostPlaceholder";
-import SearchSort from "containers/SearchSort/SearchSort";
-import SubredditSort from "containers/SubredditSort/SubredditSort";
+import FilterSentiment from "components/FilterSentiment/FilterSentiment";
+import Post from "components/Post/Post";
+import PostPlaceholder from "components/PostPlaceholder/PostPlaceholder";
+import SearchSort from "components/SearchSort/SearchSort";
+import SubredditSort from "components/SubredditSort/SubredditSort";
 import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import {
     loadPosts,
@@ -107,7 +107,7 @@ const Browse: React.FC<Props> = () => {
                     {!isRefreshing &&
                         Object.values(postDeque.data).map((post, index) => (
                             <div className="my-8" key={index}>
-                                <PostComponent post={post} />
+                                <Post post={post} />
                             </div>
                         ))}
                     {(isLoading || after) && (

@@ -24,6 +24,7 @@ Default.args = {
             created_utc: 0,
             body_html: "<p>This is a comment.</p>",
             score: 100,
+            depth: 0,
         },
         meta: {
             sentiment: 1.5,

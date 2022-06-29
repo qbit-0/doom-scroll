@@ -1,7 +1,7 @@
 import { useAppDispatch } from "App/store";
-import PostComponent from "containers/PostComponent/PostComponent";
-import PostPlaceholder from "containers/PostPlaceholder/PostPlaceholder";
-import ReplyTreeComponent from "containers/ReplyTreeComponent/ReplyTreeComponent";
+import Post from "components/Post/Post";
+import PostPlaceholder from "components/PostPlaceholder/PostPlaceholder";
+import ReplyTreeComponent from "components/ReplyTreeComponent/ReplyTreeComponent";
 import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import {
     loadArticle,
@@ -65,7 +65,7 @@ const Article: React.FC<Props> = () => {
                 <div>
                     {!isRefreshing && post !== undefined ? (
                         <div className="my-4">
-                            <PostComponent post={post} />
+                            <Post post={post} />
                         </div>
                     ) : (
                         <div className="my-4">

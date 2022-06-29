@@ -6,7 +6,7 @@ import {
     Routes,
 } from "react-router-dom";
 
-import NavBar from "containers/NavBar/NavBar";
+import NavBar from "components/NavBar/NavBar";
 import Article from "pages/Article/Article";
 import Browse from "pages/Browse/Browse";
 import Hero from "pages/Hero/Hero";
