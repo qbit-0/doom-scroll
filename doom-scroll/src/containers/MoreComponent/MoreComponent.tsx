@@ -1,4 +1,4 @@
-import { useAppDispatch } from "app/store";
+import { useAppDispatch } from "App/store";
 import Button, { ButtonStyle } from "components/Button/Button";
 import { loadMore } from "features/comments/commentsSlice";
 import { MoreData } from "lib/reddit/redditData";

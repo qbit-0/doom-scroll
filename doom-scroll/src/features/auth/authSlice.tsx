@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "app/store";
+import { RootState } from "App/store";
 import RedditApi from "lib/reddit/redditApi";
 
 export const updateAppToken = createAsyncThunk(

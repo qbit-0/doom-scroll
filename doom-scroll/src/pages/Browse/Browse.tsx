@@ -1,4 +1,4 @@
-import { useAppDispatch } from "app/store";
+import { useAppDispatch } from "App/store";
 import FilterSentiment from "containers/FilterSentiment/FilterSentiment";
 import PostComponent from "containers/PostComponent/PostComponent";
 import PostPlaceholder from "containers/PostPlaceholder/PostPlaceholder";

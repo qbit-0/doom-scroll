@@ -4,7 +4,7 @@ import {
     createSlice,
     PayloadAction,
 } from "@reduxjs/toolkit";
-import { AppDispatch, RootState } from "app/store";
+import { AppDispatch, RootState } from "App/store";
 import { selectAccessToken } from "features/auth/authSlice";
 import RedditApi from "lib/reddit/redditApi";
 import {
