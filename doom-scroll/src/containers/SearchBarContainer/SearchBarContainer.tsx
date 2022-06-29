@@ -1,5 +1,4 @@
-import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SearchBar from "components/SearchBar/SearchBar";
 import React, { ChangeEventHandler, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -27,23 +26,12 @@ const SearchBarContainer: React.FC<Props> = () => {
     };
 
     return (
-        <div className="inline-block border-2 border-amber-100 rounded-3xl">
-            <input
-                type="text"
-                placeholder="Search Term"
-                value={query}
-                onChange={handleQueryChange}
-                onKeyDown={handleKeyDown}
-                className="text-amber-100 p-2 rounded-l-3xl bg-neutral-900 font-bold placeholder:font-thin"
-            />
-            <button
-                title="submit search term"
-                onClick={handleSearchSubmit}
-                className="p-2 rounded-r-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
-            >
-                <FontAwesomeIcon icon={solid("magnifying-glass")} />
-            </button>
-        </div>
+        <SearchBar
+            value={query}
+            onChange={handleQueryChange}
+            onKeyDown={handleKeyDown}
+            onSubmit={handleSearchSubmit}
+        />
     );
 };
 

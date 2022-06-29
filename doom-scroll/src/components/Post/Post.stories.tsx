@@ -9,13 +9,6 @@ export default {
         layout: "centered",
         jest: ["Post.test.tsx"],
     },
-    decorators: [
-        (Story) => (
-            <div className="w-7xl">
-                <Story />
-            </div>
-        ),
-    ],
 } as Meta;
 
 const Template: Story<ComponentProps<typeof Post>> = (args) => (

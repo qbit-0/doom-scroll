@@ -14,7 +14,7 @@ const Preview: React.FC<Props> = ({ src, href }) => {
                 target="_blank"
                 rel="noreferrer"
             >
-                <figure className="overflow-clip max-w-2xl max-h-[40rem] mt-4 mx-auto rounded-xl shadow-lg bg-neutral-800">
+                <figure className="overflow-clip max-w-2xl max-h-[40rem] mt-4 mx-auto rounded-xl shadow-lg bg-neutral-700">
                     <img
                         alt="post preview"
                         src={src}

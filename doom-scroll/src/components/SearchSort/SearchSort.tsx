@@ -1,3 +1,6 @@
+import Button from "components/Button/Button";
+import Option from "components/Option/Option";
+import Select from "components/Select/Select";
 import {
     SearchSortOption,
     SearchTimeOption,
@@ -47,89 +50,67 @@ const SearchSort = () => {
     return (
         <div className="py-2">
             <div className="inline-block mx-1">
-                <button
+                <Button
                     onClick={(event) =>
                         handleSortClick(event, SearchSortOption.RELEVANCE)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
-                    <p className="inline font-bold">
-                        {SEARCH_SORT_OPTIONS[SearchSortOption.RELEVANCE]}
-                    </p>
-                </button>
+                    {SEARCH_SORT_OPTIONS[SearchSortOption.RELEVANCE]}
+                </Button>
             </div>
 
             <div className="inline-block mx-1">
-                <button
+                <Button
                     onClick={(event) =>
                         handleSortClick(event, SearchSortOption.HOT)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
                     <p className="inline font-bold">
                         {SEARCH_SORT_OPTIONS[SearchSortOption.HOT]}
                     </p>
-                </button>
+                </Button>
             </div>
 
             <div className="inline-block mx-1">
-                <button
+                <Button
                     onClick={(event) =>
                         handleSortClick(event, SearchSortOption.TOP)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
-                    <p className="inline font-bold">
-                        {SEARCH_SORT_OPTIONS[SearchSortOption.TOP]}
-                    </p>
-                </button>
+                    {SEARCH_SORT_OPTIONS[SearchSortOption.TOP]}
+                </Button>
             </div>
 
             <div className="inline-block mx-1">
-                <button
+                <Button
                     onClick={(event) =>
                         handleSortClick(event, SearchSortOption.NEW)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
-                    <p className="inline font-bold">
-                        {SEARCH_SORT_OPTIONS[SearchSortOption.NEW]}
-                    </p>
-                </button>
+                    {SEARCH_SORT_OPTIONS[SearchSortOption.NEW]}
+                </Button>
             </div>
 
             <div className="inline-block mx-1">
-                <button
+                <Button
                     onClick={(event) =>
                         handleSortClick(event, SearchSortOption.COMMENTS)
                     }
-                    className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                 >
-                    <p className="inline font-bold">
-                        {SEARCH_SORT_OPTIONS[SearchSortOption.COMMENTS]}
-                    </p>
-                </button>
+                    {SEARCH_SORT_OPTIONS[SearchSortOption.COMMENTS]}
+                </Button>
             </div>
 
             <div className="float-right">
-                <select
-                    className="p-2 border-2 border-amber-100 rounded-3xl bg-transparent text-amber-100 font-bold"
-                    title="time"
-                    value={time}
-                    onChange={handleTimeChange}
-                >
+                <Select title="time" value={time} onChange={handleTimeChange}>
                     {Object.entries(SEARCH_TIME_OPTIONS).map(
                         (timeOption, index) => (
-                            <option
-                                value={timeOption[0]}
-                                className="bg-neutral-900"
-                                key={index}
-                            >
+                            <Option value={timeOption[0]} key={index}>
                                 {timeOption[1]}
-                            </option>
+                            </Option>
                         )
                     )}
-                </select>
+                </Select>
             </div>
         </div>
     );

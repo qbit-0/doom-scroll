@@ -1,4 +1,6 @@
 import Button from "components/Button/Button";
+import Option from "components/Option/Option";
+import Select from "components/Select/Select";
 import {
     SubredditSortOption,
     SubredditTimeOption,
@@ -55,9 +57,7 @@ const SubredditSort = () => {
                         handleSortClick(event, SubredditSortOption.HOT)
                     }
                 >
-                    <p className="inline font-bold">
-                        {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.HOT]}
-                    </p>
+                    {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.HOT]}
                 </Button>
             </div>
 
@@ -67,9 +67,7 @@ const SubredditSort = () => {
                         handleSortClick(event, SubredditSortOption.NEW)
                     }
                 >
-                    <p className="inline font-bold">
-                        {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.NEW]}
-                    </p>
+                    {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.NEW]}
                 </Button>
             </div>
 
@@ -79,32 +77,25 @@ const SubredditSort = () => {
                         handleSortClick(event, SubredditSortOption.TOP)
                     }
                 >
-                    <p className="inline font-bold">
-                        {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.TOP]}
-                    </p>
+                    {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.TOP]}
                 </Button>
             </div>
 
             {sort === "top" && (
                 <div className="inline-block mx-1">
-                    <select
+                    <Select
                         title="time"
                         value={time}
                         onChange={handleTimeChange}
-                        className="p-2 border-2 border-amber-100 rounded-3xl bg-transparent text-amber-100 font-bold"
                     >
                         {Object.entries(SUBREDDIT_TIME_OPTIONS).map(
                             (timeOption, index) => (
-                                <option
-                                    value={timeOption[0]}
-                                    className="bg-neutral-900"
-                                    key={index}
-                                >
+                                <Option value={timeOption[0]} key={index}>
                                     {timeOption[1]}
-                                </option>
+                                </Option>
                             )
                         )}
-                    </select>
+                    </Select>
                 </div>
             )}
 
@@ -114,9 +105,7 @@ const SubredditSort = () => {
                         handleSortClick(event, SubredditSortOption.RISING)
                     }
                 >
-                    <p className="inline font-bold">
-                        {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.RISING]}
-                    </p>
+                    {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.RISING]}
                 </Button>
             </div>
         </div>

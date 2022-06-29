@@ -1,5 +1,5 @@
 import Button, { ButtonStyle } from "components/Button/Button";
-import SearchBar from "components/SearchBar/SearchBar";
+import SearchBarContainer from "containers/SearchBarContainer/SearchBarContainer";
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -40,7 +40,7 @@ const NavBar: FC<Props> = (props) => {
                 </div>
 
                 <div className="inline-block mx-1">
-                    <SearchBar />
+                    <SearchBarContainer />
                 </div>
             </div>
         </nav>
