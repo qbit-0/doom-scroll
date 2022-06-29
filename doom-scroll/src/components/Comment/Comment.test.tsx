@@ -10,7 +10,7 @@ describe("Comment", () => {
         render(<Default {...Default.args} />);
 
         expect(
-            screen.getByText(Default.args?.author as string)
+            screen.getByText(Default.args?.comment?.data["author"] as string)
         ).toBeInTheDocument();
     });
 
@@ -18,7 +18,7 @@ describe("Comment", () => {
         render(<Default {...Default.args} />);
 
         expect(
-            screen.getByText(Default.args?.bodyHtml as string)
+            screen.getByText(Default.args?.comment?.data["body_html"] as string)
         ).toBeInTheDocument();
     });
 });

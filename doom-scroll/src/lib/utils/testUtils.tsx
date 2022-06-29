@@ -4,8 +4,8 @@ import { render as rtlRender } from "@testing-library/react";
 import React, { PropsWithChildren } from "react";
 import { Provider } from "react-redux";
 
-import { setupStore } from "app/store";
-import type { AppStore, RootState } from "app/store";
+import { setupStore } from "App/store";
+import type { AppStore, RootState } from "App/store";
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, "queries"> {
     preloadedState?: PreloadedState<RootState>;
