@@ -18,7 +18,7 @@ const Comment: FC<Props> = ({ comment }) => {
                 <div className="mt-4 mb-2">
                     <AuthorComponent
                         author={comment.data["author"]}
-                        createdUtc={comment.data["createdUtc"]}
+                        createdUtc={comment.data["created_utc"]}
                     />
                     <SanitizeHTML dirty={comment.data["body_html"]} />
                 </div>
