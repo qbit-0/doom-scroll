@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import CommentComponent from "containers/CommentComponent/CommentComponent";
+import CommentContainer from "containers/CommentContainer/CommentContainer";
 import { CommentData } from "lib/reddit/redditData";
 import { render } from "lib/utils/testUtils";
 import React from "react";
@@ -21,23 +21,23 @@ describe("CommentComponent", () => {
         childrenIds: [2, 3],
     };
     test("it should render author", () => {
-        render(<CommentComponent comment={comment} />);
+        render(<CommentContainer comment={comment} />);
         expect(screen.getByText("AuthorName")).toBeInTheDocument();
     });
     test("it should render number of votes", () => {
-        render(<CommentComponent comment={comment} />);
+        render(<CommentContainer comment={comment} />);
         expect(screen.getByText("123")).toBeInTheDocument();
     });
     test("it should render comment body", () => {
-        render(<CommentComponent comment={comment} />);
+        render(<CommentContainer comment={comment} />);
         expect(screen.getByText("text here")).toBeInTheDocument();
     });
     test("it should render sentiment", () => {
-        render(<CommentComponent comment={comment} />);
+        render(<CommentContainer comment={comment} />);
         expect(screen.getByText("1.5")).toBeInTheDocument();
     });
     test("it should render upvote ratio", () => {
-        render(<CommentComponent comment={comment} />);
+        render(<CommentContainer comment={comment} />);
         expect(screen.getByText("123")).toBeInTheDocument();
     });
 });

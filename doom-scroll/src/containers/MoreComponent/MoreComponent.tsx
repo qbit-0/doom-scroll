@@ -1,4 +1,5 @@
 import { useAppDispatch } from "app/store";
+import Button, { ButtonStyle } from "components/Button/Button";
 import { loadMore } from "features/comments/commentsSlice";
 import { MoreData } from "lib/reddit/redditData";
 import { borderDepthColors } from "lib/utils/replyDepthColors";
@@ -34,12 +35,13 @@ const MoreComponent: React.FC<Props> = ({ more }) => {
         borderDepthColors[more.data["depth"] % borderDepthColors.length];
 
     return (
-        <button
+        <Button
+            buttonStyle={ButtonStyle.PRIMARY}
             onClick={handleClick}
-            className={`w-fit border-b-2 ${borderDepthColor} text-amber-100`}
+            borderColor={borderDepthColor}
         >
             <p>{moreMsg}</p>
-        </button>
+        </Button>
     );
 };
 

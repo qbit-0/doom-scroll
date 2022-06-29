@@ -85,7 +85,7 @@ const Browse: React.FC<Props> = () => {
     }, [dispatch, isLoading, after]);
 
     return (
-        <div className="bg-neutral-900 text-amber-100">
+        <div className="bg-neutral-900">
             <div ref={refTop} />
             <div className="px-16 pb-8 max-w-7xl mx-auto">
                 <div className="pt-28 pb-8">

@@ -23,9 +23,9 @@ const Author: FC<Props> = ({ username: author, profileImg, createdUtc }) => {
                 )}
             </figure>
             <div>
-                <div className="inline-block ml-4">
+                <div className="inline-block ml-4 text-amber-100">
                     <p className="inline font-bold italic">{author}</p>{" "}
-                    <p className="inline font-thin">- {elapsedString}</p>
+                    <p className="inline font-thin ">- {elapsedString}</p>
                 </div>
             </div>
         </div>

@@ -1,3 +1,4 @@
+import Button, { ButtonStyle as ButtonStyle } from "components/Button/Button";
 import {
     selectMaxRatio,
     selectMaxSentiment,
@@ -22,12 +23,10 @@ const FilterSentiment = () => {
     const maxSentiment = useSelector(selectMaxSentiment);
     const minRatio = useSelector(selectMinRatio);
     const maxRatio = useSelector(selectMaxRatio);
-    const [currMinSentiment, setCurrMinSentiment] = useState<number | string>(
-        minSentiment
-    );
-    const [currMaxSentiment, setCurrMaxSentiment] = useState<number | string>(
-        maxSentiment
-    );
+    const [currMinSentiment, setCurrMinSentiment] =
+        useState<number | string>(minSentiment);
+    const [currMaxSentiment, setCurrMaxSentiment] =
+        useState<number | string>(maxSentiment);
     const [currMinRatio, setCurrMinRatio] = useState<number | string>(minRatio);
     const [currMaxRatio, setCurrMaxRatio] = useState<number | string>(maxRatio);
     const dispatch = useDispatch();
@@ -84,30 +83,30 @@ const FilterSentiment = () => {
         <div>
             <div className="block">
                 <div className="inline-block mx-1 my-2">
-                    <button
+                    <Button
+                        buttonStyle={ButtonStyle.PRIMARY}
                         onClick={handleBest}
-                        className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                     >
                         Best
-                    </button>
+                    </Button>
                 </div>
 
                 <div className="inline-block mx-1 my-2">
-                    <button
+                    <Button
+                        buttonStyle={ButtonStyle.PRIMARY}
                         onClick={handleWorst}
-                        className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                     >
                         Worst
-                    </button>
+                    </Button>
                 </div>
 
                 <div className="inline-block mx-1 my-2">
-                    <button
+                    <Button
+                        buttonStyle={ButtonStyle.PRIMARY}
                         onClick={handleReset}
-                        className="p-2 border-2 border-amber-100 rounded-3xl decoration-neutral-600 decoration-4 transition-all font-bold"
                     >
                         Reset
-                    </button>
+                    </Button>
                 </div>
             </div>
             <div className="block">

@@ -1,4 +1,4 @@
-import CommentComponent from "containers/CommentComponent/CommentComponent";
+import CommentContainer from "containers/CommentContainer/CommentContainer";
 import ReplyComponent from "containers/ReplyComponent/ReplyComponent";
 import { selectCommentsReplyTree } from "features/comments/commentsSlice";
 import { CommentData } from "lib/reddit/redditData";
@@ -35,7 +35,7 @@ const CommentAndReplies: React.FC<Props> = ({ comment }) => {
         <div
             className={`overflow-clip border-t-2 border-l-2 ${borderDepthColor} rounded-tl-3xl`}
         >
-            <CommentComponent comment={comment} />
+            <CommentContainer comment={comment} />
             {comment.childrenIds.length > 0 && childReplies}
         </div>
     );

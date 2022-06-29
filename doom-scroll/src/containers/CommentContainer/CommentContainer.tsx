@@ -9,7 +9,7 @@ type Props = {
     comment: CommentData;
 };
 
-const CommentComponent: React.FC<Props> = ({ comment }) => {
+const CommentContainer: React.FC<Props> = ({ comment }) => {
     return (
         <div
             className={`flex overflow-clip rounded-br-3xl bg-gradient-to-r from-neutral-800 shadow-lg`}
@@ -31,4 +31,4 @@ const CommentComponent: React.FC<Props> = ({ comment }) => {
     );
 };
 
-export default CommentComponent;
+export default CommentContainer;

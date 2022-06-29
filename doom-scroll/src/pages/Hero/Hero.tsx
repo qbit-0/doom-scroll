@@ -1,14 +1,15 @@
+import Button, { ButtonStyle } from "components/Button/Button";
 import React from "react";
 
 const Hero = () => {
     return (
         <div className="h-screen bg-neutral-900">
-            <header className="text-amber-100">
+            <header>
                 <blockquote
                     cite="www.merriam-webster.com"
                     className="w-3/5 max-w-md pt-16 mx-auto"
                 >
-                    <p className="p-4 text-justify text-lg font-serif font-light">
+                    <p className="p-4 text-justify text-lg font-serif font-light text-amber-100">
                         Doomscrolling refers to the tendency to continue to surf
                         or scroll through bad news, even though that news is
                         saddening, disheartening, or depressing.
@@ -22,15 +23,9 @@ const Hero = () => {
                         Scroll
                     </p>
                 </h1>
-                <h2 className="mt-16 text-2xl font-light text-center">
-                    The{" "}
-                    <div className="inline-block p-2 border-2 border-amber-100 rounded-3xl font-bold">
-                        Best
-                    </div>{" "}
-                    and{" "}
-                    <div className="inline-block p-2 border-2 border-amber-100 rounded-3xl font-bold">
-                        Worst
-                    </div>{" "}
+                <h2 className="mt-16 text-2xl font-light text-center text-amber-100">
+                    The <Button buttonStyle={ButtonStyle.PRIMARY}>Best</Button>{" "}
+                    and <Button buttonStyle={ButtonStyle.PRIMARY}>Worst</Button>{" "}
                     of Reddit.
                 </h2>
             </header>

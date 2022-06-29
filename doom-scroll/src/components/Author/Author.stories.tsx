@@ -1,12 +1,14 @@
-import { Story } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import Author from "components/Author/Author";
-import React from "react";
-import { ComponentProps } from "react";
+import React, { ComponentProps } from "react";
 
 export default {
     title: "Author",
     component: Author,
-};
+    parameters: {
+        jest: ["Author.test.tsx"],
+    },
+} as Meta;
 
 const Template: Story<ComponentProps<typeof Author>> = (args) => (
     <Author {...args} />
