@@ -6,7 +6,7 @@ import {
     Routes,
 } from "react-router-dom";
 
-import { useAppDispatch } from "app/store";
+import { useAppDispatch } from "App/store";
 import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import Article from "pages/Article/Article";
 import Browse from "pages/Browse/Browse";
