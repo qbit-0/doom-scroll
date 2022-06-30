@@ -16,14 +16,14 @@ type Props = {
 
 const SearchBar: FC<Props> = ({ value, onChange, onKeyDown, onSubmit }) => {
     return (
-        <div className="inline-block border-2 border-amber-100 rounded-3xl bg-neutral-900">
+        <div className="inline-block px-4 border-2 border-amber-100 rounded-3xl bg-neutral-900">
             <input
                 type="text"
                 placeholder="Search Term"
                 value={value}
                 onChange={onChange}
                 onKeyDown={onKeyDown}
-                className="text-amber-100 p-2 rounded-l-3xl bg-neutral-900 font-bold placeholder:font-thin"
+                className="text-amber-100 pl-2 py-2 rounded-l-3xl bg-neutral-900 font-bold placeholder:font-thin outline-none"
             />
             <button
                 title="submit search term"

@@ -1,6 +1,7 @@
 import { Meta, Story } from "@storybook/react";
 import NavBar from "components/NavBar";
 import React, { ComponentProps } from "react";
+
 export default {
     title: "NavBar",
     component: NavBar,
@@ -15,4 +16,10 @@ const Template: Story<ComponentProps<typeof NavBar>> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+    navBarPaths: {
+        "/a/": "To A",
+        "/b/": "To B",
+        "/c/": "To C",
+    },
+};

@@ -1,17 +1,20 @@
-import Button from "components/Button";
-import { ButtonStyle } from "components/Button/Button";
+import Button, { ButtonStyle } from "components/Button/Button";
 import SearchBarContainer from "containers/SearchBarContainer";
 import React, { FC, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
-type Props = {};
+type Props = {
+    navBarPaths: {
+        [path: string]: string;
+    };
+};
 
-const NavBar: FC<Props> = (props) => {
+const NavBar: FC<Props> = ({ navBarPaths }) => {
     const navigate = useNavigate();
 
-    const handleNavClick = (subreddit: string) => {
+    const handleNavClick = (path: string) => {
         return (event: MouseEvent<HTMLButtonElement>) => {
-            navigate(`/r/${subreddit}`);
+            navigate(`${path}`);
         };
     };
 
@@ -19,23 +22,16 @@ const NavBar: FC<Props> = (props) => {
         <nav className="sticky z-10 top-0 p-4 bg-neutral-900 text-amber-100 shadow-lg">
             <div className="w-fit mx-auto">
                 <div className="inline-block">
-                    <div className="inline-block mx-1">
-                        <Button
-                            buttonStyle={ButtonStyle.PRIMARY}
-                            onClick={handleNavClick("popular")}
-                        >
-                            <p className="inline font-bold">r/popular</p>
-                        </Button>
-                    </div>
-
-                    <div className="inline-block mx-1">
-                        <Button
-                            buttonStyle={ButtonStyle.PRIMARY}
-                            onClick={handleNavClick("all")}
-                        >
-                            <p className="inline font-bold">r/all</p>
-                        </Button>
-                    </div>
+                    {Object.entries(navBarPaths).map((entry) => (
+                        <div className="inline-block mx-1">
+                            <Button
+                                buttonStyle={ButtonStyle.PRIMARY}
+                                onClick={handleNavClick(entry[0])}
+                            >
+                                <p className="inline font-bold">{entry[1]}</p>
+                            </Button>
+                        </div>
+                    ))}
                 </div>
 
                 <div className="inline-block mx-1">
