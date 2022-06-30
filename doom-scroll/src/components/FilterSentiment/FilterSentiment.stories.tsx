@@ -8,6 +8,13 @@ export default {
     parameters: {
         jest: ["FilterSentiment.test.tsx"],
     },
+    decorators: [
+        (Story) => (
+            <div className="border-2 w-60 h-96">
+                <Story />
+            </div>
+        ),
+    ],
 } as Meta;
 
 const Template: Story<ComponentProps<typeof FilterSentiment>> = (args) => (

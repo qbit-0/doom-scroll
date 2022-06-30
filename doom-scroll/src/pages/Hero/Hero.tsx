@@ -39,19 +39,19 @@ const Hero: FC<Props> = () => {
             <header>
                 <blockquote
                     cite="www.merriam-webster.com"
-                    className="w-3/5 max-w-md pt-16 mx-auto"
+                    className="max-w-md pt-8 px-8 sm:pt-16 mx-auto"
                 >
-                    <p className="p-4 text-justify text-lg font-serif font-light text-amber-100">
+                    <p className="p-4 text-justify text-md sm:text-lg font-serif font-light text-amber-100">
                         Doomscrolling refers to the tendency to continue to surf
                         or scroll through bad news, even though that news is
                         saddening, disheartening, or depressing.
                     </p>
                 </blockquote>
-                <h1 className="mt-16 text-8xl text-center font-black">
-                    <p className="inline-block text-transparent bg-clip-text bg-gradient-to-t from-rose-600 to-black drop-shadow-lg animate-shake">
+                <h1 className="mt-16 text-7xl sm:text-8xl text-center font-black">
+                    <p className="text-transparent bg-clip-text bg-gradient-to-t from-rose-600 to-black drop-shadow-lg animate-shake">
                         Doom
                     </p>
-                    <p className="inline-block text-transparent bg-clip-text bg-cyan-600 drop-shadow-lg animate-fadeintop">
+                    <p className="text-transparent bg-clip-text bg-cyan-600 drop-shadow-lg animate-fadeintop">
                         Scroll
                     </p>
                 </h1>

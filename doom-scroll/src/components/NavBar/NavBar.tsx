@@ -21,9 +21,9 @@ const NavBar: FC<Props> = ({ navBarPaths }) => {
     return (
         <nav className="sticky z-10 top-0 p-4 bg-neutral-900 text-amber-100 drop-shadow-lg">
             <div className="w-fit mx-auto">
-                <div className="inline-block">
+                <div className="flex justify-center my-2">
                     {Object.entries(navBarPaths).map((entry, index) => (
-                        <div className="inline-block m-1" key={index}>
+                        <div className="inline-block mx-1" key={index}>
                             <Button onClick={handleNavClick(entry[0])}>
                                 <p className="inline font-bold">{entry[1]}</p>
                             </Button>
@@ -31,7 +31,7 @@ const NavBar: FC<Props> = ({ navBarPaths }) => {
                     ))}
                 </div>
 
-                <div className="inline-block mx-1">
+                <div className="my-2">
                     <MainSearchBar />
                 </div>
             </div>

@@ -35,15 +35,15 @@ const SentimentBanner: React.FC<Props> = ({
 
     return (
         <div
-            className={`inline-block w-28 flex-shrink-0 py-4 ${fromColor} drop-shadow-lg text-amber-100`}
+            className={`inline-block flex-shrink-0 px-2 ${fromColor} drop-shadow-lg text-amber-100`}
         >
-            <div className="mb-4">
+            <div className="my-4 text-xs">
                 <h4 className="text-center font-bold"> Sentiment</h4>
                 <p className="text-center"> {roundedSentiment}</p>
             </div>
 
             {roundedCommentSentiment !== null && (
-                <div className="mb-4">
+                <div className="my-4 text-xs">
                     <h4 className="text-center font-bold">
                         Comments Sentiment
                     </h4>
@@ -52,7 +52,7 @@ const SentimentBanner: React.FC<Props> = ({
             )}
 
             {ratio !== undefined && (
-                <div>
+                <div className="my-4 text-xs">
                     <h4 className="text-center font-bold">Upvote Ratio</h4>
                     <p className="text-center"> {ratio}</p>
                 </div>

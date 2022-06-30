@@ -3,19 +3,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 type Props = {
-    score?: number;
+    score: number;
 };
 
 const VoteVertical: React.FC<Props> = ({ score }) => {
     return (
-        <div className="inline-block flex-shrink-0 flex-grow-0 px-2 py-8 text-amber-100">
+        <div className="inline-block text-amber-100">
             <div className="p-1 bg-neutral-700 rounded-3xl">
                 <div className="w-fit mx-auto">
-                    <FontAwesomeIcon icon={solid("chevron-up")} size="lg" />
+                    <FontAwesomeIcon icon={solid("chevron-up")} size="1x" />
                 </div>
-                <p className="text-center font-bold">{score || "?"}</p>
+                <p className="text-center font-bold text-sm">{score}</p>
                 <div className="w-fit mx-auto">
-                    <FontAwesomeIcon icon={solid("chevron-down")} size="lg" />
+                    <FontAwesomeIcon icon={solid("chevron-down")} size="1x" />
                 </div>
             </div>
         </div>

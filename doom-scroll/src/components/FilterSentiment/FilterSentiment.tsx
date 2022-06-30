@@ -111,42 +111,34 @@ const FilterSentiment: FC<Props> = () => {
 
     return (
         <>
-            <div className="block">
-                <div className="inline-block mx-1 my-2">
-                    <Button
-                        bgColor="bg-cyan-700"
-                        hoverBgColor="hover:bg-cyan-600"
-                        onClick={handleBest}
-                    >
-                        Best
-                    </Button>
-                </div>
+            <div className="flex flex-wrap justify-center gap-2">
+                <Button
+                    bgColor="bg-cyan-700"
+                    hoverBgColor="hover:bg-cyan-600"
+                    onClick={handleBest}
+                >
+                    Best
+                </Button>
 
-                <div className="inline-block mx-1 my-2">
-                    <Button
-                        bgColor="bg-rose-700"
-                        hoverBgColor="hover:bg-rose-600"
-                        onClick={handleWorst}
-                    >
-                        Worst
-                    </Button>
-                </div>
+                <Button
+                    bgColor="bg-rose-700"
+                    hoverBgColor="hover:bg-rose-600"
+                    onClick={handleWorst}
+                >
+                    Worst
+                </Button>
 
-                <div className="inline-block mx-1 my-2">
-                    <Button
-                        bgColor="bg-neutral-700"
-                        hoverBgColor="hover:bg-neutral-600"
-                        onClick={handleNeutral}
-                    >
-                        Neutral
-                    </Button>
-                </div>
+                <Button
+                    bgColor="bg-neutral-700"
+                    hoverBgColor="hover:bg-neutral-600"
+                    onClick={handleNeutral}
+                >
+                    Neutral
+                </Button>
 
-                <div className="inline-block mx-1 my-2">
-                    <Button onClick={handleReset}>Reset</Button>
-                </div>
+                <Button onClick={handleReset}>Reset</Button>
             </div>
-            <div className="block">
+            {/* <div className="block">
                 <div className="inline-block mx-1 my-2">
                     <label
                         htmlFor="minSentiment"
@@ -218,7 +210,7 @@ const FilterSentiment: FC<Props> = () => {
                         onChange={handleFilterChange(setCurrMaxRatio)}
                     />
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };
