@@ -1,4 +1,4 @@
-import AuthorComponent from "containers/AuthorContainer";
+import AuthorComponent from "components/AuthorContainer";
 import SanitizeHTML from "components/SanitizeHTML";
 import { CommentData } from "lib/reddit/redditData";
 import React, { FC } from "react";

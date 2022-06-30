@@ -1,8 +1,10 @@
 import Button from "components/Button";
 import { ButtonStyle } from "components/Button/Button";
-import React from "react";
+import React, { FC } from "react";
 
-const Hero = () => {
+type Props = {};
+
+const Hero: FC<Props> = (props) => {
     return (
         <div className="h-screen bg-neutral-900">
             <header>
@@ -30,7 +32,8 @@ const Hero = () => {
                     of Reddit.
                 </h2>
             </header>
-            <footer className="absolute bottom-0 w-full p-4 bg-neutral-800 shadow-lg text-amber-100">
+
+            <footer className="absolute bottom-0 w-full p-4 mx-auto bg-neutral-800 shadow-lg text-amber-100">
                 <p className="relative bottom-0 text-center font-medium">
                     Designed and Built by Duy Pham
                 </p>

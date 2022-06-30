@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import {
     BrowserRouter as Router,
     Navigate,
@@ -12,7 +12,9 @@ import Browse from "pages/Browse";
 import Hero from "pages/Hero";
 import Login from "pages/Login";
 
-const App = () => {
+type Props = {};
+
+const App: FC<Props> = () => {
     return (
         <Router>
             <Hero />

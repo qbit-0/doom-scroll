@@ -1,11 +1,11 @@
 import Reply from "components/Reply";
 import { selectCommentsReplyTree } from "features/comments/commentsSlice";
-import React from "react";
+import React, { FC } from "react";
 import { useSelector } from "react-redux";
 
 type Props = {};
 
-const ReplyTree: React.FC<Props> = () => {
+const ReplyTree: FC<Props> = (props) => {
     const replyTree = useSelector(selectCommentsReplyTree);
 
     return (

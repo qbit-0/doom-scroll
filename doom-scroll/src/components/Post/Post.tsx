@@ -1,7 +1,7 @@
 import SanitizeHTML from "components/SanitizeHTML";
 import SentimentBanner from "components/SentimentBanner";
 import VoteVertical from "components/VoteVertical";
-import AuthorComponent from "containers/AuthorContainer";
+import AuthorComponent from "components/AuthorContainer";
 import Preview from "components/Preview";
 import { PostData } from "lib/reddit/redditData";
 import React, { FC } from "react";

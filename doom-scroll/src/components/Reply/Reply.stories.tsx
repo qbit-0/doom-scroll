@@ -3,10 +3,10 @@ import Reply from "components/Reply";
 import React, { ComponentProps } from "react";
 
 export default {
-    title: "Reply",
+    title: "Article/Reply",
     component: Reply,
     parameters: {
-        jest: ["Post.test.tsx"],
+        jest: ["Reply.test.tsx"],
     },
 } as Meta;
 

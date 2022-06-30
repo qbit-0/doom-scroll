@@ -1,5 +1,5 @@
 import Button, { ButtonStyle } from "components/Button/Button";
-import SearchBarContainer from "containers/SearchBarContainer";
+import SearchBarContainer from "components/MainSearchBar";
 import React, { FC, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 

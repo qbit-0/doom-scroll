@@ -1,5 +1,5 @@
 import { Meta, Story } from "@storybook/react";
-import AuthorContainer from "containers/AuthorContainer/AuthorContainer";
+import AuthorContainer from "components/AuthorContainer/AuthorContainer";
 import React, { ComponentProps } from "react";
 
 export default {
