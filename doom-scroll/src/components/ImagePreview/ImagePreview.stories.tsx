@@ -17,14 +17,17 @@ const Template: Story<ComponentProps<typeof ImagePreview>> = (args) => (
 export const Square = Template.bind({});
 Square.args = {
     src: "https://picsum.photos/400",
+    href: "https://picsum.photos/400",
 };
 
 export const Wide = Template.bind({});
 Wide.args = {
     src: "https://picsum.photos/800/200",
+    href: "https://picsum.photos/800/200",
 };
 
 export const Tall = Template.bind({});
 Tall.args = {
     src: "https://picsum.photos/200/800",
+    href: "https://picsum.photos/200/800",
 };

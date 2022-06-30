@@ -11,7 +11,7 @@ const ImagePreview: React.FC<Props> = ({ src, href }) => {
             <img
                 alt="post body"
                 src={src}
-                className="block object-cover mx-auto"
+                className="block object-contain mx-auto"
             />
             <div className="absolute bottom-0 w-full px-8 p-2 backdrop-blur-3xl backdrop-brightness-50">
                 <a title="link" href={href} target="_blank" rel="noreferrer">
