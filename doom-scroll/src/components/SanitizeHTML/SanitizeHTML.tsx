@@ -5,11 +5,16 @@ type Props = {
     dirty: string;
 };
 
+const sanitize = (dirty: string) => {
+    return dirty;
+    // return sanitizeHtml(dirty);
+};
+
 const SanitizeHTML: React.FC<Props> = ({ dirty }) => {
     return (
         <div
             dangerouslySetInnerHTML={{
-                __html: sanitizeHtml(dirty),
+                __html: sanitize(dirty),
             }}
             className="text-amber-100"
         />

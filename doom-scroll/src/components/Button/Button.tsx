@@ -10,6 +10,7 @@ type Props = {
     buttonStyle?: ButtonStyle;
     borderColor?: string;
     bgColor?: string;
+    hoverBgColor?: string;
     onClick?: MouseEventHandler<HTMLButtonElement>;
     children?: React.ReactNode;
 };
@@ -18,6 +19,7 @@ const Button: FC<Props> = ({
     buttonStyle = ButtonStyle.PRIMARY,
     borderColor = "border-amber-100",
     bgColor = "bg-neutral-800",
+    hoverBgColor = "hover:bg-black",
     onClick,
     children,
 }) => {
@@ -25,7 +27,7 @@ const Button: FC<Props> = ({
         <button
             type="button"
             onClick={onClick}
-            className={`p-2 border-2 ${borderColor} rounded-3xl ${bgColor} drop-shadow-lg font-bold text-amber-100 hover:contrast-200 hover:-hue-rotate-30 transition-all`}
+            className={`p-2 border-2 ${borderColor} rounded-3xl ${bgColor} drop-shadow-lg font-bold text-amber-100 ${hoverBgColor} transition-all`}
         >
             {children}
         </button>

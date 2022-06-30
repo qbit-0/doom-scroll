@@ -1,6 +1,6 @@
 import { useAppDispatch } from "App/store";
 import FilterSentiment from "components/FilterSentiment/FilterSentiment";
-import Post from "components/Post/Post";
+import PostContainer from "components/PostContainer/PostContainer";
 import PostPlaceholder from "components/PostPlaceholder/PostPlaceholder";
 import SearchSort from "components/SearchSort/SearchSort";
 import SubredditSort from "components/SubredditSort/SubredditSort";
@@ -107,7 +107,7 @@ const Browse: React.FC<Props> = () => {
                 {!isRefreshing &&
                     Object.values(postDeque.data).map((post, index) => (
                         <div className="my-8" key={index}>
-                            <Post post={post} />
+                            <PostContainer post={post} />
                         </div>
                     ))}
                 {(isLoading || after) && (

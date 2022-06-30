@@ -14,18 +14,18 @@ const SentimentBanner: React.FC<Props> = ({
     if (sentiment === null) {
         return (
             <div
-                className={`inline-block w-28 flex-shrink-0 py-4 rounded-br-3xl bg-neutral-600 drop-shadow-lg`}
+                className={`inline-block w-28 flex-shrink-0 py-4 rounded-br-3xl bg-neutral-700 drop-shadow-lg`}
             />
         );
     }
 
     const roundedSentiment = Math.round(sentiment * 100) / 100;
 
-    let fromColor = "bg-neutral-600";
+    let fromColor = "bg-neutral-700";
     if (roundedSentiment < 0) {
-        fromColor = "bg-rose-600";
+        fromColor = "bg-rose-700";
     } else if (roundedSentiment > 0) {
-        fromColor = "bg-cyan-600";
+        fromColor = "bg-cyan-700";
     }
 
     let roundedCommentSentiment = null;

@@ -2,10 +2,11 @@ import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
 import SentimentBanner from "components/SentimentBanner/SentimentBanner";
 import VoteVertical from "components/VoteVertical/VoteVertical";
 import AuthorComponent from "components/AuthorContainer/AuthorContainer";
-import Preview from "components/Preview/Preview";
+import ImagePreview from "components/ImagePreview/ImagePreview";
 import { PostData } from "lib/reddit/redditData";
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
+import Body from "components/Body/Body";
 
 type Props = {
     post: PostData;
@@ -38,24 +39,9 @@ const Post: FC<Props> = ({ post }) => {
                     </Link>
                 </div>
 
-                {post.data?.["preview"]?.["images"]?.[0]?.["source"]?.[
-                    "url"
-                ] !== undefined && (
-                    <Preview
-                        src={
-                            post.data?.["preview"]?.["images"]?.[0]?.[
-                                "source"
-                            ]?.["url"]
-                        }
-                        href={post.data["url_overridden_by_dest"]}
-                    />
-                )}
-
-                {post.data["selftext_html"] !== undefined && (
-                    <div className="overflow-y-auto max-h-[20rem] my-4">
-                        <SanitizeHTML dirty={post.data["selftext_html"]} />
-                    </div>
-                )}
+                <div className="my-4">
+                    <Body post={post} />
+                </div>
             </div>
 
             <SentimentBanner

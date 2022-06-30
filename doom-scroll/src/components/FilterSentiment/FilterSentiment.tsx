@@ -11,6 +11,7 @@ import {
     setMinRatio,
     setMinSentiment,
 } from "features/nlp/nlpSlice";
+import { NlpPresets } from "lib/utils/nlpPresets";
 import React, {
     ChangeEvent,
     Dispatch,
@@ -56,6 +57,22 @@ const FilterSentiment: FC<Props> = () => {
         dispatch(setMaxRatio(num));
     }, [dispatch, currMaxRatio]);
 
+    useEffect(() => {
+        setCurrMinSentiment(minSentiment);
+    }, [minSentiment]);
+
+    useEffect(() => {
+        setCurrMaxSentiment(maxSentiment);
+    }, [maxSentiment]);
+
+    useEffect(() => {
+        setCurrMinRatio(minRatio);
+    }, [minRatio]);
+
+    useEffect(() => {
+        setCurrMaxRatio(maxRatio);
+    }, [maxRatio]);
+
     const handleFilterChange = (
         setCurr: Dispatch<SetStateAction<string | number>>
     ) => {
@@ -65,35 +82,64 @@ const FilterSentiment: FC<Props> = () => {
     };
 
     const handleWorst = () => {
-        setCurrMinSentiment(-5);
-        setCurrMaxSentiment(-0.05);
-        setCurrMinRatio(0);
-        setCurrMaxRatio(0.95);
+        setCurrMinSentiment(NlpPresets.worst.minSentiment);
+        setCurrMaxSentiment(NlpPresets.worst.maxSentiment);
+        setCurrMinRatio(NlpPresets.worst.minRatio);
+        setCurrMaxRatio(NlpPresets.worst.maxRatio);
     };
 
     const handleBest = () => {
-        setCurrMinSentiment(0.05);
-        setCurrMaxSentiment(5);
-        setCurrMinRatio(0.95);
-        setCurrMaxRatio(1);
+        setCurrMinSentiment(NlpPresets.best.minSentiment);
+        setCurrMaxSentiment(NlpPresets.best.maxSentiment);
+        setCurrMinRatio(NlpPresets.best.minRatio);
+        setCurrMaxRatio(NlpPresets.best.maxRatio);
+    };
+
+    const handleNeutral = () => {
+        setCurrMinSentiment(NlpPresets.neutral.minSentiment);
+        setCurrMaxSentiment(NlpPresets.neutral.maxSentiment);
+        setCurrMinRatio(NlpPresets.neutral.minRatio);
+        setCurrMaxRatio(NlpPresets.neutral.maxRatio);
     };
 
     const handleReset = () => {
-        setCurrMinSentiment(-5);
-        setCurrMaxSentiment(5);
-        setCurrMinRatio(0);
-        setCurrMaxRatio(1);
+        setCurrMinSentiment(NlpPresets.reset.minSentiment);
+        setCurrMaxSentiment(NlpPresets.reset.maxSentiment);
+        setCurrMinRatio(NlpPresets.reset.minRatio);
+        setCurrMaxRatio(NlpPresets.reset.maxRatio);
     };
 
     return (
         <>
             <div className="block">
                 <div className="inline-block mx-1 my-2">
-                    <Button onClick={handleBest}>Best</Button>
+                    <Button
+                        bgColor="bg-cyan-700"
+                        hoverBgColor="hover:bg-cyan-600"
+                        onClick={handleBest}
+                    >
+                        Best
+                    </Button>
                 </div>
 
                 <div className="inline-block mx-1 my-2">
-                    <Button onClick={handleWorst}>Worst</Button>
+                    <Button
+                        bgColor="bg-rose-700"
+                        hoverBgColor="hover:bg-rose-600"
+                        onClick={handleWorst}
+                    >
+                        Worst
+                    </Button>
+                </div>
+
+                <div className="inline-block mx-1 my-2">
+                    <Button
+                        bgColor="bg-neutral-700"
+                        hoverBgColor="hover:bg-neutral-600"
+                        onClick={handleNeutral}
+                    >
+                        Neutral
+                    </Button>
                 </div>
 
                 <div className="inline-block mx-1 my-2">

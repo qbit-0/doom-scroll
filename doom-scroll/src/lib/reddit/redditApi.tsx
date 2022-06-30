@@ -65,7 +65,7 @@ class RedditApi {
         const searchParams = new URLSearchParams(searchStr);
         searchParams.append("api_type", "json");
         searchParams.append("children", more.data["children"].join(","));
-        searchParams.append("id", more.data["name"]);
+        searchParams.append("id", more.data["id"]);
         searchParams.append("link_id", articleId);
 
         return await this.fetchReddit(

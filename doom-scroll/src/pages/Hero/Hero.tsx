@@ -1,10 +1,39 @@
+import { useAppDispatch } from "App/store";
 import Button from "components/Button/Button";
 import { ButtonStyle } from "components/Button/Button";
+import {
+    setMinSentiment,
+    setMaxSentiment,
+    setMinRatio,
+    setMaxRatio,
+} from "features/nlp/nlpSlice";
+import { NlpPresets } from "lib/utils/nlpPresets";
 import React, { FC } from "react";
+import { batch } from "react-redux";
 
 type Props = {};
 
 const Hero: FC<Props> = () => {
+    const dispatch = useAppDispatch();
+
+    const handleWorst = () => {
+        batch(() => {
+            dispatch(setMinSentiment(NlpPresets.worst.minSentiment));
+            dispatch(setMaxSentiment(NlpPresets.worst.maxSentiment));
+            dispatch(setMinRatio(NlpPresets.worst.minRatio));
+            dispatch(setMaxRatio(NlpPresets.worst.maxRatio));
+        });
+    };
+
+    const handleBest = () => {
+        batch(() => {
+            dispatch(setMinSentiment(NlpPresets.best.minSentiment));
+            dispatch(setMaxSentiment(NlpPresets.best.maxSentiment));
+            dispatch(setMinRatio(NlpPresets.best.minRatio));
+            dispatch(setMaxRatio(NlpPresets.best.maxRatio));
+        });
+    };
+
     return (
         <div className="h-screen bg-neutral-900">
             <header>
@@ -27,8 +56,23 @@ const Hero: FC<Props> = () => {
                     </p>
                 </h1>
                 <h2 className="mt-16 text-2xl font-light text-center text-amber-100">
-                    The <Button bgColor="bg-cyan-600">Best</Button> and{" "}
-                    <Button bgColor="bg-rose-600">Worst</Button> of Reddit.
+                    The{" "}
+                    <Button
+                        bgColor="bg-cyan-700"
+                        hoverBgColor="hover:bg-cyan-600"
+                        onClick={handleBest}
+                    >
+                        Best
+                    </Button>{" "}
+                    and{" "}
+                    <Button
+                        bgColor="bg-rose-700"
+                        hoverBgColor="hover:bg-rose-600"
+                        onClick={handleWorst}
+                    >
+                        Worst
+                    </Button>{" "}
+                    of Reddit.
                 </h2>
             </header>
 
