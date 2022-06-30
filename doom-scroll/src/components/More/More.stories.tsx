@@ -1,5 +1,5 @@
 import { Story } from "@storybook/react";
-import More from "components/More";
+import More from "components/More/More";
 import React, { ComponentProps } from "react";
 
 export default {

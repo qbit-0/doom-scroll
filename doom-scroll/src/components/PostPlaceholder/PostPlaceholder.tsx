@@ -1,6 +1,6 @@
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SentimentBanner from "components/SentimentBanner";
+import SentimentBanner from "components/SentimentBanner/SentimentBanner";
 import React, { FC } from "react";
 
 type Props = {};

@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import NavBar from "components/MainNavBar";
-import Article from "pages/Article";
-import Browse from "pages/Browse";
-import Hero from "pages/Hero";
-import Login from "pages/Login";
+import NavBar from "components/MainNavBar/MainNavBar";
+import Article from "pages/Article/Article";
+import Browse from "pages/Browse/Browse";
+import Hero from "pages/Hero/Hero";
+import Login from "pages/Login/Login";
 
 type Props = {};
 

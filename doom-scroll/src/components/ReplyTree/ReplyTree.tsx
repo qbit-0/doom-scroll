@@ -1,4 +1,4 @@
-import Reply from "components/Reply";
+import Reply from "components/Reply/Reply";
 import { selectCommentsReplyTree } from "features/comments/commentsSlice";
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
@@ -15,11 +15,7 @@ const ReplyTree: FC<Props> = () => {
                     return reply.parentId === -1;
                 })
                 .map((reply, index) => {
-                    return (
-                        <div className="my-2" key={index}>
-                            <Reply reply={reply} />
-                        </div>
-                    );
+                    return <Reply reply={reply} />;
                 })}
         </section>
     );

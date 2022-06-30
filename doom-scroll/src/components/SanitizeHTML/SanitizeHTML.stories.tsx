@@ -1,5 +1,5 @@
 import { Meta, Story } from "@storybook/react";
-import SanitizeHTML from "components/SanitizeHTML";
+import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
 import React from "react";
 import { ComponentProps } from "react";
 

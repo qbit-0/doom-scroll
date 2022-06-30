@@ -1,5 +1,5 @@
 import { useAppDispatch } from "App/store";
-import Author from "components/Author";
+import Author from "components/Author/Author";
 import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import RedditApi from "lib/reddit/redditApi";
 import React, { useEffect, useState } from "react";

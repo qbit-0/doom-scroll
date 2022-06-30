@@ -1,6 +1,6 @@
-import Button from "components/Button";
-import Option from "components/Option";
-import Select from "components/Select";
+import Button from "components/Button/Button";
+import Option from "components/Option/Option";
+import Select from "components/Select/Select";
 import {
     SearchSortOption,
     SearchTimeOption,

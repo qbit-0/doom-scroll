@@ -1,5 +1,5 @@
 import { Meta, Story } from "@storybook/react";
-import SubredditSort from "components/SubredditSort";
+import SubredditSort from "components/SubredditSort/SubredditSort";
 import React, { ComponentProps } from "react";
 
 export default {

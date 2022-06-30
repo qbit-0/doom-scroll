@@ -1,5 +1,5 @@
 import { Meta, Story } from "@storybook/react";
-import Reply from "components/Reply";
+import Reply from "components/Reply/Reply";
 import React, { ComponentProps } from "react";
 
 export default {

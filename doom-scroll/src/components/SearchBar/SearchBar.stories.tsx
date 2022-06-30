@@ -1,5 +1,5 @@
 import { Meta, Story } from "@storybook/react";
-import SearchBar from "components/SearchBar";
+import SearchBar from "components/SearchBar/SearchBar";
 import React, { ComponentProps } from "react";
 
 export default {

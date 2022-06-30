@@ -76,6 +76,10 @@ class RedditApi {
         let json;
         json = await this.fetchReddit(accessToken, `/user/${author}/about`, "");
 
+        if (!json.data) {
+            return null;
+        }
+
         return json.data.icon_img;
     };
 }

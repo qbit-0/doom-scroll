@@ -1,5 +1,5 @@
 import { Meta, Story } from "@storybook/react";
-import MainNavBar from "components/MainNavBar";
+import MainNavBar from "components/MainNavBar/MainNavBar";
 import React, { ComponentProps } from "react";
 export default {
     title: "Shared/MainNavBar",

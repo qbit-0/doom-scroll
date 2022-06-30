@@ -1,6 +1,6 @@
-import Button from "components/Button";
+import Button from "components/Button/Button";
 import { ButtonStyle } from "components/Button/Button";
-import InputNumber from "components/InputNumber";
+import InputNumber from "components/InputNumber/InputNumber";
 import {
     selectMaxRatio,
     selectMaxSentiment,

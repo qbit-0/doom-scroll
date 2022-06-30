@@ -1,9 +1,9 @@
-import AuthorComponent from "components/AuthorContainer";
-import SanitizeHTML from "components/SanitizeHTML";
+import AuthorComponent from "components/AuthorContainer/AuthorContainer";
+import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
 import { CommentData } from "lib/reddit/redditData";
 import React, { FC } from "react";
-import VoteHorizontal from "components/VoteHorizontal";
-import SentimentBanner from "components/SentimentBanner";
+import VoteHorizontal from "components/VoteHorizontal/VoteHorizontal";
+import SentimentBanner from "components/SentimentBanner/SentimentBanner";
 
 type Props = {
     comment: CommentData;
