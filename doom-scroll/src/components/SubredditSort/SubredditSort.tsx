@@ -18,7 +18,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 type Props = {};
 
-const SubredditSort: FC<Props> = (props) => {
+const SubredditSort: FC<Props> = () => {
     const { subreddit, pathnameSort } = useParams();
     const [searchParams] = useSearchParams();
     const [sort, setSort] = useState(pathnameSort || SubredditSortOption.HOT);

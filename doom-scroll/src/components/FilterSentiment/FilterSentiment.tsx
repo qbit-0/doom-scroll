@@ -23,7 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 type Props = {};
 
-const FilterSentiment: FC<Props> = (props) => {
+const FilterSentiment: FC<Props> = () => {
     const minSentiment = useSelector(selectMinSentiment);
     const maxSentiment = useSelector(selectMaxSentiment);
     const minRatio = useSelector(selectMinRatio);

@@ -18,7 +18,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 type Props = {};
 
-const SearchSort: FC<Props> = (props) => {
+const SearchSort: FC<Props> = () => {
     const [searchParams] = useSearchParams();
     const [sort, setSort] = useState(SearchSortOption.RELEVANCE);
     const [time, setTime] = useState(SearchTimeOption.ALL);

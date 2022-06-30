@@ -1,10 +1,5 @@
 import React, { FC } from "react";
-import {
-    BrowserRouter as Router,
-    Navigate,
-    Route,
-    Routes,
-} from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import NavBar from "components/MainNavBar";
 import Article from "pages/Article";
@@ -16,7 +11,7 @@ type Props = {};
 
 const App: FC<Props> = () => {
     return (
-        <Router>
+        <>
             <Hero />
             <main>
                 <NavBar />
@@ -38,7 +33,7 @@ const App: FC<Props> = () => {
                     <Route path="/login" element={<Login />} />
                 </Routes>
             </main>
-        </Router>
+        </>
     );
 };
 

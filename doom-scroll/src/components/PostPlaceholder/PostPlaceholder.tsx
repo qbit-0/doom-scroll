@@ -5,7 +5,7 @@ import React, { FC } from "react";
 
 type Props = {};
 
-const PostPlaceholder: FC<Props> = (props) => {
+const PostPlaceholder: FC<Props> = () => {
     return (
         <article className="flex overflow-clip h-[50rem] mx-auto border-t-2 border-l-2 border-neutral-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-neutral-800 to-neutral-900 shadow-lg">
             <div className="flex-grow-0 w-full">

@@ -4,7 +4,7 @@ import React, { FC } from "react";
 
 type Props = {};
 
-const Hero: FC<Props> = (props) => {
+const Hero: FC<Props> = () => {
     return (
         <div className="h-screen bg-neutral-900">
             <header>
@@ -33,7 +33,7 @@ const Hero: FC<Props> = (props) => {
                 </h2>
             </header>
 
-            <footer className="absolute bottom-0 w-full p-4 mx-auto bg-neutral-800 shadow-lg text-amber-100">
+            <footer className="absolute bottom-0 w-full py-4 bg-neutral-800 shadow-lg text-amber-100">
                 <p className="relative bottom-0 text-center font-medium">
                     Designed and Built by Duy Pham
                 </p>

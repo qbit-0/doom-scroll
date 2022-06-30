@@ -1,5 +1,6 @@
 import { addDecorator } from "@storybook/react";
 import { withTests } from "@storybook/addon-jest";
+import { withRouter } from "storybook-addon-react-router-v6";
 import "index.css";
 import results from "../.jest-test-results.json";
 import { setupStore } from "../src/App/store";
@@ -17,12 +18,11 @@ export const decorators = [
         const newStore = setupStore();
         return (
             <Provider store={newStore}>
-                <Router>
-                    <Story />
-                </Router>
+                <Story />
             </Provider>
         );
     },
+    withRouter,
 ];
 
 export const parameters = {

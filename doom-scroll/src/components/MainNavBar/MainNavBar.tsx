@@ -13,7 +13,7 @@ const MAIN_NAV_BAR_PATHS = {
     [MainNavBarPath.ALL]: "r/popular",
 };
 
-const MainNavBar: FC<Props> = (props) => {
+const MainNavBar: FC<Props> = () => {
     return <NavBar navBarPaths={MAIN_NAV_BAR_PATHS} />;
 };
 
