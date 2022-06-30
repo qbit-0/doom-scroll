@@ -9,13 +9,16 @@ import {
 } from "lib/reddit/redditFilterOptions";
 import React, {
     ChangeEventHandler,
+    FC,
     MouseEvent,
     useEffect,
     useState,
 } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
-const SubredditSort = () => {
+type Props = {};
+
+const SubredditSort: FC<Props> = (props) => {
     const { subreddit, pathnameSort } = useParams();
     const [searchParams] = useSearchParams();
     const [sort, setSort] = useState(pathnameSort || SubredditSortOption.HOT);

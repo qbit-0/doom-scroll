@@ -3,10 +3,9 @@ import PostPlaceholder from "components/PostPlaceholder";
 import React, { ComponentProps } from "react";
 
 export default {
-    title: "PostPlaceholder",
+    title: "Browse/PostPlaceholder",
     component: PostPlaceholder,
     parameters: {
-        layout: "centered",
         jest: ["PostPlaceholder.test.tsx"],
     },
 } as Meta;

@@ -4,10 +4,9 @@ import React from "react";
 import { ComponentProps } from "react";
 
 export default {
-    title: "SentimentBanner",
+    title: "Shared/SentimentBanner",
     component: SentimentBanner,
     parameters: {
-        layout: "centered",
         jest: ["SentimentBanner.test.tsx"],
     },
 } as Meta;

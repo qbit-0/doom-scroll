@@ -6,7 +6,6 @@ export default {
     title: "Reply",
     component: Reply,
     parameters: {
-        layout: "centered",
         jest: ["Post.test.tsx"],
     },
 } as Meta;

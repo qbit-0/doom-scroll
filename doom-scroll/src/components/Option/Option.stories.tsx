@@ -2,10 +2,9 @@ import { Meta, Story } from "@storybook/react";
 import Option from "components/Option";
 import React, { ComponentProps } from "react";
 export default {
-    title: "Option",
+    title: "Shared/Option",
     component: Option,
     parameters: {
-        layout: "centered",
         jest: ["Option.test.tsx"],
     },
     decorators: [

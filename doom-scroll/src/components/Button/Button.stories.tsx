@@ -1,14 +1,11 @@
 import { Meta, Story } from "@storybook/react";
-import Button from "components/Button";
-import { ButtonStyle } from "components/Button/Button";
-import React from "react";
-import { ComponentProps } from "react";
+import Button, { ButtonStyle } from "components/Button/Button";
+import React, { ComponentProps } from "react";
 
 export default {
-    title: "Button",
+    title: "Shared/Button",
     component: Button,
     parameters: {
-        layout: "centered",
         jest: ["Button.test.tsx"],
     },
 } as Meta;

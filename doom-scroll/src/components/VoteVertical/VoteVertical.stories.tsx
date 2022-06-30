@@ -4,10 +4,9 @@ import React from "react";
 import { ComponentProps } from "react";
 
 export default {
-    title: "VoteVertical",
+    title: "Shared/VoteVertical",
     component: VoteVertical,
     parameters: {
-        layout: "centered",
         jest: ["VoteVertical.test.tsx"],
     },
 } as Meta;

@@ -1,7 +1,7 @@
 import { useAppDispatch } from "App/store";
 import Post from "components/Post";
 import PostPlaceholder from "components/PostPlaceholder";
-import ReplyTree from "containers/ReplyTree";
+import ReplyTree from "components/ReplyTree";
 import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import {
     loadArticle,

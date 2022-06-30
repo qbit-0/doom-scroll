@@ -11,16 +11,14 @@ describe("Author", () => {
         render(<Default {...Default.args} />);
 
         expect(
-            screen.getByText(Default?.args?.username as string)
+            screen.getByText(Default?.args?.author as string)
         ).toBeInTheDocument();
     });
     test("should render the author's profile picture", () => {
         render(<Default {...Default.args} />);
 
         expect(
-            screen.getByAltText(
-                `${Default?.args?.username as string}'s profile`
-            )
+            screen.getByAltText(`${Default?.args?.author as string}'s profile`)
         ).toBeInTheDocument();
     });
     test("should render the relative age of posting", () => {

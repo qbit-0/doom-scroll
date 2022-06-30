@@ -14,13 +14,16 @@ import {
 import React, {
     ChangeEvent,
     Dispatch,
+    FC,
     SetStateAction,
     useEffect,
     useState,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const FilterSentiment = () => {
+type Props = {};
+
+const FilterSentiment: FC<Props> = (props) => {
     const minSentiment = useSelector(selectMinSentiment);
     const maxSentiment = useSelector(selectMaxSentiment);
     const minRatio = useSelector(selectMinRatio);
@@ -114,7 +117,10 @@ const FilterSentiment = () => {
             </div>
             <div className="block">
                 <div className="inline-block mx-1 my-2">
-                    <label htmlFor="minSentiment" className="font-bold mr-2">
+                    <label
+                        htmlFor="minSentiment"
+                        className="font-bold mr-2 text-amber-100"
+                    >
                         Sentiment Min:
                     </label>
                     <InputNumber
@@ -129,7 +135,10 @@ const FilterSentiment = () => {
                 </div>
 
                 <div className="inline-block mx-1 my-2">
-                    <label htmlFor="maxSentiment" className="font-bold mr-2">
+                    <label
+                        htmlFor="maxSentiment"
+                        className="font-bold mr-2 text-amber-100"
+                    >
                         Sentiment Max:
                     </label>
                     <InputNumber
@@ -144,7 +153,10 @@ const FilterSentiment = () => {
                 </div>
 
                 <div className="inline-block mx-1 my-2">
-                    <label htmlFor="minRatio" className="font-bold mr-2">
+                    <label
+                        htmlFor="minRatio"
+                        className="font-bold mr-2 text-amber-100"
+                    >
                         Ratio Min:
                     </label>
                     <InputNumber
@@ -159,7 +171,10 @@ const FilterSentiment = () => {
                 </div>
 
                 <div className="inline-block mx-1 my-2">
-                    <label htmlFor="maxRatio" className="font-bold mr-2">
+                    <label
+                        htmlFor="maxRatio"
+                        className="font-bold mr-2 text-amber-100"
+                    >
                         Ratio Max:
                     </label>
                     <InputNumber

@@ -1,11 +1,10 @@
 import { Meta, Story } from "@storybook/react";
-import Comment from "components/Comment";
+import Comment from "components/Comment/Comment";
 import React, { ComponentProps } from "react";
 export default {
-    title: "Comment",
+    title: "Article/Comment",
     component: Comment,
     parameters: {
-        layout: "centered",
         jest: ["Comment.test.tsx"],
     },
 } as Meta;

@@ -3,10 +3,9 @@ import More from "components/More";
 import React, { ComponentProps } from "react";
 
 export default {
-    title: "More",
+    title: "Article/More",
     component: More,
     parameters: {
-        layout: "centered",
         jest: ["More.test.tsx"],
     },
 };

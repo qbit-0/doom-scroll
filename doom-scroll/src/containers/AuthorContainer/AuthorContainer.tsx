@@ -10,7 +10,7 @@ type Props = {
     createdUtc: number;
 };
 
-const AuthorComponent: React.FC<Props> = ({ author, createdUtc }) => {
+const AuthorContainer: React.FC<Props> = ({ author, createdUtc }) => {
     const accessToken = useSelector(selectAccessToken);
     const [profileImg, setProfileImg] = useState(null);
     const dispatch = useAppDispatch();
@@ -37,11 +37,11 @@ const AuthorComponent: React.FC<Props> = ({ author, createdUtc }) => {
 
     return (
         <Author
-            username={author}
+            author={author}
             profileImg={profileImg}
             createdUtc={createdUtc}
         />
     );
 };
 
-export default AuthorComponent;
+export default AuthorContainer;

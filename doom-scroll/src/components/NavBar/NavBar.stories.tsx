@@ -3,10 +3,9 @@ import NavBar from "components/NavBar";
 import React, { ComponentProps } from "react";
 
 export default {
-    title: "NavBar",
+    title: "Shared/NavBar",
     component: NavBar,
     parameters: {
-        layout: "centered",
         jest: ["NavBar.test.tsx"],
     },
 } as Meta;

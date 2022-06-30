@@ -3,10 +3,9 @@ import Option from "components/Option";
 import Select from "components/Select";
 import React, { ComponentProps } from "react";
 export default {
-    title: "Select",
+    title: "Shared/Select",
     component: Select,
     parameters: {
-        layout: "centered",
         jest: ["Select.test.tsx"],
     },
 } as Meta;

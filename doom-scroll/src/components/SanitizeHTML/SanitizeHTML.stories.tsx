@@ -4,10 +4,9 @@ import React from "react";
 import { ComponentProps } from "react";
 
 export default {
-    title: "SanitizeHTML",
+    title: "Shared/SanitizeHTML",
     component: SanitizeHTML,
     parameters: {
-        layout: "centered",
         jest: ["SanitizeHTML.test.tsx"],
     },
 } as Meta;

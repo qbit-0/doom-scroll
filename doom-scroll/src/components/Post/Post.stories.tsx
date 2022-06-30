@@ -3,10 +3,9 @@ import Post from "components/Post";
 import React, { ComponentProps } from "react";
 
 export default {
-    title: "Post",
+    title: "Browse/Post",
     component: Post,
     parameters: {
-        layout: "centered",
         jest: ["Post.test.tsx"],
     },
 } as Meta;

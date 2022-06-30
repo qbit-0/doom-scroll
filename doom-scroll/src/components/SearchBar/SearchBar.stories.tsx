@@ -3,10 +3,9 @@ import SearchBar from "components/SearchBar";
 import React, { ComponentProps } from "react";
 
 export default {
-    title: "SearchBar",
+    title: "Shared/SearchBar",
     component: SearchBar,
     parameters: {
-        layout: "centered",
         jest: ["SearchBar.test.tsx"],
     },
 } as Meta;

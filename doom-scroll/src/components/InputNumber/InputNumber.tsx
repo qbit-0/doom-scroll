@@ -31,7 +31,7 @@ const InputNumber: FC<Props> = ({
             step={step}
             value={value}
             onChange={onChange}
-            className="p-2 border-2 border-amber-100 rounded-3xl bg-neutral-900 text-amber-100"
+            className="p-2 border-2 border-amber-100 rounded-3xl bg-neutral-800 text-amber-100 text-center"
         />
     );
 };

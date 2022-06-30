@@ -2,11 +2,11 @@ import { getElapsedString } from "lib/utils/getElapsedString";
 import React, { FC } from "react";
 
 type Props = {
-    username: string;
+    author: string;
     profileImg: string | null;
     createdUtc: number;
 };
-const Author: FC<Props> = ({ username: author, profileImg, createdUtc }) => {
+const Author: FC<Props> = ({ author, profileImg, createdUtc }) => {
     const elapsedString = getElapsedString(createdUtc);
 
     return (

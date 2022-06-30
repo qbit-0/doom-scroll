@@ -1,20 +1,20 @@
 import { Story } from "@storybook/react";
 import { setupStore } from "App/store";
-import CommentAndReplies from "components/CommentAndReplies/CommentAndReplies";
+import ReplyTree from "components/ReplyTree/ReplyTree";
 import { CommentData, MoreData } from "lib/reddit/redditData";
 import React, { ComponentProps } from "react";
 import { Provider } from "react-redux";
 
 export default {
-    title: "Article/CommentAndReplies",
-    component: CommentAndReplies,
+    title: "Article/ReplyTree",
+    component: ReplyTree,
     parameters: {
-        jest: ["CommentAndReplies.test.tsx"],
+        jest: ["ReplyTree.test.tsx"],
     },
 };
 
-const Template: Story<ComponentProps<typeof CommentAndReplies>> = (args) => (
-    <CommentAndReplies {...args} />
+const Template: Story<ComponentProps<typeof ReplyTree>> = (args) => (
+    <ReplyTree {...args} />
 );
 
 export const Default = Template.bind({});
@@ -84,9 +84,7 @@ const preloadedState = {
 
 const store = setupStore(preloadedState);
 
-Default.args = {
-    comment: parentComment,
-};
+Default.args = {};
 
 Default.decorators = [
     (Story) => {

@@ -9,13 +9,16 @@ import {
 } from "lib/reddit/redditFilterOptions";
 import React, {
     ChangeEventHandler,
+    FC,
     MouseEvent,
     useEffect,
     useState,
 } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-const SearchSort = () => {
+type Props = {};
+
+const SearchSort: FC<Props> = (props) => {
     const [searchParams] = useSearchParams();
     const [sort, setSort] = useState(SearchSortOption.RELEVANCE);
     const [time, setTime] = useState(SearchTimeOption.ALL);

@@ -2,10 +2,9 @@ import { Meta, Story } from "@storybook/react";
 import MainNavBar from "components/MainNavBar";
 import React, { ComponentProps } from "react";
 export default {
-    title: "MainNavBar",
+    title: "Shared/MainNavBar",
     component: MainNavBar,
     parameters: {
-        layout: "centered",
         jest: ["MainNavBar.test.tsx"],
     },
 } as Meta;

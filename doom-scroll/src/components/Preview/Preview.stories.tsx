@@ -3,10 +3,9 @@ import Preview from "components/Preview";
 import React, { ComponentProps } from "react";
 
 export default {
-    title: "Preview",
+    title: "Browse/Preview",
     component: Preview,
     parameters: {
-        layout: "centered",
         jest: ["Preview.test.tsx"],
     },
 } as Meta;
