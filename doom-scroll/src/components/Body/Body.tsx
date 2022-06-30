@@ -10,15 +10,17 @@ type Props = {
 const Body: FC<Props> = ({ post }) => {
     if (post.data["selftext_html"]) {
         return (
-            <div className="overflow-auto max-h-[40rem] my-4">
-                <SanitizeHTML dirty={post.data["selftext_html"]} />
+            <div className="flex max-h-[8rem] px-4 my-4">
+                <div className="overflow-y-auto overflow-ellipsis">
+                    <SanitizeHTML dirty={post.data["selftext_html"]} />
+                </div>
             </div>
         );
     }
 
     if (post.data?.["media"]?.["oembed"]?.["html"]) {
         return (
-            <div className="overflow-auto max-h-[40rem] my-4">
+            <div className="overflow-auto max-h-[40rem] px-4 my-4">
                 <SanitizeHTML dirty={post.data["media"]["oembed"]["html"]} />
             </div>
         );
@@ -26,7 +28,7 @@ const Body: FC<Props> = ({ post }) => {
 
     if (post.data?.["media"]?.["reddit_video"]?.["dash_url"]) {
         return (
-            <div className="flex overflow-auto max-h-[40rem] my-4">
+            <div className="flex overflow-auto max-h-[40rem] px-4 my-4">
                 <video muted loop preload="auto" controls className="mx-auto">
                     <source
                         src={post.data["media"]["reddit_video"]["dash_url"]}
@@ -45,23 +47,19 @@ const Body: FC<Props> = ({ post }) => {
 
     if (post.data?.["preview"]?.["images"]?.["0"]?.["source"]?.["url"]) {
         return (
-            <div className="my-4">
-                <ImagePreview
-                    src={post.data["preview"]["images"]["0"]["source"]["url"]}
-                    href={post.data["url_overridden_by_dest"]}
-                />
-            </div>
+            <ImagePreview
+                src={post.data["preview"]["images"]["0"]["source"]["url"]}
+                href={post.data["url_overridden_by_dest"]}
+            />
         );
     }
 
     if (post.data["post_hint"] === "image") {
         return (
-            <div className="my-4">
-                <ImagePreview
-                    src={post.data["url_overridden_by_dest"]}
-                    href={post.data["url_overridden_by_dest"]}
-                />
-            </div>
+            <ImagePreview
+                src={post.data["url_overridden_by_dest"]}
+                href={post.data["url_overridden_by_dest"]}
+            />
         );
     }
 

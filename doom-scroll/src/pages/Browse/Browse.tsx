@@ -106,12 +106,12 @@ const Browse: React.FC<Props> = () => {
 
                 {!isRefreshing &&
                     Object.values(postDeque.data).map((post, index) => (
-                        <div className="my-8" key={index}>
+                        <div className="my-4" key={index}>
                             <PostContainer post={post} />
                         </div>
                     ))}
                 {(isLoading || after) && (
-                    <div className="my-8">
+                    <div className="my-4">
                         <PostPlaceholder />
                     </div>
                 )}
