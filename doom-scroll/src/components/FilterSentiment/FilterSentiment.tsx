@@ -89,30 +89,15 @@ const FilterSentiment: FC<Props> = () => {
         <>
             <div className="block">
                 <div className="inline-block mx-1 my-2">
-                    <Button
-                        buttonStyle={ButtonStyle.PRIMARY}
-                        onClick={handleBest}
-                    >
-                        Best
-                    </Button>
+                    <Button onClick={handleBest}>Best</Button>
                 </div>
 
                 <div className="inline-block mx-1 my-2">
-                    <Button
-                        buttonStyle={ButtonStyle.PRIMARY}
-                        onClick={handleWorst}
-                    >
-                        Worst
-                    </Button>
+                    <Button onClick={handleWorst}>Worst</Button>
                 </div>
 
                 <div className="inline-block mx-1 my-2">
-                    <Button
-                        buttonStyle={ButtonStyle.PRIMARY}
-                        onClick={handleReset}
-                    >
-                        Reset
-                    </Button>
+                    <Button onClick={handleReset}>Reset</Button>
                 </div>
             </div>
             <div className="block">

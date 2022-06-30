@@ -14,14 +14,19 @@ import React, {
     useEffect,
     useState,
 } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {
+    useLocation,
+    useNavigate,
+    useParams,
+    useSearchParams,
+} from "react-router-dom";
 
 type Props = {};
 
 const SubredditSort: FC<Props> = () => {
-    const { subreddit, pathnameSort } = useParams();
+    const { subreddit, subredditSort } = useParams();
     const [searchParams] = useSearchParams();
-    const [sort, setSort] = useState(pathnameSort || SubredditSortOption.HOT);
+    const [sort, setSort] = useState(subredditSort || SubredditSortOption.HOT);
     const [time, setTime] = useState(
         searchParams.get("t") || SubredditTimeOption.DAY
     );

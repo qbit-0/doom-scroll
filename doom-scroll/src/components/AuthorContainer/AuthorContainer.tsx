@@ -23,15 +23,11 @@ const AuthorContainer: React.FC<Props> = ({ author, createdUtc }) => {
 
     useEffect(() => {
         if (accessToken !== null && author !== "[deleted]") {
-            try {
-                RedditApi.fetchProfileImg(accessToken, author).then(
-                    (fetchedProfileImg) => {
-                        setProfileImg(fetchedProfileImg);
-                    }
-                );
-            } catch (err) {
-                console.log(err);
-            }
+            RedditApi.fetchProfileImg(accessToken, author).then(
+                (fetchedProfileImg) => {
+                    setProfileImg(fetchedProfileImg);
+                }
+            );
         }
     }, [accessToken, author]);
 

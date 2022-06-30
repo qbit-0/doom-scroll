@@ -14,7 +14,7 @@ const SentimentBanner: React.FC<Props> = ({
     if (sentiment === null) {
         return (
             <div
-                className={`inline-block w-28 flex-shrink-0 py-4 rounded-br-3xl bg-neutral-600 shadow-lg`}
+                className={`inline-block w-28 flex-shrink-0 py-4 rounded-br-3xl bg-neutral-600 drop-shadow-lg`}
             />
         );
     }
@@ -25,7 +25,7 @@ const SentimentBanner: React.FC<Props> = ({
     if (roundedSentiment < 0) {
         fromColor = "bg-rose-600";
     } else if (roundedSentiment > 0) {
-        fromColor = "bg-sky-600";
+        fromColor = "bg-cyan-600";
     }
 
     let roundedCommentSentiment = null;
@@ -35,7 +35,7 @@ const SentimentBanner: React.FC<Props> = ({
 
     return (
         <div
-            className={`inline-block w-28 flex-shrink-0 py-4 ${fromColor} shadow-lg text-amber-100`}
+            className={`inline-block w-28 flex-shrink-0 py-4 ${fromColor} drop-shadow-lg text-amber-100`}
         >
             <div className="mb-4">
                 <h4 className="text-center font-bold"> Sentiment</h4>

@@ -1,5 +1,5 @@
-import Button, { ButtonStyle } from "components/Button/Button";
-import SearchBarContainer from "components/MainSearchBar/MainSearchBar";
+import Button from "components/Button/Button";
+import MainSearchBar from "components/MainSearchBar/MainSearchBar";
 import React, { FC, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -19,15 +19,12 @@ const NavBar: FC<Props> = ({ navBarPaths }) => {
     };
 
     return (
-        <nav className="sticky z-10 top-0 p-4 bg-neutral-900 text-amber-100 shadow-lg">
+        <nav className="sticky z-10 top-0 p-4 bg-neutral-900 text-amber-100 drop-shadow-lg">
             <div className="w-fit mx-auto">
                 <div className="inline-block">
-                    {Object.entries(navBarPaths).map((entry) => (
-                        <div className="inline-block mx-1">
-                            <Button
-                                buttonStyle={ButtonStyle.PRIMARY}
-                                onClick={handleNavClick(entry[0])}
-                            >
+                    {Object.entries(navBarPaths).map((entry, index) => (
+                        <div className="inline-block m-1" key={index}>
+                            <Button onClick={handleNavClick(entry[0])}>
                                 <p className="inline font-bold">{entry[1]}</p>
                             </Button>
                         </div>
@@ -35,7 +32,7 @@ const NavBar: FC<Props> = ({ navBarPaths }) => {
                 </div>
 
                 <div className="inline-block mx-1">
-                    <SearchBarContainer />
+                    <MainSearchBar />
                 </div>
             </div>
         </nav>

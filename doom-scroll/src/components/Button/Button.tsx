@@ -25,7 +25,7 @@ const Button: FC<Props> = ({
         <button
             type="button"
             onClick={onClick}
-            className={`p-2 border-2 ${borderColor} rounded-3xl ${bgColor} transition-all shadow-md font-bold text-amber-100`}
+            className={`p-2 border-2 ${borderColor} rounded-3xl ${bgColor} drop-shadow-lg font-bold text-amber-100 hover:contrast-200 hover:-hue-rotate-30 transition-all`}
         >
             {children}
         </button>

@@ -13,7 +13,7 @@ type Props = {
 
 const Post: FC<Props> = ({ post }) => {
     return (
-        <article className="flex overflow-clip mx-auto border-t-2 border-l-2 border-neutral-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-neutral-800 to-neutral-900 shadow-lg">
+        <article className="flex overflow-clip mx-auto border-t-2 border-l-2 border-neutral-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-neutral-800 to-neutral-900 drop-shadow-lg">
             <VoteVertical score={post.data["score"]} />
 
             <div className="w-full px-4 py-8">

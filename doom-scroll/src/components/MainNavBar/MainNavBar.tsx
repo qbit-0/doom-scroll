@@ -9,8 +9,8 @@ enum MainNavBarPath {
 }
 
 const MAIN_NAV_BAR_PATHS = {
-    [MainNavBarPath.POPULAR]: "r/all",
-    [MainNavBarPath.ALL]: "r/popular",
+    [MainNavBarPath.POPULAR]: "r/popular",
+    [MainNavBarPath.ALL]: "r/all",
 };
 
 const MainNavBar: FC<Props> = () => {

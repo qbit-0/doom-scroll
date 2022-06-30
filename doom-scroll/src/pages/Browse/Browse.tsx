@@ -12,11 +12,9 @@ import {
     selectPostsAfter,
     selectPostsIsLoading,
     selectPostsIsRefreshing,
-    setPostsPathname,
-    setPostsSearchStr,
 } from "features/posts/postsSlice";
 import React, { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { batch, useSelector } from "react-redux";
 import { useLocation, useMatch } from "react-router-dom";
 
 type Props = {};
@@ -51,18 +49,16 @@ const Browse: React.FC<Props> = () => {
     useEffect(() => {
         if (isRefreshing) return;
         scrollToTop();
-        dispatch(setPostsPathname(location.pathname));
-        dispatch(setPostsSearchStr(location.search));
-        dispatch(loadPosts());
+        batch(() => {
+            dispatch(
+                loadPosts({
+                    pathname: location.pathname,
+                    searchStr: location.search,
+                })
+            );
+        });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch, location]);
-
-    useEffect(() => {
-        if (isRefreshing) return;
-        scrollToTop();
-        dispatch(loadPosts());
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch, accessToken]);
+    }, [dispatch, accessToken, location]);
 
     const refBot = useRef<HTMLDivElement>(null);
 
@@ -75,7 +71,12 @@ const Browse: React.FC<Props> = () => {
             const observer = new IntersectionObserver((entities) => {
                 const entity = entities[0];
                 if (entity.isIntersecting) {
-                    dispatch(loadPostsAfter());
+                    dispatch(
+                        loadPostsAfter({
+                            pathname: location.pathname,
+                            searchStr: location.search,
+                        })
+                    );
                 }
             }, options);
 
@@ -88,7 +89,7 @@ const Browse: React.FC<Props> = () => {
         }
 
         return;
-    }, [dispatch, isLoading, after]);
+    }, [dispatch, isLoading, after, location]);
 
     return (
         <div className="bg-neutral-900">

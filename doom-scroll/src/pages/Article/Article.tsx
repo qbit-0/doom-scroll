@@ -7,8 +7,6 @@ import {
     loadArticle,
     selectCommentsIsRefreshing,
     selectCommentsPost,
-    setCommentsPathname,
-    setCommentsSearchStr,
 } from "features/comments/commentsSlice";
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
@@ -22,6 +20,7 @@ const Article: React.FC<Props> = () => {
     const post = useSelector(selectCommentsPost);
     const isRefreshing = useSelector(selectCommentsIsRefreshing);
     const dispatch = useAppDispatch();
+
     useEffect(() => {
         if (accessToken === null) {
             dispatch(updateAppToken());
@@ -42,18 +41,14 @@ const Article: React.FC<Props> = () => {
     useEffect(() => {
         if (isRefreshing) return;
         scrollToTop();
-        dispatch(setCommentsPathname(location.pathname));
-        dispatch(setCommentsSearchStr(location.search));
-        dispatch(loadArticle());
+        dispatch(
+            loadArticle({
+                pathname: location.pathname,
+                searchStr: location.search,
+            })
+        );
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch, location]);
-
-    useEffect(() => {
-        if (isRefreshing) return;
-        scrollToTop();
-        dispatch(loadArticle());
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch, accessToken]);
+    }, [dispatch, accessToken, location]);
 
     return (
         <div className="bg-neutral-900 text-amber-100">

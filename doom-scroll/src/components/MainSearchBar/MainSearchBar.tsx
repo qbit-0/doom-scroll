@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 type Props = {};
 
-const MainSearchBarContainer: React.FC<Props> = () => {
+const MainSearchBar: React.FC<Props> = () => {
     const [searchParams] = useSearchParams();
     const [query, setQuery] = useState(searchParams.get("q") || "");
     const navigate = useNavigate();
@@ -20,6 +20,7 @@ const MainSearchBarContainer: React.FC<Props> = () => {
     };
 
     const handleSearchSubmit = () => {
+        if (query === "") return;
         const params = new URLSearchParams();
         params.append("q", query);
         navigate(`/search?${params.toString()}`);
@@ -35,4 +36,4 @@ const MainSearchBarContainer: React.FC<Props> = () => {
     );
 };
 
-export default MainSearchBarContainer;
+export default MainSearchBar;

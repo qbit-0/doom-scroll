@@ -50,6 +50,9 @@ class RedditApi {
             headers: headers,
         });
 
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
         return await response.json();
     };
 
@@ -74,9 +77,14 @@ class RedditApi {
 
     static fetchProfileImg = async (accessToken: string, author: string) => {
         let json;
-        json = await this.fetchReddit(accessToken, `/user/${author}/about`, "");
-
-        if (!json.data) {
+        try {
+            json = await this.fetchReddit(
+                accessToken,
+                `/user/${author}/about`,
+                ""
+            );
+        } catch (err) {
+            console.log(err);
             return null;
         }
 
