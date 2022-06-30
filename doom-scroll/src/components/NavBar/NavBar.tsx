@@ -19,7 +19,7 @@ const NavBar: FC<Props> = ({ navBarPaths }) => {
     };
 
     return (
-        <nav className="sticky z-10 top-0 p-4 bg-neutral-900 text-amber-100 drop-shadow-lg">
+        <nav className="sticky z-10 top-0 p-1 bg-neutral-900 text-amber-100 drop-shadow-lg">
             <div className="w-fit mx-auto">
                 <div className="flex justify-center my-2">
                     {Object.entries(navBarPaths).map((entry, index) => (

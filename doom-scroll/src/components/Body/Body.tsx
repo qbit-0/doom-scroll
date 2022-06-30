@@ -20,7 +20,7 @@ const Body: FC<Props> = ({ post }) => {
 
     if (post.data?.["media"]?.["oembed"]?.["html"]) {
         return (
-            <div className="overflow-auto max-h-[40rem] px-4 my-4">
+            <div className="overflow-auto max-h-[25rem]">
                 <SanitizeHTML dirty={post.data["media"]["oembed"]["html"]} />
             </div>
         );
@@ -28,7 +28,7 @@ const Body: FC<Props> = ({ post }) => {
 
     if (post.data?.["media"]?.["reddit_video"]?.["dash_url"]) {
         return (
-            <div className="flex overflow-auto max-h-[40rem] px-4 my-4">
+            <div className="flex overflow-auto max-h-[25rem]">
                 <video muted loop preload="auto" controls className="mx-auto">
                     <source
                         src={post.data["media"]["reddit_video"]["dash_url"]}

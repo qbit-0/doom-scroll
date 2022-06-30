@@ -99,7 +99,7 @@ const Browse: React.FC<Props> = () => {
                     <div>
                         {searchMatch ? <SearchSort /> : <SubredditSort />}
                     </div>
-                    <div className="border-t-2 border-neutral-700">
+                    <div className="pt-2 border-t-2 border-neutral-700">
                         <FilterSentiment />
                     </div>
                 </div>

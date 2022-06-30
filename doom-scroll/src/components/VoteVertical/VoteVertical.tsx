@@ -9,14 +9,12 @@ type Props = {
 const VoteVertical: React.FC<Props> = ({ score }) => {
     return (
         <div className="inline-block text-amber-100">
-            <div className="p-1 bg-neutral-700 rounded-3xl">
-                <div className="w-fit mx-auto">
-                    <FontAwesomeIcon icon={solid("chevron-up")} size="1x" />
-                </div>
-                <p className="text-center font-bold text-sm">{score}</p>
-                <div className="w-fit mx-auto">
-                    <FontAwesomeIcon icon={solid("chevron-down")} size="1x" />
-                </div>
+            <div className="w-fit mx-auto">
+                <FontAwesomeIcon icon={solid("chevron-up")} size="sm" />
+            </div>
+            <p className="text-center font-bold text-sm">{score}</p>
+            <div className="w-fit mx-auto">
+                <FontAwesomeIcon icon={solid("chevron-down")} size="sm" />
             </div>
         </div>
     );

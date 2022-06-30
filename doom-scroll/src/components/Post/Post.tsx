@@ -36,7 +36,9 @@ const Post: FC<Props> = ({ post }) => {
                 </Link>
             </div>
 
-            <Body post={post} />
+            <div className="mt-2">
+                <Body post={post} />
+            </div>
 
             <SentimentBanner
                 sentiment={post.meta.sentiment}
