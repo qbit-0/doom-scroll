@@ -34,7 +34,7 @@ const CommentAndReplies: React.FC<Props> = ({ comment }) => {
 
     return (
         <div
-            className={`overflow-clip border-t-2 border-l-2 ${borderDepthColor} rounded-tl-xl bg-transparent`}
+            className={`overflow-clip rounded-tl-xl border-t-2 border-l-2 bg-transparent ${borderDepthColor}`}
         >
             <Comment comment={comment} />
             {comment.childrenIds.length > 0 && childReplies}

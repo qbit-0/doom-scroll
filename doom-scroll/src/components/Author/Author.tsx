@@ -19,7 +19,7 @@ const Author: FC<Props> = ({ author, profileImg, createdUtc }) => {
                         className="block h-full w-full"
                     />
                 ) : (
-                    <div className={`block h-full w-full bg-neutral-800`}></div>
+                    <div className="block h-full w-full bg-neutral-800"></div>
                 )}
             </figure>
 
