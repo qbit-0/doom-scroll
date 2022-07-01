@@ -29,7 +29,7 @@ const SearchBar: FC<Props> = ({ value, onChange, onKeyDown, onSubmit }) => {
 
     return (
         <div
-            className={`inline-flex justify-between flex-auto px-4 border-2 border-amber-100 rounded-3xl bg-neutral-800 drop-shadow-lg hover:contrast-200 hover:-hue-rotate-30 ${
+            className={`inline-flex flex-auto justify-between rounded-3xl border-2 border-amber-100 bg-neutral-800 px-4 drop-shadow-lg hover:contrast-200 hover:-hue-rotate-30 ${
                 isFocused && "contrast-200"
             } ${isFocused && "-hue-rotate-30"} transition-all`}
         >
@@ -41,12 +41,12 @@ const SearchBar: FC<Props> = ({ value, onChange, onKeyDown, onSubmit }) => {
                 onKeyDown={onKeyDown}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                className="flex-auto text-amber-100 pl-2 py-2 rounded-l-3xl bg-transparent font-bold placeholder:font-thin outline-none"
+                className="flex-auto rounded-l-3xl bg-transparent py-2 pl-2 font-bold text-amber-100 outline-none placeholder:font-thin"
             />
             <button
                 title="submit search term"
                 onClick={onSubmit}
-                className="p-2 rounded-r-3xl decoration-neutral-600 decoration-4 transition-all font-bold text-amber-100"
+                className="rounded-r-3xl p-2 font-bold text-amber-100 decoration-neutral-600 decoration-4 transition-all"
             >
                 <FontAwesomeIcon icon={solid("magnifying-glass")} />
             </button>

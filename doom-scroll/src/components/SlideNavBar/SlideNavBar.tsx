@@ -55,14 +55,14 @@ const SlideNavBar: FC<Props> = ({ navBarPaths, bottomMargin }) => {
     return (
         <nav>
             <div
-                className={`w-full z-10 top-0 p-1 bg-neutral-900 text-amber-100 drop-shadow-lg`}
+                className={`top-0 z-10 w-full bg-neutral-900 p-1 text-amber-100 drop-shadow-lg`}
                 ref={staticNav}
             >
                 <NavBar navBarPaths={navBarPaths} />
             </div>
 
             <div
-                className={`fixed invisible w-full z-10 top-0 p-1 bg-neutral-900 text-amber-100 drop-shadow-lg ${animate}`}
+                className={`invisible fixed top-0 z-10 w-full bg-neutral-900 p-1 text-amber-100 drop-shadow-lg ${animate}`}
             >
                 <NavBar navBarPaths={navBarPaths} />
             </div>

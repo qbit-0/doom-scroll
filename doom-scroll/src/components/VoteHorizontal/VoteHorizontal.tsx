@@ -12,7 +12,7 @@ const VoteHorizontal: FC<Props> = ({ score }) => {
             <div className="inline-block">
                 <FontAwesomeIcon icon={solid("chevron-up")} size="sm" />
             </div>
-            <p className="inline-block mx-2 text-sm text-center font-bold">
+            <p className="mx-2 inline-block text-center text-sm font-bold">
                 {score}
             </p>
             <div className="inline-block">

@@ -30,10 +30,12 @@ const FilterSentiment: FC<Props> = () => {
     const maxSentiment = useSelector(selectMaxSentiment);
     const minRatio = useSelector(selectMinRatio);
     const maxRatio = useSelector(selectMaxRatio);
-    const [currMinSentiment, setCurrMinSentiment] =
-        useState<number | string>(minSentiment);
-    const [currMaxSentiment, setCurrMaxSentiment] =
-        useState<number | string>(maxSentiment);
+    const [currMinSentiment, setCurrMinSentiment] = useState<number | string>(
+        minSentiment
+    );
+    const [currMaxSentiment, setCurrMaxSentiment] = useState<number | string>(
+        maxSentiment
+    );
     const [currMinRatio, setCurrMinRatio] = useState<number | string>(minRatio);
     const [currMaxRatio, setCurrMaxRatio] = useState<number | string>(maxRatio);
     const dispatch = useDispatch();

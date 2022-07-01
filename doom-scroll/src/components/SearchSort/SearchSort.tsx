@@ -53,7 +53,7 @@ const SearchSort: FC<Props> = () => {
     };
 
     return (
-        <div className="flex flex-wrap justify-left py-2 gap-2">
+        <div className="justify-left flex flex-wrap gap-2 py-2">
             <Button onClick={handleSortClick(SearchSortOption.RELEVANCE)}>
                 {SEARCH_SORT_OPTIONS[SearchSortOption.RELEVANCE]}
             </Button>

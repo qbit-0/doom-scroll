@@ -1,7 +1,0 @@
-{
-    "tabWidth": 4,
-    "useTabs": false,
-    "importOrder": ["^components/(.*)$", "^[./]"],
-    "importOrderSeparation": true,
-    "importOrderSortSpecifiers": true
-}

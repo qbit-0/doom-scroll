@@ -11,7 +11,7 @@ type Props = {
 const Body: FC<Props> = ({ post }) => {
     if (post.data["selftext_html"]) {
         return (
-            <div className="flex max-h-[8rem] px-4 my-4">
+            <div className="my-4 mx-auto flex max-h-[8rem] w-fit px-4">
                 <div className="overflow-y-auto overflow-ellipsis">
                     <SanitizeHTML dirty={post.data["selftext_html"]} />
                 </div>
@@ -21,7 +21,7 @@ const Body: FC<Props> = ({ post }) => {
 
     if (post.data?.["media"]?.["oembed"]?.["html"]) {
         return (
-            <div className="overflow-auto max-h-[25rem] px-4">
+            <div className="mx-auto max-h-[25rem] w-fit overflow-auto px-4">
                 <SanitizeHTML dirty={post.data["media"]["oembed"]["html"]} />
             </div>
         );
@@ -29,16 +29,23 @@ const Body: FC<Props> = ({ post }) => {
 
     if (post.data?.["media"]?.["reddit_video"]?.["dash_url"]) {
         return (
-            <div className="flex overflow-auto max-h-[25rem]">
+            <div className="flex max-h-[25rem] overflow-auto">
                 <video muted loop preload="auto" controls className="mx-auto">
                     <source
                         src={post.data["media"]["reddit_video"]["dash_url"]}
                     />
                     <source
+                        src={post.data["media"]["reddit_video"]["hls_url"]}
+                    />
+                    <source
                         src={post.data["media"]["reddit_video"]["fallback_url"]}
                     />
                     <source
-                        src={post.data["media"]["reddit_video"]["hls_url"]}
+                        src={
+                            post.data["media"]["reddit_video"][
+                                "scrubber_media_url"
+                            ]
+                        }
                     />
                     Your browser does not support the video tag.
                 </video>
@@ -66,7 +73,7 @@ const Body: FC<Props> = ({ post }) => {
 
     if (post.data?.["gallery_data"]?.["items"]) {
         return (
-            <div className="flex flex-wrap overflow-auto max-h-[25rem] gap-2">
+            <div className="flex max-h-[25rem] flex-wrap gap-2 overflow-auto">
                 {Object.values(post.data["gallery_data"]["items"]).map(
                     ({ media_id }: any, index) => {
                         return (

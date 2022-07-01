@@ -12,19 +12,19 @@ const NoMatch: FC<Props> = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="flex justify-center items-center h-screen bg-neutral-900">
+        <div className="flex h-screen items-center justify-center bg-neutral-900">
             <div>
-                <h2 className="text-center text-amber-100 font-black text-8xl">
+                <h2 className="text-center text-8xl font-black text-amber-100">
                     No Route Match
                 </h2>
-                <div className="flex flex-col w-full h-full p-8 justify-center items-center text-neutral-700">
+                <div className="flex h-full w-full flex-col items-center justify-center p-8 text-neutral-700">
                     <FontAwesomeIcon
                         icon={solid("signs-post")}
                         size="10x"
                         bounce
                     />
                 </div>
-                <p className="text-center text-amber-100 font-black text-3xl">
+                <p className="text-center text-3xl font-black text-amber-100">
                     Let's go{" "}
                     <Button
                         borderColor="border-purple-700"

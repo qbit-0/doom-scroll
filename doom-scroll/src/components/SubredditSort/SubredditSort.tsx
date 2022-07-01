@@ -55,7 +55,7 @@ const SubredditSort: FC<Props> = () => {
     };
 
     return (
-        <div className="flex flex-wrap justify-left gap-2 py-2">
+        <div className="justify-left flex flex-wrap gap-2 py-2">
             <Button onClick={handleSortClick(SubredditSortOption.HOT)}>
                 {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.HOT]}
             </Button>

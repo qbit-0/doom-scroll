@@ -7,15 +7,15 @@ type Props = {
 
 const ImagePreview: React.FC<Props> = ({ src, href }) => {
     return (
-        <figure className="flex overflow-clip min-h-[10rem] max-h-[25rem] drop-shadow-lg bg-neutral-800">
+        <figure className="flex max-h-[25rem] min-h-[10rem] overflow-clip bg-neutral-800 drop-shadow-lg">
             <img
-                className="block object-contain mx-auto"
+                className="mx-auto block object-contain"
                 alt="post body"
                 src={src}
             />
-            <div className="invisible sm:visible absolute bottom-0 w-full backdrop-blur-md backdrop-brightness-50">
+            <div className="invisible absolute bottom-0 w-full backdrop-blur-md backdrop-brightness-50 sm:visible">
                 <a title="link" href={href} target="_blank" rel="noreferrer">
-                    <p className="px-8 py-2 underline text-sm text-amber-100 overflow-ellipsis">
+                    <p className="overflow-ellipsis px-8 py-2 text-sm text-amber-100 underline">
                         {href}
                     </p>
                 </a>

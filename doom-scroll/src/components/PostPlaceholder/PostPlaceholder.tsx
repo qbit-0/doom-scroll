@@ -6,8 +6,8 @@ type Props = {};
 
 const PostPlaceholder: FC<Props> = () => {
     return (
-        <article className="overflow-clip h-[20rem] mx-auto border-2 border-neutral-700 rounded-tl-3xl rounded-br-3xl bg-gradient-to-r from-neutral-800 to-neutral-900 drop-shadow-lg animation-pulse">
-            <div className="flex justify-center items-end w-full h-full text-neutral-700">
+        <article className="animation-pulse mx-auto h-[40rem] overflow-clip rounded-tl-3xl rounded-br-3xl border-2 border-neutral-700 bg-gradient-to-r from-neutral-800 to-neutral-900 drop-shadow-lg">
+            <div className="flex h-full w-full items-end justify-center text-neutral-700">
                 <FontAwesomeIcon icon={solid("frog")} size="10x" bounce />
             </div>
         </article>

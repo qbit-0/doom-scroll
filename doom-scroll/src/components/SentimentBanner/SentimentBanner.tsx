@@ -17,7 +17,7 @@ const SentimentBanner: React.FC<Props> = ({ sentiment, ratio }) => {
 
     return (
         <div
-            className={`flex-auto inline-flex shrink-0 p-2 ${fromColor} drop-shadow-lg text-amber-100`}
+            className={`inline-flex flex-auto shrink-0 p-2 ${fromColor} text-amber-100 drop-shadow-lg`}
         >
             <div className="inline-block flex-auto text-xs">
                 <h4 className="text-center font-bold"> Sentiment</h4>

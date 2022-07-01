@@ -10,25 +10,25 @@ const Author: FC<Props> = ({ author, profileImg, createdUtc }) => {
     const elapsedString = getElapsedString(createdUtc);
 
     return (
-        <div className="flex h-full flex-auto justify-start items-center gap-2 overflow-hidden">
-            <figure className="inline-block grow-0 shrink-0 overflow-clip w-8 h-8 rounded-full">
+        <div className="flex h-full flex-auto items-center justify-start gap-2 overflow-hidden">
+            <figure className="inline-block h-8 w-8 shrink-0 grow-0 overflow-clip rounded-full">
                 {profileImg !== null ? (
                     <img
                         src={profileImg}
                         alt={`${author}'s profile`}
-                        className="block w-full h-full"
+                        className="block h-full w-full"
                     />
                 ) : (
-                    <div className={`block w-full h-full bg-neutral-800`}></div>
+                    <div className={`block h-full w-full bg-neutral-800`}></div>
                 )}
             </figure>
 
             <div className="flex-auto flex-wrap overflow-hidden">
-                <p className="text-amber-100 text-sm font-bold italic overflow-hidden overflow-ellipsis">
+                <p className="overflow-hidden overflow-ellipsis text-sm font-bold italic text-amber-100">
                     {author}
                 </p>
 
-                <p className="font-thin text-sm text-amber-100">
+                <p className="text-sm font-thin text-amber-100">
                     &nbsp; - {elapsedString}
                 </p>
             </div>
