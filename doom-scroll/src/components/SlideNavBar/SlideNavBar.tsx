@@ -31,7 +31,7 @@ const SlideNavBar: FC<Props> = ({ navBarPaths, bottomMargin }) => {
                 window.pageYOffset < lastPageOffset
             ) {
                 setShow(true);
-            } else {
+            } else if (show === true) {
                 setShow(false);
             }
             lastPageOffset = window.pageYOffset;
@@ -41,7 +41,7 @@ const SlideNavBar: FC<Props> = ({ navBarPaths, bottomMargin }) => {
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
-    }, [bottomMargin]);
+    }, [bottomMargin, show]);
 
     let animate = "";
     if (show === null) {

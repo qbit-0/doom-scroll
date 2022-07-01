@@ -93,9 +93,8 @@ const Browse: React.FC<Props> = () => {
 
     return (
         <div className="bg-neutral-900">
-            <div ref={refTop} />
-            <div className="px-2 ms:px-16 pb-8 max-w-7xl mx-auto">
-                <div className="pt-2 sm:pt-28 pb-8">
+            <div className="px-2 pb-8 max-w-7xl mx-auto ms:px-16">
+                <div className="pt-2 pb-8 sm:pt-28">
                     <div>
                         {searchMatch ? <SearchSort /> : <SubredditSort />}
                     </div>
@@ -103,6 +102,7 @@ const Browse: React.FC<Props> = () => {
                         <FilterSentiment />
                     </div>
                 </div>
+                <div ref={refTop} />
 
                 {!isRefreshing &&
                     Object.values(postDeque.data).map((post, index) => (

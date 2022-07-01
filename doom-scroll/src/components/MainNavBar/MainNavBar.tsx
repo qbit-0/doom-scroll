@@ -14,7 +14,7 @@ const MAIN_NAV_BAR_PATHS = {
 };
 
 const MainNavBar: FC<Props> = () => {
-    return <SlideNavBar navBarPaths={MAIN_NAV_BAR_PATHS} bottomMargin={250} />;
+    return <SlideNavBar navBarPaths={MAIN_NAV_BAR_PATHS} bottomMargin={500} />;
 };
 
 export default MainNavBar;
