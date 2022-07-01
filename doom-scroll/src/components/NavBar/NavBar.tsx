@@ -20,17 +20,12 @@ export const NavBar: FC<InnerProps> = ({ navBarPaths }) => {
 
     return (
         <div className="w-fit mx-auto">
-            <div className="flex justify-center my-2">
+            <div className="flex flex-wrap justify-center my-2 gap-2">
                 {Object.entries(navBarPaths).map((entry, index) => (
-                    <div className="inline-block mx-1" key={index}>
-                        <Button onClick={handleNavClick(entry[0])}>
-                            <p className="inline font-bold">{entry[1]}</p>
-                        </Button>
-                    </div>
+                    <Button onClick={handleNavClick(entry[0])}>
+                        <p className="inline font-bold">{entry[1]}</p>
+                    </Button>
                 ))}
-            </div>
-
-            <div className="my-2">
                 <MainSearchBar />
             </div>
         </div>

@@ -55,48 +55,30 @@ const SubredditSort: FC<Props> = () => {
     };
 
     return (
-        <div className="py-2">
-            <div className="inline-block mx-1">
-                <Button onClick={handleSortClick(SubredditSortOption.HOT)}>
-                    {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.HOT]}
-                </Button>
-            </div>
-
-            <div className="inline-block mx-1">
-                <Button onClick={handleSortClick(SubredditSortOption.NEW)}>
-                    {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.NEW]}
-                </Button>
-            </div>
-
-            <div className="inline-block mx-1">
-                <Button onClick={handleSortClick(SubredditSortOption.TOP)}>
-                    {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.TOP]}
-                </Button>
-            </div>
-
+        <div className="flex flex-wrap justify-left gap-2 py-2">
+            <Button onClick={handleSortClick(SubredditSortOption.HOT)}>
+                {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.HOT]}
+            </Button>
+            <Button onClick={handleSortClick(SubredditSortOption.NEW)}>
+                {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.NEW]}
+            </Button>
+            <Button onClick={handleSortClick(SubredditSortOption.TOP)}>
+                {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.TOP]}
+            </Button>
             {sort === "top" && (
-                <div className="inline-block mx-1">
-                    <Select
-                        title="time"
-                        value={time}
-                        onChange={handleTimeChange}
-                    >
-                        {Object.entries(SUBREDDIT_TIME_OPTIONS).map(
-                            (timeOption, index) => (
-                                <Option value={timeOption[0]} key={index}>
-                                    {timeOption[1]}
-                                </Option>
-                            )
-                        )}
-                    </Select>
-                </div>
+                <Select title="time" value={time} onChange={handleTimeChange}>
+                    {Object.entries(SUBREDDIT_TIME_OPTIONS).map(
+                        (timeOption, index) => (
+                            <Option value={timeOption[0]} key={index}>
+                                {timeOption[1]}
+                            </Option>
+                        )
+                    )}
+                </Select>
             )}
-
-            <div className="inline-block mx-1">
-                <Button onClick={handleSortClick(SubredditSortOption.RISING)}>
-                    {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.RISING]}
-                </Button>
-            </div>
+            <Button onClick={handleSortClick(SubredditSortOption.RISING)}>
+                {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.RISING]}
+            </Button>
         </div>
     );
 };

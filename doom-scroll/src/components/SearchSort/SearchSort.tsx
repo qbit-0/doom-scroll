@@ -53,50 +53,38 @@ const SearchSort: FC<Props> = () => {
     };
 
     return (
-        <div className="py-2">
-            <div className="inline-block mx-1">
-                <Button onClick={handleSortClick(SearchSortOption.RELEVANCE)}>
-                    {SEARCH_SORT_OPTIONS[SearchSortOption.RELEVANCE]}
-                </Button>
-            </div>
+        <div className="flex flex-wrap justify-left py-2 gap-2">
+            <Button onClick={handleSortClick(SearchSortOption.RELEVANCE)}>
+                {SEARCH_SORT_OPTIONS[SearchSortOption.RELEVANCE]}
+            </Button>
 
-            <div className="inline-block mx-1">
-                <Button onClick={handleSortClick(SearchSortOption.HOT)}>
-                    <p className="inline font-bold">
-                        {SEARCH_SORT_OPTIONS[SearchSortOption.HOT]}
-                    </p>
-                </Button>
-            </div>
+            <Button onClick={handleSortClick(SearchSortOption.HOT)}>
+                <p className="inline font-bold">
+                    {SEARCH_SORT_OPTIONS[SearchSortOption.HOT]}
+                </p>
+            </Button>
 
-            <div className="inline-block mx-1">
-                <Button onClick={handleSortClick(SearchSortOption.TOP)}>
-                    {SEARCH_SORT_OPTIONS[SearchSortOption.TOP]}
-                </Button>
-            </div>
+            <Button onClick={handleSortClick(SearchSortOption.TOP)}>
+                {SEARCH_SORT_OPTIONS[SearchSortOption.TOP]}
+            </Button>
 
-            <div className="inline-block mx-1">
-                <Button onClick={handleSortClick(SearchSortOption.NEW)}>
-                    {SEARCH_SORT_OPTIONS[SearchSortOption.NEW]}
-                </Button>
-            </div>
+            <Button onClick={handleSortClick(SearchSortOption.NEW)}>
+                {SEARCH_SORT_OPTIONS[SearchSortOption.NEW]}
+            </Button>
 
-            <div className="inline-block mx-1">
-                <Button onClick={handleSortClick(SearchSortOption.COMMENTS)}>
-                    {SEARCH_SORT_OPTIONS[SearchSortOption.COMMENTS]}
-                </Button>
-            </div>
+            <Button onClick={handleSortClick(SearchSortOption.COMMENTS)}>
+                {SEARCH_SORT_OPTIONS[SearchSortOption.COMMENTS]}
+            </Button>
 
-            <div className="float-right">
-                <Select title="time" value={time} onChange={handleTimeChange}>
-                    {Object.entries(SEARCH_TIME_OPTIONS).map(
-                        (timeOption, index) => (
-                            <Option value={timeOption[0]} key={index}>
-                                {timeOption[1]}
-                            </Option>
-                        )
-                    )}
-                </Select>
-            </div>
+            <Select title="time" value={time} onChange={handleTimeChange}>
+                {Object.entries(SEARCH_TIME_OPTIONS).map(
+                    (timeOption, index) => (
+                        <Option value={timeOption[0]} key={index}>
+                            {timeOption[1]}
+                        </Option>
+                    )
+                )}
+            </Select>
         </div>
     );
 };

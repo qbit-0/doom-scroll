@@ -24,7 +24,7 @@ const Comment: FC<Props> = ({ comment }) => {
                         created_utc={created_utc}
                     />
                 </div>
-                <div className="inline-block">
+                <div className="inline-block overflow-clip rounded-3xl">
                     <SentimentBanner sentiment={comment.meta.sentiment} />
                 </div>
             </div>

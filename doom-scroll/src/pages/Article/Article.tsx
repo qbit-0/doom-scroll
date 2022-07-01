@@ -54,7 +54,7 @@ const Article: React.FC<Props> = () => {
     return (
         <div className="bg-neutral-900 text-amber-100">
             <div ref={refTop} />
-            <div className="px-2 pt-2 pb-8 sm:px-16 sm:pt-28">
+            <div className="px-2 pt-2 pb-8 sm:px-16">
                 <div>
                     {!isRefreshing && post !== null ? (
                         <div className="my-4">

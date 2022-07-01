@@ -30,12 +30,10 @@ const FilterSentiment: FC<Props> = () => {
     const maxSentiment = useSelector(selectMaxSentiment);
     const minRatio = useSelector(selectMinRatio);
     const maxRatio = useSelector(selectMaxRatio);
-    const [currMinSentiment, setCurrMinSentiment] = useState<number | string>(
-        minSentiment
-    );
-    const [currMaxSentiment, setCurrMaxSentiment] = useState<number | string>(
-        maxSentiment
-    );
+    const [currMinSentiment, setCurrMinSentiment] =
+        useState<number | string>(minSentiment);
+    const [currMaxSentiment, setCurrMaxSentiment] =
+        useState<number | string>(maxSentiment);
     const [currMinRatio, setCurrMinRatio] = useState<number | string>(minRatio);
     const [currMaxRatio, setCurrMaxRatio] = useState<number | string>(maxRatio);
     const dispatch = useDispatch();
@@ -122,7 +120,6 @@ const FilterSentiment: FC<Props> = () => {
                 >
                     Best
                 </Button>
-
                 <Button
                     bgColor="bg-rose-700"
                     hoverBgColor="hover:bg-rose-600"
@@ -130,7 +127,6 @@ const FilterSentiment: FC<Props> = () => {
                 >
                     Worst
                 </Button>
-
                 <Button
                     bgColor="bg-neutral-700"
                     hoverBgColor="hover:bg-neutral-600"
@@ -138,7 +134,6 @@ const FilterSentiment: FC<Props> = () => {
                 >
                     Neutral
                 </Button>
-
                 <Button onClick={handleReset}>Reset</Button>
             </div>
             {/* <div className="block">
