@@ -8,15 +8,23 @@ module.exports = {
         },
         extend: {
             keyframes: {
-                fadein: {
+                slidein: {
                     "0%": {
-                        transform: "translate(0%, 50%)",
+                        transform: "translate(0%, -100%)",
                     },
                     "100%": {
                         transform: "translate(0%, 0%)",
                     },
                 },
-                fadeintop: {
+                slideout: {
+                    "0%": {
+                        transform: "translate(0%, 0%)",
+                    },
+                    "100%": {
+                        transform: "translate(0%, -100%)",
+                    },
+                },
+                scrollfade: {
                     "0%": {
                         opacity: "0%",
                         transform: "translate(0%, -25%)",
@@ -48,9 +56,10 @@ module.exports = {
                 },
             },
             animation: {
-                fadein: "fadein 200ms linear both",
-                fadeintop: "fadeintop 2s ease infinite",
+                slidein: "slidein 200ms ease forwards",
+                slideout: "slideout 200ms ease forwards",
                 shake: "shake 100ms linear infinite",
+                scrollfade: "scrollfade 2s ease infinite",
             },
         },
     },

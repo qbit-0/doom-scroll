@@ -1,17 +1,17 @@
 import { Meta, Story } from "@storybook/react";
-import NavBar from "components/NavBar/NavBar";
+import SlideNavBar from "components/SlideNavBar/SlideNavBar";
 import React, { ComponentProps } from "react";
 
 export default {
-    title: "Shared/NavBar",
-    component: NavBar,
+    title: "Shared/SlideNavBar",
+    component: SlideNavBar,
     parameters: {
-        jest: ["NavBar.test.tsx"],
+        jest: ["SlideNavBar.test.tsx"],
     },
 } as Meta;
 
-const Template: Story<ComponentProps<typeof NavBar>> = (args) => (
-    <NavBar {...args} />
+const Template: Story<ComponentProps<typeof SlideNavBar>> = (args) => (
+    <SlideNavBar {...args} />
 );
 
 export const Default = Template.bind({});

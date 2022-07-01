@@ -51,7 +51,7 @@ const Hero: FC<Props> = () => {
                     <p className="inline-block text-transparent bg-clip-text bg-gradient-to-t from-rose-600 to-black drop-shadow-lg animate-shake">
                         Doom
                     </p>
-                    <p className="inline-block text-transparent bg-clip-text bg-cyan-600 drop-shadow-lg animate-fadeintop">
+                    <p className="inline-block text-transparent bg-clip-text bg-cyan-600 drop-shadow-lg">
                         Scroll
                     </p>
                 </h1>
