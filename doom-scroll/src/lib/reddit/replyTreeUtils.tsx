@@ -1,4 +1,5 @@
 import { CommentData, ReplyData, ReplyTreeData } from "./redditData";
+
 class ReplyTreeUtils {
     static find = (replyTree: ReplyTreeData, id: number): ReplyData => {
         return replyTree.data[id];

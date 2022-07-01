@@ -1,6 +1,7 @@
 import { Meta, Story } from "@storybook/react";
-import NumComments from "components/NumComments/NumComments";
 import React, { ComponentProps } from "react";
+
+import NumComments from "components/NumComments/NumComments";
 
 export default {
     title: "Shared/NumComments",

@@ -1,9 +1,4 @@
 import { useAppDispatch } from "App/store";
-import FilterSentiment from "components/FilterSentiment/FilterSentiment";
-import PostContainer from "components/PostContainer/PostContainer";
-import PostPlaceholder from "components/PostPlaceholder/PostPlaceholder";
-import SearchSort from "components/SearchSort/SearchSort";
-import SubredditSort from "components/SubredditSort/SubredditSort";
 import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import {
     loadPosts,
@@ -16,6 +11,12 @@ import {
 import React, { useEffect, useRef } from "react";
 import { batch, useSelector } from "react-redux";
 import { useLocation, useMatch } from "react-router-dom";
+
+import FilterSentiment from "components/FilterSentiment/FilterSentiment";
+import PostContainer from "components/PostContainer/PostContainer";
+import PostPlaceholder from "components/PostPlaceholder/PostPlaceholder";
+import SearchSort from "components/SearchSort/SearchSort";
+import SubredditSort from "components/SubredditSort/SubredditSort";
 
 type Props = {};
 

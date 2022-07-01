@@ -1,7 +1,8 @@
 import { Meta, Story } from "@storybook/react";
-import SentimentBanner from "components/SentimentBanner/SentimentBanner";
 import React from "react";
 import { ComponentProps } from "react";
+
+import SentimentBanner from "components/SentimentBanner/SentimentBanner";
 
 export default {
     title: "Shared/SentimentBanner",

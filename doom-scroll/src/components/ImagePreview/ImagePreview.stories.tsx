@@ -1,6 +1,7 @@
 import { Meta, Story } from "@storybook/react";
-import ImagePreview from "components/ImagePreview/ImagePreview";
 import React, { ComponentProps } from "react";
+
+import ImagePreview from "components/ImagePreview/ImagePreview";
 
 export default {
     title: "Browse/ImagePreview",

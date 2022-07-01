@@ -1,6 +1,7 @@
 import { Meta, Story } from "@storybook/react";
-import Author from "components/Author/Author";
 import React, { ComponentProps } from "react";
+
+import Author from "components/Author/Author";
 
 export default {
     title: "Shared/Author",

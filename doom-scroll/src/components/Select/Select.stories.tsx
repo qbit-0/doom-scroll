@@ -1,7 +1,9 @@
 import { Meta, Story } from "@storybook/react";
+import React, { ComponentProps } from "react";
+
 import Option from "components/Option/Option";
 import Select from "components/Select/Select";
-import React, { ComponentProps } from "react";
+
 export default {
     title: "Shared/Select",
     component: Select,

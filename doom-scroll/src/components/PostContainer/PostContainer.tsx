@@ -1,4 +1,3 @@
-import Post from "components/Post/Post";
 import {
     selectMaxRatio,
     selectMaxSentiment,
@@ -9,6 +8,8 @@ import { PostData } from "lib/reddit/redditData";
 import React from "react";
 import { FC } from "react";
 import { useSelector } from "react-redux";
+
+import Post from "components/Post/Post";
 
 type Props = {
     post: PostData;

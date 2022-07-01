@@ -1,6 +1,8 @@
 import { Meta, Story } from "@storybook/react";
-import Option from "components/Option/Option";
 import React, { ComponentProps } from "react";
+
+import Option from "components/Option/Option";
+
 export default {
     title: "Shared/Option",
     component: Option,

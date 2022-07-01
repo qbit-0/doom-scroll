@@ -1,7 +1,8 @@
-import Button from "components/Button/Button";
-import MainSearchBar from "components/MainSearchBar/MainSearchBar";
 import React, { FC, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
+
+import Button from "components/Button/Button";
+import MainSearchBar from "components/MainSearchBar/MainSearchBar";
 
 type InnerProps = {
     navBarPaths: {

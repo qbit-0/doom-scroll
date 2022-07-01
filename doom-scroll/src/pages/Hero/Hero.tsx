@@ -1,15 +1,16 @@
 import { useAppDispatch } from "App/store";
-import Button from "components/Button/Button";
-import { ButtonStyle } from "components/Button/Button";
 import {
-    setMinSentiment,
+    setMaxRatio,
     setMaxSentiment,
     setMinRatio,
-    setMaxRatio,
+    setMinSentiment,
 } from "features/nlp/nlpSlice";
 import { NlpPresets } from "lib/utils/nlpPresets";
 import React, { FC } from "react";
 import { batch } from "react-redux";
+
+import Button from "components/Button/Button";
+import { ButtonStyle } from "components/Button/Button";
 
 type Props = {};
 

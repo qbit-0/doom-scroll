@@ -1,9 +1,10 @@
 import { Story } from "@storybook/react";
 import { setupStore } from "App/store";
-import ReplyTree from "components/ReplyTree/ReplyTree";
 import { CommentData, MoreData } from "lib/reddit/redditData";
 import React, { ComponentProps } from "react";
 import { Provider } from "react-redux";
+
+import ReplyTree from "components/ReplyTree/ReplyTree";
 
 export default {
     title: "Article/ReplyTree",

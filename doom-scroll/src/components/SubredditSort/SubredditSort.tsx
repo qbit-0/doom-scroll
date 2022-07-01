@@ -1,11 +1,8 @@
-import Button from "components/Button/Button";
-import Option from "components/Option/Option";
-import Select from "components/Select/Select";
 import {
-    SubredditSortOption,
-    SubredditTimeOption,
     SUBREDDIT_SORT_OPTIONS,
     SUBREDDIT_TIME_OPTIONS,
+    SubredditSortOption,
+    SubredditTimeOption,
 } from "lib/reddit/redditFilterOptions";
 import React, {
     ChangeEventHandler,
@@ -15,6 +12,10 @@ import React, {
     useState,
 } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+
+import Button from "components/Button/Button";
+import Option from "components/Option/Option";
+import Select from "components/Select/Select";
 
 type Props = {};
 

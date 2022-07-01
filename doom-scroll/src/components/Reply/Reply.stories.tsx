@@ -1,6 +1,7 @@
 import { Meta, Story } from "@storybook/react";
-import Reply from "components/Reply/Reply";
 import React, { ComponentProps } from "react";
+
+import Reply from "components/Reply/Reply";
 
 export default {
     title: "Article/Reply",

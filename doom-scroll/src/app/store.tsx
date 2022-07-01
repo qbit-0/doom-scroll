@@ -1,7 +1,7 @@
 import {
+    PreloadedState,
     combineReducers,
     configureStore,
-    PreloadedState,
 } from "@reduxjs/toolkit";
 import authReducer from "features/auth/authSlice";
 import commentsReducer from "features/comments/commentsSlice";

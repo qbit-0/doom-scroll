@@ -1,9 +1,10 @@
 import { useAppDispatch } from "App/store";
-import Author from "components/Author/Author";
 import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import RedditApi from "lib/reddit/redditApi";
 import React, { FC, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+
+import Author from "components/Author/Author";
 
 type Props = {
     author: string;

@@ -1,6 +1,8 @@
 import { Meta, Story } from "@storybook/react";
-import Comment from "components/Comment/Comment";
 import React, { ComponentProps } from "react";
+
+import Comment from "components/Comment/Comment";
+
 export default {
     title: "Article/Comment",
     component: Comment,

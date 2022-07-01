@@ -1,9 +1,10 @@
 import { Story } from "@storybook/react";
 import { setupStore } from "App/store";
-import CommentAndReplies from "components/CommentAndReplies/CommentAndReplies";
 import { CommentData, MoreData } from "lib/reddit/redditData";
 import React, { ComponentProps } from "react";
 import { Provider } from "react-redux";
+
+import CommentAndReplies from "components/CommentAndReplies/CommentAndReplies";
 
 export default {
     title: "Article/CommentAndReplies",

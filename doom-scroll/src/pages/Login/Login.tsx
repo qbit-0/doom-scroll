@@ -1,8 +1,8 @@
+import { setUserToken } from "features/auth/authSlice";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import { v4 as uuid } from "uuid";
-import { setUserToken } from "features/auth/authSlice";
 
 const REDDIT_AUTH_URL = "https://www.reddit.com/api/v1/authorize";
 

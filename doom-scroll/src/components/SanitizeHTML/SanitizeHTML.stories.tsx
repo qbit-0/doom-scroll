@@ -1,7 +1,8 @@
 import { Meta, Story } from "@storybook/react";
-import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
 import React from "react";
 import { ComponentProps } from "react";
+
+import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
 
 export default {
     title: "Shared/SanitizeHTML",

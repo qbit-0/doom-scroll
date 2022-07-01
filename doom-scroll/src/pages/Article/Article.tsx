@@ -1,7 +1,4 @@
 import { useAppDispatch } from "App/store";
-import Post from "components/Post/Post";
-import PostPlaceholder from "components/PostPlaceholder/PostPlaceholder";
-import ReplyTree from "components/ReplyTree/ReplyTree";
 import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import {
     loadArticle,
@@ -11,6 +8,10 @@ import {
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+
+import Post from "components/Post/Post";
+import PostPlaceholder from "components/PostPlaceholder/PostPlaceholder";
+import ReplyTree from "components/ReplyTree/ReplyTree";
 
 type Props = {};
 

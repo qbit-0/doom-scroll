@@ -1,6 +1,7 @@
 import { Meta, Story } from "@storybook/react";
-import Post from "components/Post/Post";
 import React, { ComponentProps } from "react";
+
+import Post from "components/Post/Post";
 
 export default {
     title: "Browse/Post",

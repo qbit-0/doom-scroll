@@ -1,6 +1,7 @@
 import { Meta, Story } from "@storybook/react";
-import InputNumber from "components/InputNumber/InputNumber";
 import React, { ComponentProps } from "react";
+
+import InputNumber from "components/InputNumber/InputNumber";
 
 export default {
     title: "Shared/InputNumber",

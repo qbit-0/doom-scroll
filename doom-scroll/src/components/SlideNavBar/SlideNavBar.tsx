@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from "react";
+
 import { NavBar } from "../NavBar/NavBar";
 
 type Props = {

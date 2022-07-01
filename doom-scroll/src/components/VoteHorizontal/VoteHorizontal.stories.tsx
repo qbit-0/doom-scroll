@@ -1,7 +1,8 @@
 import { Meta, Story } from "@storybook/react";
-import VoteHorizontal from "components/VoteHorizontal/VoteHorizontal";
 import React from "react";
 import { ComponentProps } from "react";
+
+import VoteHorizontal from "components/VoteHorizontal/VoteHorizontal";
 
 export default {
     title: "Shared/VoteHorizontal",

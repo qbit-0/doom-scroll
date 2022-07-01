@@ -1,6 +1,7 @@
 import { Story } from "@storybook/react";
-import More from "components/More/More";
 import React, { ComponentProps } from "react";
+
+import More from "components/More/More";
 
 export default {
     title: "Article/More",

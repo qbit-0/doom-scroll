@@ -1,6 +1,7 @@
-import SearchBar from "components/SearchBar/SearchBar";
 import React, { ChangeEventHandler, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+
+import SearchBar from "components/SearchBar/SearchBar";
 
 type Props = {};
 

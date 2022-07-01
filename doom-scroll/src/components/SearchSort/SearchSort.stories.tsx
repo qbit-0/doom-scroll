@@ -1,6 +1,7 @@
 import { Meta, Story } from "@storybook/react";
-import SearchSort from "components/SearchSort/SearchSort";
 import React, { ComponentProps } from "react";
+
+import SearchSort from "components/SearchSort/SearchSort";
 
 export default {
     title: "Browse/SearchSort",

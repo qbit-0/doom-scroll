@@ -1,6 +1,7 @@
 import { Meta, Story } from "@storybook/react";
-import FilterSentiment from "components/FilterSentiment/FilterSentiment";
 import React, { ComponentProps } from "react";
+
+import FilterSentiment from "components/FilterSentiment/FilterSentiment";
 
 export default {
     title: "Browse/FilterSentiment",

@@ -1,6 +1,7 @@
 import { Meta, Story } from "@storybook/react";
-import SlideNavBar from "components/SlideNavBar/SlideNavBar";
 import React, { ComponentProps } from "react";
+
+import SlideNavBar from "components/SlideNavBar/SlideNavBar";
 
 export default {
     title: "Shared/SlideNavBar",

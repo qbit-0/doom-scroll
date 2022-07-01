@@ -1,6 +1,7 @@
 import { Meta, Story } from "@storybook/react";
-import SearchBar from "components/SearchBar/SearchBar";
 import React, { ComponentProps } from "react";
+
+import SearchBar from "components/SearchBar/SearchBar";
 
 export default {
     title: "Shared/SearchBar",

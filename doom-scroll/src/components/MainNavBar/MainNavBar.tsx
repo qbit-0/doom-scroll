@@ -1,5 +1,6 @@
-import SlideNavBar from "components/SlideNavBar/SlideNavBar";
 import React, { FC } from "react";
+
+import SlideNavBar from "components/SlideNavBar/SlideNavBar";
 
 type Props = {};
 

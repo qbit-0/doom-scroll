@@ -1,9 +1,10 @@
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Button from "components/Button/Button";
 import React from "react";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
+
+import Button from "components/Button/Button";
 
 type Props = {};
 
