@@ -10,7 +10,6 @@ import React, { FC } from "react";
 import { batch } from "react-redux";
 
 import Button from "components/Button/Button";
-import { ButtonStyle } from "components/Button/Button";
 
 type Props = {};
 
