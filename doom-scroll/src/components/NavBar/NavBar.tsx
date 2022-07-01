@@ -8,7 +8,7 @@ type InnerProps = {
         [path: string]: string;
     };
 };
-export const InnerNavBar: FC<InnerProps> = ({ navBarPaths }) => {
+export const NavBar: FC<InnerProps> = ({ navBarPaths }) => {
     const navigate = useNavigate();
 
     const handleNavClick = (path: string) => {

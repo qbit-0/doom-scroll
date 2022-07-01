@@ -8,6 +8,13 @@ export default {
     parameters: {
         jest: ["SlideNavBar.test.tsx"],
     },
+    decorators: [
+        (Story) => (
+            <div className="h-[2000rem] pt-[150rem]">
+                <Story />
+            </div>
+        ),
+    ],
 } as Meta;
 
 const Template: Story<ComponentProps<typeof SlideNavBar>> = (args) => (
@@ -21,4 +28,5 @@ Default.args = {
         "/b/": "To B",
         "/c/": "To C",
     },
+    bottomMargin: 500,
 };

@@ -1,14 +1,48 @@
-import React, { FC } from "react";
-import { InnerNavBar as NavBar } from "../NavBar/NavBar";
+import React, { FC, useEffect, useRef, useState } from "react";
+import { NavBar } from "../NavBar/NavBar";
 
 type Props = {
-    show: boolean | null;
     navBarPaths: {
         [path: string]: string;
     };
+    bottomMargin: number;
 };
 
-const SlideNavBar: FC<Props> = ({ show, navBarPaths }) => {
+const SlideNavBar: FC<Props> = ({ navBarPaths, bottomMargin }) => {
+    const [show, setShow] = useState<boolean | null>(null);
+
+    const staticNav = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        let lastPageOffset = window.pageYOffset;
+        const handleScroll = () => {
+            if (staticNav.current === null) {
+                return;
+            }
+
+            const staticNavTop =
+                staticNav.current.getBoundingClientRect().top +
+                window.scrollY +
+                bottomMargin;
+
+            if (
+                staticNavTop &&
+                window.scrollY > staticNavTop &&
+                window.pageYOffset < lastPageOffset
+            ) {
+                setShow(true);
+            } else {
+                setShow(false);
+            }
+            lastPageOffset = window.pageYOffset;
+        };
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [bottomMargin]);
+
     let animate = "";
     if (show === null) {
     } else if (show === true) {
@@ -20,13 +54,14 @@ const SlideNavBar: FC<Props> = ({ show, navBarPaths }) => {
     return (
         <nav>
             <div
-                className={`sticky w-full z-10 top-0 p-1 bg-neutral-900 text-amber-100 drop-shadow-lg`}
+                className={`w-full z-10 top-0 p-1 bg-neutral-900 text-amber-100 drop-shadow-lg`}
+                ref={staticNav}
             >
                 <NavBar navBarPaths={navBarPaths} />
             </div>
 
             <div
-                className={`fixed w-full z-10 top-0 p-1 bg-neutral-900 text-amber-100 drop-shadow-lg ${animate}`}
+                className={`fixed invisible w-full z-10 top-0 p-1 bg-neutral-900 text-amber-100 drop-shadow-lg ${animate}`}
             >
                 <NavBar navBarPaths={navBarPaths} />
             </div>

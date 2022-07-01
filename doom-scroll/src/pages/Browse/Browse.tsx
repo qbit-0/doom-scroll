@@ -68,9 +68,9 @@ const Browse: React.FC<Props> = () => {
                 rootMargin: "5000px",
             };
 
-            const observer = new IntersectionObserver((entities) => {
-                const entity = entities[0];
-                if (entity.isIntersecting) {
+            const observer = new IntersectionObserver((entries) => {
+                const entry = entries[0];
+                if (entry.isIntersecting) {
                     dispatch(
                         loadPostsAfter({
                             pathname: location.pathname,

@@ -11,17 +11,21 @@ module.exports = {
                 slidein: {
                     "0%": {
                         transform: "translate(0%, -100%)",
+                        visibility: "hidden",
                     },
                     "100%": {
                         transform: "translate(0%, 0%)",
+                        visibility: "visible",
                     },
                 },
                 slideout: {
                     "0%": {
                         transform: "translate(0%, 0%)",
+                        visibility: "visible",
                     },
                     "100%": {
                         transform: "translate(0%, -100%)",
+                        visibility: "hidden",
                     },
                 },
                 scrollfade: {

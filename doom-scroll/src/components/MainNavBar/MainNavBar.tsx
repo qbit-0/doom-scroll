@@ -1,5 +1,5 @@
 import SlideNavBar from "components/SlideNavBar/SlideNavBar";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 
 type Props = {};
 
@@ -14,31 +14,7 @@ const MAIN_NAV_BAR_PATHS = {
 };
 
 const MainNavBar: FC<Props> = () => {
-    const [show, setShow] = useState<boolean | null>(null);
-
-    useEffect(() => {
-        let scrollPos = 0;
-
-        const handleScroll = () => {
-            if (window.scrollY <= window.innerHeight) {
-                setShow(false);
-            } else {
-                if (window.scrollY > scrollPos) {
-                    setShow(false);
-                } else {
-                    setShow(true);
-                }
-            }
-
-            scrollPos = window.scrollY;
-        };
-
-        window.addEventListener("scroll", handleScroll);
-
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    return <SlideNavBar show={show} navBarPaths={MAIN_NAV_BAR_PATHS} />;
+    return <SlideNavBar navBarPaths={MAIN_NAV_BAR_PATHS} bottomMargin={250} />;
 };
 
 export default MainNavBar;
