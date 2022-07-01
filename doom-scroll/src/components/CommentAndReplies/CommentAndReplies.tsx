@@ -19,12 +19,12 @@ const CommentAndReplies: React.FC<Props> = ({ comment }) => {
         borderDepthColors[comment.data["depth"] % borderDepthColors.length];
 
     const childReplies = (
-        <div className={"pl-2"}>
+        <div className={"pl-1 sm:pl-2"}>
             {comment.childrenIds.map((childId: number, index: number) => {
                 const reply = ReplyTreeUtils.find(replyTree, childId);
 
                 return (
-                    <div className="my-2" key={index}>
+                    <div className="my-1 sm:my-2" key={index}>
                         <Reply reply={reply} />
                     </div>
                 );

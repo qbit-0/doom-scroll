@@ -17,14 +17,15 @@ const Comment: FC<Props> = ({ comment }) => {
         <div
             className={`overflow-clip rounded-br-xl bg-gradient-to-r from-neutral-800 to-neutral-900 drop-shadow-lg`}
         >
-            <div className="flex justify-between px-4 pt-4">
-                <div className="inline-block">
+            <div className="flex justify-between gap-2 px-4 pt-4">
+                <div className="flex-auto inline-block overflow-hidden">
                     <AuthorComponent
                         author={author}
                         created_utc={created_utc}
                     />
                 </div>
-                <div className="inline-block overflow-clip rounded-3xl">
+
+                <div className="inline-flex overflow-clip rounded-3xl shrink-0">
                     <SentimentBanner sentiment={comment.meta.sentiment} />
                 </div>
             </div>

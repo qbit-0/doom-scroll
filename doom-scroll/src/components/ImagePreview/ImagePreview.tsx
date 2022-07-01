@@ -7,7 +7,7 @@ type Props = {
 
 const ImagePreview: React.FC<Props> = ({ src, href }) => {
     return (
-        <figure className="flex overflow-clip max-w-2xl min-h-[10rem] max-h-[25rem] mx-auto drop-shadow-lg bg-neutral-800">
+        <figure className="flex overflow-clip min-h-[10rem] max-h-[25rem] mx-auto drop-shadow-lg bg-neutral-800">
             <img
                 className="block object-contain mx-auto"
                 alt="post body"

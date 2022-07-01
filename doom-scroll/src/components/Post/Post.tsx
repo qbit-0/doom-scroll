@@ -56,10 +56,12 @@ const Post: FC<Props> = ({ post }) => {
                 </Link>
             </div>
 
-            <SentimentBanner
-                sentiment={post.meta.sentiment}
-                ratio={upvote_ratio}
-            />
+            <div className="flex">
+                <SentimentBanner
+                    sentiment={post.meta.sentiment}
+                    ratio={upvote_ratio}
+                />
+            </div>
         </article>
     );
 };

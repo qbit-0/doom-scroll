@@ -17,15 +17,15 @@ const SentimentBanner: React.FC<Props> = ({ sentiment, ratio }) => {
 
     return (
         <div
-            className={`inline-flex w-full px-2 py-2 ${fromColor} drop-shadow-lg text-amber-100`}
+            className={`flex-auto inline-flex shrink-0 p-2 ${fromColor} drop-shadow-lg text-amber-100`}
         >
-            <div className="inline-block flex-auto mx-4 text-xs">
+            <div className="inline-block flex-auto text-xs">
                 <h4 className="text-center font-bold"> Sentiment</h4>
                 <p className="text-center"> {roundedSentiment}</p>
             </div>
 
             {ratio !== undefined && (
-                <div className="inline-block flex-auto mx-4 text-xs">
+                <div className="inline-block flex-auto text-xs">
                     <h4 className="text-center font-bold">Upvote Ratio</h4>
                     <p className="text-center"> {ratio}</p>
                 </div>

@@ -17,7 +17,7 @@ const ReplyTree: FC<Props> = () => {
                 })
                 .map((reply, index) => {
                     return (
-                        <div className="my-2" key={index}>
+                        <div className="my-1 sm:my-2" key={index}>
                             <Reply reply={reply} />
                         </div>
                     );
