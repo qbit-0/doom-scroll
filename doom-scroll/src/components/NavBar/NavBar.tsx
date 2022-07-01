@@ -22,7 +22,7 @@ export const NavBar: FC<InnerProps> = ({ navBarPaths }) => {
         <div className="w-fit mx-auto">
             <div className="flex flex-wrap justify-center my-2 gap-2">
                 {Object.entries(navBarPaths).map((entry, index) => (
-                    <Button onClick={handleNavClick(entry[0])}>
+                    <Button onClick={handleNavClick(entry[0])} key={index}>
                         <p className="inline font-bold">{entry[1]}</p>
                     </Button>
                 ))}

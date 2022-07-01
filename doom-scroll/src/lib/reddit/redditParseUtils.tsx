@@ -69,11 +69,9 @@ export const pushRepliesListing = (
     parentId: number
 ): number[] => {
     const listingChildren = redditRepliesListing.data.children;
-    return listingChildren
-        .map((redditReply: any) => pushReply(replyTree, redditReply, parentId))
-        .reduce((previousValue: number[], currentValue: number[]) => {
-            return [...previousValue, currentValue];
-        }, []);
+    return listingChildren.map((redditReply: any) =>
+        pushReply(replyTree, redditReply, parentId)
+    );
 };
 
 export const pushReply = (

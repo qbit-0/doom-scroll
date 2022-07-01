@@ -64,6 +64,40 @@ const Body: FC<Props> = ({ post }) => {
         );
     }
 
+    if (post.data?.["gallery_data"]?.["items"]) {
+        return (
+            <div className="flex flex-wrap overflow-auto max-h-[25rem] gap-2">
+                {Object.values(post.data["gallery_data"]["items"]).map(
+                    ({ media_id }: any, index) => {
+                        return (
+                            <ImagePreview
+                                src={
+                                    post.data["media_metadata"][media_id]["s"][
+                                        "u"
+                                    ]
+                                }
+                                href={post.data["url_overridden_by_dest"]}
+                                key={index}
+                            />
+                        );
+                    }
+                )}
+            </div>
+        );
+    }
+
+    if (
+        post.data?.["thumbnail"] !== "default" &&
+        post.data?.["thumbnail"] !== "self"
+    ) {
+        return (
+            <ImagePreview
+                src={post.data["thumbnail"]}
+                href={post.data["url_overridden_by_dest"]}
+            />
+        );
+    }
+
     return null;
 };
 
