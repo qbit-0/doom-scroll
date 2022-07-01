@@ -1,7 +1,8 @@
-import ImagePreview from "components/ImagePreview/ImagePreview";
-import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
 import React from "react";
 import { FC } from "react";
+
+import ImagePreview from "components/ImagePreview/ImagePreview";
+import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
 
 type Props = {
     post: any;

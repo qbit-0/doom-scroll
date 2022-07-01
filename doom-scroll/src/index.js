@@ -1,11 +1,12 @@
+import App from "App/App";
+import store from "App/store";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import store from "App/store";
-import App from "App/App";
-import reportWebVitals from "./reportWebVitals";
-import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
+
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
 
 const container = document.getElementById("root");
 const root = createRoot(container);

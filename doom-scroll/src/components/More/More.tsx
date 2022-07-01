@@ -52,7 +52,7 @@ const More: React.FC<Props> = ({ more }) => {
 
     return (
         <Button onClick={handleClick} borderColor={borderDepthColor}>
-            <p>{moreMsg}</p>
+            <p className="text-xs">{moreMsg}</p>
         </Button>
     );
 };

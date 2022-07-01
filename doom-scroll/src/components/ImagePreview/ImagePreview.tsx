@@ -13,7 +13,7 @@ const ImagePreview: React.FC<Props> = ({ src, href }) => {
                 alt="post body"
                 src={src}
             />
-            <div className="invisible sm:visible absolute bottom-0 w-full backdrop-blur-md">
+            <div className="invisible sm:visible absolute bottom-0 w-full backdrop-blur-md backdrop-brightness-50">
                 <a title="link" href={href} target="_blank" rel="noreferrer">
                     <p className="px-8 py-2 underline text-sm text-amber-100 overflow-ellipsis">
                         {href}
