@@ -20,7 +20,7 @@ const Body: FC<Props> = ({ post }) => {
 
     if (post.data?.["media"]?.["oembed"]?.["html"]) {
         return (
-            <div className="overflow-auto max-h-[25rem]">
+            <div className="overflow-auto max-h-[25rem] px-4">
                 <SanitizeHTML dirty={post.data["media"]["oembed"]["html"]} />
             </div>
         );

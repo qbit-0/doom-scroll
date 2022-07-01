@@ -10,6 +10,8 @@ type Props = {
 };
 
 const Comment: FC<Props> = ({ comment }) => {
+    const { author, created_utc, body_html, score } = comment.data;
+
     return (
         <div
             className={`flex overflow-clip rounded-br-3xl bg-gradient-to-r from-neutral-800 to-neutral-900 drop-shadow-lg`}
@@ -17,13 +19,13 @@ const Comment: FC<Props> = ({ comment }) => {
             <div className="w-full px-8">
                 <div className="mt-4 mb-2">
                     <AuthorComponent
-                        author={comment.data["author"]}
-                        createdUtc={comment.data["created_utc"]}
+                        author={author}
+                        created_utc={created_utc}
                     />
-                    <SanitizeHTML dirty={comment.data["body_html"]} />
+                    <SanitizeHTML dirty={body_html} />
                 </div>
                 <div className="my-2">
-                    <VoteHorizontal score={comment.data["score"]} />
+                    <VoteHorizontal score={score} />
                 </div>
             </div>
             <SentimentBanner sentiment={comment.meta.sentiment} />

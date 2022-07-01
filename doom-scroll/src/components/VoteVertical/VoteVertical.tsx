@@ -1,12 +1,12 @@
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { FC } from "react";
 
 type Props = {
     score: number;
 };
 
-const VoteVertical: React.FC<Props> = ({ score }) => {
+const VoteVertical: FC<Props> = ({ score }) => {
     return (
         <div className="inline-block text-amber-100">
             <div className="w-fit mx-auto">

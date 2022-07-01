@@ -16,11 +16,11 @@ const Template: Story<ComponentProps<typeof AuthorContainer>> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
     author: "Reddit",
-    createdUtc: 0,
+    created_utc: 0,
 };
 
 export const Deleted = Template.bind({});
 Deleted.args = {
     author: "[deleted]",
-    createdUtc: 0,
+    created_utc: 0,
 };

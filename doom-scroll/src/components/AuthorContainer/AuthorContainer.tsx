@@ -2,15 +2,15 @@ import { useAppDispatch } from "App/store";
 import Author from "components/Author/Author";
 import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import RedditApi from "lib/reddit/redditApi";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 type Props = {
     author: string;
-    createdUtc: number;
+    created_utc: number;
 };
 
-const AuthorContainer: React.FC<Props> = ({ author, createdUtc }) => {
+const AuthorContainer: FC<Props> = ({ author, created_utc }) => {
     const accessToken = useSelector(selectAccessToken);
     const [profileImg, setProfileImg] = useState(null);
     const dispatch = useAppDispatch();
@@ -35,7 +35,7 @@ const AuthorContainer: React.FC<Props> = ({ author, createdUtc }) => {
         <Author
             author={author}
             profileImg={profileImg}
-            createdUtc={createdUtc}
+            createdUtc={created_utc}
         />
     );
 };

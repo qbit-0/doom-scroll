@@ -3,23 +3,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { FC } from "react";
 
 type Props = {
-    score: number;
+    num_comments: number;
 };
 
-const VoteHorizontal: FC<Props> = ({ score }) => {
+const NumComments: FC<Props> = ({ num_comments }) => {
     return (
         <div className="inline-block flex-shrink-0 flex-grow-0 p-1 text-amber-100">
-            <div className="inline-block">
-                <FontAwesomeIcon icon={solid("chevron-up")} size="sm" />
+            <div className="inline-block mx-1">
+                <FontAwesomeIcon icon={solid("comments")} size="sm" />
             </div>
             <p className="inline-block mx-2 text-sm text-center font-bold">
-                {score}
+                {num_comments}
             </p>
-            <div className="inline-block">
-                <FontAwesomeIcon icon={solid("chevron-down")} size="sm" />
-            </div>
         </div>
     );
 };
 
-export default VoteHorizontal;
+export default NumComments;

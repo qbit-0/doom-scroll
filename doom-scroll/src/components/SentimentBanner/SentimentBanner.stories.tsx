@@ -18,6 +18,5 @@ const Template: Story<ComponentProps<typeof SentimentBanner>> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
     sentiment: 1.5,
-    commentSentiment: 2,
     ratio: 0.95,
 };
