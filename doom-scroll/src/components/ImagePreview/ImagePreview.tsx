@@ -7,12 +7,8 @@ type Props = {
 
 const ImagePreview: React.FC<Props> = ({ src, href }) => {
     return (
-        <figure className="flex overflow-clip bg-neutral-800 leading-none drop-shadow-lg">
-            <img
-                className="max-h-[25rem] min-h-[10rem]"
-                alt="post body"
-                src={src}
-            />
+        <figure className="leading-none drop-shadow-lg">
+            <img className="h-96" alt="post body" src={src} />
             <div className="invisible absolute bottom-0 w-full backdrop-blur-md backdrop-brightness-50 sm:visible">
                 <a
                     title="link"

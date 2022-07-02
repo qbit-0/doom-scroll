@@ -12,17 +12,15 @@ type Props = {
 const Body: FC<Props> = ({ post }) => {
     if (post.data["selftext_html"]) {
         return (
-            <div className="my-4 mx-auto flex max-h-[8rem] w-fit px-4">
-                <div className="overflow-y-auto overflow-ellipsis">
-                    <SanitizeHTML dirty={post.data["selftext_html"]} />
-                </div>
+            <div className="flex max-h-96 overflow-auto overflow-ellipsis px-4 ">
+                <SanitizeHTML dirty={post.data["selftext_html"]} />
             </div>
         );
     }
 
     if (post.data?.["media"]?.["oembed"]?.["html"]) {
         return (
-            <div className="mx-auto max-h-[25rem] w-fit overflow-auto px-4">
+            <div className="flex max-h-96 overflow-auto overflow-ellipsis px-4">
                 <SanitizeHTML dirty={post.data["media"]["oembed"]["html"]} />
             </div>
         );
@@ -30,7 +28,7 @@ const Body: FC<Props> = ({ post }) => {
 
     if (post.data?.["media"]?.["reddit_video"]?.["dash_url"]) {
         return (
-            <div className="flex max-h-[25rem] overflow-auto ">
+            <div className="flex h-96 justify-center overflow-auto bg-neutral-700">
                 <video
                     playsInline
                     width={post.data["media"]["reddit_video"]["width"]}
@@ -39,7 +37,6 @@ const Body: FC<Props> = ({ post }) => {
                     loop
                     preload="auto"
                     controls
-                    className="mx-auto"
                     poster={
                         post.data["preview"]["images"]["0"]["source"]["url"]
                     }
@@ -66,9 +63,22 @@ const Body: FC<Props> = ({ post }) => {
         );
     }
 
+    if (post.data?.["gallery_data"]?.["items"]) {
+        return (
+            <div className="flex justify-center bg-neutral-700">
+                <Gallery
+                    srcs={Object.values(post.data["gallery_data"]["items"]).map(
+                        ({ media_id }: any) =>
+                            post.data["media_metadata"][media_id]["s"]["u"]
+                    )}
+                />
+            </div>
+        );
+    }
+
     if (post.data?.["preview"]?.["images"]?.["0"]?.["source"]?.["url"]) {
         return (
-            <div className="mx-auto w-fit">
+            <div className="flex justify-center bg-neutral-700">
                 <ImagePreview
                     src={post.data["preview"]["images"]["0"]["source"]["url"]}
                     href={post.data["url_overridden_by_dest"]}
@@ -79,7 +89,7 @@ const Body: FC<Props> = ({ post }) => {
 
     if (post.data["post_hint"] === "image") {
         return (
-            <div className="mx-auto w-fit">
+            <div className="flex justify-center bg-neutral-700">
                 <ImagePreview
                     src={post.data["url_overridden_by_dest"]}
                     href={post.data["url_overridden_by_dest"]}
@@ -88,26 +98,17 @@ const Body: FC<Props> = ({ post }) => {
         );
     }
 
-    if (post.data?.["gallery_data"]?.["items"]) {
-        return (
-            <Gallery
-                srcs={Object.values(post.data["gallery_data"]["items"]).map(
-                    ({ media_id }: any) =>
-                        post.data["media_metadata"][media_id]["s"]["u"]
-                )}
-            />
-        );
-    }
-
     if (
         post.data?.["thumbnail"] !== "default" &&
         post.data?.["thumbnail"] !== "self"
     ) {
         return (
-            <ImagePreview
-                src={post.data["thumbnail"]}
-                href={post.data["url_overridden_by_dest"]}
-            />
+            <div className="flex justify-center bg-neutral-700">
+                <ImagePreview
+                    src={post.data["thumbnail"]}
+                    href={post.data["url_overridden_by_dest"]}
+                />
+            </div>
         );
     }
 

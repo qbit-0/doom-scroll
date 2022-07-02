@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useState } from "react";
+import React, { ChangeEventHandler, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import SearchBar from "components/SearchBar/SearchBar";
@@ -9,6 +9,10 @@ const MainSearchBar: React.FC<Props> = () => {
     const [searchParams] = useSearchParams();
     const [query, setQuery] = useState(searchParams.get("q") || "");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setQuery(searchParams.get("q") || "");
+    }, [searchParams]);
 
     const handleQueryChange: ChangeEventHandler<HTMLInputElement> = (event) => {
         setQuery(event.target.value);
