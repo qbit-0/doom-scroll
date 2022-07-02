@@ -3,6 +3,7 @@ import { FC } from "react";
 
 import ImagePreview from "components/ImagePreview/ImagePreview";
 import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
+import Gallery from "components/Gallery/Gallery";
 
 type Props = {
     post: any;
@@ -29,8 +30,20 @@ const Body: FC<Props> = ({ post }) => {
 
     if (post.data?.["media"]?.["reddit_video"]?.["dash_url"]) {
         return (
-            <div className="flex max-h-[25rem] overflow-auto">
-                <video muted loop preload="auto" controls className="mx-auto">
+            <div className="flex max-h-[25rem] overflow-auto ">
+                <video
+                    playsInline
+                    width={post.data["media"]["reddit_video"]["width"]}
+                    height={post.data["media"]["reddit_video"]["height"]}
+                    muted
+                    loop
+                    preload="auto"
+                    controls
+                    className="mx-auto"
+                    poster={
+                        post.data["preview"]["images"]["0"]["source"]["url"]
+                    }
+                >
                     <source
                         src={post.data["media"]["reddit_video"]["dash_url"]}
                     />
@@ -55,41 +68,34 @@ const Body: FC<Props> = ({ post }) => {
 
     if (post.data?.["preview"]?.["images"]?.["0"]?.["source"]?.["url"]) {
         return (
-            <ImagePreview
-                src={post.data["preview"]["images"]["0"]["source"]["url"]}
-                href={post.data["url_overridden_by_dest"]}
-            />
+            <div className="mx-auto w-fit">
+                <ImagePreview
+                    src={post.data["preview"]["images"]["0"]["source"]["url"]}
+                    href={post.data["url_overridden_by_dest"]}
+                />
+            </div>
         );
     }
 
     if (post.data["post_hint"] === "image") {
         return (
-            <ImagePreview
-                src={post.data["url_overridden_by_dest"]}
-                href={post.data["url_overridden_by_dest"]}
-            />
+            <div className="mx-auto w-fit">
+                <ImagePreview
+                    src={post.data["url_overridden_by_dest"]}
+                    href={post.data["url_overridden_by_dest"]}
+                />
+            </div>
         );
     }
 
     if (post.data?.["gallery_data"]?.["items"]) {
         return (
-            <div className="flex max-h-[25rem] flex-wrap gap-2 overflow-auto">
-                {Object.values(post.data["gallery_data"]["items"]).map(
-                    ({ media_id }: any, index) => {
-                        return (
-                            <ImagePreview
-                                src={
-                                    post.data["media_metadata"][media_id]["s"][
-                                        "u"
-                                    ]
-                                }
-                                href={post.data["url_overridden_by_dest"]}
-                                key={index}
-                            />
-                        );
-                    }
+            <Gallery
+                srcs={Object.values(post.data["gallery_data"]["items"]).map(
+                    ({ media_id }: any) =>
+                        post.data["media_metadata"][media_id]["s"]["u"]
                 )}
-            </div>
+            />
         );
     }
 
