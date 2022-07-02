@@ -29,5 +29,4 @@ Default.args = {
         "/b/": "To B",
         "/c/": "To C",
     },
-    bottomMargin: 500,
 };

@@ -34,6 +34,7 @@ import {
     SubredditSortOption,
     SubredditTimeOption,
 } from "lib/reddit/redditFilterOptions";
+import useIntersected from "lib/hooks/useIntersected";
 
 type Props = {};
 
@@ -124,6 +125,10 @@ const Browse: React.FC<Props> = () => {
     };
 
     useEffect(() => {
+        scrollToTop(); //TODO CREATE CUSTOM HOOK FOR SCROLLING TO TOP
+    }, []);
+
+    useEffect(() => {
         if (isRefreshing) return;
         scrollToTop();
         batch(() => {
@@ -138,35 +143,20 @@ const Browse: React.FC<Props> = () => {
     }, [dispatch, accessToken, location]);
 
     const refBot = useRef<HTMLDivElement>(null);
+    const isNearBot = useIntersected(refBot, {
+        rootMargin: "5000px",
+    });
 
     useEffect(() => {
-        if (!isLoading && after !== null) {
-            const options = {
-                rootMargin: "5000px",
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                const entry = entries[0];
-                if (entry.isIntersecting) {
-                    dispatch(
-                        loadPostsAfter({
-                            pathname: location.pathname,
-                            searchStr: location.search,
-                        })
-                    );
-                }
-            }, options);
-
-            if (refBot.current) observer.observe(refBot.current);
-
-            const refBotCopy = refBot;
-            return () => {
-                if (refBotCopy.current) observer.unobserve(refBotCopy.current);
-            };
+        if (isNearBot && !isLoading && after !== null) {
+            dispatch(
+                loadPostsAfter({
+                    pathname: location.pathname,
+                    searchStr: location.search,
+                })
+            );
         }
-
-        return;
-    }, [dispatch, isLoading, after, location]);
+    }, [dispatch, isNearBot, isLoading, after, location]);
 
     return (
         <div className="bg-neutral-900">

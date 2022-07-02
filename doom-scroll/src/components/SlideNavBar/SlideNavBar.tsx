@@ -1,3 +1,6 @@
+import useIntersected from "lib/hooks/useIntersected";
+import useScrollVel from "lib/hooks/useScrollVel";
+import useViewportOffsetY from "lib/hooks/useViewportOffsetY";
 import React, {
     FC,
     MouseEventHandler,
@@ -13,47 +16,22 @@ type Props = {
         [path: string]: string;
     };
     handleNavClick: (path: string) => MouseEventHandler<HTMLButtonElement>;
-    bottomMargin: number;
 };
 
-const SlideNavBar: FC<Props> = ({
-    navBarPaths,
-    handleNavClick,
-    bottomMargin,
-}) => {
+const SlideNavBar: FC<Props> = ({ navBarPaths, handleNavClick }) => {
     const [show, setShow] = useState<boolean | null>(null);
 
     const staticNav = useRef<HTMLDivElement>(null);
+    const viewportOffsetY = useViewportOffsetY(staticNav);
+    const scrollVel = useScrollVel();
 
     useEffect(() => {
-        let lastPageOffset = window.pageYOffset;
-        const handleScroll = () => {
-            if (staticNav.current === null) {
-                return;
-            }
-
-            const staticNavTop =
-                staticNav.current.getBoundingClientRect().top +
-                window.scrollY +
-                bottomMargin;
-
-            if (
-                staticNavTop &&
-                window.scrollY > staticNavTop &&
-                window.pageYOffset < lastPageOffset
-            ) {
-                setShow(true);
-            } else if (show === true) {
-                setShow(false);
-            }
-            lastPageOffset = window.pageYOffset;
-        };
-        window.addEventListener("scroll", handleScroll);
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, [bottomMargin, show]);
+        if (viewportOffsetY > 0 && scrollVel < 0) {
+            setShow(true);
+        } else if (show === true) {
+            setShow(false);
+        }
+    }, [viewportOffsetY, scrollVel, show]);
 
     let animate = "";
     if (show === null) {

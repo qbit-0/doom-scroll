@@ -20,6 +20,7 @@ import {
     setSearchFilterTempQuery,
     setSearchFilterTime,
 } from "features/searchFilter/searchFilterSlice";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
@@ -39,6 +40,7 @@ const MAIN_NAV_BAR_SUBREDDITS = {
 
 const MainNavBar: FC<Props> = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const handleNavClick = (path: string) => {
         return (
@@ -55,6 +57,8 @@ const MainNavBar: FC<Props> = () => {
             dispatch(setSearchFilterTime(SearchTimeOption.ALL));
 
             dispatch(setBrowseSearchMode(false));
+
+            navigate(`/r/${path}/${SubredditSortOption.HOT}`);
         };
     };
 
@@ -62,7 +66,6 @@ const MainNavBar: FC<Props> = () => {
         <SlideNavBar
             navBarPaths={MAIN_NAV_BAR_SUBREDDITS}
             handleNavClick={handleNavClick}
-            bottomMargin={0}
         />
     );
 };

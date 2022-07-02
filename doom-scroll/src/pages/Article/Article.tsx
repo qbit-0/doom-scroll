@@ -42,6 +42,10 @@ const Article: React.FC<Props> = () => {
     };
 
     useEffect(() => {
+        scrollToTop();
+    }, []);
+
+    useEffect(() => {
         if (isRefreshing) return;
         scrollToTop();
         dispatch(
