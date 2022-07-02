@@ -1,4 +1,4 @@
-import { selectCommentsReplyTree } from "features/comments/commentsSlice";
+import { selectCommentsReplyTree } from "features/article/articleSlice";
 import { CommentData } from "lib/reddit/redditData";
 import ReplyTreeUtils from "lib/reddit/replyTreeUtils";
 import { borderDepthColors } from "lib/utils/replyDepthColors";

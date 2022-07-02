@@ -1,10 +1,10 @@
 import { useAppDispatch } from "App/store";
 import {
-    setMaxRatio,
-    setMaxSentiment,
-    setMinRatio,
-    setMinSentiment,
-} from "features/nlp/nlpSlice";
+    setNlpFilterMaxRatio,
+    setNlpFilterMaxSentiment,
+    setNlpFilterMinRatio,
+    setNlpFilterMinSentiment,
+} from "features/nlpFilter/nlpFilterSlice";
 import { NlpPresets } from "lib/utils/nlpPresets";
 import React, { FC } from "react";
 import { batch } from "react-redux";
@@ -18,19 +18,19 @@ const Hero: FC<Props> = () => {
 
     const handleWorst = () => {
         batch(() => {
-            dispatch(setMinSentiment(NlpPresets.worst.minSentiment));
-            dispatch(setMaxSentiment(NlpPresets.worst.maxSentiment));
-            dispatch(setMinRatio(NlpPresets.worst.minRatio));
-            dispatch(setMaxRatio(NlpPresets.worst.maxRatio));
+            dispatch(setNlpFilterMinSentiment(NlpPresets.worst.minSentiment));
+            dispatch(setNlpFilterMaxSentiment(NlpPresets.worst.maxSentiment));
+            dispatch(setNlpFilterMinRatio(NlpPresets.worst.minRatio));
+            dispatch(setNlpFilterMaxRatio(NlpPresets.worst.maxRatio));
         });
     };
 
     const handleBest = () => {
         batch(() => {
-            dispatch(setMinSentiment(NlpPresets.best.minSentiment));
-            dispatch(setMaxSentiment(NlpPresets.best.maxSentiment));
-            dispatch(setMinRatio(NlpPresets.best.minRatio));
-            dispatch(setMaxRatio(NlpPresets.best.maxRatio));
+            dispatch(setNlpFilterMinSentiment(NlpPresets.best.minSentiment));
+            dispatch(setNlpFilterMaxSentiment(NlpPresets.best.maxSentiment));
+            dispatch(setNlpFilterMinRatio(NlpPresets.best.minRatio));
+            dispatch(setNlpFilterMaxRatio(NlpPresets.best.maxRatio));
         });
     };
 

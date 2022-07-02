@@ -1,9 +1,9 @@
 import {
-    selectMaxRatio,
-    selectMaxSentiment,
-    selectMinRatio,
-    selectMinSentiment,
-} from "features/nlp/nlpSlice";
+    selectNlpFilterMaxRatio,
+    selectNlpFilterMaxSentiment,
+    selectNlpFilterMinRatio,
+    selectNlpFilterMinSentiment,
+} from "features/nlpFilter/nlpFilterSlice";
 import { PostData } from "lib/reddit/redditData";
 import React from "react";
 import { FC } from "react";
@@ -16,10 +16,10 @@ type Props = {
 };
 
 const PostContainer: FC<Props> = ({ post }) => {
-    const minSentiment = useSelector(selectMinSentiment);
-    const maxSentiment = useSelector(selectMaxSentiment);
-    const minRatio = useSelector(selectMinRatio);
-    const maxRatio = useSelector(selectMaxRatio);
+    const minSentiment = useSelector(selectNlpFilterMinSentiment);
+    const maxSentiment = useSelector(selectNlpFilterMaxSentiment);
+    const minRatio = useSelector(selectNlpFilterMinRatio);
+    const maxRatio = useSelector(selectNlpFilterMaxRatio);
 
     if (
         post.meta.sentiment < minSentiment ||

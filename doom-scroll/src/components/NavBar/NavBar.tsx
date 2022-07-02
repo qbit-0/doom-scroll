@@ -1,5 +1,4 @@
-import React, { FC, MouseEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { FC, MouseEventHandler } from "react";
 
 import Button from "components/Button/Button";
 import MainSearchBar from "components/MainSearchBar/MainSearchBar";
@@ -8,16 +7,9 @@ type InnerProps = {
     navBarPaths: {
         [path: string]: string;
     };
+    handleNavClick: (path: string) => MouseEventHandler<HTMLButtonElement>;
 };
-export const NavBar: FC<InnerProps> = ({ navBarPaths }) => {
-    const navigate = useNavigate();
-
-    const handleNavClick = (path: string) => {
-        return (event: MouseEvent<HTMLButtonElement>) => {
-            navigate(`${path}`);
-        };
-    };
-
+export const NavBar: FC<InnerProps> = ({ navBarPaths, handleNavClick }) => {
     return (
         <div className="mx-auto w-fit">
             <div className="my-2 flex flex-wrap justify-center gap-2">

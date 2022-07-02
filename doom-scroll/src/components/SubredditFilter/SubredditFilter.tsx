@@ -11,47 +11,50 @@ import React, {
     useEffect,
     useState,
 } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {
+    generatePath,
+    matchPath,
+    matchRoutes,
+    useLocation,
+    useNavigate,
+    useParams,
+    useSearchParams,
+} from "react-router-dom";
 
 import Button from "components/Button/Button";
 import Option from "components/Option/Option";
 import Select from "components/Select/Select";
+import { useAppDispatch } from "App/store";
+import {
+    selectSubredditFilterSort,
+    selectSubredditFilterSubreddit,
+    selectSubredditFilterTime,
+    setSubredditFilterSort,
+    setSubredditFilterTime,
+} from "features/subredditFilter/subredditFilterSlice";
+import { useSelector } from "react-redux";
 
 type Props = {};
 
-const SubredditSort: FC<Props> = () => {
-    const { subreddit, subredditSort } = useParams();
-    const [searchParams] = useSearchParams();
-    const [sort, setSort] = useState(subredditSort || SubredditSortOption.HOT);
-    const [time, setTime] = useState(
-        searchParams.get("t") || SubredditTimeOption.DAY
-    );
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (subreddit === undefined) return;
-
-        const newSearchParams = new URLSearchParams();
-        if (sort === "top" && time !== SubredditTimeOption.DAY)
-            newSearchParams.set("t", time);
-
-        const url = `/r/${subreddit}/${sort}/?${newSearchParams.toString()}`;
-
-        navigate(url);
-    }, [navigate, subreddit, sort, time]);
+const SubredditFilter: FC<Props> = () => {
+    const filterSort = useSelector(selectSubredditFilterSort);
+    const filterTime = useSelector(selectSubredditFilterTime);
+    const dispatch = useAppDispatch();
 
     const handleSortClick = (value: SubredditSortOption) => {
         return (
             event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
         ) => {
             event.preventDefault();
-            setSort(value);
-            setTime(SubredditTimeOption.DAY);
+            dispatch(setSubredditFilterSort(value));
+            dispatch(setSubredditFilterTime(SubredditTimeOption.DAY));
         };
     };
 
     const handleTimeChange: ChangeEventHandler<HTMLSelectElement> = (event) => {
-        setTime(event.target.value as SubredditTimeOption);
+        dispatch(
+            setSubredditFilterTime(event.target.value as SubredditTimeOption)
+        );
     };
 
     return (
@@ -65,8 +68,12 @@ const SubredditSort: FC<Props> = () => {
             <Button onClick={handleSortClick(SubredditSortOption.TOP)}>
                 {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.TOP]}
             </Button>
-            {sort === "top" && (
-                <Select title="time" value={time} onChange={handleTimeChange}>
+            {filterSort === "top" && (
+                <Select
+                    title="time"
+                    value={filterTime}
+                    onChange={handleTimeChange}
+                >
                     {Object.entries(SUBREDDIT_TIME_OPTIONS).map(
                         (timeOption, index) => (
                             <Option value={timeOption[0]} key={index}>
@@ -83,4 +90,4 @@ const SubredditSort: FC<Props> = () => {
     );
 };
 
-export default SubredditSort;
+export default SubredditFilter;

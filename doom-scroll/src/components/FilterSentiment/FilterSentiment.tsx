@@ -1,13 +1,13 @@
 import {
-    selectMaxRatio,
-    selectMaxSentiment,
-    selectMinRatio,
-    selectMinSentiment,
-    setMaxRatio,
-    setMaxSentiment,
-    setMinRatio,
-    setMinSentiment,
-} from "features/nlp/nlpSlice";
+    selectNlpFilterMaxRatio,
+    selectNlpFilterMaxSentiment,
+    selectNlpFilterMinRatio,
+    selectNlpFilterMinSentiment,
+    setNlpFilterMaxRatio,
+    setNlpFilterMaxSentiment,
+    setNlpFilterMinRatio,
+    setNlpFilterMinSentiment,
+} from "features/nlpFilter/nlpFilterSlice";
 import { NlpPresets } from "lib/utils/nlpPresets";
 import React, {
     ChangeEvent,
@@ -20,16 +20,14 @@ import React, {
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "components/Button/Button";
-import { ButtonStyle } from "components/Button/Button";
-import InputNumber from "components/InputNumber/InputNumber";
 
 type Props = {};
 
 const FilterSentiment: FC<Props> = () => {
-    const minSentiment = useSelector(selectMinSentiment);
-    const maxSentiment = useSelector(selectMaxSentiment);
-    const minRatio = useSelector(selectMinRatio);
-    const maxRatio = useSelector(selectMaxRatio);
+    const minSentiment = useSelector(selectNlpFilterMinSentiment);
+    const maxSentiment = useSelector(selectNlpFilterMaxSentiment);
+    const minRatio = useSelector(selectNlpFilterMinRatio);
+    const maxRatio = useSelector(selectNlpFilterMaxRatio);
     const [currMinSentiment, setCurrMinSentiment] = useState<number | string>(
         minSentiment
     );
@@ -42,22 +40,22 @@ const FilterSentiment: FC<Props> = () => {
 
     useEffect(() => {
         const num = Number(currMinSentiment);
-        dispatch(setMinSentiment(num));
+        dispatch(setNlpFilterMinSentiment(num));
     }, [dispatch, currMinSentiment]);
 
     useEffect(() => {
         const num = Number(currMaxSentiment);
-        dispatch(setMaxSentiment(num));
+        dispatch(setNlpFilterMaxSentiment(num));
     }, [dispatch, currMaxSentiment]);
 
     useEffect(() => {
         const num = Number(currMinRatio);
-        dispatch(setMinRatio(num));
+        dispatch(setNlpFilterMinRatio(num));
     }, [dispatch, currMinRatio]);
 
     useEffect(() => {
         const num = Number(currMaxRatio);
-        dispatch(setMaxRatio(num));
+        dispatch(setNlpFilterMaxRatio(num));
     }, [dispatch, currMaxRatio]);
 
     useEffect(() => {

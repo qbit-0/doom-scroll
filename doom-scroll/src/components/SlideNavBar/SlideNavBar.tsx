@@ -1,4 +1,10 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, {
+    FC,
+    MouseEventHandler,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 
 import { NavBar } from "../NavBar/NavBar";
 
@@ -6,10 +12,15 @@ type Props = {
     navBarPaths: {
         [path: string]: string;
     };
+    handleNavClick: (path: string) => MouseEventHandler<HTMLButtonElement>;
     bottomMargin: number;
 };
 
-const SlideNavBar: FC<Props> = ({ navBarPaths, bottomMargin }) => {
+const SlideNavBar: FC<Props> = ({
+    navBarPaths,
+    handleNavClick,
+    bottomMargin,
+}) => {
     const [show, setShow] = useState<boolean | null>(null);
 
     const staticNav = useRef<HTMLDivElement>(null);
@@ -58,13 +69,19 @@ const SlideNavBar: FC<Props> = ({ navBarPaths, bottomMargin }) => {
                 className="top-0 z-10 w-full bg-neutral-900 p-1 text-amber-100 drop-shadow-lg"
                 ref={staticNav}
             >
-                <NavBar navBarPaths={navBarPaths} />
+                <NavBar
+                    navBarPaths={navBarPaths}
+                    handleNavClick={handleNavClick}
+                />
             </div>
 
             <div
                 className={`invisible fixed top-0 z-10 w-full bg-neutral-900 p-1 text-amber-100 drop-shadow-lg ${animate}`}
             >
-                <NavBar navBarPaths={navBarPaths} />
+                <NavBar
+                    navBarPaths={navBarPaths}
+                    handleNavClick={handleNavClick}
+                />
             </div>
         </nav>
     );

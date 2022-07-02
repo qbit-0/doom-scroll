@@ -1,21 +1,34 @@
-import React, { ChangeEventHandler, useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import React, { ChangeEventHandler, useEffect } from "react";
 
+import { useAppDispatch } from "App/store";
 import SearchBar from "components/SearchBar/SearchBar";
+import {
+    selectBrowseSearchMode,
+    setBrowseSearchMode,
+} from "features/browse/browseSlice";
+import {
+    selectSearchFilterTempQuery,
+    setSearchFilterQuery,
+    setSearchFilterTempQuery,
+} from "features/searchFilter/searchFilterSlice";
+import { useSelector } from "react-redux";
 
 type Props = {};
 
 const MainSearchBar: React.FC<Props> = () => {
-    const [searchParams] = useSearchParams();
-    const [query, setQuery] = useState(searchParams.get("q") || "");
-    const navigate = useNavigate();
+    const searchMode = useSelector(selectBrowseSearchMode);
+    const searchFilterTempQuery = useSelector(selectSearchFilterTempQuery);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        setQuery(searchParams.get("q") || "");
-    }, [searchParams]);
+        if (!searchMode) {
+            dispatch(setSearchFilterTempQuery(""));
+            dispatch(setSearchFilterQuery(""));
+        }
+    }, [dispatch, searchMode]);
 
     const handleQueryChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-        setQuery(event.target.value);
+        dispatch(setSearchFilterTempQuery(event.target.value));
     };
 
     const handleKeyDown: React.KeyboardEventHandler = (event) => {
@@ -25,15 +38,14 @@ const MainSearchBar: React.FC<Props> = () => {
     };
 
     const handleSearchSubmit = () => {
-        if (query === "") return;
-        const params = new URLSearchParams();
-        params.append("q", query);
-        navigate(`/search?${params.toString()}`);
+        if (searchFilterTempQuery === "") return;
+        dispatch(setSearchFilterQuery(searchFilterTempQuery));
+        dispatch(setBrowseSearchMode(true));
     };
 
     return (
         <SearchBar
-            value={query}
+            value={searchFilterTempQuery}
             onChange={handleQueryChange}
             onKeyDown={handleKeyDown}
             onSubmit={handleSearchSubmit}

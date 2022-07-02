@@ -1,5 +1,5 @@
 import { useAppDispatch } from "App/store";
-import { loadMore } from "features/comments/commentsSlice";
+import { loadMore } from "features/article/articleSlice";
 import { MoreData } from "lib/reddit/redditData";
 import { borderDepthColors } from "lib/utils/replyDepthColors";
 import React, { MouseEvent, MouseEventHandler, useState } from "react";

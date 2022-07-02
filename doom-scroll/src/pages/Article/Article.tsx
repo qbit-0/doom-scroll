@@ -4,14 +4,15 @@ import {
     loadArticle,
     selectCommentsIsRefreshing,
     selectCommentsPost,
-} from "features/comments/commentsSlice";
+} from "features/article/articleSlice";
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, useNavigationType } from "react-router-dom";
 
 import Post from "components/Post/Post";
 import PostPlaceholder from "components/PostPlaceholder/PostPlaceholder";
 import ReplyTree from "components/ReplyTree/ReplyTree";
+import Button from "components/Button/Button";
 
 type Props = {};
 
@@ -21,6 +22,7 @@ const Article: React.FC<Props> = () => {
     const post = useSelector(selectCommentsPost);
     const isRefreshing = useSelector(selectCommentsIsRefreshing);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (accessToken === null) {
@@ -54,7 +56,9 @@ const Article: React.FC<Props> = () => {
     return (
         <div className="bg-neutral-900 text-amber-100">
             <div ref={refTop} />
-            <div className="mx-auto max-w-7xl px-2 pt-2 pb-8 sm:px-16">
+            <div className="mx-auto max-w-7xl px-2 py-2 sm:px-16">
+                <Button onClick={() => navigate(-1)}>Back</Button>
+
                 <div>
                     {!isRefreshing && post !== null ? (
                         <div className="my-4">

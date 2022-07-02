@@ -1,4 +1,4 @@
-import { selectCommentsReplyTree } from "features/comments/commentsSlice";
+import { selectCommentsReplyTree } from "features/article/articleSlice";
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 

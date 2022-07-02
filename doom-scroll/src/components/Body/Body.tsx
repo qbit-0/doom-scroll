@@ -100,7 +100,8 @@ const Body: FC<Props> = ({ post }) => {
 
     if (
         post.data?.["thumbnail"] !== "default" &&
-        post.data?.["thumbnail"] !== "self"
+        post.data?.["thumbnail"] !== "self" &&
+        post.data?.["thumbnail"] !== ""
     ) {
         return (
             <div className="flex justify-center bg-neutral-700">

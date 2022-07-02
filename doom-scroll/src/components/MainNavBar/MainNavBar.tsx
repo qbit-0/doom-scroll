@@ -1,29 +1,70 @@
-import React, { FC } from "react";
+import React, { FC, MouseEvent } from "react";
 
+import { useAppDispatch } from "App/store";
 import SlideNavBar from "components/SlideNavBar/SlideNavBar";
+import { setBrowseSearchMode } from "features/browse/browseSlice";
+import {
+    setSubredditFilterSort,
+    setSubredditFilterSubreddit,
+    setSubredditFilterTime,
+} from "features/subredditFilter/subredditFilterSlice";
+import {
+    SearchSortOption,
+    SearchTimeOption,
+    SubredditSortOption,
+    SubredditTimeOption,
+} from "lib/reddit/redditFilterOptions";
+import {
+    setSearchFilterQuery,
+    setSearchFilterSort,
+    setSearchFilterTempQuery,
+    setSearchFilterTime,
+} from "features/searchFilter/searchFilterSlice";
 
 type Props = {};
 
-enum MainNavBarPath {
-    POPULAR = "/r/popular",
-    ALL = "/r/all",
-    // FUNNY = "/r/funny",
-    POLITICS = "/r/politics",
-    // ASKREDDIT = "/r/AskReddit",
-    GAMING = "/r/gaming",
+enum MainNavBarSubreddit {
+    POPULAR = "popular",
+    ALL = "all",
+    POLITICS = "politics",
+    GAMING = "gaming",
 }
 
-const MAIN_NAV_BAR_PATHS = {
-    [MainNavBarPath.POPULAR]: "r/popular",
-    [MainNavBarPath.ALL]: "r/all",
-    // [MainNavBarPath.FUNNY]: "r/funny",
-    [MainNavBarPath.POLITICS]: "r/politics",
-    // [MainNavBarPath.ASKREDDIT]: "r/AskReddit",
-    [MainNavBarPath.GAMING]: "r/gaming",
+const MAIN_NAV_BAR_SUBREDDITS = {
+    [MainNavBarSubreddit.POPULAR]: "r/popular",
+    [MainNavBarSubreddit.ALL]: "r/all",
+    [MainNavBarSubreddit.POLITICS]: "r/politics",
+    [MainNavBarSubreddit.GAMING]: "r/gaming",
 };
 
 const MainNavBar: FC<Props> = () => {
-    return <SlideNavBar navBarPaths={MAIN_NAV_BAR_PATHS} bottomMargin={0} />;
+    const dispatch = useAppDispatch();
+
+    const handleNavClick = (path: string) => {
+        return (
+            event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+        ) => {
+            event.preventDefault();
+            dispatch(setSubredditFilterSubreddit(path));
+            dispatch(setSubredditFilterSort(SubredditSortOption.HOT));
+            dispatch(setSubredditFilterTime(SubredditTimeOption.DAY));
+
+            dispatch(setSearchFilterQuery(""));
+            dispatch(setSearchFilterTempQuery(""));
+            dispatch(setSearchFilterSort(SearchSortOption.RELEVANCE));
+            dispatch(setSearchFilterTime(SearchTimeOption.ALL));
+
+            dispatch(setBrowseSearchMode(false));
+        };
+    };
+
+    return (
+        <SlideNavBar
+            navBarPaths={MAIN_NAV_BAR_SUBREDDITS}
+            handleNavClick={handleNavClick}
+            bottomMargin={0}
+        />
+    );
 };
 
 export default MainNavBar;

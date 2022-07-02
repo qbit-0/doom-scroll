@@ -2,6 +2,7 @@ import {
     createAsyncThunk,
     createSelector,
     createSlice,
+    PayloadAction,
 } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "App/store";
 import { selectAccessToken } from "features/auth/authSlice";
@@ -19,13 +20,17 @@ export const loadPosts = createAsyncThunk<
     PostDequeData,
     { pathname: string; searchStr: string },
     { state: RootState; dispatch: AppDispatch }
->("posts/loadPosts", async ({ pathname, searchStr }, thunkApi) => {
+>("browse/loadPosts", async ({ pathname, searchStr }, thunkApi) => {
     const accessToken = selectAccessToken(thunkApi.getState());
+    const currPathname = selectBrowsePathname(thunkApi.getState());
+    const currSearchStr = selectBrowseSearchStr(thunkApi.getState());
 
     if (accessToken === null)
         return thunkApi.rejectWithValue("accessToken is null");
-    if (pathname === null) return thunkApi.rejectWithValue("pathname is null");
-    if (searchStr === null) return thunkApi.rejectWithValue("search is null");
+
+    if (pathname === currPathname && searchStr === currSearchStr) {
+        return thunkApi.rejectWithValue("already loaded");
+    }
 
     let json;
     try {
@@ -40,7 +45,7 @@ export const loadPostsAfter = createAsyncThunk<
     PostData[],
     { pathname: string; searchStr: string },
     { state: RootState; dispatch: AppDispatch }
->("posts/loadPostsAfter", async ({ pathname, searchStr }, thunkApi) => {
+>("browse/loadPostsAfter", async ({ pathname, searchStr }, thunkApi) => {
     const accessToken = selectAccessToken(thunkApi.getState());
     const after = selectPostsAfter(thunkApi.getState());
 
@@ -70,7 +75,7 @@ export const analyzePostComments = createAsyncThunk<
     number,
     PostData,
     { state: RootState; dispatch: AppDispatch }
->("posts/analyzePostAndReplies", async (post: PostData, thunkApi) => {
+>("browse/analyzePostAndReplies", async (post: PostData, thunkApi) => {
     const accessToken = selectAccessToken(thunkApi.getState());
 
     if (accessToken === null)
@@ -93,11 +98,17 @@ export const analyzePostComments = createAsyncThunk<
 });
 
 const initialState: {
+    pathname: string | null;
+    searchStr: string | null;
+    searchMode: boolean;
     postDeque: PostDequeData;
     isRefreshing: boolean;
     isLoadingBefore: boolean;
     isLoadingAfter: boolean;
 } = {
+    pathname: null,
+    searchStr: null,
+    searchMode: false,
     postDeque: {
         data: {},
         topId: 0,
@@ -110,10 +121,14 @@ const initialState: {
     isLoadingAfter: false,
 };
 
-const postsSlice = createSlice({
+const browseSlice = createSlice({
     name: "posts",
     initialState: initialState,
-    reducers: {},
+    reducers: {
+        setBrowseSearchMode: (state, action: PayloadAction<boolean>) => {
+            state.searchMode = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(loadPosts.pending, (state, action) => {
@@ -122,6 +137,8 @@ const postsSlice = createSlice({
             })
             .addCase(loadPosts.fulfilled, (state, action) => {
                 state.postDeque = action.payload;
+                state.pathname = action.meta.arg.pathname;
+                state.searchStr = action.meta.arg.searchStr;
                 state.isRefreshing = false;
             })
             .addCase(loadPosts.rejected, (state, action) => {
@@ -160,17 +177,22 @@ const postsSlice = createSlice({
     },
 });
 
-export const selectPostDeque = (state: RootState) => state.posts.postDeque;
+export const selectBrowsePathname = (state: RootState) => state.browse.pathname;
+export const selectBrowseSearchStr = (state: RootState) =>
+    state.browse.searchStr;
+export const selectBrowseSearchMode = (state: RootState) =>
+    state.browse.searchMode;
+export const selectPostDeque = (state: RootState) => state.browse.postDeque;
 export const selectPostsBefore = (state: RootState) =>
-    state.posts.postDeque.before;
+    state.browse.postDeque.before;
 export const selectPostsAfter = (state: RootState) =>
-    state.posts.postDeque.after;
+    state.browse.postDeque.after;
 export const selectPostsIsRefreshing = (state: RootState) =>
-    state.posts.isRefreshing;
+    state.browse.isRefreshing;
 export const selectPostsIsLoadingBefore = (state: RootState) =>
-    state.posts.isLoadingBefore;
+    state.browse.isLoadingBefore;
 export const selectPostsIsLoadingAfter = (state: RootState) =>
-    state.posts.isLoadingAfter;
+    state.browse.isLoadingAfter;
 export const selectPostsIsLoading = createSelector(
     selectPostsIsRefreshing,
     selectPostsIsLoadingBefore,
@@ -179,4 +201,5 @@ export const selectPostsIsLoading = createSelector(
         isRefreshing || isLoadingBefore || isLoadingAfter
 );
 
-export default postsSlice.reducer;
+export const { setBrowseSearchMode } = browseSlice.actions;
+export default browseSlice.reducer;

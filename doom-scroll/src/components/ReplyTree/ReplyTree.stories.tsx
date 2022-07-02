@@ -66,7 +66,7 @@ const childMore: MoreData = {
 };
 
 const preloadedState = {
-    comments: {
+    article: {
         pathname: null,
         searchStr: null,
         post: null,

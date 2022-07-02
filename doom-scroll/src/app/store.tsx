@@ -4,16 +4,20 @@ import {
     configureStore,
 } from "@reduxjs/toolkit";
 import authReducer from "features/auth/authSlice";
-import commentsReducer from "features/comments/commentsSlice";
-import nlpReducer from "features/nlp/nlpSlice";
-import postsReducer from "features/posts/postsSlice";
+import browseReducer from "features/browse/browseSlice";
+import articleReducer from "features/article/articleSlice";
+import subredditFilterReducer from "features/subredditFilter/subredditFilterSlice";
+import searchFilterReducer from "features/searchFilter/searchFilterSlice";
+import nlpFilterReducer from "features/nlpFilter/nlpFilterSlice";
 import { useDispatch } from "react-redux";
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    posts: postsReducer,
-    comments: commentsReducer,
-    nlp: nlpReducer,
+    browse: browseReducer,
+    article: articleReducer,
+    subredditFilter: subredditFilterReducer,
+    searchFitler: searchFilterReducer,
+    nlpFilter: nlpFilterReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {

@@ -1,55 +1,43 @@
 import {
-    SEARCH_SORT_OPTIONS,
-    SEARCH_TIME_OPTIONS,
     SearchSortOption,
     SearchTimeOption,
+    SEARCH_SORT_OPTIONS,
+    SEARCH_TIME_OPTIONS,
 } from "lib/reddit/redditFilterOptions";
-import React, {
-    ChangeEventHandler,
-    FC,
-    MouseEvent,
-    useEffect,
-    useState,
-} from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import React, { ChangeEventHandler, FC, MouseEvent } from "react";
 
+import { useAppDispatch } from "App/store";
 import Button from "components/Button/Button";
 import Option from "components/Option/Option";
 import Select from "components/Select/Select";
+import {
+    selectSearchFilterQuery,
+    selectSearchFilterSort,
+    selectSearchFilterTime,
+    setSearchFilterSort,
+    setSearchFilterTime,
+} from "features/searchFilter/searchFilterSlice";
+import { useSelector } from "react-redux";
 
 type Props = {};
 
-const SearchSort: FC<Props> = () => {
-    const [searchParams] = useSearchParams();
-    const [sort, setSort] = useState(SearchSortOption.RELEVANCE);
-    const [time, setTime] = useState(SearchTimeOption.ALL);
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const newSearchParams = new URLSearchParams();
-
-        const query = searchParams.get("q");
-        if (query !== null) newSearchParams.set("q", query);
-        if (sort !== SearchSortOption.RELEVANCE)
-            newSearchParams.set("sort", sort);
-        if (time !== SearchTimeOption.ALL) newSearchParams.set("t", time);
-
-        const url = `/search/?${newSearchParams.toString()}`;
-        navigate(url);
-    }, [navigate, searchParams, sort, time]);
+const SearchFilter: FC<Props> = () => {
+    const filterSearchSort = useSelector(selectSearchFilterSort);
+    const filterSearchTime = useSelector(selectSearchFilterTime);
+    const dispatch = useAppDispatch();
 
     const handleSortClick = (sortOption: SearchSortOption) => {
         return (
             event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
         ) => {
             event.preventDefault();
-            setSort(sortOption);
-            setTime(SearchTimeOption.ALL);
+            dispatch(setSearchFilterSort(sortOption));
+            dispatch(setSearchFilterTime(SearchTimeOption.ALL));
         };
     };
 
     const handleTimeChange: ChangeEventHandler<HTMLSelectElement> = (event) => {
-        setTime(event.target.value as SearchTimeOption);
+        dispatch(setSearchFilterTime(event.target.value as SearchTimeOption));
     };
 
     return (
@@ -57,26 +45,25 @@ const SearchSort: FC<Props> = () => {
             <Button onClick={handleSortClick(SearchSortOption.RELEVANCE)}>
                 {SEARCH_SORT_OPTIONS[SearchSortOption.RELEVANCE]}
             </Button>
-
             <Button onClick={handleSortClick(SearchSortOption.HOT)}>
                 <p className="inline font-bold">
                     {SEARCH_SORT_OPTIONS[SearchSortOption.HOT]}
                 </p>
             </Button>
-
             <Button onClick={handleSortClick(SearchSortOption.TOP)}>
                 {SEARCH_SORT_OPTIONS[SearchSortOption.TOP]}
             </Button>
-
             <Button onClick={handleSortClick(SearchSortOption.NEW)}>
                 {SEARCH_SORT_OPTIONS[SearchSortOption.NEW]}
             </Button>
-
             <Button onClick={handleSortClick(SearchSortOption.COMMENTS)}>
                 {SEARCH_SORT_OPTIONS[SearchSortOption.COMMENTS]}
             </Button>
-
-            <Select title="time" value={time} onChange={handleTimeChange}>
+            <Select
+                title="time"
+                value={filterSearchTime}
+                onChange={handleTimeChange}
+            >
                 {Object.entries(SEARCH_TIME_OPTIONS).map(
                     (timeOption, index) => (
                         <Option value={timeOption[0]} key={index}>
@@ -89,4 +76,4 @@ const SearchSort: FC<Props> = () => {
     );
 };
 
-export default SearchSort;
+export default SearchFilter;
