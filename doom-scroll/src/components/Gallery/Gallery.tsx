@@ -10,7 +10,7 @@ const Gallery: FC<Props> = ({ srcs }) => {
         <div className="w-full justify-center overflow-x-auto whitespace-nowrap">
             {srcs.map((src, index) => {
                 return (
-                    <div className="inline-block w-11/12" key={index}>
+                    <div className="inline-block max-w-[90%]" key={index}>
                         <ImagePreview src={src} href={src} />
                     </div>
                 );
