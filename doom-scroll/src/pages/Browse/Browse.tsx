@@ -114,23 +114,8 @@ const Browse: React.FC<Props> = () => {
         }
     }, [dispatch, accessToken]);
 
-    const refTop = useRef<HTMLDivElement>(null);
-    const scrollToTop = () => {
-        if (refTop.current === null) return;
-
-        window.scroll({
-            top: refTop.current.offsetTop,
-            behavior: "auto",
-        });
-    };
-
-    useEffect(() => {
-        scrollToTop(); //TODO CREATE CUSTOM HOOK FOR SCROLLING TO TOP
-    }, []);
-
     useEffect(() => {
         if (isRefreshing) return;
-        scrollToTop();
         batch(() => {
             dispatch(
                 loadPosts({
@@ -144,18 +129,26 @@ const Browse: React.FC<Props> = () => {
 
     const refBot = useRef<HTMLDivElement>(null);
     const isNearBot = useIntersected(refBot, {
-        rootMargin: "5000px",
+        rootMargin: "2000px",
     });
 
     useEffect(() => {
+        let interval: NodeJS.Timer | null = null;
         if (isNearBot && !isLoading && after !== null) {
-            dispatch(
-                loadPostsAfter({
-                    pathname: location.pathname,
-                    searchStr: location.search,
-                })
-            );
+            interval = setInterval(() => {
+                dispatch(
+                    loadPostsAfter({
+                        pathname: location.pathname,
+                        searchStr: location.search,
+                    })
+                );
+            }, 1000);
+        } else {
+            if (interval !== null) clearInterval(interval);
         }
+        return () => {
+            if (interval !== null) clearInterval(interval);
+        };
     }, [dispatch, isNearBot, isLoading, after, location]);
 
     return (

@@ -1,18 +1,18 @@
 import { useAppDispatch } from "App/store";
-import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import {
     loadArticle,
     selectCommentsIsRefreshing,
     selectCommentsPost,
 } from "features/article/articleSlice";
+import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate, useNavigationType } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
+import Button from "components/Button/Button";
 import Post from "components/Post/Post";
 import PostPlaceholder from "components/PostPlaceholder/PostPlaceholder";
 import ReplyTree from "components/ReplyTree/ReplyTree";
-import Button from "components/Button/Button";
 
 type Props = {};
 
@@ -40,10 +40,6 @@ const Article: React.FC<Props> = () => {
             behavior: "auto",
         });
     };
-
-    useEffect(() => {
-        scrollToTop();
-    }, []);
 
     useEffect(() => {
         if (isRefreshing) return;

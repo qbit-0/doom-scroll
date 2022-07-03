@@ -32,11 +32,18 @@ export const loadPosts = createAsyncThunk<
         return thunkApi.rejectWithValue("already loaded");
     }
 
+    const searchParams = new URLSearchParams(searchStr);
+    searchParams.append("limit", "5");
+
     let json;
     try {
-        json = await RedditApi.fetchReddit(accessToken, pathname, searchStr);
+        json = await RedditApi.fetchReddit(
+            accessToken,
+            pathname,
+            searchParams.toString()
+        );
     } catch (err) {
-        return thunkApi.rejectWithValue(err);
+        thunkApi.rejectWithValue(err);
     }
     return parsePostDeque(json);
 });
@@ -56,6 +63,7 @@ export const loadPostsAfter = createAsyncThunk<
     if (after === null) return thunkApi.rejectWithValue("after is null");
 
     const searchParams = new URLSearchParams(searchStr);
+    searchParams.append("limit", "5");
     searchParams.append("after", after);
 
     let json;
