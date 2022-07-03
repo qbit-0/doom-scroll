@@ -4,39 +4,38 @@ import {
     SEARCH_SORT_OPTIONS,
     SEARCH_TIME_OPTIONS,
 } from "lib/reddit/redditFilterOptions";
-import React, { ChangeEventHandler, FC, MouseEvent } from "react";
+import React, { ChangeEventHandler, FC, MouseEvent, useState } from "react";
 
-import { useAppDispatch } from "App/store";
 import Button from "components/Button/Button";
 import Option from "components/Option/Option";
 import Select from "components/Select/Select";
 import {
-    selectSearchFilterSort,
-    selectSearchFilterTime,
-    setSearchFilterSort,
-    setSearchFilterTime,
-} from "features/searchFilter/searchFilterSlice";
-import { useSelector } from "react-redux";
+    Location,
+    NavigateFunction,
+    useLocation,
+    useNavigate,
+} from "react-router-dom";
 
 type Props = {};
 
 const SearchFilter: FC<Props> = () => {
-    const filterSearchSort = useSelector(selectSearchFilterSort);
-    const filterSearchTime = useSelector(selectSearchFilterTime);
-    const dispatch = useAppDispatch();
+    const location = useLocation();
+    const navigate = useNavigate();
 
-    const handleSortClick = (sortOption: SearchSortOption) => {
-        return (
-            event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-        ) => {
+    const [time, setTime] = useState(SearchTimeOption.ALL);
+
+    const handleSortClick = (newSort: SearchSortOption) => {
+        return (event: MouseEvent<HTMLButtonElement>) => {
             event.preventDefault();
-            dispatch(setSearchFilterSort(sortOption));
-            dispatch(setSearchFilterTime(SearchTimeOption.ALL));
+            navigateSearchFilter(location, navigate, null, newSort, null);
         };
     };
 
     const handleTimeChange: ChangeEventHandler<HTMLSelectElement> = (event) => {
-        dispatch(setSearchFilterTime(event.target.value as SearchTimeOption));
+        const newTime = event.target.value as SearchTimeOption;
+        setTime(newTime);
+
+        navigateSearchFilter(location, navigate, null, null, newTime);
     };
 
     return (
@@ -58,11 +57,7 @@ const SearchFilter: FC<Props> = () => {
             <Button onClick={handleSortClick(SearchSortOption.COMMENTS)}>
                 {SEARCH_SORT_OPTIONS[SearchSortOption.COMMENTS]}
             </Button>
-            <Select
-                title="time"
-                value={filterSearchTime}
-                onChange={handleTimeChange}
-            >
+            <Select title="time" value={time} onChange={handleTimeChange}>
                 {Object.entries(SEARCH_TIME_OPTIONS).map(
                     (timeOption, index) => (
                         <Option value={timeOption[0]} key={index}>
@@ -73,6 +68,39 @@ const SearchFilter: FC<Props> = () => {
             </Select>
         </div>
     );
+};
+
+const navigateSearchFilter = (
+    location: Location,
+    navigate: NavigateFunction,
+    query: string | null,
+    sort: SearchSortOption | null,
+    time: SearchTimeOption | null
+) => {
+    const searchParams = new URLSearchParams(location.search);
+
+    if (query === null) {
+        query = searchParams.get("q");
+        if (query === null) query = "";
+    }
+
+    if (sort === null) {
+        sort = searchParams.get("sort") as SearchSortOption;
+        if (sort === null) sort = SearchSortOption.RELEVANCE;
+    }
+
+    if (time === null) {
+        time = searchParams.get("t") as SearchTimeOption;
+        if (time === null) time = SearchTimeOption.ALL;
+    }
+
+    const newPath = "/search";
+    const newSearchParams = new URLSearchParams();
+    newSearchParams.set("q", query);
+    if (sort !== SearchSortOption.RELEVANCE) newSearchParams.set("sort", sort);
+    if (time !== SearchTimeOption.ALL) newSearchParams.set("t", time);
+
+    navigate(`${newPath}?${newSearchParams.toString()}`);
 };
 
 export default SearchFilter;

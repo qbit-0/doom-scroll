@@ -6,7 +6,7 @@ import NoMatch from "pages/NoMatch/NoMatch";
 import React, { FC } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import NavBar from "components/MainNavBar/MainNavBar";
+import MainNavBar from "components/MainNavBar/MainNavBar";
 
 type Props = {};
 
@@ -14,8 +14,10 @@ const App: FC<Props> = () => {
     return (
         <>
             <Hero />
+            <header>
+                <MainNavBar />
+            </header>
             <main>
-                <NavBar />
                 <Routes>
                     <Route path="/" element={<Navigate to="r/popular" />} />
 

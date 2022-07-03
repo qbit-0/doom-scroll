@@ -108,7 +108,6 @@ export const analyzePostComments = createAsyncThunk<
 const initialState: {
     pathname: string | null;
     searchStr: string | null;
-    searchMode: boolean;
     postDeque: PostDequeData;
     isRefreshing: boolean;
     isLoadingBefore: boolean;
@@ -116,7 +115,6 @@ const initialState: {
 } = {
     pathname: null,
     searchStr: null,
-    searchMode: false,
     postDeque: {
         data: {},
         topId: 0,
@@ -132,11 +130,7 @@ const initialState: {
 const browseSlice = createSlice({
     name: "posts",
     initialState: initialState,
-    reducers: {
-        setBrowseSearchMode: (state, action: PayloadAction<boolean>) => {
-            state.searchMode = action.payload;
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(loadPosts.pending, (state, action) => {
@@ -188,8 +182,6 @@ const browseSlice = createSlice({
 export const selectBrowsePathname = (state: RootState) => state.browse.pathname;
 export const selectBrowseSearchStr = (state: RootState) =>
     state.browse.searchStr;
-export const selectBrowseSearchMode = (state: RootState) =>
-    state.browse.searchMode;
 export const selectPostDeque = (state: RootState) => state.browse.postDeque;
 export const selectPostsBefore = (state: RootState) =>
     state.browse.postDeque.before;
@@ -209,5 +201,4 @@ export const selectPostsIsLoading = createSelector(
         isRefreshing || isLoadingBefore || isLoadingAfter
 );
 
-export const { setBrowseSearchMode } = browseSlice.actions;
 export default browseSlice.reducer;

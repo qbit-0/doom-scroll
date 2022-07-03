@@ -1,30 +1,15 @@
 import React, { FC } from "react";
 
-import Button from "components/Button/Button";
 import MainSearchBar from "components/MainSearchBar/MainSearchBar";
-import { SubredditSortOption } from "lib/reddit/redditFilterOptions";
+import SubredditLinks from "components/SubredditLinks/SubredditLinks";
 
-type InnerProps = {
-    navBarPaths: {
-        [path: string]: string;
-    };
-    handleNavClick: (path: string, isSearch: boolean) => void;
-};
-export const NavBar: FC<InnerProps> = ({ navBarPaths, handleNavClick }) => {
+type InnerProps = {};
+export const NavBar: FC<InnerProps> = () => {
     return (
         <div className="mx-auto w-fit">
             <div className="my-2 flex flex-wrap justify-center gap-2">
-                {Object.entries(navBarPaths).map((entry, index) => (
-                    <Button
-                        onClick={() => {
-                            handleNavClick(entry[0], false);
-                        }}
-                        key={index}
-                    >
-                        {entry[1]}
-                    </Button>
-                ))}
-                <MainSearchBar handleNavClick={handleNavClick} />
+                <SubredditLinks />
+                <MainSearchBar />
             </div>
         </div>
     );

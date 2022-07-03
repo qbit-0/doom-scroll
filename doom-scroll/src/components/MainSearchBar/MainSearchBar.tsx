@@ -1,40 +1,20 @@
 import React, {
     ChangeEventHandler,
     KeyboardEventHandler,
-    useEffect,
+    useState,
 } from "react";
 
-import { useAppDispatch } from "App/store";
 import SearchBar from "components/SearchBar/SearchBar";
-import {
-    selectBrowseSearchMode,
-    setBrowseSearchMode,
-} from "features/browse/browseSlice";
-import {
-    selectSearchFilterTempQuery,
-    setSearchFilterQuery,
-    setSearchFilterTempQuery,
-} from "features/searchFilter/searchFilterSlice";
-import { useSelector } from "react-redux";
+import { generatePath, useNavigate } from "react-router-dom";
 
-type Props = {
-    handleNavClick: (path: string, isSearch: boolean) => void;
-};
+type Props = {};
 
-const MainSearchBar: React.FC<Props> = ({ handleNavClick }) => {
-    const searchMode = useSelector(selectBrowseSearchMode);
-    const searchFilterTempQuery = useSelector(selectSearchFilterTempQuery);
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        if (!searchMode) {
-            dispatch(setSearchFilterTempQuery(""));
-            dispatch(setSearchFilterQuery(""));
-        }
-    }, [dispatch, searchMode]);
+const MainSearchBar: React.FC<Props> = () => {
+    const [query, setQuery] = useState("");
+    const navigate = useNavigate();
 
     const handleQueryChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-        dispatch(setSearchFilterTempQuery(event.target.value));
+        setQuery(event.target.value);
     };
 
     const handleKeyDown: KeyboardEventHandler = (event) => {
@@ -45,15 +25,15 @@ const MainSearchBar: React.FC<Props> = ({ handleNavClick }) => {
     };
 
     const handleSearchSubmit = () => {
-        if (searchFilterTempQuery === "") return;
-        dispatch(setSearchFilterQuery(searchFilterTempQuery));
-        dispatch(setBrowseSearchMode(true));
-        handleNavClick("", true);
+        const newSearchPath = generatePath("/search");
+        const newSearchParams = new URLSearchParams();
+        newSearchParams.set("q", query);
+        navigate(`${newSearchPath}?${newSearchParams.toString()}`);
     };
 
     return (
         <SearchBar
-            value={searchFilterTempQuery}
+            value={query}
             onChange={handleQueryChange}
             onKeyDown={handleKeyDown}
             onSubmit={handleSearchSubmit}

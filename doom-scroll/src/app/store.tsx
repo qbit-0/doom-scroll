@@ -6,8 +6,6 @@ import {
 import authReducer from "features/auth/authSlice";
 import browseReducer from "features/browse/browseSlice";
 import articleReducer from "features/article/articleSlice";
-import subredditFilterReducer from "features/subredditFilter/subredditFilterSlice";
-import searchFilterReducer from "features/searchFilter/searchFilterSlice";
 import nlpFilterReducer from "features/nlpFilter/nlpFilterSlice";
 import { useDispatch } from "react-redux";
 
@@ -15,8 +13,6 @@ const rootReducer = combineReducers({
     auth: authReducer,
     browse: browseReducer,
     article: articleReducer,
-    subredditFilter: subredditFilterReducer,
-    searchFitler: searchFilterReducer,
     nlpFilter: nlpFilterReducer,
 });
 

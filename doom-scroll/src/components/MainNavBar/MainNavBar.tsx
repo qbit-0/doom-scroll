@@ -1,67 +1,48 @@
-import React, { FC } from "react";
-
-import { useAppDispatch } from "App/store";
-import SlideNavBar from "components/SlideNavBar/SlideNavBar";
-import { setBrowseSearchMode } from "features/browse/browseSlice";
-import {
-    setSearchFilterQuery,
-    setSearchFilterSort,
-    setSearchFilterTempQuery,
-    setSearchFilterTime,
-} from "features/searchFilter/searchFilterSlice";
-import {
-    setSubredditFilterSort,
-    setSubredditFilterSubreddit,
-    setSubredditFilterTime,
-} from "features/subredditFilter/subredditFilterSlice";
-import {
-    SearchSortOption,
-    SearchTimeOption,
-    SubredditSortOption,
-    SubredditTimeOption,
-} from "lib/reddit/redditFilterOptions";
+import { NavBar } from "components/NavBar/NavBar";
+import useScrollVel from "lib/hooks/useScrollVel";
+import useViewportOffsetY from "lib/hooks/useViewportOffsetY";
+import React, { FC, useEffect, useRef, useState } from "react";
 
 type Props = {};
 
-enum MainNavBarSubreddit {
-    POPULAR = "popular",
-    ALL = "all",
-    POLITICS = "politics",
-    GAMING = "gaming",
-}
-
-const MAIN_NAV_BAR_SUBREDDITS = {
-    [MainNavBarSubreddit.POPULAR]: "r/popular",
-    [MainNavBarSubreddit.ALL]: "r/all",
-    [MainNavBarSubreddit.POLITICS]: "r/politics",
-    [MainNavBarSubreddit.GAMING]: "r/gaming",
-};
-
 const MainNavBar: FC<Props> = () => {
-    const dispatch = useAppDispatch();
+    const [show, setShow] = useState<boolean | null>(null);
 
-    const handleNavClick = (path: string, isSearch: boolean) => {
-        dispatch(setSubredditFilterSort(SubredditSortOption.HOT));
-        dispatch(setSubredditFilterTime(SubredditTimeOption.DAY));
+    const staticNav = useRef<HTMLDivElement>(null);
+    const viewportOffsetY = useViewportOffsetY(staticNav);
+    const scrollVel = useScrollVel();
 
-        dispatch(setSearchFilterSort(SearchSortOption.RELEVANCE));
-        dispatch(setSearchFilterTime(SearchTimeOption.ALL));
-
-        if (isSearch) {
-            dispatch(setBrowseSearchMode(true));
-        } else {
-            dispatch(setSearchFilterQuery(""));
-            dispatch(setSearchFilterTempQuery(""));
-            dispatch(setBrowseSearchMode(false));
-            dispatch(setSubredditFilterSubreddit(path));
+    useEffect(() => {
+        if (viewportOffsetY > 0 && scrollVel < 0) {
+            setShow(true);
+        } else if (show === true) {
+            setShow(false);
         }
-    };
+    }, [viewportOffsetY, scrollVel, show]);
+
+    let animate = "";
+    if (show === null) {
+    } else if (show === true) {
+        animate = "animate-slidein";
+    } else if (show === false) {
+        animate = "animate-slideout";
+    }
 
     return (
-        <SlideNavBar
-            navBarPaths={MAIN_NAV_BAR_SUBREDDITS}
-            handleNavClick={handleNavClick}
-        />
+        <nav>
+            <div
+                className="top-0 z-10 w-full bg-neutral-900 p-1 text-amber-100 drop-shadow-lg"
+                ref={staticNav}
+            >
+                <NavBar />
+            </div>
+
+            <div
+                className={`invisible fixed top-0 z-10 w-full bg-neutral-900 p-1 text-amber-100 drop-shadow-lg ${animate}`}
+            >
+                <NavBar />
+            </div>
+        </nav>
     );
 };
 

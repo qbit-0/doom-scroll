@@ -4,41 +4,44 @@ import {
     SUBREDDIT_SORT_OPTIONS,
     SUBREDDIT_TIME_OPTIONS,
 } from "lib/reddit/redditFilterOptions";
-import React, { ChangeEventHandler, FC, MouseEvent } from "react";
+import React, { ChangeEventHandler, FC, MouseEvent, useState } from "react";
 
-import { useAppDispatch } from "App/store";
 import Button from "components/Button/Button";
 import Option from "components/Option/Option";
 import Select from "components/Select/Select";
 import {
-    selectSubredditFilterSort,
-    selectSubredditFilterTime,
-    setSubredditFilterSort,
-    setSubredditFilterTime,
-} from "features/subredditFilter/subredditFilterSlice";
-import { useSelector } from "react-redux";
+    generatePath,
+    Location,
+    matchPath,
+    NavigateFunction,
+    useLocation,
+    useNavigate,
+} from "react-router-dom";
 
 type Props = {};
 
 const SubredditFilter: FC<Props> = () => {
-    const filterSort = useSelector(selectSubredditFilterSort);
-    const filterTime = useSelector(selectSubredditFilterTime);
-    const dispatch = useAppDispatch();
+    const location = useLocation();
+    const navigate = useNavigate();
 
-    const handleSortClick = (value: SubredditSortOption) => {
+    const [sort, setSort] = useState(SubredditSortOption.HOT);
+    const [time, setTime] = useState(SubredditTimeOption.DAY);
+
+    const handleSortClick = (newSort: SubredditSortOption) => {
         return (
             event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
         ) => {
             event.preventDefault();
-            dispatch(setSubredditFilterSort(value));
-            dispatch(setSubredditFilterTime(SubredditTimeOption.DAY));
+            setSort(newSort);
+            navigateSubredditFilter(location, navigate, null, newSort, null);
         };
     };
 
     const handleTimeChange: ChangeEventHandler<HTMLSelectElement> = (event) => {
-        dispatch(
-            setSubredditFilterTime(event.target.value as SubredditTimeOption)
-        );
+        const newTime = event.target.value as SubredditTimeOption;
+        setTime(newTime);
+
+        navigateSubredditFilter(location, navigate, null, null, newTime);
     };
 
     return (
@@ -52,12 +55,8 @@ const SubredditFilter: FC<Props> = () => {
             <Button onClick={handleSortClick(SubredditSortOption.TOP)}>
                 {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.TOP]}
             </Button>
-            {filterSort === "top" && (
-                <Select
-                    title="time"
-                    value={filterTime}
-                    onChange={handleTimeChange}
-                >
+            {sort === "top" && (
+                <Select title="time" value={time} onChange={handleTimeChange}>
                     {Object.entries(SUBREDDIT_TIME_OPTIONS).map(
                         (timeOption, index) => (
                             <Option value={timeOption[0]} key={index}>
@@ -72,6 +71,42 @@ const SubredditFilter: FC<Props> = () => {
             </Button>
         </div>
     );
+};
+
+const navigateSubredditFilter = (
+    location: Location,
+    navigate: NavigateFunction,
+    subreddit: string | null,
+    sort: SubredditSortOption | null,
+    time: SubredditTimeOption | null
+) => {
+    const match = matchPath("/r/:subreddit/:sort", location.pathname);
+
+    if (subreddit === null) {
+        if (!match?.params.subreddit) subreddit = "popular";
+        else subreddit = match.params.subreddit;
+    }
+
+    if (sort === null) {
+        if (!match?.params.sort) sort = SubredditSortOption.HOT;
+        else sort = match.params.sort as SubredditSortOption;
+    }
+
+    if (time === null) {
+        const searchParams = new URLSearchParams(location.search);
+        time = searchParams.get("t") as SubredditTimeOption;
+        if (time === null) time = SubredditTimeOption.DAY;
+    }
+
+    const newPath = generatePath("/r/:subreddit/:sort", {
+        subreddit: subreddit,
+        sort: sort,
+    });
+
+    const newSearchParams = new URLSearchParams();
+    if (sort === "top") newSearchParams.set("t", time);
+
+    navigate(`${newPath}?${newSearchParams.toString()}`);
 };
 
 export default SubredditFilter;
