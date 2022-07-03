@@ -1,8 +1,14 @@
-import React, { FC, MouseEvent } from "react";
+import React, { FC } from "react";
 
 import { useAppDispatch } from "App/store";
 import SlideNavBar from "components/SlideNavBar/SlideNavBar";
 import { setBrowseSearchMode } from "features/browse/browseSlice";
+import {
+    setSearchFilterQuery,
+    setSearchFilterSort,
+    setSearchFilterTempQuery,
+    setSearchFilterTime,
+} from "features/searchFilter/searchFilterSlice";
 import {
     setSubredditFilterSort,
     setSubredditFilterSubreddit,
@@ -14,13 +20,6 @@ import {
     SubredditSortOption,
     SubredditTimeOption,
 } from "lib/reddit/redditFilterOptions";
-import {
-    setSearchFilterQuery,
-    setSearchFilterSort,
-    setSearchFilterTempQuery,
-    setSearchFilterTime,
-} from "features/searchFilter/searchFilterSlice";
-import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
@@ -40,26 +39,22 @@ const MAIN_NAV_BAR_SUBREDDITS = {
 
 const MainNavBar: FC<Props> = () => {
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
 
-    const handleNavClick = (path: string) => {
-        return (
-            event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-        ) => {
-            event.preventDefault();
-            dispatch(setSubredditFilterSubreddit(path));
-            dispatch(setSubredditFilterSort(SubredditSortOption.HOT));
-            dispatch(setSubredditFilterTime(SubredditTimeOption.DAY));
+    const handleNavClick = (path: string, isSearch: boolean) => {
+        dispatch(setSubredditFilterSort(SubredditSortOption.HOT));
+        dispatch(setSubredditFilterTime(SubredditTimeOption.DAY));
 
+        dispatch(setSearchFilterSort(SearchSortOption.RELEVANCE));
+        dispatch(setSearchFilterTime(SearchTimeOption.ALL));
+
+        if (isSearch) {
+            dispatch(setBrowseSearchMode(true));
+        } else {
             dispatch(setSearchFilterQuery(""));
             dispatch(setSearchFilterTempQuery(""));
-            dispatch(setSearchFilterSort(SearchSortOption.RELEVANCE));
-            dispatch(setSearchFilterTime(SearchTimeOption.ALL));
-
             dispatch(setBrowseSearchMode(false));
-
-            navigate(`/r/${path}/${SubredditSortOption.HOT}`);
-        };
+            dispatch(setSubredditFilterSubreddit(path));
+        }
     };
 
     return (

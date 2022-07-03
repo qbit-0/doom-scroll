@@ -41,7 +41,7 @@ const SearchBar: FC<Props> = ({ value, onChange, onKeyDown, onSubmit }) => {
                 onKeyDown={onKeyDown}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                className="flex-auto rounded-l-3xl bg-transparent py-2 pl-2 font-bold text-amber-100 outline-none placeholder:font-thin"
+                className="flex-auto rounded-l-3xl bg-transparent py-2 pl-2 text-sm font-bold text-amber-100 outline-none placeholder:font-thin sm:text-base"
             />
             <button
                 title="submit search term"

@@ -1,22 +1,17 @@
 import React from "react";
-import sanitizeHtml from "sanitize-html";
+import DOMPurify from "dompurify";
 
 type Props = {
     dirty: string;
-};
-
-const sanitize = (dirty: string) => {
-    return dirty;
-    // return sanitizeHtml(dirty);
 };
 
 const SanitizeHTML: React.FC<Props> = ({ dirty }) => {
     return (
         <div
             dangerouslySetInnerHTML={{
-                __html: sanitize(dirty),
+                __html: DOMPurify.sanitize(dirty),
             }}
-            className="text-amber-100"
+            className="unreset text-amber-100"
         />
     );
 };

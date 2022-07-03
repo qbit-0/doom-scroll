@@ -11,35 +11,21 @@ import {
 } from "features/browse/browseSlice";
 import React, { useEffect, useRef } from "react";
 import { batch, useSelector } from "react-redux";
-import { generatePath, useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import FilterSentiment from "components/FilterSentiment/FilterSentiment";
 import PostContainer from "components/PostContainer/PostContainer";
 import PostPlaceholder from "components/PostPlaceholder/PostPlaceholder";
 import SearchFilter from "components/SearchFilter/SearchFilter";
 import SubredditFilter from "components/SubredditFilter/SubredditFilter";
-import {
-    selectSearchFilterQuery,
-    selectSearchFilterSort,
-    selectSearchFilterTime,
-} from "features/searchFilter/searchFilterSlice";
-import {
-    selectSubredditFilterSort,
-    selectSubredditFilterSubreddit,
-    selectSubredditFilterTime,
-} from "features/subredditFilter/subredditFilterSlice";
-import {
-    SearchSortOption,
-    SearchTimeOption,
-    SubredditSortOption,
-    SubredditTimeOption,
-} from "lib/reddit/redditFilterOptions";
 import useIntersected from "lib/hooks/useIntersected";
+import useRedirectBrowse from "lib/hooks/useRedirectBrowse";
 
 type Props = {};
 
 const Browse: React.FC<Props> = () => {
     const location = useLocation();
+    const searchMode = useSelector(selectBrowseSearchMode);
     const accessToken = useSelector(selectAccessToken);
     const postDeque = useSelector(selectPostDeque);
     const isRefreshing = useSelector(selectPostsIsRefreshing);
@@ -47,66 +33,7 @@ const Browse: React.FC<Props> = () => {
     const after = useSelector(selectPostsAfter);
     const dispatch = useAppDispatch();
 
-    const searchMode = useSelector(selectBrowseSearchMode);
-
-    const filterSubredditSubreddit = useSelector(
-        selectSubredditFilterSubreddit
-    );
-    const filterSubredditSort = useSelector(selectSubredditFilterSort);
-    const filterSubredditTime = useSelector(selectSubredditFilterTime);
-
-    const filterSearchQuery = useSelector(selectSearchFilterQuery);
-    const filterSearchSort = useSelector(selectSearchFilterSort);
-    const filterSearchTime = useSelector(selectSearchFilterTime);
-
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (searchMode) return;
-
-        const newPathname = generatePath("/r/:subreddit/:sort", {
-            subreddit: filterSubredditSubreddit,
-            sort: filterSubredditSort,
-        });
-
-        const newSearchParams = new URLSearchParams();
-        if (
-            filterSubredditSort === SubredditSortOption.TOP &&
-            filterSubredditTime !== SubredditTimeOption.DAY
-        )
-            newSearchParams.set("t", filterSubredditTime);
-
-        const url = `${newPathname}?${newSearchParams.toString()}`;
-
-        navigate(url);
-    }, [
-        navigate,
-        searchMode,
-        filterSubredditSubreddit,
-        filterSubredditSort,
-        filterSubredditTime,
-    ]);
-
-    useEffect(() => {
-        if (!searchMode) return;
-
-        const newSearchParams = new URLSearchParams();
-
-        newSearchParams.set("q", filterSearchQuery);
-        if (filterSearchSort !== SearchSortOption.RELEVANCE)
-            newSearchParams.set("sort", filterSearchSort);
-        if (filterSearchTime !== SearchTimeOption.ALL)
-            newSearchParams.set("t", filterSearchTime);
-
-        const url = `/search/?${newSearchParams.toString()}`;
-        navigate(url);
-    }, [
-        navigate,
-        searchMode,
-        filterSearchQuery,
-        filterSearchSort,
-        filterSearchTime,
-    ]);
+    useRedirectBrowse();
 
     useEffect(() => {
         if (accessToken === null) {

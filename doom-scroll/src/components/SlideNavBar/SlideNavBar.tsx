@@ -1,13 +1,6 @@
-import useIntersected from "lib/hooks/useIntersected";
 import useScrollVel from "lib/hooks/useScrollVel";
 import useViewportOffsetY from "lib/hooks/useViewportOffsetY";
-import React, {
-    FC,
-    MouseEventHandler,
-    useEffect,
-    useRef,
-    useState,
-} from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 
 import { NavBar } from "../NavBar/NavBar";
 
@@ -15,7 +8,7 @@ type Props = {
     navBarPaths: {
         [path: string]: string;
     };
-    handleNavClick: (path: string) => MouseEventHandler<HTMLButtonElement>;
+    handleNavClick: (path: string, isSearch: boolean) => void;
 };
 
 const SlideNavBar: FC<Props> = ({ navBarPaths, handleNavClick }) => {

@@ -52,7 +52,10 @@ export const loadMore = createAsyncThunk<
         return thunkApi.rejectWithValue("replyTree is null");
 
     const treeCopy = structuredClone(replyTree);
-    const match = matchPath("/r/:subreddit/article/:articleId/*", pathname);
+    const match = matchPath(
+        "/r/:subreddit/comments/:articleId/:articleTitle/*",
+        pathname
+    );
 
     if (match === null) return thunkApi.rejectWithValue("match is null");
 

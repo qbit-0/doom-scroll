@@ -1,4 +1,8 @@
-import React, { ChangeEventHandler, useEffect } from "react";
+import React, {
+    ChangeEventHandler,
+    KeyboardEventHandler,
+    useEffect,
+} from "react";
 
 import { useAppDispatch } from "App/store";
 import SearchBar from "components/SearchBar/SearchBar";
@@ -13,9 +17,11 @@ import {
 } from "features/searchFilter/searchFilterSlice";
 import { useSelector } from "react-redux";
 
-type Props = {};
+type Props = {
+    handleNavClick: (path: string, isSearch: boolean) => void;
+};
 
-const MainSearchBar: React.FC<Props> = () => {
+const MainSearchBar: React.FC<Props> = ({ handleNavClick }) => {
     const searchMode = useSelector(selectBrowseSearchMode);
     const searchFilterTempQuery = useSelector(selectSearchFilterTempQuery);
     const dispatch = useAppDispatch();
@@ -31,8 +37,9 @@ const MainSearchBar: React.FC<Props> = () => {
         dispatch(setSearchFilterTempQuery(event.target.value));
     };
 
-    const handleKeyDown: React.KeyboardEventHandler = (event) => {
+    const handleKeyDown: KeyboardEventHandler = (event) => {
         if (event.code === "Enter") {
+            console.log(event.code);
             handleSearchSubmit();
         }
     };
@@ -41,6 +48,7 @@ const MainSearchBar: React.FC<Props> = () => {
         if (searchFilterTempQuery === "") return;
         dispatch(setSearchFilterQuery(searchFilterTempQuery));
         dispatch(setBrowseSearchMode(true));
+        handleNavClick("", true);
     };
 
     return (

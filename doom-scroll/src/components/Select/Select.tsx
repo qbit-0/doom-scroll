@@ -14,7 +14,7 @@ const Select: FC<Props> = ({ title, value, onChange, children }) => {
             title={title}
             value={value}
             onChange={onChange}
-            className="flex-auto rounded-3xl border-2 border-amber-100 bg-neutral-800  p-[0.6rem] font-bold text-amber-100 outline-none drop-shadow-lg transition-all hover:contrast-200 hover:-hue-rotate-30"
+            className="flex-auto rounded-3xl border-2 border-amber-100 bg-neutral-800  p-[0.6rem] text-sm font-bold text-amber-100 outline-none drop-shadow-lg transition-all hover:contrast-200 hover:-hue-rotate-30 sm:text-base"
         >
             {children}
         </select>

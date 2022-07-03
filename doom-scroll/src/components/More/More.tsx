@@ -3,7 +3,7 @@ import { loadMore } from "features/article/articleSlice";
 import { MoreData } from "lib/reddit/redditData";
 import { borderDepthColors } from "lib/utils/replyDepthColors";
 import React, { MouseEvent, MouseEventHandler, useState } from "react";
-import { useLocation, useMatch, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Button from "components/Button/Button";
 
@@ -19,7 +19,6 @@ const More: React.FC<Props> = ({ more }) => {
 
     const handleClick: MouseEventHandler = (event: MouseEvent) => {
         event.preventDefault();
-
         if (more.data["count"] === 0) {
             const parentLinkId = more.data["parent_id"];
             const shortName = parentLinkId.match(/t1_(\w{7})/)[1];

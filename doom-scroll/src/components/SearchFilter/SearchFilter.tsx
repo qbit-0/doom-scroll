@@ -11,7 +11,6 @@ import Button from "components/Button/Button";
 import Option from "components/Option/Option";
 import Select from "components/Select/Select";
 import {
-    selectSearchFilterQuery,
     selectSearchFilterSort,
     selectSearchFilterTime,
     setSearchFilterSort,

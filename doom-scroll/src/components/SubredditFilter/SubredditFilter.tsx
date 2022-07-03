@@ -1,33 +1,17 @@
 import {
-    SUBREDDIT_SORT_OPTIONS,
-    SUBREDDIT_TIME_OPTIONS,
     SubredditSortOption,
     SubredditTimeOption,
+    SUBREDDIT_SORT_OPTIONS,
+    SUBREDDIT_TIME_OPTIONS,
 } from "lib/reddit/redditFilterOptions";
-import React, {
-    ChangeEventHandler,
-    FC,
-    MouseEvent,
-    useEffect,
-    useState,
-} from "react";
-import {
-    generatePath,
-    matchPath,
-    matchRoutes,
-    useLocation,
-    useNavigate,
-    useParams,
-    useSearchParams,
-} from "react-router-dom";
+import React, { ChangeEventHandler, FC, MouseEvent } from "react";
 
+import { useAppDispatch } from "App/store";
 import Button from "components/Button/Button";
 import Option from "components/Option/Option";
 import Select from "components/Select/Select";
-import { useAppDispatch } from "App/store";
 import {
     selectSubredditFilterSort,
-    selectSubredditFilterSubreddit,
     selectSubredditFilterTime,
     setSubredditFilterSort,
     setSubredditFilterTime,

@@ -30,7 +30,7 @@ const NoMatch: FC<Props> = () => {
                         borderColor="border-purple-700"
                         onClick={() => navigate("/r/popular")}
                     >
-                        back?
+                        home?
                     </Button>
                 </p>
             </div>
