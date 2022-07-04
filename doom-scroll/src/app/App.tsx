@@ -16,7 +16,10 @@ const App: FC<Props> = () => {
             <MainNavBar />
             <main>
                 <Routes>
-                    <Route path="/" element={<Navigate to="r/popular" />} />
+                    <Route
+                        path="/"
+                        element={<Navigate to="r/popular" replace={true} />}
+                    />
 
                     <Route path="/r/:subreddit/">
                         <Route path="" element={<Browse />} />
