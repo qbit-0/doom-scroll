@@ -7,7 +7,7 @@ type Props = {
 
 const ImagePreview: React.FC<Props> = ({ src, href }) => {
     return (
-        <figure className="leading-none drop-shadow-lg">
+        <figure className="leading-none">
             <a
                 title="link"
                 href={href}
@@ -15,7 +15,11 @@ const ImagePreview: React.FC<Props> = ({ src, href }) => {
                 rel="noreferrer"
                 className="group"
             >
-                <img className="max-h-[40rem]" alt="post body" src={src} />
+                <img
+                    className="max-h-[40rem] drop-shadow-lg"
+                    alt="post body"
+                    src={src}
+                />
                 <div className="invisible absolute bottom-0 w-full backdrop-blur-md backdrop-brightness-50 group-hover:visible">
                     <p className="overflow-hidden overflow-ellipsis px-8 py-2 text-sm text-neutral-50 underline">
                         {href}

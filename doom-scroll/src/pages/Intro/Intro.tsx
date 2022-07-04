@@ -92,7 +92,7 @@ const Intro: FC<Props> = () => {
 
     return (
         <div ref={introRef} className="bg-neutral-900">
-            <div className={`h-screen ${hideIntro && "hidden"}`}>
+            <div className={`h-screen ${hideIntro && "hidden overflow-clip"}`}>
                 <header>
                     <blockquote
                         cite="www.merriam-webster.com"

@@ -7,10 +7,10 @@ type Props = {
 
 const Gallery: FC<Props> = ({ srcs }) => {
     return (
-        <div className="w-full overflow-x-auto whitespace-nowrap">
+        <div className="w-full overflow-x-auto overflow-y-clip whitespace-nowrap">
             {srcs.map((src, index) => {
                 return (
-                    <div className="inline-flex max-w-[90%]" key={index}>
+                    <div className="inline-flex h-full max-w-[95%]" key={index}>
                         <ImagePreview src={src} href={src} />
                     </div>
                 );
