@@ -5,11 +5,12 @@ import React, {
 } from "react";
 
 import SearchBar from "components/SearchBar/SearchBar";
-import { generatePath, useNavigate } from "react-router-dom";
+import { generatePath, useNavigate, useSearchParams } from "react-router-dom";
 
 type Props = {};
 
 const MainSearchBar: React.FC<Props> = () => {
+    const [searchParams] = useSearchParams();
     const [query, setQuery] = useState("");
     const navigate = useNavigate();
 
@@ -18,10 +19,7 @@ const MainSearchBar: React.FC<Props> = () => {
     };
 
     const handleKeyDown: KeyboardEventHandler = (event) => {
-        if (event.code === "Enter") {
-            console.log(event.code);
-            handleSearchSubmit();
-        }
+        if (event.code === "Enter") handleSearchSubmit();
     };
 
     const handleSearchSubmit = () => {
@@ -31,8 +29,11 @@ const MainSearchBar: React.FC<Props> = () => {
         navigate(`${newSearchPath}?${newSearchParams.toString()}`);
     };
 
+    const urlQuery = searchParams.get("q");
+
     return (
         <SearchBar
+            highlight={urlQuery === query}
             value={query}
             onChange={handleQueryChange}
             onKeyDown={handleKeyDown}

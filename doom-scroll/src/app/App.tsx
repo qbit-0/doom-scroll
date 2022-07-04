@@ -7,6 +7,7 @@ import React, { FC } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import MainNavBar from "components/MainNavBar/MainNavBar";
+import Footer from "pages/Footer/Footer";
 
 type Props = {};
 
@@ -14,9 +15,8 @@ const App: FC<Props> = () => {
     return (
         <>
             <Hero />
-            <header>
-                <MainNavBar />
-            </header>
+            <Footer />
+            <MainNavBar />
             <main>
                 <Routes>
                     <Route path="/" element={<Navigate to="r/popular" />} />

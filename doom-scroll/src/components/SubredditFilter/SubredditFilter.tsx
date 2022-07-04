@@ -15,12 +15,14 @@ import {
     matchPath,
     NavigateFunction,
     useLocation,
+    useMatch,
     useNavigate,
 } from "react-router-dom";
 
 type Props = {};
 
 const SubredditFilter: FC<Props> = () => {
+    const match = useMatch("/r/:subreddit/:sort");
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -46,17 +48,31 @@ const SubredditFilter: FC<Props> = () => {
 
     return (
         <div className="justify-left flex flex-wrap gap-2 py-2">
-            <Button onClick={handleSortClick(SubredditSortOption.HOT)}>
+            <Button
+                highlight={match?.params.sort === SubredditSortOption.HOT}
+                onClick={handleSortClick(SubredditSortOption.HOT)}
+            >
                 {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.HOT]}
             </Button>
-            <Button onClick={handleSortClick(SubredditSortOption.NEW)}>
+            <Button
+                highlight={match?.params.sort === SubredditSortOption.NEW}
+                onClick={handleSortClick(SubredditSortOption.NEW)}
+            >
                 {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.NEW]}
             </Button>
-            <Button onClick={handleSortClick(SubredditSortOption.TOP)}>
+            <Button
+                highlight={match?.params.sort === SubredditSortOption.TOP}
+                onClick={handleSortClick(SubredditSortOption.TOP)}
+            >
                 {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.TOP]}
             </Button>
             {sort === "top" && (
-                <Select title="time" value={time} onChange={handleTimeChange}>
+                <Select
+                    highlight={match?.params.sort === SubredditSortOption.TOP}
+                    title="time"
+                    value={time}
+                    onChange={handleTimeChange}
+                >
                     {Object.entries(SUBREDDIT_TIME_OPTIONS).map(
                         (timeOption, index) => (
                             <Option value={timeOption[0]} key={index}>
@@ -66,7 +82,10 @@ const SubredditFilter: FC<Props> = () => {
                     )}
                 </Select>
             )}
-            <Button onClick={handleSortClick(SubredditSortOption.RISING)}>
+            <Button
+                highlight={match?.params.sort === SubredditSortOption.RISING}
+                onClick={handleSortClick(SubredditSortOption.RISING)}
+            >
                 {SUBREDDIT_SORT_OPTIONS[SubredditSortOption.RISING]}
             </Button>
         </div>

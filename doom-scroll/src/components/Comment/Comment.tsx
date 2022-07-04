@@ -25,7 +25,7 @@ const Comment: FC<Props> = ({ comment }) => {
                     />
                 </div>
 
-                <div className="inline-flex shrink-0 overflow-clip rounded-3xl">
+                <div className="inline-flex shrink-0 overflow-clip rounded-lg">
                     <SentimentBanner sentiment={comment.meta.sentiment} />
                 </div>
             </div>

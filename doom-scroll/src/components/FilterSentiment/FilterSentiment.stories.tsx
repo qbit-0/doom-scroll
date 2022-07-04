@@ -11,7 +11,7 @@ export default {
     },
     decorators: [
         (Story) => (
-            <div className="h-96 w-60 border-2">
+            <div className="h-96 w-60">
                 <Story />
             </div>
         ),

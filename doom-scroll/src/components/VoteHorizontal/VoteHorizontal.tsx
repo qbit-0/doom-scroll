@@ -8,7 +8,7 @@ type Props = {
 
 const VoteHorizontal: FC<Props> = ({ score }) => {
     return (
-        <div className="inline-block flex-shrink-0 flex-grow-0 p-1 text-amber-100">
+        <div className="inline-block flex-shrink-0 flex-grow-0 p-1 text-neutral-50">
             <div className="inline-block">
                 <FontAwesomeIcon icon={solid("chevron-up")} size="sm" />
             </div>

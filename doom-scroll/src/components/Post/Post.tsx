@@ -28,7 +28,7 @@ const Post: FC<Props> = ({ post }) => {
         <article className="mx-auto overflow-clip rounded-tl-xl rounded-br-xl border-2 border-neutral-700 bg-gradient-to-r from-neutral-800 to-neutral-900 drop-shadow-lg">
             <div className="px-4 pt-4">
                 <Link to={`/r/${subreddit}`}>
-                    <p className="text-sm text-amber-100 underline">{`/r/${subreddit}`}</p>
+                    <p className="text-sm text-neutral-50 underline">{`/r/${subreddit}`}</p>
                 </Link>
 
                 <div className="mt-2">
@@ -39,7 +39,7 @@ const Post: FC<Props> = ({ post }) => {
                 </div>
 
                 <Link to={`${permalink}`}>
-                    <h3 className="text-lg font-bold text-amber-100 sm:text-2xl">
+                    <h3 className="text-lg font-bold text-neutral-50 sm:text-2xl">
                         {title}
                     </h3>
                 </Link>
@@ -49,7 +49,7 @@ const Post: FC<Props> = ({ post }) => {
                 <Body post={post} />
             </div>
 
-            <div className="mt-2 flex w-full justify-around border-t-2 border-neutral-700 drop-shadow-lg">
+            <div className="flex w-full justify-around border-t-2 border-neutral-700 drop-shadow-lg">
                 <VoteHorizontal score={score} />
                 <Link to={`${permalink}`}>
                     <NumComments num_comments={num_comments} />

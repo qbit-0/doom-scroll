@@ -30,6 +30,10 @@ const Browse: React.FC<Props> = () => {
     const after = useSelector(selectPostsAfter);
     const dispatch = useAppDispatch();
 
+    const scrollToTop = () => {
+        window.scroll(0, 0);
+    };
+
     useEffect(() => {
         if (accessToken === null) {
             dispatch(updateAppToken());
@@ -38,6 +42,7 @@ const Browse: React.FC<Props> = () => {
 
     useEffect(() => {
         if (isRefreshing) return;
+        scrollToTop();
         batch(() => {
             dispatch(
                 loadPosts({
@@ -49,9 +54,9 @@ const Browse: React.FC<Props> = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, accessToken, location]);
 
-    const refBot = useRef<HTMLDivElement>(null);
-    const isNearBot = useIntersected(refBot, {
-        rootMargin: "2000px",
+    const botRef = useRef<HTMLDivElement>(null);
+    const isNearBot = useIntersected(botRef, {
+        rootMargin: "5000px",
     });
 
     useEffect(() => {
@@ -76,7 +81,7 @@ const Browse: React.FC<Props> = () => {
     const isSearch = matchPath("/search", location.pathname);
 
     return (
-        <div className="bg-neutral-900">
+        <div className="min-h-screen bg-neutral-900">
             <div className="mx-auto max-w-7xl px-2 py-2 sm:px-16">
                 {isSearch ? <SearchFilter /> : <SubredditFilter />}
 
@@ -96,7 +101,7 @@ const Browse: React.FC<Props> = () => {
                     </div>
                 )}
             </div>
-            <div ref={refBot} />
+            <div ref={botRef} />
         </div>
     );
 };

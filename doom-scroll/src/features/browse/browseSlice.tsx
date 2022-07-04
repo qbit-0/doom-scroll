@@ -2,7 +2,6 @@ import {
     createAsyncThunk,
     createSelector,
     createSlice,
-    PayloadAction,
 } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "App/store";
 import { selectAccessToken } from "features/auth/authSlice";
@@ -33,7 +32,7 @@ export const loadPosts = createAsyncThunk<
     }
 
     const searchParams = new URLSearchParams(searchStr);
-    searchParams.append("limit", "5");
+    searchParams.append("limit", "25");
 
     let json;
     try {
@@ -63,7 +62,7 @@ export const loadPostsAfter = createAsyncThunk<
     if (after === null) return thunkApi.rejectWithValue("after is null");
 
     const searchParams = new URLSearchParams(searchStr);
-    searchParams.append("limit", "5");
+    searchParams.append("limit", "25");
     searchParams.append("after", after);
 
     let json;

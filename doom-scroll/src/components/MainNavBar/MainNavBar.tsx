@@ -13,7 +13,7 @@ const MainNavBar: FC<Props> = () => {
     const scrollVel = useScrollVel();
 
     useEffect(() => {
-        if (viewportOffsetY > 0 && scrollVel < 0) {
+        if (viewportOffsetY - 500 > 0 && scrollVel < 0) {
             setShow(true);
         } else if (show === true) {
             setShow(false);
@@ -31,14 +31,14 @@ const MainNavBar: FC<Props> = () => {
     return (
         <nav>
             <div
-                className="top-0 z-10 w-full bg-neutral-900 p-1 text-amber-100 drop-shadow-lg"
+                className="top-0 z-10 w-full bg-neutral-900 p-1 text-neutral-50 drop-shadow-lg"
                 ref={staticNav}
             >
                 <NavBar />
             </div>
 
             <div
-                className={`invisible fixed top-0 z-10 w-full bg-neutral-900 p-1 text-amber-100 drop-shadow-lg ${animate}`}
+                className={`invisible fixed top-0 z-10 w-full bg-neutral-900 p-1 text-neutral-50 drop-shadow-lg ${animate}`}
             >
                 <NavBar />
             </div>

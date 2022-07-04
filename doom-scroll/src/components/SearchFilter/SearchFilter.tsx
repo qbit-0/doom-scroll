@@ -3,6 +3,7 @@ import {
     SearchTimeOption,
     SEARCH_SORT_OPTIONS,
     SEARCH_TIME_OPTIONS,
+    SubredditSortOption,
 } from "lib/reddit/redditFilterOptions";
 import React, { ChangeEventHandler, FC, MouseEvent, useState } from "react";
 
@@ -14,6 +15,7 @@ import {
     NavigateFunction,
     useLocation,
     useNavigate,
+    useSearchParams,
 } from "react-router-dom";
 
 type Props = {};
@@ -38,26 +40,50 @@ const SearchFilter: FC<Props> = () => {
         navigateSearchFilter(location, navigate, null, null, newTime);
     };
 
+    const searchParams = new URLSearchParams(location.search);
+    const urlSort =
+        (searchParams.get("sort") as SearchSortOption) ||
+        SearchSortOption.RELEVANCE;
+    const urlTime =
+        (searchParams.get("t") as SearchTimeOption) || SearchTimeOption.ALL;
+
     return (
         <div className="justify-left flex flex-wrap gap-2 py-2">
-            <Button onClick={handleSortClick(SearchSortOption.RELEVANCE)}>
+            <Button
+                highlight={urlSort === SearchSortOption.RELEVANCE}
+                onClick={handleSortClick(SearchSortOption.RELEVANCE)}
+            >
                 {SEARCH_SORT_OPTIONS[SearchSortOption.RELEVANCE]}
             </Button>
-            <Button onClick={handleSortClick(SearchSortOption.HOT)}>
+            <Button
+                highlight={urlSort === SearchSortOption.HOT}
+                onClick={handleSortClick(SearchSortOption.HOT)}
+            >
                 <p className="inline font-bold">
                     {SEARCH_SORT_OPTIONS[SearchSortOption.HOT]}
                 </p>
             </Button>
-            <Button onClick={handleSortClick(SearchSortOption.TOP)}>
+            <Button
+                highlight={urlSort === SearchSortOption.TOP}
+                onClick={handleSortClick(SearchSortOption.TOP)}
+            >
                 {SEARCH_SORT_OPTIONS[SearchSortOption.TOP]}
             </Button>
-            <Button onClick={handleSortClick(SearchSortOption.NEW)}>
+            <Button
+                highlight={urlSort === SearchSortOption.NEW}
+                onClick={handleSortClick(SearchSortOption.NEW)}
+            >
                 {SEARCH_SORT_OPTIONS[SearchSortOption.NEW]}
             </Button>
             <Button onClick={handleSortClick(SearchSortOption.COMMENTS)}>
                 {SEARCH_SORT_OPTIONS[SearchSortOption.COMMENTS]}
             </Button>
-            <Select title="time" value={time} onChange={handleTimeChange}>
+            <Select
+                highlight={true}
+                title="time"
+                value={time}
+                onChange={handleTimeChange}
+            >
                 {Object.entries(SEARCH_TIME_OPTIONS).map(
                     (timeOption, index) => (
                         <Option value={timeOption[0]} key={index}>
@@ -85,13 +111,14 @@ const navigateSearchFilter = (
     }
 
     if (sort === null) {
-        sort = searchParams.get("sort") as SearchSortOption;
-        if (sort === null) sort = SearchSortOption.RELEVANCE;
+        sort =
+            (searchParams.get("sort") as SearchSortOption) ||
+            SearchSortOption.RELEVANCE;
     }
 
     if (time === null) {
-        time = searchParams.get("t") as SearchTimeOption;
-        if (time === null) time = SearchTimeOption.ALL;
+        time =
+            (searchParams.get("t") as SearchTimeOption) || SearchTimeOption.ALL;
     }
 
     const newPath = "/search";

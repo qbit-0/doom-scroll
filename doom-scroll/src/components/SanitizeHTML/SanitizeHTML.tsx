@@ -9,9 +9,17 @@ const SanitizeHTML: React.FC<Props> = ({ dirty }) => {
     return (
         <div
             dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(dirty),
+                __html: DOMPurify.sanitize(dirty, {
+                    ADD_TAGS: ["iframe"],
+                    ADD_ATTR: [
+                        "allow",
+                        "allowfullscreen",
+                        "frameborder",
+                        "scrolling",
+                    ],
+                }),
             }}
-            className="unreset text-amber-100"
+            className="unreset text-neutral-50"
         />
     );
 };

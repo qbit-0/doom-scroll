@@ -10,43 +10,41 @@ import React, {
 } from "react";
 
 type Props = {
+    highlight?: boolean;
     value: string;
     onChange: ChangeEventHandler<HTMLInputElement>;
     onKeyDown: KeyboardEventHandler;
     onSubmit: MouseEventHandler<HTMLButtonElement>;
+    bgColor?: string;
+    hoverBgColor?: string;
 };
 
-const SearchBar: FC<Props> = ({ value, onChange, onKeyDown, onSubmit }) => {
-    const [isFocused, setIsFocused] = useState(false);
-
-    const handleFocus: FocusEventHandler<HTMLInputElement> = () => {
-        setIsFocused(true);
-    };
-
-    const handleBlur: FocusEventHandler<HTMLInputElement> = () => {
-        setIsFocused(false);
-    };
+const SearchBar: FC<Props> = ({
+    highlight = false,
+    value,
+    onChange,
+    onKeyDown,
+    onSubmit,
+    bgColor = "bg-neutral-800",
+    hoverBgColor = "hover:bg-neutral-700",
+}) => {
+    const defaultStyle = `inline-flex flex-auto justify-between rounded-3xl border-2 px-2 text-sm font-bold text-neutral-50 drop-shadow-lg transition-all sm:px-2 sm:text-base border-neutral-700 ${bgColor} ${hoverBgColor}`;
+    const highlightStyle = `inline-flex flex-auto justify-between rounded-3xl border-2 px-2 text-sm font-bold text-neutral-50 drop-shadow-lg transition-all sm:px-2 sm:text-base border-neutral-50 text-neutral-900 ${bgColor} ${hoverBgColor}`;
 
     return (
-        <div
-            className={`inline-flex flex-auto justify-between rounded-3xl border-2 border-amber-100 bg-neutral-800 px-4 drop-shadow-lg hover:contrast-200 hover:-hue-rotate-30 ${
-                isFocused && "contrast-200"
-            } ${isFocused && "-hue-rotate-30"} transition-all`}
-        >
+        <div className={highlight ? highlightStyle : defaultStyle}>
             <input
                 type="text"
                 placeholder="Search Term"
                 value={value}
                 onChange={onChange}
                 onKeyDown={onKeyDown}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                className="flex-auto rounded-l-3xl bg-transparent py-2 pl-2 text-sm font-bold text-amber-100 outline-none placeholder:font-thin sm:text-base"
+                className="flex-auto bg-transparent p-1 text-sm font-bold text-neutral-50 outline-none placeholder:font-thin sm:p-2 sm:text-base"
             />
             <button
                 title="submit search term"
                 onClick={onSubmit}
-                className="rounded-r-3xl p-2 font-bold text-amber-100 decoration-neutral-600 decoration-4 transition-all"
+                className="p-1 font-bold text-neutral-50 decoration-neutral-600 decoration-4 transition-all sm:p-2"
             >
                 <FontAwesomeIcon icon={solid("magnifying-glass")} />
             </button>

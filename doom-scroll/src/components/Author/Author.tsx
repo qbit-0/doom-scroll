@@ -24,11 +24,11 @@ const Author: FC<Props> = ({ author, profileImg, createdUtc }) => {
             </figure>
 
             <div className="flex-auto flex-wrap overflow-hidden">
-                <p className="overflow-hidden overflow-ellipsis text-sm font-bold italic text-amber-100">
+                <p className="overflow-hidden overflow-ellipsis text-sm font-bold italic text-neutral-50">
                     {author}
                 </p>
 
-                <p className="text-sm font-thin text-amber-100">
+                <p className="text-sm font-thin text-neutral-50">
                     &nbsp; - {elapsedString}
                 </p>
             </div>

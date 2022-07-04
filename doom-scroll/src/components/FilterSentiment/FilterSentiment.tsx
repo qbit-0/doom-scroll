@@ -74,14 +74,6 @@ const FilterSentiment: FC<Props> = () => {
         setCurrMaxRatio(maxRatio);
     }, [maxRatio]);
 
-    const handleFilterChange = (
-        setCurr: Dispatch<SetStateAction<string | number>>
-    ) => {
-        return (event: ChangeEvent<HTMLInputElement>) => {
-            setCurr(event.target.value);
-        };
-    };
-
     const handleWorst = () => {
         setCurrMinSentiment(NlpPresets.worst.minSentiment);
         setCurrMaxSentiment(NlpPresets.worst.maxSentiment);
@@ -114,101 +106,31 @@ const FilterSentiment: FC<Props> = () => {
         <>
             <div className="flex flex-wrap justify-center gap-2">
                 <Button
-                    bgColor="bg-cyan-700"
-                    hoverBgColor="hover:bg-cyan-600"
+                    highlight={minSentiment > 0 && maxSentiment > 0}
+                    bgColor="bg-cyan-600"
+                    hoverBgColor="hover:bg-cyan-500"
                     onClick={handleBest}
                 >
                     Best
                 </Button>
                 <Button
-                    bgColor="bg-rose-700"
-                    hoverBgColor="hover:bg-rose-600"
+                    highlight={minSentiment < 0 && maxSentiment < 0}
+                    bgColor="bg-rose-600"
+                    hoverBgColor="hover:bg-rose-500"
                     onClick={handleWorst}
                 >
                     Worst
                 </Button>
                 <Button
-                    bgColor="bg-neutral-700"
-                    hoverBgColor="hover:bg-neutral-600"
+                    highlight={minSentiment === 0 && maxSentiment === 0}
+                    bgColor="bg-neutral-600"
+                    hoverBgColor="hover:bg-neutral-500"
                     onClick={handleNeutral}
                 >
                     Neutral
                 </Button>
                 <Button onClick={handleReset}>Reset</Button>
             </div>
-            {/* <div className="block">
-                <div className="inline-block mx-1 my-2">
-                    <label
-                        htmlFor="minSentiment"
-                        className="font-bold mr-2 text-amber-100"
-                    >
-                        Sentiment Min:
-                    </label>
-                    <InputNumber
-                        id="minSentiment"
-                        title="Min Sentiment"
-                        min={-5}
-                        max={5}
-                        step={0.01}
-                        value={currMinSentiment}
-                        onChange={handleFilterChange(setCurrMinSentiment)}
-                    />
-                </div>
-
-                <div className="inline-block mx-1 my-2">
-                    <label
-                        htmlFor="maxSentiment"
-                        className="font-bold mr-2 text-amber-100"
-                    >
-                        Sentiment Max:
-                    </label>
-                    <InputNumber
-                        id="maxSentiment"
-                        title="Max Sentiment"
-                        min={-5}
-                        max={5}
-                        step={0.01}
-                        value={currMaxSentiment}
-                        onChange={handleFilterChange(setCurrMaxSentiment)}
-                    />
-                </div>
-
-                <div className="inline-block mx-1 my-2">
-                    <label
-                        htmlFor="minRatio"
-                        className="font-bold mr-2 text-amber-100"
-                    >
-                        Ratio Min:
-                    </label>
-                    <InputNumber
-                        id="minRatio"
-                        title="Min Upvote Ratio"
-                        min={0}
-                        max={1}
-                        step={0.01}
-                        value={currMinRatio}
-                        onChange={handleFilterChange(setCurrMinRatio)}
-                    />
-                </div>
-
-                <div className="inline-block mx-1 my-2">
-                    <label
-                        htmlFor="maxRatio"
-                        className="font-bold mr-2 text-amber-100"
-                    >
-                        Ratio Max:
-                    </label>
-                    <InputNumber
-                        id="maxRatio"
-                        title="Max Upvote Ratio"
-                        min={0}
-                        max={1}
-                        step={0.01}
-                        value={currMaxRatio}
-                        onChange={handleFilterChange(setCurrMaxRatio)}
-                    />
-                </div>
-            </div> */}
         </>
     );
 };

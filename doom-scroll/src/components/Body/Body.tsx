@@ -20,7 +20,7 @@ const Body: FC<Props> = ({ post }) => {
 
     if (post.data?.["media"]?.["oembed"]?.["html"]) {
         return (
-            <div className="flex max-h-96 overflow-auto overflow-ellipsis px-4">
+            <div className="flex max-h-96 justify-center overflow-auto overflow-ellipsis px-4">
                 <SanitizeHTML dirty={post.data["media"]["oembed"]["html"]} />
             </div>
         );
@@ -67,21 +67,17 @@ const Body: FC<Props> = ({ post }) => {
         return (
             <div className="flex justify-center bg-neutral-700">
                 <Gallery
-                    srcs={Object.values(post.data["gallery_data"]["items"]).map(
-                        ({ media_id }: any) =>
-                            post.data["media_metadata"][media_id]["s"]["u"]
-                    )}
-                />
-            </div>
-        );
-    }
-
-    if (post.data?.["preview"]?.["images"]?.["0"]?.["source"]?.["url"]) {
-        return (
-            <div className="flex justify-center bg-neutral-700">
-                <ImagePreview
-                    src={post.data["preview"]["images"]["0"]["source"]["url"]}
-                    href={post.data["url_overridden_by_dest"]}
+                    srcs={Object.values(post.data["gallery_data"]["items"])
+                        .filter(
+                            ({ media_id }: any) =>
+                                post.data["media_metadata"][media_id][
+                                    "status"
+                                ] === "valid"
+                        )
+                        .map(
+                            ({ media_id }: any) =>
+                                post.data["media_metadata"][media_id]["s"]["u"]
+                        )}
                 />
             </div>
         );
@@ -98,9 +94,21 @@ const Body: FC<Props> = ({ post }) => {
         );
     }
 
+    if (post.data?.["preview"]?.["images"]?.["0"]?.["source"]?.["url"]) {
+        return (
+            <div className="flex justify-center bg-neutral-700">
+                <ImagePreview
+                    src={post.data["preview"]["images"]["0"]["source"]["url"]}
+                    href={post.data["url_overridden_by_dest"]}
+                />
+            </div>
+        );
+    }
+
     if (
         post.data?.["thumbnail"] !== "default" &&
         post.data?.["thumbnail"] !== "self" &&
+        post.data?.["thumbnail"] !== "nsfw" &&
         post.data?.["thumbnail"] !== ""
     ) {
         return (

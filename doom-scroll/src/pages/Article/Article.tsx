@@ -30,15 +30,8 @@ const Article: React.FC<Props> = () => {
         }
     }, [dispatch, accessToken]);
 
-    const refTop = useRef<HTMLDivElement>(null);
-
     const scrollToTop = () => {
-        if (refTop.current === null) return;
-
-        window.scroll({
-            top: refTop.current.offsetTop,
-            behavior: "auto",
-        });
+        window.scroll(0, 0);
     };
 
     useEffect(() => {
@@ -54,10 +47,11 @@ const Article: React.FC<Props> = () => {
     }, [dispatch, accessToken, location]);
 
     return (
-        <div className="bg-neutral-900 text-amber-100">
-            <div ref={refTop} />
+        <div className="min-h-screen bg-neutral-900">
             <div className="mx-auto max-w-7xl px-2 py-2 sm:px-16">
-                <Button onClick={() => navigate(-1)}>Back</Button>
+                <div className="mt-2">
+                    <Button onClick={() => navigate(-1)}>Back</Button>
+                </div>
 
                 <div>
                     {!isRefreshing && post !== null ? (

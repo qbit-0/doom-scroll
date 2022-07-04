@@ -2,7 +2,7 @@ import { RefObject, useEffect, useState } from "react";
 
 const useIntersected = (
     ref: RefObject<HTMLElement>,
-    options: IntersectionObserverInit
+    options?: IntersectionObserverInit
 ) => {
     const [intersected, setIntersected] = useState(false);
 

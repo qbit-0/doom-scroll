@@ -7,6 +7,7 @@ export enum ButtonStyle {
 }
 
 type Props = {
+    highlight?: boolean;
     buttonStyle?: ButtonStyle;
     borderColor?: string;
     bgColor?: string;
@@ -16,18 +17,21 @@ type Props = {
 };
 
 const Button: FC<Props> = ({
+    highlight = false,
     buttonStyle = ButtonStyle.PRIMARY,
-    borderColor = "border-amber-100",
     bgColor = "bg-neutral-800",
-    hoverBgColor = "hover:bg-black",
+    hoverBgColor = "hover:bg-neutral-700",
     onClick,
     children,
 }) => {
+    const defaultStyle = `flex-auto rounded-3xl border-2 p-1 text-sm font-bold text-neutral-50 drop-shadow-lg transition-all sm:p-2 sm:text-base border-neutral-700 ${bgColor} ${hoverBgColor}`;
+    const highlightStyle = `flex-auto rounded-3xl border-2 p-1 text-sm font-bold text-neutral-50 drop-shadow-lg transition-all sm:p-2 sm:text-base border-neutral-50 text-neutral-900 ${bgColor} ${hoverBgColor}`;
+
     return (
         <button
             type="button"
             onClick={onClick}
-            className={`flex-auto border-2 p-2 ${borderColor} rounded-3xl ${bgColor} font-bold text-amber-100 drop-shadow-lg ${hoverBgColor} text-sm transition-all sm:text-base`}
+            className={highlight ? highlightStyle : defaultStyle}
         >
             {children}
         </button>

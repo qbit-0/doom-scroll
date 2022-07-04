@@ -14,7 +14,7 @@ const NoMatch: FC<Props> = () => {
     return (
         <div className="flex h-screen items-center justify-center bg-neutral-900">
             <div>
-                <h2 className="text-center text-8xl font-black text-amber-100">
+                <h2 className="text-center text-8xl font-black text-neutral-50">
                     No Route Match
                 </h2>
                 <div className="flex h-full w-full flex-col items-center justify-center p-8 text-neutral-700">
@@ -24,7 +24,7 @@ const NoMatch: FC<Props> = () => {
                         bounce
                     />
                 </div>
-                <p className="text-center text-3xl font-black text-amber-100">
+                <p className="text-center text-3xl font-black text-neutral-50">
                     Let's go{" "}
                     <Button
                         borderColor="border-purple-700"
