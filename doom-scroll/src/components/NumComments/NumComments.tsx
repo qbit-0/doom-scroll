@@ -12,7 +12,7 @@ const NumComments: FC<Props> = ({ num_comments }) => {
             <div className="mx-1 inline-block">
                 <FontAwesomeIcon icon={solid("message")} size="sm" />
             </div>
-            <p className="mx-2 inline-block text-center text-sm font-bold">
+            <p className="mx-2 inline-block text-center text-sm font-bold sm:text-base">
                 {num_comments}
             </p>
         </div>

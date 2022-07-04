@@ -44,11 +44,9 @@ const SearchFilter: FC<Props> = () => {
     const urlSort =
         (searchParams.get("sort") as SearchSortOption) ||
         SearchSortOption.RELEVANCE;
-    const urlTime =
-        (searchParams.get("t") as SearchTimeOption) || SearchTimeOption.ALL;
 
     return (
-        <div className="justify-left flex flex-wrap gap-2 py-2">
+        <div className="justify-left flex flex-wrap gap-2">
             <Button
                 highlight={urlSort === SearchSortOption.RELEVANCE}
                 onClick={handleSortClick(SearchSortOption.RELEVANCE)}
@@ -75,7 +73,10 @@ const SearchFilter: FC<Props> = () => {
             >
                 {SEARCH_SORT_OPTIONS[SearchSortOption.NEW]}
             </Button>
-            <Button onClick={handleSortClick(SearchSortOption.COMMENTS)}>
+            <Button
+                highlight={urlSort === SearchSortOption.COMMENTS}
+                onClick={handleSortClick(SearchSortOption.COMMENTS)}
+            >
                 {SEARCH_SORT_OPTIONS[SearchSortOption.COMMENTS]}
             </Button>
             <Select

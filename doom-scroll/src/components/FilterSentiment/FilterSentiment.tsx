@@ -88,13 +88,6 @@ const FilterSentiment: FC<Props> = () => {
         setCurrMaxRatio(NlpPresets.best.maxRatio);
     };
 
-    const handleNeutral = () => {
-        setCurrMinSentiment(NlpPresets.neutral.minSentiment);
-        setCurrMaxSentiment(NlpPresets.neutral.maxSentiment);
-        setCurrMinRatio(NlpPresets.neutral.minRatio);
-        setCurrMaxRatio(NlpPresets.neutral.maxRatio);
-    };
-
     const handleReset = () => {
         setCurrMinSentiment(NlpPresets.reset.minSentiment);
         setCurrMaxSentiment(NlpPresets.reset.maxSentiment);
@@ -122,14 +115,12 @@ const FilterSentiment: FC<Props> = () => {
                     Worst
                 </Button>
                 <Button
-                    highlight={minSentiment === 0 && maxSentiment === 0}
                     bgColor="bg-neutral-600"
                     hoverBgColor="hover:bg-neutral-500"
-                    onClick={handleNeutral}
+                    onClick={handleReset}
                 >
-                    Neutral
+                    Reset
                 </Button>
-                <Button onClick={handleReset}>Reset</Button>
             </div>
         </>
     );

@@ -11,12 +11,6 @@ export const NlpPresets = {
         minRatio: 0,
         maxRatio: 0.97,
     },
-    neutral: {
-        minSentiment: 0,
-        maxSentiment: 0,
-        minRatio: 0,
-        maxRatio: 1,
-    },
     reset: {
         minSentiment: -5,
         maxSentiment: 5,

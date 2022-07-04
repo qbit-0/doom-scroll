@@ -5,7 +5,7 @@ import {
     selectCommentsPost,
 } from "features/article/articleSlice";
 import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 

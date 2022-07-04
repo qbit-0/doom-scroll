@@ -13,32 +13,32 @@ import { batch, useSelector } from "react-redux";
 
 import Button from "components/Button/Button";
 import useIntersected from "lib/hooks/useIntersected";
+import IntroButton from "pages/IntroButton/IntroButton";
 
 type Props = {};
 
-const Hero: FC<Props> = () => {
+const Intro: FC<Props> = () => {
     const minSentiment = useSelector(selectNlpFilterMinSentiment);
     const maxSentiment = useSelector(selectNlpFilterMaxSentiment);
-    const [hideHero, setHideHero] = useState(false);
+    const [hideIntro, setHideIntro] = useState(false);
     const dispatch = useAppDispatch();
 
-    const heroRef = useRef<HTMLDivElement>(null);
-    const heroVisible = useIntersected(heroRef);
+    const introRef = useRef<HTMLDivElement>(null);
+    const introVisible = useIntersected(introRef, { rootMargin: "100px" });
 
     useEffect(() => {
         let timeout: NodeJS.Timeout | undefined;
-        if (heroVisible) {
+        if (introVisible) {
             clearTimeout(timeout);
         } else {
-            clearTimeout(timeout);
             timeout = setTimeout(() => {
-                setHideHero(true);
-            }, 2000);
+                setHideIntro(true);
+            }, 1000);
         }
         return () => {
             clearTimeout(timeout);
         };
-    }, [heroVisible]);
+    }, [introVisible]);
 
     const handleWorst = () => {
         batch(() => {
@@ -58,12 +58,41 @@ const Hero: FC<Props> = () => {
         });
     };
 
+    const handleFooterClick = () => {
+        setHideIntro(false);
+        window.scroll({ top: 0, behavior: "smooth" });
+    };
+
+    let overallSentiment;
+    let sentimentMessage;
+    if (minSentiment > 0 && maxSentiment > 0) {
+        overallSentiment = 1;
+        sentimentMessage = (
+            <p className="mx-auto w-fit text-lg text-neutral-50">
+                Showing <span className="font-bold text-sky-600">Positive</span>{" "}
+                Posts.
+            </p>
+        );
+    } else if (minSentiment < 0 && maxSentiment < 0) {
+        overallSentiment = -1;
+        sentimentMessage = (
+            <p className="mx-auto w-fit text-lg text-neutral-50">
+                Showing{" "}
+                <span className="font-bold text-rose-600">Negative</span> Posts.
+            </p>
+        );
+    } else {
+        overallSentiment = 0;
+        sentimentMessage = (
+            <p className="mx-auto w-fit text-lg text-neutral-50">
+                Showing <span className="font-bold">All</span> Posts.
+            </p>
+        );
+    }
+
     return (
-        <div
-            ref={heroRef}
-            className={`h-screen bg-neutral-900 ${hideHero && "hidden"}`}
-        >
-            <header>
+        <div ref={introRef} className="bg-neutral-900">
+            <header className={`h-screen ${hideIntro && "hidden"}`}>
                 <blockquote
                     cite="www.merriam-webster.com"
                     className="mx-auto max-w-md px-8 pt-8 sm:pt-16"
@@ -85,7 +114,7 @@ const Hero: FC<Props> = () => {
                 <h2 className="mt-16 text-center text-2xl font-light text-neutral-50">
                     The{" "}
                     <Button
-                        highlight={minSentiment > 0 && maxSentiment > 0}
+                        highlight={overallSentiment > 0}
                         bgColor="bg-cyan-600"
                         hoverBgColor="hover:bg-cyan-500"
                         onClick={handleBest}
@@ -94,7 +123,7 @@ const Hero: FC<Props> = () => {
                     </Button>{" "}
                     and{" "}
                     <Button
-                        highlight={minSentiment < 0 && maxSentiment < 0}
+                        highlight={overallSentiment < 0}
                         bgColor="bg-rose-600"
                         hoverBgColor="hover:bg-rose-500"
                         onClick={handleWorst}
@@ -103,9 +132,16 @@ const Hero: FC<Props> = () => {
                     </Button>{" "}
                     of Reddit.
                 </h2>
+                <div className="mt-16">{sentimentMessage}</div>
             </header>
+            <footer className="absolute bottom-0 w-full bg-neutral-800 p-2">
+                <p className="text-center text-xs font-medium text-neutral-50">
+                    Designed and Built by Duy Pham
+                </p>
+            </footer>
+            <IntroButton onClick={handleFooterClick} />
         </div>
     );
 };
 
-export default Hero;
+export default Intro;

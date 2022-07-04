@@ -26,9 +26,9 @@ const Post: FC<Props> = ({ post }) => {
 
     return (
         <article className="mx-auto overflow-clip rounded-tl-xl rounded-br-xl border-2 border-neutral-700 bg-gradient-to-r from-neutral-800 to-neutral-900 drop-shadow-lg">
-            <div className="px-4 pt-4">
+            <div className="px-4 pt-4 sm:px-8 sm:pt-8">
                 <Link to={`/r/${subreddit}`}>
-                    <p className="text-sm text-neutral-50 underline">{`/r/${subreddit}`}</p>
+                    <p className="text-sm text-neutral-50 underline sm:text-base">{`/r/${subreddit}`}</p>
                 </Link>
 
                 <div className="mt-2">

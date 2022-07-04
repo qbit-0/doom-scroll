@@ -4,6 +4,7 @@ import { FC } from "react";
 import ImagePreview from "components/ImagePreview/ImagePreview";
 import SanitizeHTML from "components/SanitizeHTML/SanitizeHTML";
 import Gallery from "components/Gallery/Gallery";
+import { Link } from "react-router-dom";
 
 type Props = {
     post: any;
@@ -12,9 +13,11 @@ type Props = {
 const Body: FC<Props> = ({ post }) => {
     if (post.data["selftext_html"]) {
         return (
-            <div className="flex max-h-96 overflow-auto overflow-ellipsis px-4 ">
-                <SanitizeHTML dirty={post.data["selftext_html"]} />
-            </div>
+            <Link to={`${post.data["permalink"]}`}>
+                <div className="flex max-h-96 overflow-auto overflow-ellipsis px-4 ">
+                    <SanitizeHTML dirty={post.data["selftext_html"]} />
+                </div>
+            </Link>
         );
     }
 

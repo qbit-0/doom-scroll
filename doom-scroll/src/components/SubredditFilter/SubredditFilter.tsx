@@ -47,7 +47,7 @@ const SubredditFilter: FC<Props> = () => {
     };
 
     return (
-        <div className="justify-left flex flex-wrap gap-2 py-2">
+        <div className="justify-left flex flex-wrap gap-2">
             <Button
                 highlight={match?.params.sort === SubredditSortOption.HOT}
                 onClick={handleSortClick(SubredditSortOption.HOT)}

@@ -24,8 +24,9 @@ const Button: FC<Props> = ({
     onClick,
     children,
 }) => {
-    const defaultStyle = `flex-auto rounded-3xl border-2 p-1 text-sm font-bold text-neutral-50 drop-shadow-lg transition-all sm:p-2 sm:text-base border-neutral-700 ${bgColor} ${hoverBgColor}`;
-    const highlightStyle = `flex-auto rounded-3xl border-2 p-1 text-sm font-bold text-neutral-50 drop-shadow-lg transition-all sm:p-2 sm:text-base border-neutral-50 text-neutral-900 ${bgColor} ${hoverBgColor}`;
+    const sharedStyle = `flex-auto rounded-3xl border-2 py-1 px-2 text-sm font-bold text-neutral-50 drop-shadow-lg transition-all sm:p-2 sm:text-base ${bgColor} ${hoverBgColor}`;
+    const defaultStyle = `${sharedStyle} border-neutral-700 `;
+    const highlightStyle = `${sharedStyle} border-neutral-50`;
 
     return (
         <button

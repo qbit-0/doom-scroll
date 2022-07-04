@@ -7,9 +7,9 @@ type InnerProps = {};
 export const NavBar: FC<InnerProps> = () => {
     return (
         <div className="mx-auto w-fit">
-            <div className="my-2 flex flex-wrap justify-center gap-2">
-                <SubredditLinks />
+            <div className="flex flex-wrap justify-center gap-2">
                 <MainSearchBar />
+                <SubredditLinks />
             </div>
         </div>
     );

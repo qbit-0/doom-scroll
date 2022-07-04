@@ -85,7 +85,7 @@ const Browse: React.FC<Props> = () => {
             <div className="mx-auto max-w-7xl px-2 py-2 sm:px-16">
                 {isSearch ? <SearchFilter /> : <SubredditFilter />}
 
-                <div className="border-t-2 border-neutral-700 pt-2">
+                <div className="mt-2 border-t-2 border-neutral-700 pt-2">
                     <FilterSentiment />
                 </div>
 

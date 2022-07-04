@@ -40,6 +40,12 @@ const SubredditLinks: FC<Props> = () => {
                 r/politics
             </Button>
             <Button
+                highlight={match?.params.subreddit === "news"}
+                onClick={handleSubredditClick("news")}
+            >
+                r/news
+            </Button>
+            <Button
                 highlight={match?.params.subreddit === "gaming"}
                 onClick={handleSubredditClick("gaming")}
             >

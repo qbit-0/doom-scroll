@@ -1,21 +1,18 @@
 import Article from "pages/Article/Article";
 import Browse from "pages/Browse/Browse";
-import Hero from "pages/Hero/Hero";
-import Login from "pages/Login/Login";
+import Intro from "pages/Intro/Intro";
 import NoMatch from "pages/NoMatch/NoMatch";
 import React, { FC } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import MainNavBar from "components/MainNavBar/MainNavBar";
-import Footer from "pages/Footer/Footer";
 
 type Props = {};
 
 const App: FC<Props> = () => {
     return (
         <>
-            <Hero />
-            <Footer />
+            <Intro />
             <MainNavBar />
             <main>
                 <Routes>
@@ -23,7 +20,7 @@ const App: FC<Props> = () => {
 
                     <Route path="/r/:subreddit/">
                         <Route path="" element={<Browse />} />
-                        <Route path=":subredditSort" element={<Browse />} />
+                        <Route path=":sort" element={<Browse />} />
                     </Route>
 
                     <Route path="/search" element={<Browse />} />
@@ -34,8 +31,6 @@ const App: FC<Props> = () => {
                     >
                         <Route path=":commentId" element={<Article />} />
                     </Route>
-
-                    <Route path="/login" element={<Login />} />
 
                     <Route path="*" element={<NoMatch />} />
                 </Routes>

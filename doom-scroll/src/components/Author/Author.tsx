@@ -11,7 +11,7 @@ const Author: FC<Props> = ({ author, profileImg, createdUtc }) => {
 
     return (
         <div className="flex h-full flex-auto items-center justify-start gap-2 overflow-hidden">
-            <figure className="inline-block h-8 w-8 shrink-0 grow-0 overflow-clip rounded-full">
+            <figure className="inline-block h-8 w-8 shrink-0 grow-0 overflow-clip rounded-full sm:h-12 sm:w-12">
                 {profileImg !== null ? (
                     <img
                         src={profileImg}
@@ -24,11 +24,11 @@ const Author: FC<Props> = ({ author, profileImg, createdUtc }) => {
             </figure>
 
             <div className="flex-auto flex-wrap overflow-hidden">
-                <p className="overflow-hidden overflow-ellipsis text-sm font-bold italic text-neutral-50">
+                <p className="overflow-hidden overflow-ellipsis text-sm font-bold italic text-neutral-50 sm:text-base">
                     {author}
                 </p>
 
-                <p className="text-sm font-thin text-neutral-50">
+                <p className="text-sm font-thin text-neutral-50 sm:text-base">
                     &nbsp; - {elapsedString}
                 </p>
             </div>

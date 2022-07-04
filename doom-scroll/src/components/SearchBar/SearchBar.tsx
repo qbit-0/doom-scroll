@@ -29,7 +29,7 @@ const SearchBar: FC<Props> = ({
     hoverBgColor = "hover:bg-neutral-700",
 }) => {
     const defaultStyle = `inline-flex flex-auto justify-between rounded-3xl border-2 px-2 text-sm font-bold text-neutral-50 drop-shadow-lg transition-all sm:px-2 sm:text-base border-neutral-700 ${bgColor} ${hoverBgColor}`;
-    const highlightStyle = `inline-flex flex-auto justify-between rounded-3xl border-2 px-2 text-sm font-bold text-neutral-50 drop-shadow-lg transition-all sm:px-2 sm:text-base border-neutral-50 text-neutral-900 ${bgColor} ${hoverBgColor}`;
+    const highlightStyle = `inline-flex flex-auto justify-between rounded-3xl border-2 px-2 text-sm font-bold text-neutral-50 drop-shadow-lg transition-all sm:px-2 sm:text-base border-neutral-50 ${bgColor} ${hoverBgColor}`;
 
     return (
         <div className={highlight ? highlightStyle : defaultStyle}>
