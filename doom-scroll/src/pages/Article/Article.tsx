@@ -5,7 +5,7 @@ import {
     selectCommentsPost,
 } from "features/article/articleSlice";
 import { selectAccessToken, updateAppToken } from "features/auth/authSlice";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -30,8 +30,10 @@ const Article: React.FC<Props> = () => {
         }
     }, [dispatch, accessToken]);
 
+    const topRef = useRef<HTMLDivElement>(null);
+
     const scrollToTop = () => {
-        window.scroll(0, 0);
+        topRef.current?.scrollIntoView();
     };
 
     useEffect(() => {
@@ -47,7 +49,7 @@ const Article: React.FC<Props> = () => {
     }, [dispatch, accessToken, location]);
 
     return (
-        <div className="min-h-screen bg-neutral-900">
+        <div ref={topRef} className="min-h-screen bg-neutral-900">
             <div className="mx-auto max-w-7xl px-2 py-2 sm:px-16">
                 <div className="mt-2">
                     <Button onClick={() => navigate(-1)}>Back</Button>

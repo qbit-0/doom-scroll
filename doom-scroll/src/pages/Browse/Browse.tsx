@@ -30,8 +30,10 @@ const Browse: React.FC<Props> = () => {
     const after = useSelector(selectPostsAfter);
     const dispatch = useAppDispatch();
 
+    const topRef = useRef<HTMLDivElement>(null);
+
     const scrollToTop = () => {
-        window.scroll(0, 0);
+        topRef.current?.scrollIntoView();
     };
 
     useEffect(() => {
@@ -81,7 +83,7 @@ const Browse: React.FC<Props> = () => {
     const isSearch = matchPath("/search", location.pathname);
 
     return (
-        <div className="min-h-screen bg-neutral-900">
+        <div ref={topRef} className="min-h-screen bg-neutral-900">
             <div className="mx-auto max-w-7xl px-2 py-2 sm:px-16">
                 {isSearch ? <SearchFilter /> : <SubredditFilter />}
 
