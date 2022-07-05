@@ -7,6 +7,7 @@ import Body from "components/Body/Body";
 import NumComments from "components/NumComments/NumComments";
 import SentimentBanner from "components/SentimentBanner/SentimentBanner";
 import VoteHorizontal from "components/VoteHorizontal/VoteHorizontal";
+import { scrollToMain } from "lib/utils/scrollToMain";
 
 type Props = {
     post: PostData;
