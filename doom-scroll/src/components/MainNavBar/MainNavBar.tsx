@@ -2,6 +2,7 @@ import { NavBar } from "components/NavBar/NavBar";
 import useScrollVel from "lib/hooks/useScrollVel";
 import useViewportOffsetY from "lib/hooks/useViewportOffsetY";
 import React, { FC, useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 type Props = {};
 

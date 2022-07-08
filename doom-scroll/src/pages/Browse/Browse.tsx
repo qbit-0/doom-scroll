@@ -30,12 +30,6 @@ const Browse: React.FC<Props> = () => {
     const after = useSelector(selectPostsAfter);
     const dispatch = useAppDispatch();
 
-    const topRef = useRef<HTMLDivElement>(null);
-
-    const scrollToTop = () => {
-        topRef.current?.scrollIntoView();
-    };
-
     useEffect(() => {
         if (accessToken === null) {
             dispatch(updateAppToken());
@@ -44,7 +38,6 @@ const Browse: React.FC<Props> = () => {
 
     useEffect(() => {
         if (isRefreshing) return;
-        scrollToTop();
         batch(() => {
             dispatch(
                 loadPosts({
@@ -83,7 +76,7 @@ const Browse: React.FC<Props> = () => {
     const isSearch = matchPath("/search", location.pathname);
 
     return (
-        <div ref={topRef} className="min-h-screen bg-neutral-900">
+        <div className="min-h-screen bg-neutral-900">
             <div className="mx-auto max-w-7xl px-2 py-2 sm:px-16">
                 {isSearch ? <SearchFilter /> : <SubredditFilter />}
 

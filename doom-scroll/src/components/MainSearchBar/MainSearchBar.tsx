@@ -12,6 +12,7 @@ import {
     useNavigate,
     useSearchParams,
 } from "react-router-dom";
+import { scrollToMain } from "lib/utils/scrollToMain";
 
 type Props = {};
 
@@ -38,6 +39,7 @@ const MainSearchBar: React.FC<Props> = () => {
         const newSearchParams = new URLSearchParams();
         newSearchParams.set("q", query);
         navigate(`${newSearchPath}?${newSearchParams.toString()}`);
+        scrollToMain();
     };
 
     const urlQuery = searchParams.get("q");

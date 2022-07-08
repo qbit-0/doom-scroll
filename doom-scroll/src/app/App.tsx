@@ -2,19 +2,46 @@ import Article from "pages/Article/Article";
 import Browse from "pages/Browse/Browse";
 import Intro from "pages/Intro/Intro";
 import NoMatch from "pages/NoMatch/NoMatch";
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import MainNavBar from "components/MainNavBar/MainNavBar";
+import Footer from "components/Footer/Footer";
+import useIntersected from "lib/hooks/useIntersected";
 
 type Props = {};
 
 const App: FC<Props> = () => {
+    const [hideIntro, setHideIntro] = useState(false);
+
+    const introRef = useRef<HTMLDivElement>(null);
+    const introVisible = useIntersected(introRef, { rootMargin: "10px" });
+
+    useEffect(() => {
+        let timeout: NodeJS.Timeout | undefined;
+
+        if (!introVisible) {
+            timeout = setTimeout(() => {
+                setHideIntro(true);
+            }, 500);
+        } else {
+            timeout = setTimeout(() => {
+                setHideIntro(false);
+            }, 500);
+        }
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [introVisible]);
+
     return (
         <>
+            <div ref={introRef} />
             <Intro />
-            <MainNavBar />
-            <main>
+            <main className="mt-[100vh]">
+                <Footer />
+                <MainNavBar />
                 <Routes>
                     <Route
                         path="/"

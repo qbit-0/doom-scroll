@@ -1,5 +1,6 @@
 import Button from "components/Button/Button";
 import { SubredditSortOption } from "lib/reddit/redditFilterOptions";
+import { scrollToMain } from "lib/utils/scrollToMain";
 import React, { FC, MouseEvent } from "react";
 import { generatePath, useMatch, useNavigate } from "react-router-dom";
 
@@ -16,6 +17,7 @@ const SubredditLinks: FC<Props> = () => {
                 sort: SubredditSortOption.HOT,
             });
             navigate(newSubredditPath);
+            scrollToMain();
         };
     };
 
