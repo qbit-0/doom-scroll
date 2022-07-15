@@ -1,6 +1,6 @@
 {
     "name": "doom-scroll",
-    "homepage": "http://doom-scroll.duypham.tech",
+    "homepage": "https://doom-scroll.herokuapp.com/",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
