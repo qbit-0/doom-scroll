@@ -1,4 +1,3 @@
-import { useAppDispatch } from "App/store";
 import {
     selectNlpFilterMaxSentiment,
     selectNlpFilterMinSentiment,
@@ -11,6 +10,7 @@ import { NlpPresets } from "lib/utils/nlpPresets";
 import React, { FC } from "react";
 import { batch, useSelector } from "react-redux";
 
+import { useAppDispatch } from "App/store";
 import Button from "components/Button/Button";
 
 type Props = {};

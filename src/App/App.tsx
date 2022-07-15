@@ -5,8 +5,8 @@ import NoMatch from "pages/NoMatch/NoMatch";
 import React, { FC, useEffect, useRef, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import MainNavBar from "components/MainNavBar/MainNavBar";
 import Footer from "components/Footer/Footer";
+import MainNavBar from "components/MainNavBar/MainNavBar";
 import useIntersected from "lib/hooks/useIntersected";
 
 type Props = {};
